@@ -133,6 +133,69 @@ import rag from './concept-icons/rag.svg';
 import llmEvals from './concept-icons/llm-evals.svg';
 import promptEngineering from './concept-icons/prompt-engineering.svg';
 
+import advancedBigO from './concept-icons/big-o.svg';
+import advancedMemory from './concept-icons/memory.svg';
+import advancedProcesses from './concept-icons/processes.svg';
+import advancedThreads from './concept-icons/threads.svg';
+import advancedConcurrency from './concept-icons/concurrency.svg';
+import advancedTcpIp from './concept-icons/tcp-ip.svg';
+import advancedDns from './concept-icons/dns.svg';
+import advancedTls from './concept-icons/tls.svg';
+import advancedHttp2Http3 from './concept-icons/http2-http3.svg';
+import advancedReverseProxy from './concept-icons/reverse-proxy.svg';
+import advancedCdn from './concept-icons/cdn.svg';
+import advancedLoadBalancing from './concept-icons/load-balancing.svg';
+import advancedAcid from './concept-icons/acid.svg';
+import advancedTransactions from './concept-icons/transactions.svg';
+import advancedIsolationLevels from './concept-icons/isolation-levels.svg';
+import advancedIndexes from './concept-icons/indexes.svg';
+import advancedQueryPlans from './concept-icons/query-plans.svg';
+import advancedNormalization from './concept-icons/normalization.svg';
+import advancedCapTheorem from './concept-icons/cap-theorem.svg';
+import advancedEventualConsistency from './concept-icons/eventual-consistency.svg';
+import advancedIdempotency from './concept-icons/idempotency.svg';
+import advancedMessageQueues from './concept-icons/message-queues.svg';
+import advancedEvents from './concept-icons/events.svg';
+import advancedSagas from './concept-icons/sagas.svg';
+import advancedRabbitmq from './concept-icons/rabbitmq.svg';
+import advancedKafka from './concept-icons/kafka.svg';
+import advancedPubSub from './concept-icons/pub-sub.svg';
+import advancedEventDrivenArchitecture from './concept-icons/event-driven-architecture.svg';
+import advancedAws from './concept-icons/aws.svg';
+import advancedGcp from './concept-icons/gcp.svg';
+import advancedIam from './concept-icons/iam.svg';
+import advancedKubernetes from './concept-icons/kubernetes.svg';
+import advancedServerless from './concept-icons/serverless.svg';
+import advancedAutoscaling from './concept-icons/autoscaling.svg';
+import advancedObjectStorage from './concept-icons/object-storage.svg';
+import advancedBackgroundJobs from './concept-icons/background-jobs.svg';
+import advancedWorkers from './concept-icons/workers.svg';
+import advancedRateLimiting from './concept-icons/rate-limiting.svg';
+import advancedCqrs from './concept-icons/cqrs.svg';
+import advancedEventSourcing from './concept-icons/event-sourcing.svg';
+import advancedContractTesting from './concept-icons/contract-testing.svg';
+import advancedMutationTesting from './concept-icons/mutation-testing.svg';
+import advancedPropertyBasedTesting from './concept-icons/property-based-testing.svg';
+import advancedCryptography from './concept-icons/cryptography.svg';
+import advancedHashing from './concept-icons/hashing.svg';
+import advancedCors from './concept-icons/cors.svg';
+import advancedCsrf from './concept-icons/csrf.svg';
+import advancedSupplyChainSecurity from './concept-icons/supply-chain-security.svg';
+import advancedTechnicalDebt from './concept-icons/technical-debt.svg';
+import advancedStaticAnalysis from './concept-icons/static-analysis.svg';
+import advancedCodeMetrics from './concept-icons/code-metrics.svg';
+import advancedLegacySystems from './concept-icons/legacy-systems.svg';
+import advancedRiskManagement from './concept-icons/risk-management.svg';
+import advancedPrioritization from './concept-icons/prioritization.svg';
+import advancedContinuousDiscovery from './concept-icons/continuous-discovery.svg';
+import advancedAnalytics from './concept-icons/analytics.svg';
+import advancedUnicode from './concept-icons/unicode.svg';
+import advancedI18n from './concept-icons/i18n.svg';
+import advancedL10n from './concept-icons/l10n.svg';
+import advancedTimezones from './concept-icons/timezones.svg';
+import advancedMachineLearning from './concept-icons/machine-learning.svg';
+import advancedLlmSystems from './concept-icons/llm-systems.svg';
+
 export const conceptIcons: Record<string, string> = {
   // Fundamentos de Software
   'sdlc': sdlc,
@@ -303,4 +366,92 @@ export const conceptIcons: Record<string, string> = {
   'rag': rag,
   'llm-evals': llmEvals,
   'prompt-engineering': promptEngineering,
+
+  // Computação
+  'big-o': advancedBigO,
+  'memory': advancedMemory,
+  'processes': advancedProcesses,
+  'threads': advancedThreads,
+  'concurrency': advancedConcurrency,
+
+  // Redes & Infra
+  'tcp-ip': advancedTcpIp,
+  'dns': advancedDns,
+  'tls': advancedTls,
+  'http2-http3': advancedHttp2Http3,
+  'reverse-proxy': advancedReverseProxy,
+  'cdn': advancedCdn,
+  'load-balancing': advancedLoadBalancing,
+
+  // Banco Avançado
+  'acid': advancedAcid,
+  'transactions': advancedTransactions,
+  'isolation-levels': advancedIsolationLevels,
+  'indexes': advancedIndexes,
+  'query-plans': advancedQueryPlans,
+  'normalization': advancedNormalization,
+
+  // Distribuídos & Mensageria
+  'cap-theorem': advancedCapTheorem,
+  'eventual-consistency': advancedEventualConsistency,
+  'idempotency': advancedIdempotency,
+  'message-queues': advancedMessageQueues,
+  'events': advancedEvents,
+  'sagas': advancedSagas,
+  'rabbitmq': advancedRabbitmq,
+  'kafka': advancedKafka,
+  'pub-sub': advancedPubSub,
+  'event-driven-architecture': advancedEventDrivenArchitecture,
+
+  // Cloud & Plataforma
+  'aws': advancedAws,
+  'gcp': advancedGcp,
+  'iam': advancedIam,
+  'kubernetes': advancedKubernetes,
+  'serverless': advancedServerless,
+  'autoscaling': advancedAutoscaling,
+  'object-storage': advancedObjectStorage,
+
+  // Backend Avançado
+  'background-jobs': advancedBackgroundJobs,
+  'workers': advancedWorkers,
+  'rate-limiting': advancedRateLimiting,
+
+  // Arquitetura Avançada
+  'cqrs': advancedCqrs,
+  'event-sourcing': advancedEventSourcing,
+
+  // Qualidade Avançada
+  'contract-testing': advancedContractTesting,
+  'mutation-testing': advancedMutationTesting,
+  'property-based-testing': advancedPropertyBasedTesting,
+
+  // Segurança Avançada
+  'cryptography': advancedCryptography,
+  'hashing': advancedHashing,
+  'cors': advancedCors,
+  'csrf': advancedCsrf,
+  'supply-chain-security': advancedSupplyChainSecurity,
+
+  // Engenharia Avançada
+  'technical-debt': advancedTechnicalDebt,
+  'static-analysis': advancedStaticAnalysis,
+  'code-metrics': advancedCodeMetrics,
+  'legacy-systems': advancedLegacySystems,
+
+  // Produto & Descoberta
+  'risk-management': advancedRiskManagement,
+  'prioritization': advancedPrioritization,
+  'continuous-discovery': advancedContinuousDiscovery,
+  'analytics': advancedAnalytics,
+
+  // Internacionalização
+  'unicode': advancedUnicode,
+  'i18n': advancedI18n,
+  'l10n': advancedL10n,
+  'timezones': advancedTimezones,
+
+  // IA & Sistemas
+  'machine-learning': advancedMachineLearning,
+  'llm-systems': advancedLlmSystems,
 };
