@@ -47,6 +47,13 @@ const tests: TestCase[] = [
       assert.equal(html?.ucs[0].modules[0].lessons.length, 1);
       assert.equal(css?.ucs[0].modules[0].status, 'planned');
       assert.equal(css?.ucs[0].modules[0].lessons.length, 0);
+
+      const routedLesson = findLesson(
+        'curso-html5',
+        'fundamentos-html5',
+        'aula-01-html-primeira-pagina'
+      );
+      assert.equal(routedLesson?.lesson.id, 'fullstack-front-html-aula-01');
     }
   },
   {
