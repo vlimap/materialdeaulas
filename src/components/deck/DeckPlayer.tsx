@@ -59,7 +59,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   }
 
   return (
-    <main className="deck-page">
+    <main id="main-content" className="deck-page">
       <div className="deck-toolbar">
         <Link to="/" className="toolbar-button" title="Voltar ao catálogo">
           <Home size={18} />
@@ -107,7 +107,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         <button onClick={() => go(-1)} disabled={index === 0} aria-label="Slide anterior">
           <ArrowLeft />
         </button>
-        <div className="deck-counter">
+        <div className="deck-counter" aria-live="polite">
           <strong>{String(index + 1).padStart(2, '0')}</strong>
           <span>/ {String(lesson.slides.length).padStart(2, '0')}</span>
         </div>

@@ -57,7 +57,7 @@ function CatalogPage() {
   };
 
   return (
-    <main className="excalidraw-home">
+    <main id="main-content" className="excalidraw-home">
       <section className="excalidraw-board" aria-label="Tecnologias disponíveis">
         <div className="excalidraw-profile">
           <img src={vlimapAvatar} alt="" />
@@ -67,7 +67,7 @@ function CatalogPage() {
           <div className="roadmap" aria-label="Roteiro recomendado de estudos">
             <p>Por onde começar</p>
             <div className="roadmap-track">
-              {roadmap.map((step) => <button className={'roadmap-node ' + (activeRoadmap === step.group ? 'active' : '')} key={step.group} onClick={() => focusGroup(step.group)}>
+              {roadmap.map((step) => <button className={'roadmap-node ' + (activeRoadmap === step.group ? 'active' : '')} key={step.group} onClick={() => focusGroup(step.group)} aria-pressed={activeRoadmap === step.group}>
                 <span>{step.number}</span><strong>{step.title}</strong>
               </button>)}
             </div>
@@ -76,7 +76,7 @@ function CatalogPage() {
             <h2>{group}</h2>
             <div className="technology-badges">
               {technologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
-                <button className="technology-badge" key={technology.slug} onClick={() => setSelectedTechnology(technology.slug)} aria-label={'Abrir curso de ' + technology.title}>
+                <button className="technology-badge" key={technology.slug} onClick={() => setSelectedTechnology(technology.slug)} aria-label={'Abrir curso de ' + technology.title} aria-pressed={selectedTechnology === technology.slug}>
                   <img src={technologyIcons[technology.slug]} alt="" /><span>{technology.title}</span>
                 </button>
               ))}
@@ -100,10 +100,10 @@ function CoursePage() {
   const { courseSlug = '' } = useParams();
   const course = allCourses.find((item) => item.slug === courseSlug);
 
-  if (!course) return <main className="not-found"><h1>Trilha não encontrada</h1><Link to="/">Voltar ao início</Link></main>;
+  if (!course) return <main id="main-content" className="not-found"><h1>Trilha não encontrada</h1><Link to="/">Voltar ao início</Link></main>;
 
   return (
-    <main className="catalog-page course-page">
+    <main id="main-content" className="catalog-page course-page">
       <BrandHeader />
       <section className="catalog-content course-content">
         <Link className="back-link" to="/"><ArrowLeft size={17} /> Todas as tecnologias</Link>
@@ -151,7 +151,7 @@ function LessonRoute() {
 
   if (!result) {
     return (
-      <main className="not-found">
+      <main id="main-content" className="not-found">
         <h1>Material não encontrado</h1>
         <Link to="/">Voltar ao catálogo</Link>
       </main>
@@ -163,11 +163,14 @@ function LessonRoute() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<CatalogPage />} />
-      <Route path="/curso/:courseSlug" element={<CoursePage />} />
-      <Route path="/curso/:courseSlug/uc/:ucSlug/aula/:lessonSlug" element={<LessonRoute />} />
-      <Route path="*" element={<CatalogPage />} />
-    </Routes>
+    <>
+      <a className="skip-link" href="#main-content">Pular para o conteúdo principal</a>
+      <Routes>
+        <Route path="/" element={<CatalogPage />} />
+        <Route path="/curso/:courseSlug" element={<CoursePage />} />
+        <Route path="/curso/:courseSlug/uc/:ucSlug/aula/:lessonSlug" element={<LessonRoute />} />
+        <Route path="*" element={<CatalogPage />} />
+      </Routes>
+    </>
   );
 }

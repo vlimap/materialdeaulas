@@ -32,6 +32,26 @@ a {
   color: inherit;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #111;
+  background: #F2C53D;
+  transform: translateY(-160%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid #F2C53D;
+  outline-offset: 3px;
+}
+
 .eyebrow {
   margin: 0 0 0.7em;
   color: var(--innovation-500);
@@ -1378,6 +1398,15 @@ a {
   }
 
   .excalidraw-board { padding-inline: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 620px) {

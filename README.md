@@ -57,6 +57,24 @@ npm run build
 npm run preview
 ```
 
+## Como contribuir
+
+O projeto aceita contribuições de conteúdo, código, acessibilidade e documentação.
+
+1. Abra uma issue explicando o que será criado ou corrigido.
+2. Crie uma branch curta a partir de `main`.
+3. Faça a alteração seguindo o [guia de contribuição](CONTRIBUTING.md).
+4. Para aulas, siga o [guia de criação de aulas](docs/LESSON_AUTHORING.md).
+5. Abra um PR usando o checklist do repositório.
+
+Cada PR deve ter escopo pequeno, testes executados e uma explicação simples de como revisar a mudança. A CI verifica `npm test` e `npm run build` antes do merge.
+
+## Acessibilidade
+
+A interface tem navegação por teclado, foco visível, link para pular ao conteúdo, suporte a redução de movimento e integração com o VLibras. Consulte [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) antes de criar uma aula ou componente.
+
+Consulte também o [Código de Conduta](CODE_OF_CONDUCT.md).
+
 ## Windows App Control
 
 Se uma máquina corporativa bloquear arquivos `.node` ou executáveis dentro de `node_modules`, não desative a política de segurança para executar este projeto. A stack de desenvolvimento foi escolhida para funcionar sem o Rollup nativo e sem o esbuild.

@@ -105,3 +105,9 @@ Vantagens:
 - o resultado mantém a mesma composição do slide exibido.
 
 Evolução futura: criar uma segunda estratégia de PPTX semântico/editável para tipos de slide simples.
+
+## Acessibilidade
+
+O layout inclui navegação por teclado, foco visível, link de salto para o conteúdo principal, `aria-live` para o contador de slides e suporte a `prefers-reduced-motion`. O VLibras Widget é carregado no `index.html` pelo script oficial e deve ser tratado como apoio adicional à linguagem simples, texto alternativo, legendas e transcrições.
+
+Consulte [docs/ACCESSIBILITY.md](ACCESSIBILITY.md) e [CONTRIBUTING.md](../CONTRIBUTING.md).
