@@ -102,7 +102,7 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
 }))
 
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
-  const course = catalog.find((item) => item.slug === courseSlug);
+  const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
   const uc = course?.ucs.find((item) => item.slug === ucSlug);
 
   for (const module of uc?.modules ?? []) {
