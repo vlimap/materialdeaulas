@@ -117,9 +117,11 @@ const tracks: Track[] = [
     label: 'Engenharia de Software',
     icon: 'engineering',
     steps: [
+      { id: 'sdlc', title: 'SDLC', subtitle: 'Entender o ciclo completo do software', slug: 'sdlc' },
       { id: 'logic', title: 'Lógica de Programação', subtitle: 'Base para resolver problemas', slug: 'logic-programming' },
       { id: 'brd', title: 'BRD', subtitle: 'Problema, objetivos e escopo', slug: 'brd' },
       { id: 'srs', title: 'SRS', subtitle: 'Especificação dos requisitos', slug: 'srs' },
+      { id: 'iso', title: 'ISO/IEC/IEEE 29148', subtitle: 'Referência para engenharia de requisitos', slug: 'iso-29148' },
       { id: 'requirements', title: 'Engenharia de Requisitos', subtitle: 'Elicitar, analisar e validar', slug: 'requirements-engineering' },
       { id: 'uml', title: 'UML', subtitle: 'Modelar o sistema', slug: 'uml' },
       { id: 'ux', title: 'UX/UI', subtitle: 'Fluxos e experiência', slug: 'ux-ui' },
