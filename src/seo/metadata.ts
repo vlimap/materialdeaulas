@@ -273,12 +273,14 @@ export function resolveSeoPage(pathname: string): SeoPage {
     .flatMap((course) =>
       course.ucs.flatMap((uc) =>
         uc.modules.flatMap((module) =>
-          module.lessons.map((lesson) => ({
-            course,
-            uc,
-            lesson,
-            path: lessonPath(course, uc, lesson)
-          }))
+          module.lessons
+            .filter((lesson) => lesson.status !== 'planned' && lesson.slides.length > 0)
+            .map((lesson) => ({
+              course,
+              uc,
+              lesson,
+              path: lessonPath(course, uc, lesson)
+            }))
         )
       )
     )
