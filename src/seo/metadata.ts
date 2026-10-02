@@ -1,7 +1,7 @@
 import { catalog, technologyCourses } from '../content/catalog';
 import type { CourseDefinition, LessonDefinition, UcDefinition } from '../types/course';
 
-export type SeoKind = 'home' | 'course' | 'lesson' | 'fallback';
+export type SeoKind = 'home' | 'roadmap' | 'course' | 'lesson' | 'fallback';
 
 export type SeoPage = {
   kind: SeoKind;
@@ -248,6 +248,37 @@ export function getPublicSeoPages(): SeoPage[] {
       robots: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
       ogType: 'website',
       jsonLd: homeJsonLd()
+    },
+    {
+      kind: 'roadmap',
+      path: '/roadmap',
+      title: 'Roadmap de Programação | ' + seoSite.name,
+      description:
+        'Roadmap interativo de programação com trilhas de Frontend, Backend, Full Stack, Banco de Dados e DevOps ligadas aos cursos da plataforma.',
+      canonicalPath: '/roadmap',
+      robots: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+      ogType: 'website',
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'LearningResource',
+          name: 'Roadmap de Programação',
+          description:
+            'Trilhas interativas de Frontend, Backend, Full Stack, Banco de Dados e DevOps.',
+          inLanguage: seoSite.language,
+          learningResourceType: 'Learning path',
+          author: provider(),
+          hasPart: publicCourses.map((course) => ({
+            '@type': 'CreativeWork',
+            name: course.title,
+            url: coursePath(course)
+          }))
+        },
+        breadcrumb([
+          { name: seoSite.name, path: '/' },
+          { name: 'Roadmap', path: '/roadmap' }
+        ])
+      ]
     }
   ];
 
