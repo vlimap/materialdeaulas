@@ -5048,3 +5048,310 @@ a.lesson-playlist-item:focus-visible {
     animation: none !important;
   }
 }
+
+
+/* Desktop projection typography
+   Applied globally to every lesson so projected text remains readable at distance.
+   Mobile Stories keeps its dedicated sizing rules below 620px. */
+@media (min-width: 961px) {
+  .deck-page .slide-header .eyebrow {
+    font-size: clamp(16px, 1.05cqw, 20px);
+  }
+
+  .deck-page .slide-header h2 {
+    max-width: 72cqw;
+    font-size: clamp(42px, 3.75cqw, 64px);
+    line-height: 1;
+  }
+
+  .deck-page .slide-subtitle {
+    max-width: 70cqw;
+    font-size: clamp(20px, 1.55cqw, 28px);
+    line-height: 1.35;
+  }
+
+  .deck-page .slide-body {
+    inset: 17cqw 4.5cqw 5cqw;
+  }
+
+  .deck-page .cover-content .eyebrow {
+    font-size: clamp(17px, 1.12cqw, 22px);
+  }
+
+  .deck-page .cover-content > p:last-child {
+    font-size: clamp(24px, 2.1cqw, 36px);
+  }
+
+  .deck-page .cover-badge {
+    font-size: clamp(15px, 1cqw, 19px);
+  }
+
+  .deck-page .statement-lead {
+    font-size: clamp(46px, 4.25cqw, 72px);
+    line-height: .98;
+  }
+
+  .deck-page .statement-detail {
+    font-size: clamp(22px, 1.7cqw, 30px);
+    line-height: 1.45;
+  }
+
+  .deck-page .chip-row span {
+    font-size: clamp(16px, 1cqw, 20px);
+  }
+
+  .deck-page .timeline-year {
+    font-size: clamp(17px, 1.15cqw, 21px);
+  }
+
+  .deck-page .timeline-item h3 {
+    font-size: clamp(20px, 1.5cqw, 26px);
+  }
+
+  .deck-page .timeline-item p {
+    font-size: clamp(16px, 1.08cqw, 20px);
+    line-height: 1.4;
+  }
+
+  .deck-page .visual-caption {
+    font-size: clamp(18px, 1.2cqw, 23px);
+    line-height: 1.35;
+  }
+
+  .deck-page .network-service,
+  .deck-page .flow-card strong,
+  .deck-page .tech-card strong {
+    font-size: clamp(18px, 1.35cqw, 24px);
+  }
+
+  .deck-page .network-core div,
+  .deck-page .network-service div,
+  .deck-page .flow-card span,
+  .deck-page .flow-card small,
+  .deck-page .tech-card p {
+    font-size: clamp(15px, .95cqw, 19px);
+  }
+
+  .deck-page .tree-node strong {
+    font-size: clamp(18px, 1.5cqw, 25px);
+  }
+
+  .deck-page .tree-node span {
+    font-size: clamp(15px, 1cqw, 19px);
+  }
+
+  .deck-page .browser-content h3 {
+    font-size: clamp(28px, 2.25cqw, 38px);
+  }
+
+  .deck-page .browser-content p,
+  .deck-page .browser-content a {
+    font-size: clamp(17px, 1.08cqw, 21px);
+  }
+
+  .deck-page .mini-label,
+  .deck-page .card-kicker {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .info-card h3 {
+    font-size: clamp(21px, 1.5cqw, 26px);
+  }
+
+  .deck-page .info-card p {
+    font-size: clamp(17px, 1.08cqw, 21px);
+    line-height: 1.38;
+  }
+
+  .deck-page .code-topbar b {
+    font-size: clamp(13px, .8cqw, 16px);
+  }
+
+  .deck-page .code-window pre {
+    font-size: clamp(16px, 1cqw, 20px);
+    line-height: 1.42;
+  }
+
+  .deck-page .teaching-points li {
+    font-size: clamp(17px, 1.08cqw, 21px);
+    line-height: 1.35;
+  }
+
+  .deck-page .code-layout.is-dense .code-window pre {
+    font-size: clamp(15px, .82cqw, 18px);
+    line-height: 1.32;
+  }
+
+  .deck-page .code-layout.is-very-dense .code-window pre {
+    font-size: clamp(14px, .72cqw, 17px);
+    line-height: 1.28;
+  }
+
+  .deck-page .code-layout.is-dense .teaching-points li,
+  .deck-page .code-layout.is-very-dense .teaching-points li {
+    font-size: clamp(15px, .9cqw, 18px);
+  }
+
+  .deck-page .anatomy-code {
+    font-size: clamp(29px, 2.35cqw, 42px);
+  }
+
+  .deck-page .anatomy-labels code,
+  .deck-page .anatomy-labels span {
+    font-size: clamp(16px, .98cqw, 20px);
+  }
+
+  .deck-page .timebox,
+  .deck-page .success-box > span {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .exercise-main h3 {
+    font-size: clamp(23px, 1.75cqw, 30px);
+  }
+
+  .deck-page .exercise-main ol,
+  .deck-page .success-box ul {
+    font-size: clamp(17px, 1.08cqw, 21px);
+    line-height: 1.35;
+  }
+
+  .deck-page .checklist p {
+    font-size: clamp(17px, 1.05cqw, 21px);
+    line-height: 1.32;
+  }
+
+  .deck-page .checklist span {
+    font-size: clamp(13px, .8cqw, 16px);
+  }
+
+  .deck-page .checkpoint-prompt {
+    font-size: clamp(18px, 1.12cqw, 22px);
+  }
+
+  .deck-page .references > div > span,
+  .deck-page .references strong {
+    font-size: clamp(17px, 1.08cqw, 21px);
+  }
+
+  .deck-page .references small {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .hyper-doc span,
+  .deck-page .web-birth-doc {
+    font-size: clamp(17px, 1.12cqw, 21px);
+  }
+
+  .deck-page .hyper-doc small,
+  .deck-page .web-birth-label small {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .semantic-browser-bar,
+  .deck-page .stage-browser-bar {
+    font-size: clamp(13px, .78cqw, 16px);
+  }
+
+  .deck-page .semantic-region {
+    font-size: clamp(16px, 1.05cqw, 20px);
+  }
+
+  .deck-page .semantic-region small {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .live-lab-toolbar,
+  .deck-page .live-lab-preview-bar {
+    font-size: clamp(13px, .78cqw, 16px);
+  }
+
+  .deck-page .live-lab-toolbar button,
+  .deck-page .live-lab-toolbar a {
+    font-size: clamp(13px, .74cqw, 15px);
+  }
+
+  .deck-page .live-lab-editor textarea {
+    font-size: clamp(15px, .9cqw, 18px);
+    line-height: 1.45;
+  }
+
+  .deck-page .live-lab-instructions strong {
+    font-size: clamp(17px, 1cqw, 20px);
+  }
+
+  .deck-page .live-lab-instructions ol {
+    font-size: clamp(15px, .86cqw, 18px);
+    line-height: 1.35;
+  }
+
+  .deck-page .stage-page h3 {
+    font-size: clamp(18px, 1.18cqw, 23px);
+  }
+
+  .deck-page .stage-page p,
+  .deck-page .stage-page button,
+  .deck-page .stage-browser > strong,
+  .deck-page .stage-browser > small {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .head-impact-item > code,
+  .deck-page .charset-demo,
+  .deck-page .search-snippet strong,
+  .deck-page .alt-broken,
+  .deck-page .alt-card code,
+  .deck-page .semantic-puzzle-page > div {
+    font-size: clamp(15px, .9cqw, 18px);
+  }
+
+  .deck-page .head-impact-item > span,
+  .deck-page .search-snippet small,
+  .deck-page .alt-card > span {
+    font-size: clamp(14px, .8cqw, 16px);
+  }
+
+  .deck-page .semantic-puzzle-controls p,
+  .deck-page .micro-challenge-prompt {
+    font-size: clamp(18px, 1.08cqw, 22px);
+  }
+
+  .deck-page .semantic-puzzle-controls button,
+  .deck-page .micro-challenge-index,
+  .deck-page .micro-challenge-option strong,
+  .deck-page .micro-challenge-feedback {
+    font-size: clamp(15px, .86cqw, 18px);
+  }
+
+  .deck-page .micro-challenge-option code {
+    font-size: clamp(14px, .8cqw, 17px);
+  }
+
+  .deck-page .missions-intro {
+    font-size: clamp(17px, 1cqw, 20px);
+  }
+
+  .deck-page .mission-options span,
+  .deck-page .mission-options small,
+  .deck-page .mission-options em,
+  .deck-page .mission-requirements > span,
+  .deck-page .mission-requirements ul {
+    font-size: clamp(14px, .82cqw, 17px);
+  }
+
+  .deck-page .mission-options strong {
+    font-size: clamp(19px, 1.12cqw, 23px);
+  }
+
+  .deck-page .slide-subtitle,
+  .deck-page .statement-detail,
+  .deck-page .timeline-item p,
+  .deck-page .visual-caption,
+  .deck-page .info-card p,
+  .deck-page .teaching-points li,
+  .deck-page .exercise-main ol,
+  .deck-page .checklist p,
+  .deck-page .missions-intro {
+    color: #d6dee7;
+  }
+}
