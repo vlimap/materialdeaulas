@@ -1,10 +1,10 @@
 import type { Slide } from '../../types/course';
-import { senacLabsCodeLogo } from '../../brand/senacLabsCode';
+import vlimapAvatar from '../../brand/vlimap-avatar.png';
 
 function Brand() {
   return (
     <div className="slide-brand" aria-hidden="true">
-      <img src={senacLabsCodeLogo} alt="" />
+      <img src={vlimapAvatar} alt="" />
     </div>
   );
 }
@@ -285,7 +285,7 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
       </div>
 
       <footer className="slide-footer">
-        <span>Senac Labs · Material de Aulas</span>
+        <span>Val Lima · Material de Aulas</span>
         <span>{slide.id}</span>
       </footer>
     </article>

@@ -10,6 +10,26 @@ Manter uma única fonte de conteúdo para:
 
 A exportação não mantém os objetos do PPTX editáveis: cada slide é capturado em alta resolução e inserido como uma imagem 16:9. A escolha é intencional nesta primeira versão porque garante fidelidade visual entre Web, PDF e PowerPoint.
 
+## Toolchain
+
+A aplicação usa React + TypeScript com **Webpack 5**.
+
+A escolha evita a dependência direta de Rollup e esbuild no fluxo de desenvolvimento e build. Isso é relevante para máquinas Windows gerenciadas em que App Control/Code Integrity bloqueia módulos nativos `.node` e executáveis baixados em `node_modules`.
+
+Fluxo:
+
+```text
+TypeScript / TSX
+      ↓
+   ts-loader
+      ↓
+   Webpack 5
+      ↓
+     dist/
+```
+
+O servidor de desenvolvimento é o `webpack-dev-server`, com fallback para as rotas do React Router.
+
 ## Organização
 
 ```text
@@ -27,6 +47,13 @@ src/
   styles/
     tokens.css
     global.css
+
+scripts/
+  test-catalog.ts
+
+webpack.config.cjs
+tsconfig.json
+tsconfig.test.json
 ```
 
 A hierarquia lógica é:
@@ -51,17 +78,17 @@ Uma nova aula deve:
 
 Dessa forma, HTML/CSS, JavaScript, React, Back-End e Projeto Integrador reutilizam o mesmo motor.
 
-## Identidade Senac RN
+## Identidade visual
 
-Tokens extraídos do Design System fornecido no Figma:
+Tokens definidos para o projeto:
 
-- Azul Senac: `#004B8D`;
-- Laranja Senac/Labs principal: `#FF7D01`;
-- Azul Inovação: `#1747F5`;
+- Azul principal: `#0D47A1`;
+- Azul secundário: `#1565C0`;
+- Amarelo de destaque: `#F2C53D`;
 - preto: `#292929`;
 - tipografia principal: Rubik.
 
-O motor não copia a tela do Design System. Ele reutiliza seus fundamentos de marca para construir uma linguagem específica para material didático e apresentação.
+O motor usa uma linguagem direta, escura e orientada a cursos de tecnologia.
 
 ## Exportação
 

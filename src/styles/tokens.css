@@ -1,20 +1,20 @@
 :root {
-  --senac-blue-100: #004b8d;
-  --senac-blue-90: #1a5d99;
-  --senac-blue-80: #336fa4;
-  --senac-blue-60: #6693bb;
-  --senac-blue-30: #b3c9dd;
-  --senac-blue-10: #e6edf4;
+  --project-blue-100: #0d47a1;
+  --project-blue-90: #1255b7;
+  --project-blue-80: #1565c0;
+  --project-blue-60: #6693bb;
+  --project-blue-30: #b3c9dd;
+  --project-blue-10: #e6edf4;
 
-  --innovation-900: #041275;
-  --innovation-600: #1036d2;
-  --innovation-500: #1747f5;
+  --innovation-900: #061b3a;
+  --innovation-600: #0d47a1;
+  --innovation-500: #1565c0;
   --innovation-300: #7296fc;
   --innovation-100: #d0defe;
 
   --orange-800: #933100;
   --orange-600: #db6000;
-  --orange-500: #ff7d01;
+  --orange-500: #f7df1e;
   --orange-300: #ffc066;
   --orange-100: #ffefcd;
 

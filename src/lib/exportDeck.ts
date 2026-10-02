@@ -67,10 +67,10 @@ export async function exportLessonPptx(
   const pptx = new pptxgen();
 
   pptx.layout = 'LAYOUT_WIDE';
-  pptx.author = 'Senac Labs';
+  pptx.author = 'Val Lima';
   pptx.subject = lesson.title;
   pptx.title = lesson.title;
-  pptx.company = 'Senac';
+  pptx.company = 'Val Lima';
   pptx.theme = {
     headFontFace: 'Rubik',
     bodyFontFace: 'Rubik'
