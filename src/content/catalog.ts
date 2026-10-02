@@ -1,5 +1,6 @@
 import type { CourseDefinition } from '../types/course';
 import { aula01HtmlCss } from './fullstack/aula-01-html-css';
+import { htmlLessons } from './fullstack/trilha-html';
 
 export const catalog: CourseDefinition[] = [
   {
@@ -97,12 +98,18 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
     slug: 'fundamentos-' + slug,
     title: 'Fundamentos de ' + title,
     description: 'Aulas e materiais de ' + title + '.',
-    modules: [{ slug, title, description: 'Conteúdo em preparação.', status: slug === 'html5' || slug === 'css3' ? 'active' : 'planned', lessons: slug === 'html5' || slug === 'css3' ? [aula01HtmlCss] : [] }]
+    modules: [{
+      slug,
+      title,
+      description: slug === 'html5' ? 'Trilha completa de HTML em 12 aulas de 4 horas.' : 'Conteúdo em preparação.',
+      status: slug === 'html5' || slug === 'css3' ? 'active' : 'planned',
+      lessons: slug === 'html5' ? [aula01HtmlCss, ...htmlLessons] : slug === 'css3' ? [aula01HtmlCss] : []
+    }]
   }]
 }))
 
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
-  const course = catalog.find((item) => item.slug === courseSlug);
+  const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
   const uc = course?.ucs.find((item) => item.slug === ucSlug);
 
   for (const module of uc?.modules ?? []) {
