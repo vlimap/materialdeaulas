@@ -4546,3 +4546,67 @@ a.lesson-playlist-item:focus-visible {
     animation: none !important;
   }
 }
+
+
+/* Mobile Stories sizing fix.
+   The slide content is absolutely positioned; without a definite frame height,
+   the mobile canvas can collapse to 0px even though the stage fills the viewport. */
+@media (max-width: 620px) {
+  .deck-page.story-mode {
+    grid-template-rows: 58px minmax(0, 1fr);
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .story-mode .deck-stage {
+    width: 100%;
+    height: calc(100dvh - 58px);
+    min-height: calc(100dvh - 58px);
+    align-self: stretch;
+    justify-self: stretch;
+    padding: 13px 0 0;
+  }
+
+  .story-mode .deck-slide-frame {
+    position: relative;
+    width: min(100%, 460px);
+    height: calc(100dvh - 71px);
+    min-height: calc(100dvh - 71px);
+    align-self: stretch;
+    justify-self: center;
+    overflow: hidden;
+  }
+
+  .story-mode .slide-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    display: block;
+    overflow: hidden;
+  }
+
+  .story-mode .cover-slide {
+    min-height: 100%;
+  }
+}
+
+@supports (height: 100svh) {
+  @media (max-width: 620px) {
+    .deck-page.story-mode {
+      height: 100svh;
+      min-height: 100svh;
+    }
+
+    .story-mode .deck-stage {
+      height: calc(100svh - 58px);
+      min-height: calc(100svh - 58px);
+    }
+
+    .story-mode .deck-slide-frame {
+      height: calc(100svh - 71px);
+      min-height: calc(100svh - 71px);
+    }
+  }
+}
