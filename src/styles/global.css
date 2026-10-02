@@ -3125,3 +3125,25 @@ a {
     font-size: .7rem;
   }
 }
+
+
+.excalidraw-lesson-planned,
+.lesson-link-planned {
+  cursor: default;
+  opacity: .62;
+}
+
+.excalidraw-lesson-planned {
+  border-style: dashed;
+}
+
+.excalidraw-lesson-planned > span:last-child,
+.lesson-link-planned .lesson-enter {
+  color: #8f9cac;
+  font-size: .78rem;
+}
+
+.lesson-link-planned:hover {
+  transform: none;
+  box-shadow: none;
+}
