@@ -50,7 +50,7 @@ export function SeoManager() {
     const origin = window.location.origin;
     const absolute = (path: string) => new URL(path, origin).toString();
     const canonical = absolute(page.canonicalPath);
-    const image = absolute('/og-image.png');
+    const image = seoSite.ogImageUrl;
 
     document.documentElement.lang = seoSite.language;
     document.title = page.title;
