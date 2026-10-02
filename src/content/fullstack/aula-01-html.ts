@@ -146,7 +146,7 @@ export const aula01Html: LessonDefinition = {
       kind: 'cover',
       eyebrow: 'Desenvolvimento Front-End · Fundamentos',
       title: 'HTML',
-      subtitle: 'Da história da Web à sua primeira página',
+      subtitle: 'História → estrutura → prática → primeira página',
       badge: 'Aula 01',
       duration: '4 horas',
       note: 'Abra perguntando: o que precisa existir antes de uma página ficar bonita?'
@@ -156,8 +156,8 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: 'Objetivo da aula',
       title: 'Hoje você sai do zero com uma página completa.',
-      lead: 'Não vamos começar decorando tags.',
-      detail: 'Primeiro vamos entender por que a Web existe. Depois, cada novo elemento HTML entra porque resolve uma necessidade concreta da página que será construída no final.',
+      lead: 'Entender primeiro. Marcar depois.',
+      detail: 'A aula começa pelo problema que criou a Web e termina com uma página HTML completa.',
       chips: ['história', 'estrutura', 'semântica', 'prática', 'produção final']
     },
     {
@@ -165,17 +165,17 @@ export const aula01Html: LessonDefinition = {
       kind: 'cards',
       eyebrow: 'Plano de 4 horas',
       title: 'Progressão da aula',
-      subtitle: 'Os blocos abaixo totalizam 240 minutos.',
+      subtitle: '9 blocos · 240 min',
       items: [
-        { kicker: '30 min', title: 'Contexto', detail: 'Problema original, hipertexto e nascimento da Web.', tone: 'innovation' },
-        { kicker: '20 min', title: 'Como a Web funciona', detail: 'Navegador, rede, servidor e resposta.', tone: 'blue' },
-        { kicker: '60 min', title: 'Fundamentos HTML', detail: 'Elementos, atributos, aninhamento e documento.', tone: 'orange' },
-        { kicker: '25 min', title: 'Conteúdo', detail: 'Texto, listas, links e imagens.', tone: 'green' },
-        { kicker: '15 min', title: 'Intervalo', detail: 'Pausa entre fundamentos e aplicação.', tone: 'neutral' },
-        { kicker: '25 min', title: 'Semântica', detail: 'Estruturar regiões da página pelo significado.', tone: 'blue' },
-        { kicker: '25 min', title: 'Prática guiada', detail: 'Montagem incremental com acompanhamento.', tone: 'innovation' },
-        { kicker: '30 min', title: 'Produção final', detail: 'Página de apresentação feita pelo aluno.', tone: 'orange' },
-        { kicker: '10 min', title: 'Revisão', detail: 'Checklist e preparação para a próxima aula.', tone: 'green' }
+        { kicker: '30 min', title: 'Contexto', detail: 'Web + hipertexto', tone: 'innovation' },
+        { kicker: '20 min', title: 'Como a Web funciona', detail: 'cliente → servidor', tone: 'blue' },
+        { kicker: '60 min', title: 'Fundamentos HTML', detail: 'tags + atributos + árvore', tone: 'orange' },
+        { kicker: '25 min', title: 'Conteúdo', detail: 'texto + links + mídia', tone: 'green' },
+        { kicker: '15 min', title: 'Intervalo', detail: 'pausa', tone: 'neutral' },
+        { kicker: '25 min', title: 'Semântica', detail: 'estrutura com significado', tone: 'blue' },
+        { kicker: '25 min', title: 'Prática guiada', detail: 'construção passo a passo', tone: 'innovation' },
+        { kicker: '30 min', title: 'Produção final', detail: 'página completa', tone: 'orange' },
+        { kicker: '10 min', title: 'Revisão', detail: 'checkpoint', tone: 'green' }
       ]
     },
     {
@@ -183,22 +183,22 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: 'Antes do HTML',
       title: 'O problema não era “criar sites bonitos”.',
-      lead: 'Era conectar informação.',
-      detail: 'Pesquisadores trabalhavam com documentos espalhados em computadores e sistemas diferentes. A ideia de hipertexto permitiu ligar um documento a outro por referências navegáveis.',
+      lead: 'Conectar informação.',
+      detail: 'Documentos isolados → documentos conectados por links.',
       chips: ['documentos', 'hipertexto', 'links', 'informação']
     },
     {
       id: 'historia-web',
       kind: 'timeline',
       eyebrow: 'História da Web',
-      title: 'De uma proposta no CERN a uma plataforma mundial',
-      subtitle: 'Marcos que explicam por que HTML nasceu como linguagem de documentos conectados.',
+      title: '5 marcos. Uma nova forma de navegar informação.',
+      subtitle: '1989 → 1994',
       items: [
-        { year: '1989', title: 'A proposta', detail: 'Tim Berners-Lee propõe no CERN um sistema de informação baseado em hipertexto.' },
-        { year: '1990', title: 'A Web ganha forma', detail: 'Surgem o primeiro servidor, o navegador/editor WorldWideWeb e a primeira versão de HTML.' },
-        { year: '1991', title: 'Expansão', detail: 'A tecnologia começa a se espalhar para além do ambiente inicial de desenvolvimento.' },
-        { year: '1993', title: 'Web aberta', detail: 'O CERN coloca o software da Web em domínio público, favorecendo sua disseminação.' },
-        { year: '1994', title: 'W3C', detail: 'É fundado o World Wide Web Consortium para coordenar padrões abertos para a Web.' }
+        { year: '1989', title: 'A proposta', detail: 'Proposta de sistema baseado em hipertexto.' },
+        { year: '1990', title: 'A Web ganha forma', detail: 'Servidor + navegador/editor + HTML.' },
+        { year: '1991', title: 'Expansão', detail: 'A Web começa a se expandir.' },
+        { year: '1993', title: 'Web aberta', detail: 'Tecnologia liberada para ampla adoção.' },
+        { year: '1994', title: 'W3C', detail: 'W3C e padrões abertos.' }
       ]
     },
     {
@@ -206,8 +206,8 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: 'O H de HTML',
       title: 'HyperText: texto que aponta para outros recursos.',
-      lead: 'Um link transforma leitura linear em navegação.',
-      detail: 'Essa ideia continua central na Web: documentos independentes podem se conectar sem precisar pertencer ao mesmo sistema ou servidor.',
+      lead: 'Texto + conexão = navegação.',
+      detail: 'O documento aponta para outro recurso. O usuário escolhe o caminho.',
       chips: ['HyperText', 'href', 'documentos', 'navegação']
     },
     {
@@ -215,33 +215,33 @@ export const aula01Html: LessonDefinition = {
       kind: 'visual',
       eyebrow: 'Hipertexto em movimento',
       title: 'Um documento pode levar a muitos outros',
-      subtitle: 'A força da Web aparece quando conteúdos independentes se conectam por links.',
+      subtitle: 'documentos → links → caminhos',
       visual: 'hypertext-map',
-      caption: 'O usuário não precisa conhecer a estrutura física dos servidores; ele segue relações entre informações.'
+      caption: 'O usuário segue relações, não a infraestrutura.'
     },
     {
       id: 'internet-web',
       kind: 'visual',
       eyebrow: 'Modelo mental',
       title: 'Internet e Web não são sinônimos',
-      subtitle: 'A Internet é a infraestrutura de rede. A Web é um serviço construído sobre essa infraestrutura.',
+      subtitle: 'Internet = infraestrutura · Web = serviço',
       visual: 'web-internet',
-      caption: 'A Web usa protocolos e endereços para localizar e transferir recursos entre computadores.'
+      caption: 'A Web usa a rede para localizar e transferir recursos.'
     },
     {
       id: 'request-flow',
       kind: 'visual',
       eyebrow: 'Do endereço à tela',
-      title: 'O navegador solicita recursos e transforma a resposta em página',
+      title: 'Do endereço digitado à página renderizada',
       visual: 'request-flow',
-      caption: 'Por enquanto, guarde a sequência: navegador → rede → servidor → resposta → renderização.'
+      caption: 'navegador → rede → servidor → resposta → renderização'
     },
     {
       id: 'papel-tecnologias',
       kind: 'visual',
       eyebrow: 'Responsabilidades',
       title: 'HTML, CSS e JavaScript resolvem problemas diferentes',
-      subtitle: 'Nesta aula o foco é exclusivamente a estrutura e o significado do conteúdo.',
+      subtitle: 'Hoje: HTML',
       visual: 'html-css-js'
     },
     {
@@ -249,8 +249,8 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: 'HTML',
       title: 'HTML é uma linguagem de marcação.',
-      lead: 'Ele descreve estrutura e significado.',
-      detail: 'HTML não é uma linguagem de programação. Ele usa elementos para identificar o papel de cada parte do conteúdo: título, parágrafo, link, lista, imagem, região de navegação e muito mais.',
+      lead: 'Estrutura + significado.',
+      detail: 'HTML identifica o papel de cada parte do conteúdo.',
       chips: ['HyperText', 'Markup', 'Language', 'semântica']
     },
     {
@@ -270,14 +270,14 @@ export const aula01Html: LessonDefinition = {
       id: 'conceitos-base',
       kind: 'cards',
       eyebrow: 'Vocabulário essencial',
-      title: 'Tag, elemento e atributo não são a mesma coisa',
+      title: '6 peças do vocabulário HTML',
       items: [
-        { title: 'Tag', detail: 'A marcação entre sinais de menor e maior, como <p> ou </p>.', tone: 'blue' },
-        { title: 'Elemento', detail: 'A unidade completa: abertura, conteúdo e fechamento quando aplicável.', tone: 'innovation' },
-        { title: 'Atributo', detail: 'Informação adicional declarada na tag de abertura.', tone: 'orange' },
-        { title: 'Conteúdo', detail: 'Texto ou outros elementos inseridos dentro de um elemento.', tone: 'green' },
-        { title: 'Elemento vazio', detail: 'Elemento que não envolve conteúdo, como <img>.', tone: 'neutral' },
-        { title: 'Aninhamento', detail: 'Elementos dentro de outros elementos respeitando uma hierarquia.', tone: 'blue' }
+        { title: 'Tag', detail: '<p> ... </p>', tone: 'blue' },
+        { title: 'Elemento', detail: 'tag + conteúdo + fechamento', tone: 'innovation' },
+        { title: 'Atributo', detail: 'dados extras da tag', tone: 'orange' },
+        { title: 'Conteúdo', detail: 'o que está dentro', tone: 'green' },
+        { title: 'Elemento vazio', detail: 'ex.: <img>', tone: 'neutral' },
+        { title: 'Aninhamento', detail: 'pai → filho', tone: 'blue' }
       ]
     },
     {
@@ -285,13 +285,13 @@ export const aula01Html: LessonDefinition = {
       kind: 'code',
       eyebrow: 'Hierarquia',
       title: 'HTML forma uma árvore de elementos',
-      subtitle: 'Abra e feche elementos respeitando a ordem de aninhamento.',
+      subtitle: 'pai → filho → neto',
       language: 'html',
       code: nestedElements,
       bullets: [
-        '<article> contém um título e um parágrafo.',
-        '<strong> está dentro do parágrafo e acrescenta importância ao trecho.',
-        'Indentação não muda o significado, mas torna a estrutura legível.'
+        '<article> → h2 + p',
+        '<strong> está dentro de <p>',
+        'Indentação = leitura mais clara'
       ]
     },
     {
@@ -299,23 +299,23 @@ export const aula01Html: LessonDefinition = {
       kind: 'visual',
       eyebrow: 'Documento completo',
       title: 'Todo documento HTML possui uma estrutura',
-      subtitle: 'A raiz contém duas regiões principais: head e body.',
+      subtitle: 'html → head + body',
       visual: 'document-tree',
-      caption: 'Head descreve o documento; body contém o que compõe a página.'
+      caption: 'head = metadados · body = conteúdo'
     },
     {
       id: 'primeiro-documento',
       kind: 'code',
       eyebrow: 'Primeiro arquivo',
       title: 'Crie index.html',
-      subtitle: 'Esta é a base que será reutilizada durante toda a aula.',
+      subtitle: 'A estrutura mínima que vamos reutilizar',
       language: 'html',
       code: firstDocument,
       bullets: [
-        '<!doctype html> ativa o modo de documento HTML moderno.',
-        'lang="pt-BR" informa o idioma principal do documento.',
-        '<meta charset="UTF-8"> define a codificação de caracteres.',
-        'viewport prepara a página para diferentes larguras de tela.'
+        '<!doctype html> → HTML moderno',
+        'lang → idioma',
+        'charset → caracteres',
+        'viewport → telas diferentes'
       ]
     },
     {
@@ -338,66 +338,66 @@ export const aula01Html: LessonDefinition = {
       id: 'head',
       kind: 'cards',
       eyebrow: 'Dentro de <head>',
-      title: 'Informações sobre a página que não fazem parte do conteúdo principal',
+      title: '<head>: dados sobre o documento',
       items: [
-        { title: '<title>', detail: 'Nome exibido na aba do navegador e usado como sinal por mecanismos de busca.', tone: 'blue' },
-        { title: 'charset', detail: 'Define como caracteres do documento são interpretados.', tone: 'innovation' },
-        { title: 'viewport', detail: 'Controla a área de visualização em dispositivos móveis.', tone: 'orange' },
-        { title: 'description', detail: 'Resume o conteúdo e pode ser utilizada em resultados e compartilhamentos.', tone: 'green' }
+        { title: '<title>', detail: 'nome da página', tone: 'blue' },
+        { title: 'charset', detail: 'codificação', tone: 'innovation' },
+        { title: 'viewport', detail: 'largura da tela', tone: 'orange' },
+        { title: 'description', detail: 'resumo da página', tone: 'green' }
       ]
     },
     {
       id: 'texto-com-significado',
       kind: 'cards',
       eyebrow: 'Conteúdo textual',
-      title: 'Não escolha uma tag pelo tamanho visual',
-      subtitle: 'Escolha pelo papel que o conteúdo desempenha.',
+      title: 'Escolha a tag pelo significado',
+      subtitle: 'semântica > aparência',
       items: [
-        { title: '<h1> … <h6>', detail: 'Criam níveis de títulos e organizam a hierarquia do conteúdo.', tone: 'blue' },
-        { title: '<p>', detail: 'Representa um parágrafo completo de texto.', tone: 'innovation' },
-        { title: '<strong>', detail: 'Marca conteúdo de forte importância.', tone: 'orange' },
-        { title: '<em>', detail: 'Marca ênfase no discurso.', tone: 'green' },
-        { title: '<br>', detail: 'Quebra de linha; não deve ser usado para criar espaçamento visual.', tone: 'neutral' },
-        { title: '<hr>', detail: 'Representa uma mudança temática entre blocos de conteúdo.', tone: 'blue' }
+        { title: '<h1> … <h6>', detail: 'hierarquia de títulos', tone: 'blue' },
+        { title: '<p>', detail: 'parágrafo', tone: 'innovation' },
+        { title: '<strong>', detail: 'forte importância', tone: 'orange' },
+        { title: '<em>', detail: 'ênfase', tone: 'green' },
+        { title: '<br>', detail: 'quebra de linha', tone: 'neutral' },
+        { title: '<hr>', detail: 'mudança temática', tone: 'blue' }
       ]
     },
     {
       id: 'listas',
       kind: 'code',
       eyebrow: 'Coleções',
-      title: 'Listas representam conjuntos de itens relacionados',
+      title: 'Listas = itens relacionados',
       language: 'html',
       code: listExample,
       bullets: [
-        '<ul> representa lista sem ordem numérica relevante.',
-        '<ol> é usada quando a ordem dos itens importa.',
-        '<li> representa cada item da lista.'
+        '<ul> → sem ordem',
+        '<ol> → ordem importa',
+        '<li> → item'
       ]
     },
     {
       id: 'links',
       kind: 'code',
       eyebrow: 'Hipertexto na prática',
-      title: 'O elemento <a> conecta sua página a outro recurso',
+      title: '<a> conecta recursos',
       language: 'html',
       code: linkExample,
       bullets: [
-        'href contém o destino do link.',
-        'O texto do link deve indicar claramente para onde ele leva.',
-        'target="_blank" abre outro contexto; use apenas quando houver motivo.'
+        'href → destino',
+        'texto do link → intenção clara',
+        'target="_blank" → nova guia'
       ]
     },
     {
       id: 'imagens',
       kind: 'code',
       eyebrow: 'Conteúdo visual',
-      title: 'Imagem também precisa de significado',
+      title: '<img>: arquivo + significado',
       language: 'html',
       code: imageExample,
       bullets: [
-        'src aponta para o arquivo ou endereço da imagem.',
-        'alt descreve a finalidade ou informação relevante da imagem.',
-        'Se a imagem for apenas decorativa, alt pode ser vazio: alt="".'
+        'src → arquivo',
+        'alt → significado',
+        'decorativa → alt=""'
       ]
     },
     {
@@ -405,8 +405,8 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: '15 minutos',
       title: 'Intervalo',
-      lead: 'Pare. Salve. Respire.',
-      detail: 'Depois do intervalo vamos reorganizar o que já sabemos usando HTML semântico e construir a primeira página completa.',
+      lead: '15 min.',
+      detail: 'Na volta: semântica + construção final.',
       chips: ['salvar arquivos', 'organizar pasta', 'retomar em 15 min']
     },
     {
@@ -414,44 +414,44 @@ export const aula01Html: LessonDefinition = {
       kind: 'statement',
       eyebrow: 'HTML semântico',
       title: 'Semântica é escolher elementos pelo significado.',
-      lead: 'A estrutura deve continuar compreensível mesmo sem CSS.',
-      detail: 'Uma página bem marcada ajuda pessoas, navegadores, mecanismos de busca e tecnologias assistivas a compreender a organização do conteúdo.',
+      lead: 'Sem CSS, ainda precisa fazer sentido.',
+      detail: 'Semântica melhora leitura, acessibilidade, manutenção e interpretação.',
       chips: ['significado', 'estrutura', 'acessibilidade', 'manutenção']
     },
     {
       id: 'regioes-semanticas',
       kind: 'cards',
       eyebrow: 'Regiões da página',
-      title: 'Elementos semânticos dão nome às partes da interface',
+      title: 'As regiões ganham nomes',
       items: [
-        { title: '<header>', detail: 'Conteúdo introdutório de uma página ou seção.', tone: 'blue' },
-        { title: '<nav>', detail: 'Conjunto principal ou relevante de links de navegação.', tone: 'innovation' },
-        { title: '<main>', detail: 'Conteúdo principal e único daquele documento.', tone: 'orange' },
-        { title: '<section>', detail: 'Agrupa conteúdo relacionado normalmente identificado por um título.', tone: 'green' },
-        { title: '<article>', detail: 'Conteúdo autocontido que pode fazer sentido de forma independente.', tone: 'neutral' },
-        { title: '<footer>', detail: 'Informações de encerramento da página ou seção.', tone: 'blue' }
+        { title: '<header>', detail: 'introdução', tone: 'blue' },
+        { title: '<nav>', detail: 'navegação', tone: 'innovation' },
+        { title: '<main>', detail: 'conteúdo principal', tone: 'orange' },
+        { title: '<section>', detail: 'grupo temático', tone: 'green' },
+        { title: '<article>', detail: 'conteúdo independente', tone: 'neutral' },
+        { title: '<footer>', detail: 'encerramento', tone: 'blue' }
       ]
     },
     {
       id: 'pagina-semantica-visual',
       kind: 'visual',
       eyebrow: 'Estrutura visível',
-      title: 'Semântica transforma uma página em regiões compreensíveis',
-      subtitle: 'Observe como header, nav, main, section e footer formam um mapa lógico do documento.',
+      title: 'Uma página vira um mapa lógico',
+      subtitle: 'header · nav · main · section · footer',
       visual: 'semantic-page',
-      caption: 'A aparência pode mudar depois com CSS; a organização conceitual já existe no HTML.'
+      caption: 'A estrutura existe antes do CSS.'
     },
     {
       id: 'estrutura-semantica',
       kind: 'code',
       eyebrow: 'Montagem',
-      title: 'Uma página pode revelar sua organização pelo próprio HTML',
+      title: 'A estrutura aparece no próprio código',
       language: 'html',
       code: semanticPage,
       bullets: [
-        'IDs permitem criar links internos para seções.',
-        '<main> concentra o conteúdo principal.',
-        'A ordem dos elementos deve acompanhar a ordem lógica de leitura.'
+        'id → destino interno',
+        '<main> → conteúdo principal',
+        'ordem do código → ordem de leitura'
       ]
     },
     {
