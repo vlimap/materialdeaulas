@@ -44,7 +44,19 @@ export type Slide =
     })
   | (BaseSlide & {
       kind: 'visual';
-      visual: 'web-internet' | 'request-flow' | 'html-css-js' | 'document-tree' | 'box-model' | 'before-after' | 'hypertext-map' | 'semantic-page';
+      visual:
+        | 'web-internet'
+        | 'request-flow'
+        | 'html-css-js'
+        | 'document-tree'
+        | 'box-model'
+        | 'before-after'
+        | 'hypertext-map'
+        | 'semantic-page'
+        | 'web-birth'
+        | 'head-impact'
+        | 'alt-demo'
+        | 'semantic-puzzle';
       caption?: string;
     })
   | (BaseSlide & {
@@ -80,6 +92,19 @@ export type Slide =
       starterCode: string;
       instructions: string[];
       editorPath?: string;
+    })
+  | (BaseSlide & {
+      kind: 'challenge';
+      prompt: string;
+      options: Array<{ label: string; code?: string }>;
+      answerIndex: number;
+      explanation: string;
+    })
+  | (BaseSlide & {
+      kind: 'missions';
+      intro: string;
+      options: Array<{ title: string; detail: string; twist?: string }>;
+      requirements: string[];
     })
   | (BaseSlide & {
       kind: 'references';
