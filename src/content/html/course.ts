@@ -40,122 +40,122 @@ export const htmlLessons: LessonDefinition[] = [
   },
   plannedLesson(
     2,
-    'aula-02-textos-links-listas-caminhos',
-    'HTML: textos, links, listas e caminhos',
-    'Textos, links e caminhos',
+    'aula-02-textos-links-imagens',
+    'HTML: textos, links, imagens e organização de conteúdo',
+    'Conteúdo HTML',
     [
       'Criar hierarquia textual coerente com títulos e parágrafos.',
+      'Usar ênfase, citações, trechos de código e diferentes tipos de lista.',
       'Construir links internos, externos, relativos e absolutos.',
-      'Usar listas ordenadas, não ordenadas e de descrição.',
-      'Organizar arquivos e compreender caminhos relativos.'
+      'Inserir imagens com texto alternativo e caminhos corretos.'
     ]
   ),
   plannedLesson(
     3,
-    'aula-03-imagens-audio-video',
-    'HTML: imagens, áudio, vídeo e mídia responsiva',
-    'Imagens e mídia',
-    [
-      'Usar imagens com texto alternativo adequado.',
-      'Aplicar figure e figcaption quando houver relação semântica.',
-      'Criar imagens responsivas com picture e srcset.',
-      'Incorporar áudio e vídeo com alternativas acessíveis.'
-    ]
-  ),
-  plannedLesson(
-    4,
-    'aula-04-html-semantico',
-    'HTML semântico: estrutura, landmarks e conteúdo',
+    'aula-03-html-semantico',
+    'HTML semântico: estrutura e significado',
     'HTML semântico',
     [
       'Organizar páginas com header, nav, main, section, article, aside e footer.',
       'Escolher elementos pelo significado e não pela aparência.',
-      'Criar uma ordem de leitura lógica.',
-      'Reconhecer quando div e span são apropriados.'
+      'Usar figure, figcaption, time e address quando apropriado.',
+      'Reconhecer quando div e span continuam sendo adequados.'
+    ]
+  ),
+  plannedLesson(
+    4,
+    'aula-04-tabelas',
+    'HTML: tabelas e representação de dados',
+    'Tabelas',
+    [
+      'Modelar dados tabulares com table, caption, thead, tbody e tfoot.',
+      'Relacionar cabeçalhos e células com th, td e scope.',
+      'Usar colspan e rowspan apenas quando necessários.',
+      'Evitar tabelas para construção de layout.'
     ]
   ),
   plannedLesson(
     5,
-    'aula-05-tabelas',
-    'HTML: tabelas de dados acessíveis',
-    'Tabelas',
+    'aula-05-formularios-fundamentos',
+    'HTML: formulários — fundamentos',
+    'Formulários I',
     [
-      'Modelar dados tabulares com table, thead, tbody e tfoot.',
-      'Relacionar cabeçalhos e células corretamente.',
-      'Usar caption e escopos de cabeçalho.',
-      'Evitar tabelas para layout.'
+      'Construir formulários com form, label, input, textarea, select e button.',
+      'Relacionar labels e controles corretamente.',
+      'Escolher tipos de input adequados ao dado solicitado.',
+      'Organizar grupos de campos com fieldset e legend.'
     ]
   ),
   plannedLesson(
     6,
-    'aula-06-formularios-fundamentos',
-    'HTML: formulários — fundamentos',
-    'Formulários I',
+    'aula-06-formularios-validacao',
+    'HTML: formulários — validação e experiência do usuário',
+    'Formulários II',
     [
-      'Construir formulários com form, label, input, textarea e button.',
-      'Relacionar labels e controles corretamente.',
-      'Escolher tipos de input adequados.',
-      'Compreender name, value, method e action.'
+      'Aplicar required, min, max, minlength, maxlength, pattern e step.',
+      'Usar autocomplete e demais atributos de experiência de preenchimento.',
+      'Trabalhar radio, checkbox, file, range, color e campos de data e hora.',
+      'Distinguir validação no navegador de validação e segurança no servidor.'
     ]
   ),
   plannedLesson(
     7,
-    'aula-07-formularios-validacao',
-    'HTML: formulários — validação e experiência do usuário',
-    'Formulários II',
+    'aula-07-audio-video-embeds',
+    'HTML: áudio, vídeo e conteúdo incorporado',
+    'Mídia e embeds',
     [
-      'Aplicar required, minlength, maxlength, min, max e pattern.',
-      'Usar autocomplete de forma apropriada.',
-      'Agrupar controles com fieldset e legend.',
-      'Criar formulários mais acessíveis e amigáveis em dispositivos móveis.'
+      'Incorporar áudio e vídeo com elementos nativos.',
+      'Trabalhar múltiplas fontes, poster, controles e comportamento de reprodução.',
+      'Adicionar legendas com track e WebVTT.',
+      'Usar iframe considerando acessibilidade, privacidade e falhas externas.'
     ]
   ),
   plannedLesson(
     8,
-    'aula-08-acessibilidade-html',
-    'HTML acessível: recursos nativos antes de ARIA',
-    'Acessibilidade',
+    'aula-08-imagens-responsivas',
+    'HTML: imagens responsivas e carregamento eficiente',
+    'Imagens responsivas',
     [
-      'Priorizar elementos HTML nativos para acessibilidade.',
-      'Criar navegação por teclado coerente.',
-      'Trabalhar idioma, rótulos, nomes acessíveis e landmarks.',
-      'Entender quando ARIA é necessário e quando não deve ser usado.'
+      'Compreender o papel da meta viewport em dispositivos móveis.',
+      'Usar srcset e sizes para fornecer imagens adequadas ao contexto.',
+      'Aplicar picture para direção de arte e formatos alternativos.',
+      'Usar width, height, loading e formatos modernos visando estabilidade e performance.'
     ]
   ),
   plannedLesson(
     9,
-    'aula-09-head-metadados-seo',
-    'HTML: head, metadados, SEO e compartilhamento',
-    'Metadados e SEO',
+    'aula-09-acessibilidade-html',
+    'HTML acessível: recursos nativos antes de ARIA',
+    'Acessibilidade',
     [
-      'Configurar title, description, canonical e robots.',
-      'Preparar Open Graph e Twitter Cards.',
-      'Adicionar favicons e informações de idioma.',
-      'Introduzir dados estruturados com JSON-LD.'
+      'Priorizar elementos HTML nativos e semânticos.',
+      'Criar navegação por teclado e ordem de leitura coerentes.',
+      'Trabalhar idioma, headings, texto alternativo, labels e landmarks.',
+      'Entender quando ARIA é necessário e quando não deve ser usado.'
     ]
   ),
   plannedLesson(
     10,
-    'aula-10-html-moderno',
-    'HTML moderno: details, dialog, popover, template e embeds',
-    'HTML moderno',
+    'aula-10-seo-metadados',
+    'HTML: SEO, metadados e compartilhamento',
+    'SEO e metadados',
     [
-      'Usar details e summary para conteúdo expansível.',
-      'Compreender dialog e popover em interfaces modernas.',
-      'Trabalhar template como estrutura inerte.',
-      'Incorporar conteúdo externo com iframe de forma segura.'
+      'Configurar title, description, canonical e robots.',
+      'Preparar Open Graph e metadados de compartilhamento.',
+      'Relacionar semântica, headings, links e imagens com rastreabilidade.',
+      'Introduzir dados estruturados com schema.org e JSON-LD.'
     ]
   ),
   plannedLesson(
     11,
-    'aula-11-performance-recursos',
-    'HTML: carregamento de recursos e performance',
-    'Performance HTML',
+    'aula-11-html-moderno',
+    'HTML moderno: recursos nativos para aplicações',
+    'HTML moderno',
     [
-      'Aplicar loading e decoding em imagens quando adequado.',
-      'Compreender preload, preconnect e outras resource hints.',
-      'Entender defer, async e module na inclusão de scripts.',
-      'Evitar decisões de marcação que prejudiquem Core Web Vitals.'
+      'Usar details e summary para conteúdo expansível.',
+      'Compreender dialog, popover, progress e meter.',
+      'Trabalhar template, data-* e hidden como base para comportamento posterior.',
+      'Preparar a transição conceitual para JavaScript sem recriar recursos nativos desnecessariamente.'
     ]
   ),
   plannedLesson(
@@ -166,7 +166,7 @@ export const htmlLessons: LessonDefinition[] = [
     [
       'Planejar a arquitetura de conteúdo de um pequeno site.',
       'Construir múltiplas páginas conectadas semanticamente.',
-      'Integrar acessibilidade, formulários, mídia e metadados.',
+      'Integrar acessibilidade, formulários, mídia, imagens responsivas e metadados.',
       'Validar HTML e apresentar decisões técnicas do projeto.'
     ]
   )
