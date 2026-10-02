@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && npm run seo:generate",
     "preview": "webpack serve --mode production --no-hot",
-    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts"
+    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts",
+    "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts"
   },
   "dependencies": {
     "@fontsource/rubik": "^5.2.5",
