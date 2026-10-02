@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
@@ -33,7 +33,7 @@ function vscodeWebUrl(path?: string) {
 function LiveLab({ slide }: { slide: Extract<Slide, { kind: 'lab' }> }) {
   const [code, setCode] = useState(slide.starterCode);
 
-  const stopStoryGesture = (event: React.SyntheticEvent) => {
+  const stopStoryGesture = (event: SyntheticEvent) => {
     event.stopPropagation();
   };
 
