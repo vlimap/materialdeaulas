@@ -12,7 +12,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { ArrowRight, BookOpen, CheckCircle2, Database, Server, Wrench } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { getTechnologyIcon } from '../../brand/technologyIcons';
 import '../../styles/roadmap.css';
@@ -222,7 +222,13 @@ function RoadmapNodeCard({ data }: NodeProps) {
   );
 
   return (
-    <div className={'roadmap-node-card' + (nodeData.kind === 'goal' ? ' is-goal' : '')}>
+    <div
+      className={
+        'roadmap-node-card' +
+        (nodeData.kind === 'goal' ? ' is-goal' : '') +
+        (nodeData.slug ? ' is-clickable' : '')
+      }
+    >
       <Handle type="target" position={Position.Left} className="roadmap-handle" />
       {nodeData.slug ? (
         <Link
@@ -243,6 +249,7 @@ function RoadmapNodeCard({ data }: NodeProps) {
 const nodeTypes = { roadmap: RoadmapNodeCard };
 
 export function RoadmapPage() {
+  const navigate = useNavigate();
   const [selectedTrack, setSelectedTrack] = useState<TrackId>('frontend');
   const track = tracks.find((item) => item.id === selectedTrack)!;
   const graph = useMemo(() => createLayout(track), [track]);
@@ -303,6 +310,10 @@ export function RoadmapPage() {
             nodesDraggable={false}
             nodesConnectable={false}
             elementsSelectable={false}
+            onNodeClick={(_, node) => {
+              const nodeData = node.data as RoadmapNodeData;
+              if (nodeData.slug) navigate('/curso/curso-' + nodeData.slug);
+            }}
             proOptions={{ hideAttribution: true }}
           >
             <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#27313d" />
