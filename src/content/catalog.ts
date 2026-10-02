@@ -117,7 +117,9 @@ export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: strin
 
   for (const module of uc?.modules ?? []) {
     const lesson = module.lessons.find((item) => item.slug === lessonSlug);
-    if (lesson) return { course, uc, module, lesson };
+    if (lesson && lesson.status !== 'planned' && lesson.slides.length > 0) {
+      return { course, uc, module, lesson };
+    }
   }
 
   return null;
