@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { ExternalLink, RotateCcw } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 
@@ -21,7 +23,121 @@ function Header({ slide }: { slide: Slide }) {
   );
 }
 
+const VSCODE_WEB_REPO = 'https://vscode.dev/github/vlimap/materialdeaulas';
+
+function vscodeWebUrl(path?: string) {
+  if (!path) return VSCODE_WEB_REPO;
+  return VSCODE_WEB_REPO + '/blob/main/' + path.replace(/^\/+/, '');
+}
+
+function LiveLab({ slide }: { slide: Extract<Slide, { kind: 'lab' }> }) {
+  const [code, setCode] = useState(slide.starterCode);
+
+  const stopStoryGesture = (event: React.SyntheticEvent) => {
+    event.stopPropagation();
+  };
+
+  return (
+    <div
+      className="live-lab"
+      onPointerDown={stopStoryGesture}
+      onPointerUp={stopStoryGesture}
+      onClick={stopStoryGesture}
+    >
+      <div className="live-lab-editor">
+        <div className="live-lab-toolbar">
+          <span>{slide.language}</span>
+          <div>
+            <button
+              type="button"
+              onClick={() => setCode(slide.starterCode)}
+              title="Restaurar código inicial"
+              aria-label="Restaurar código inicial"
+            >
+              <RotateCcw size={15} />
+              <span>Restaurar</span>
+            </button>
+            <a
+              href={vscodeWebUrl(slide.editorPath)}
+              target="_blank"
+              rel="noreferrer"
+              title="Abrir código no VS Code para Web"
+            >
+              <ExternalLink size={15} />
+              <span>VS Code Web</span>
+            </a>
+          </div>
+        </div>
+        <textarea
+          value={code}
+          onChange={(event) => setCode(event.target.value)}
+          spellCheck={false}
+          aria-label="Editor de código HTML"
+        />
+      </div>
+
+      <div className="live-lab-preview">
+        <div className="live-lab-preview-bar">
+          <i /><i /><i />
+          <span>prévia</span>
+        </div>
+        <iframe
+          title="Prévia do código"
+          srcDoc={code}
+          sandbox={slide.language === 'javascript' ? 'allow-scripts' : ''}
+        />
+      </div>
+
+      <aside className="live-lab-instructions">
+        <strong>Faça agora</strong>
+        <ol>
+          {slide.instructions.map((instruction) => (
+            <li key={instruction}>{instruction}</li>
+          ))}
+        </ol>
+      </aside>
+    </div>
+  );
+}
+
 function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }) {
+  if (name === 'hypertext-map') {
+    return (
+      <div className="hypertext-map" aria-label="Mapa animado de documentos conectados por hiperlinks">
+        <svg viewBox="0 0 900 430" role="img" aria-hidden="true">
+          <path className="hyper-link link-a" d="M225 120 C350 35 535 40 675 115" />
+          <path className="hyper-link link-b" d="M225 120 C350 190 330 310 455 325" />
+          <path className="hyper-link link-c" d="M675 115 C650 235 580 280 455 325" />
+          <path className="hyper-link link-d" d="M455 325 C300 365 190 315 135 245" />
+          <circle className="hyper-pulse pulse-a" cx="225" cy="120" r="8" />
+          <circle className="hyper-pulse pulse-b" cx="675" cy="115" r="8" />
+          <circle className="hyper-pulse pulse-c" cx="455" cy="325" r="8" />
+        </svg>
+        <div className="hyper-doc doc-a"><span>Documento A</span><small>uma ideia</small></div>
+        <div className="hyper-doc doc-b"><span>Documento B</span><small>outra fonte</small></div>
+        <div className="hyper-doc doc-c"><span>Documento C</span><small>referência</small></div>
+        <div className="hyper-doc doc-d"><span>Documento D</span><small>novo caminho</small></div>
+        <div className="hyper-cursor">↗</div>
+      </div>
+    );
+  }
+
+  if (name === 'semantic-page') {
+    return (
+      <div className="semantic-page-visual" aria-label="Estrutura semântica de uma página HTML">
+        <div className="semantic-browser-bar"><i /><i /><i /><span>pagina.html</span></div>
+        <div className="semantic-region semantic-header">&lt;header&gt;<small>identidade e introdução</small></div>
+        <div className="semantic-region semantic-nav">&lt;nav&gt;<small>navegação</small></div>
+        <div className="semantic-main">
+          <div className="semantic-region semantic-main-label">&lt;main&gt;</div>
+          <div className="semantic-region semantic-section-one">&lt;section&gt;<small>sobre</small></div>
+          <div className="semantic-region semantic-section-two">&lt;section&gt;<small>conteúdo</small></div>
+        </div>
+        <div className="semantic-region semantic-footer">&lt;footer&gt;<small>encerramento</small></div>
+      </div>
+    );
+  }
+
   if (name === 'web-internet') {
     return (
       <div className="visual-network">
@@ -267,6 +383,10 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
             </div>
             {slide.prompt && <p className="checkpoint-prompt">{slide.prompt}</p>}
           </div>
+        )}
+
+        {slide.kind === 'lab' && (
+          <LiveLab slide={slide} />
         )}
 
         {slide.kind === 'references' && (
