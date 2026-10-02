@@ -7,9 +7,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'assets/js/[name].[contenthash:8].js',
     chunkFilename: 'assets/js/[name].[contenthash:8].chunk.js',
-    // Resolve media relative to the loaded bundle so assets also work when
-    // the public repository is served from a subpath such as /materialdeaulas/.
-    publicPath: 'auto',
+    // The production app is served from the domain root. Keep every emitted
+    // bundle/media URL absolute so refreshing a deep SPA/SEO route never makes
+    // the browser request /curso/.../assets/*.
+    publicPath: '/',
     clean: true
   },
   resolve: {
