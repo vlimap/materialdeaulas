@@ -211,6 +211,15 @@ export const aula01Html: LessonDefinition = {
       chips: ['HyperText', 'href', 'documentos', 'navegação']
     },
     {
+      id: 'hipertexto-visual',
+      kind: 'visual',
+      eyebrow: 'Hipertexto em movimento',
+      title: 'Um documento pode levar a muitos outros',
+      subtitle: 'A força da Web aparece quando conteúdos independentes se conectam por links.',
+      visual: 'hypertext-map',
+      caption: 'O usuário não precisa conhecer a estrutura física dos servidores; ele segue relações entre informações.'
+    },
+    {
       id: 'internet-web',
       kind: 'visual',
       eyebrow: 'Modelo mental',
@@ -408,6 +417,15 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
+      id: 'pagina-semantica-visual',
+      kind: 'visual',
+      eyebrow: 'Estrutura visível',
+      title: 'Semântica transforma uma página em regiões compreensíveis',
+      subtitle: 'Observe como header, nav, main, section e footer formam um mapa lógico do documento.',
+      visual: 'semantic-page',
+      caption: 'A aparência pode mudar depois com CSS; a organização conceitual já existe no HTML.'
+    },
+    {
       id: 'estrutura-semantica',
       kind: 'code',
       eyebrow: 'Montagem',
@@ -543,7 +561,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Fontes e continuidade',
       title: 'Referências técnicas para revisar a aula',
       items: [
-        { label: 'CERN — The birth of the Web', url: 'https://home.cern/science/computing/birth-web' },
+        { label: 'CERN — The birth of the Web', url: 'https://home.cern/science/computing/the-birth-of-the-web/' },
         { label: 'W3C — History', url: 'https://www.w3.org/about/history/' },
         { label: 'MDN — HTML', url: 'https://developer.mozilla.org/pt-BR/docs/Web/HTML' },
         { label: 'MDN — Iniciando com HTML', url: 'https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax' },
