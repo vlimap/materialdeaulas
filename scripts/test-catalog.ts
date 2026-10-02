@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { catalog, findLesson, technologyCourses } from '../src/content/catalog';
+import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
 import { getPublicSeoPages } from '../src/seo/metadata';
 
 type TestCase = {
@@ -127,6 +127,25 @@ const tests: TestCase[] = [
           );
         }
       }
+    }
+  },
+  {
+    name: 'mantém a navegação contextual das aulas na ordem do curso',
+    run: () => {
+      const navigation = getCourseLessonNavigation('curso-html5');
+
+      assert.equal(navigation.length, 12);
+      assert.equal(navigation[0].id, 'fullstack-front-html-aula-01');
+      assert.equal(navigation[0].published, true);
+      assert.equal(navigation[1].published, false);
+      assert.match(
+        navigation[0].href,
+        /^\/curso\/curso-html5\/uc\/fundamentos-html5\/aula\//
+      );
+      assert.deepEqual(
+        navigation.map((item) => item.number),
+        Array.from({ length: 12 }, (_, index) => index + 1)
+      );
     }
   },
   {
