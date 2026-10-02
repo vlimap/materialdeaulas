@@ -400,7 +400,7 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
     return (
       <div className="alt-demo">
         <div className="alt-card">
-          <div className="alt-picture" aria-hidden="true">🐕</div>
+          <div className="alt-picture" aria-hidden="true" />
           <code>alt="Cachorro caramelo sentado"</code>
           <span>imagem com significado</span>
         </div>
