@@ -42,7 +42,6 @@ function CourseVisual() {
 }
 
 function CatalogPage() {
-  const [selectedTechnology, setSelectedTechnology] = useState<string | null>(null);
   const [courseQuery, setCourseQuery] = useState('');
   const technologies = technologyCourses;
 
@@ -62,22 +61,6 @@ function CatalogPage() {
       )
     : technologies;
 
-  const selected = technologies.find((technology) => technology.slug === selectedTechnology);
-    const selectedModule = selected?.ucs.flatMap((uc) => uc.modules)[0];
-    const lessons = selectedModule?.lessons ?? [];
-    const rows = lessons.length > 0
-      ? lessons.map((lesson) => ({
-          label: 'Aula ' + String(lesson.number).padStart(2, '0') + ' · ' + lesson.shortTitle,
-          href: '/curso/' + (selected?.slug ?? '') + '/uc/' + (selected?.ucs[0].slug ?? '') + '/aula/' + lesson.slug,
-          published: lesson.status !== 'planned' && lesson.slides.length > 0
-        }))
-      : [
-          { label: 'Aula 01 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false },
-          { label: 'Aula 02 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false },
-          { label: 'Aula 03 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false }
-        ];
-
-  const tone = (slug: string) => slug.includes('react') ? 'react' : slug.includes('express') ? 'express' : slug.includes('python') ? 'python' : 'default';
   const groups = Array.from(new Set(visibleTechnologies.map((technology) => technology.description.split(' · ')[1])));
 
   return (
@@ -85,7 +68,7 @@ function CatalogPage() {
       <BrandHeader dark />
       <main id="main-content" className="excalidraw-home">
         <section className="excalidraw-board" aria-label="Tecnologias disponíveis">
-        {!selected ? <div className="technology-groups">
+        <div className="technology-groups">
           <div className="course-search" role="search">
             <Search size={21} aria-hidden="true" />
             <input
@@ -113,9 +96,15 @@ function CatalogPage() {
             <h2>{group}</h2>
             <div className="technology-badges">
               {visibleTechnologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
-                <button className="technology-badge" key={technology.slug} onClick={() => setSelectedTechnology(technology.slug)} aria-label={'Abrir curso de ' + technology.title} aria-pressed={selectedTechnology === technology.slug}>
-                  {getTechnologyIcon(technology.slug) && <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />}<span>{technology.title}</span>
-                </button>
+                <Link
+                  className="technology-badge"
+                  key={technology.slug}
+                  to={'/curso/' + technology.slug}
+                  aria-label={'Abrir curso de ' + technology.title}
+                >
+                  {getTechnologyIcon(technology.slug) && <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />}
+                  <span>{technology.title}</span>
+                </Link>
               ))}
             </div>
           </section>)}
@@ -125,23 +114,7 @@ function CatalogPage() {
               Nenhum curso encontrado para <strong>“{courseQuery.trim()}”</strong>.
             </div>
           )}
-        </div> : <div className="excalidraw-lessons">
-          <button className={'excalidraw-selected-tech tech-' + tone(selected.slug)} onClick={() => setSelectedTechnology(null)} aria-label="Voltar para todas as tecnologias">
-            {getTechnologyIcon(selected.slug) && <img src={getTechnologyIcon(selected.slug)} alt="" aria-hidden="true" />}
-          </button>
-          <strong className="excalidraw-selected-label">{selected.title}</strong>
-          <div className="excalidraw-lesson-list">
-            {rows.map((row) => row.published ? (
-              <Link className="excalidraw-lesson" key={row.label} to={row.href}>
-                <span>{row.label}</span><span>→</span>
-              </Link>
-            ) : (
-              <div className="excalidraw-lesson excalidraw-lesson-planned" key={row.label} aria-disabled="true">
-                <span>{row.label}</span><span>Em breve</span>
-              </div>
-            ))}
-          </div>
-        </div>}
+        </div>
         </section>
       </main>
     </div>
