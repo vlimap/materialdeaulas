@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play, Search, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { catalog, findLesson, technologyCourses } from './content/catalog';
@@ -38,8 +38,24 @@ function CourseVisual() {
 
 function CatalogPage() {
   const [selectedTechnology, setSelectedTechnology] = useState<string | null>(null);
-  const [activeRoadmap, setActiveRoadmap] = useState('Linguagens');
+  const [courseQuery, setCourseQuery] = useState('');
   const technologies = technologyCourses;
+
+  const normalizedQuery = courseQuery
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .toLowerCase();
+
+  const visibleTechnologies = normalizedQuery
+    ? technologies.filter((technology) =>
+        technology.title
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .includes(normalizedQuery)
+      )
+    : technologies;
 
   const selected = technologies.find((technology) => technology.slug === selectedTechnology);
     const selectedModule = selected?.ucs.flatMap((uc) => uc.modules)[0];
@@ -49,19 +65,7 @@ function CatalogPage() {
       : [{ label: 'Aula 01 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }, { label: 'Aula 02 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }, { label: 'Aula 03 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }];
 
   const tone = (slug: string) => slug.includes('react') ? 'react' : slug.includes('express') ? 'express' : slug.includes('python') ? 'python' : 'default';
-  const groups = Array.from(new Set(technologies.map((technology) => technology.description.split(' · ')[1])));
-  const roadmap = [
-    { number: '01', title: 'Fundamentos', group: 'Linguagens' },
-    { number: '02', title: 'Frontend', group: 'Frontend' },
-    { number: '03', title: 'Backend', group: 'Backend' },
-    { number: '04', title: 'Dados', group: 'Banco de Dados' },
-    { number: '05', title: 'DevOps', group: 'DevOps & Cloud' },
-  ];
-
-  const focusGroup = (group: string) => {
-    setActiveRoadmap(group);
-    document.getElementById('group-' + group.toLowerCase().replace(/[^a-z]+/g, '-'))?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const groups = Array.from(new Set(visibleTechnologies.map((technology) => technology.description.split(' · ')[1])));
 
   return (
     <div className="home-shell">
@@ -69,24 +73,45 @@ function CatalogPage() {
       <main id="main-content" className="excalidraw-home">
         <section className="excalidraw-board" aria-label="Tecnologias disponíveis">
         {!selected ? <div className="technology-groups">
-          <div className="roadmap" aria-label="Roteiro recomendado de estudos">
-            <p>Por onde começar</p>
-            <div className="roadmap-track">
-              {roadmap.map((step) => <button className={'roadmap-node ' + (activeRoadmap === step.group ? 'active' : '')} key={step.group} onClick={() => focusGroup(step.group)} aria-pressed={activeRoadmap === step.group}>
-                <span>{step.number}</span><strong>{step.title}</strong>
-              </button>)}
-            </div>
+          <div className="course-search" role="search">
+            <Search size={21} aria-hidden="true" />
+            <input
+              type="search"
+              value={courseQuery}
+              onChange={(event) => setCourseQuery(event.target.value)}
+              placeholder="Buscar curso pelo nome"
+              aria-label="Buscar curso pelo nome"
+              autoComplete="off"
+            />
+            {courseQuery && (
+              <button
+                type="button"
+                className="course-search-clear"
+                onClick={() => setCourseQuery('')}
+                aria-label="Limpar busca"
+                title="Limpar busca"
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            )}
           </div>
-          {groups.map((group) => <section className={'technology-group ' + (activeRoadmap === group ? 'is-active' : '')} id={'group-' + group.toLowerCase().replace(/[^a-z]+/g, '-')} key={group}>
+
+          {groups.map((group) => <section className="technology-group" id={'group-' + group.toLowerCase().replace(/[^a-z]+/g, '-')} key={group}>
             <h2>{group}</h2>
             <div className="technology-badges">
-              {technologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
+              {visibleTechnologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
                 <button className="technology-badge" key={technology.slug} onClick={() => setSelectedTechnology(technology.slug)} aria-label={'Abrir curso de ' + technology.title} aria-pressed={selectedTechnology === technology.slug}>
                   {getTechnologyIcon(technology.slug) && <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />}<span>{technology.title}</span>
                 </button>
               ))}
             </div>
           </section>)}
+
+          {visibleTechnologies.length === 0 && (
+            <div className="course-search-empty" role="status">
+              Nenhum curso encontrado para <strong>“{courseQuery.trim()}”</strong>.
+            </div>
+          )}
         </div> : <div className="excalidraw-lessons">
           <button className={'excalidraw-selected-tech tech-' + tone(selected.slug)} onClick={() => setSelectedTechnology(null)} aria-label="Voltar para todas as tecnologias">
             {getTechnologyIcon(selected.slug) && <img src={getTechnologyIcon(selected.slug)} alt="" aria-hidden="true" />}

@@ -254,6 +254,87 @@ a {
 }
 
 .technology-groups { display: grid; gap: 34px; margin-top: 34px; }
+
+.course-search {
+  width: min(680px, 100%);
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 6px;
+  padding: 0 14px;
+  border: 1px solid #3a4554;
+  border-radius: 12px;
+  color: #aeb8c4;
+  background: #151a21;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.course-search:focus-within {
+  border-color: #F2C53D;
+  background: #171d25;
+  box-shadow: 0 0 0 3px rgba(242, 197, 61, .12);
+}
+
+.course-search > svg {
+  flex: 0 0 auto;
+  color: #F2C53D;
+}
+
+.course-search input {
+  width: 100%;
+  min-width: 0;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: #f7f7f7;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+}
+
+.course-search input::placeholder {
+  color: #8d99a8;
+  opacity: 1;
+}
+
+.course-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.course-search-clear {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  color: #c7d0da;
+  background: transparent;
+}
+
+.course-search-clear:hover,
+.course-search-clear:focus-visible {
+  color: #111;
+  background: #F2C53D;
+}
+
+.course-search-empty {
+  width: min(680px, 100%);
+  padding: 22px 18px;
+  border: 1px dashed #465365;
+  border-radius: 12px;
+  color: #aeb8c4;
+  background: #151a21;
+  line-height: 1.5;
+}
+
+.course-search-empty strong {
+  color: #f7f7f7;
+}
 .roadmap { margin: 30px 0 42px; padding: 18px 20px 20px; border: 1px solid #29313d; border-radius: 12px; background: #151a21; }
 .roadmap > p { margin: 0 0 16px; color: #aeb8c4; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .roadmap-track { display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; }
@@ -1404,7 +1485,11 @@ a {
 
   .excalidraw-home { min-height: calc(100dvh - 76px); padding: 12px 16px 36px; }
   .excalidraw-board { width: 100%; min-height: 0; padding: 8px 0; }
-  .technology-groups { gap: 30px; margin-top: 10px; }
+  .technology-groups { gap: 26px; margin-top: 10px; }
+  .course-search { width: 100%; min-height: 50px; margin: 0; padding: 0 12px; border-radius: 10px; }
+  .course-search input { height: 48px; font-size: .98rem; }
+  .course-search-clear { width: 40px; height: 40px; }
+  .course-search-empty { width: 100%; padding: 18px 14px; }
   .roadmap { margin: 0 0 4px; padding: 16px 14px; }
   .roadmap > p { margin-bottom: 14px; }
   .roadmap-track { min-width: 0; grid-template-columns: repeat(5, minmax(84px, 1fr)); gap: 4px; overflow-x: auto; padding: 2px 0 8px; scrollbar-width: thin; }
@@ -1455,7 +1540,7 @@ a {
 }
 
 @media (pointer: coarse) {
-  .roadmap-node, .technology-badge, .excalidraw-lesson, .lesson-link, .toolbar-button { touch-action: manipulation; }
+  .course-search-clear, .technology-badge, .excalidraw-lesson, .lesson-link, .toolbar-button { touch-action: manipulation; }
 }
 
 @media (max-width: 960px) {
