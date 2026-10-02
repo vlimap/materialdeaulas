@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointer
 import {
   ArrowLeft,
   ArrowRight,
+  Code2,
   Download,
   Expand,
   Home,
@@ -117,7 +118,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   }, [index, isStoryMode, lesson.slides.length]);
 
   useEffect(() => {
-    if (!isStoryMode || !storyAutoPlay || holdingStory) return;
+    if (!isStoryMode || !storyAutoPlay || holdingStory || current.kind === 'lab') return;
 
     let animationFrame = 0;
     const startedAt = performance.now() - elapsedRef.current;
@@ -139,6 +140,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
     animationFrame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(animationFrame);
   }, [
+    current.kind,
     currentStoryDuration,
     holdingStory,
     index,
@@ -234,6 +236,20 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         </div>
 
         <div className="toolbar-actions">
+          {lesson.lab && (
+            <a
+              className="toolbar-button"
+              href={'https://vscode.dev/github/vlimap/materialdeaulas/blob/main/' + lesson.lab.workspacePath}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={lesson.lab.editorLabel ?? 'Abrir atividade no VS Code Web'}
+              title={lesson.lab.editorLabel ?? 'Abrir atividade no VS Code Web'}
+            >
+              <Code2 size={18} />
+              <span>VS Code</span>
+            </a>
+          )}
+
           {isStoryMode && (
             <button
               className="toolbar-button icon-only story-autoplay-button"
