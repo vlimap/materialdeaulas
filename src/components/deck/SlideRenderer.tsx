@@ -525,8 +525,13 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           </div>
         )}
 
-        {slide.kind === 'code' && (
-          <div className="code-layout">
+        {slide.kind === 'code' && (() => {
+          const lineCount = slide.code.split('\n').length;
+          const densityClass =
+            lineCount >= 34 ? ' is-very-dense' : lineCount >= 20 ? ' is-dense' : '';
+
+          return (
+          <div className={'code-layout' + densityClass}>
             <div className="code-window">
               <div className="code-topbar">
                 <span /><span /><span />
