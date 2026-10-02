@@ -188,6 +188,15 @@ export const aula01Html: LessonDefinition = {
       chips: ['documentos', 'hipertexto', 'links', 'informação']
     },
     {
+      id: 'nascimento-web-visual',
+      kind: 'visual',
+      eyebrow: 'Ideia central',
+      title: 'Documentos isolados começam a conversar',
+      subtitle: 'uma conexão muda a forma de navegar informação',
+      visual: 'web-birth',
+      caption: 'A Web nasce da possibilidade de conectar documentos e seguir relações entre eles.'
+    },
+    {
       id: 'historia-web',
       kind: 'timeline',
       eyebrow: 'História da Web',
@@ -195,7 +204,7 @@ export const aula01Html: LessonDefinition = {
       subtitle: '1989 → 1994',
       items: [
         { year: '1989', title: 'A proposta', detail: 'Proposta de sistema baseado em hipertexto.' },
-        { year: '1990', title: 'A Web ganha forma', detail: 'Servidor + navegador/editor + HTML.' },
+        { year: '1990', title: 'A Web ganha forma', detail: 'Servidor + navegador/editor + HTML. Ainda sem framework para instalar.' },
         { year: '1991', title: 'Expansão', detail: 'A Web começa a se expandir.' },
         { year: '1993', title: 'Web aberta', detail: 'Tecnologia liberada para ampla adoção.' },
         { year: '1994', title: 'W3C', detail: 'W3C e padrões abertos.' }
@@ -234,7 +243,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Do endereço à tela',
       title: 'Do endereço digitado à página renderizada',
       visual: 'request-flow',
-      caption: 'navegador → rede → servidor → resposta → renderização'
+      caption: 'Acompanhe o pedido saindo do navegador e o HTML voltando até virar tela.'
     },
     {
       id: 'papel-tecnologias',
@@ -267,6 +276,21 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
+      id: 'microdesafio-html-valido',
+      kind: 'challenge',
+      eyebrow: '30 segundos',
+      title: 'Qual marcação está correta?',
+      subtitle: 'Responda antes de revelar a explicação.',
+      prompt: 'Qual opção representa um parágrafo HTML corretamente aberto e fechado?',
+      options: [
+        { label: 'Opção A', code: '<p>Olá</p>' },
+        { label: 'Opção B', code: '<p>Olá<p>' },
+        { label: 'Opção C', code: '<p Olá </p>' }
+      ],
+      answerIndex: 0,
+      explanation: 'A tag de abertura <p> e a tag de fechamento </p> envolvem o conteúdo.'
+    },
+    {
       id: 'conceitos-base',
       kind: 'cards',
       eyebrow: 'Vocabulário essencial',
@@ -293,6 +317,20 @@ export const aula01Html: LessonDefinition = {
         '<strong> está dentro de <p>',
         'Indentação = leitura mais clara'
       ]
+    },
+    {
+      id: 'microdesafio-aninhamento',
+      kind: 'challenge',
+      eyebrow: 'Leitura de árvore',
+      title: 'Quem é o pai de <strong>?',
+      prompt: 'No exemplo anterior, qual elemento contém diretamente <strong>?</strong>?',
+      options: [
+        { label: '<article>' },
+        { label: '<p>' },
+        { label: '<h2>' }
+      ],
+      answerIndex: 1,
+      explanation: '<strong> está diretamente dentro de <p>. O <article> é ancestral, mas não é o pai imediato.'
     },
     {
       id: 'arvore-documento',
@@ -336,15 +374,12 @@ export const aula01Html: LessonDefinition = {
     },
     {
       id: 'head',
-      kind: 'cards',
+      kind: 'visual',
       eyebrow: 'Dentro de <head>',
-      title: '<head>: dados sobre o documento',
-      items: [
-        { title: '<title>', detail: 'nome da página', tone: 'blue' },
-        { title: 'charset', detail: 'codificação', tone: 'innovation' },
-        { title: 'viewport', detail: 'largura da tela', tone: 'orange' },
-        { title: 'description', detail: 'resumo da página', tone: 'green' }
-      ]
+      title: '<head>: pequenas linhas, consequências visíveis',
+      subtitle: 'aba · caracteres · celular · resumo',
+      visual: 'head-impact',
+      caption: 'Em vez de decorar metadados, observe o que muda quando cada um existe.'
     },
     {
       id: 'texto-com-significado',
@@ -401,6 +436,15 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
+      id: 'alt-em-acao',
+      kind: 'visual',
+      eyebrow: 'Acessibilidade em ação',
+      title: 'O texto alternativo continua útil quando a imagem não ajuda',
+      subtitle: 'significado > decoração',
+      visual: 'alt-demo',
+      caption: 'Descreva o que a imagem comunica. Se ela for apenas decorativa, alt="" é válido.'
+    },
+    {
       id: 'intervalo',
       kind: 'statement',
       eyebrow: '15 minutos',
@@ -408,6 +452,20 @@ export const aula01Html: LessonDefinition = {
       lead: '15 min.',
       detail: 'Na volta: semântica + construção final.',
       chips: ['salvar arquivos', 'organizar pasta', 'retomar em 15 min']
+    },
+    {
+      id: 'divverso',
+      kind: 'code',
+      eyebrow: 'Antes da semântica',
+      title: 'Bem-vindo ao Divverso',
+      subtitle: 'Funciona. Mas ninguém sabe o papel de cada bloco só olhando a marcação.',
+      language: 'html',
+      code: '<div>\n  <div>\n    <div>\n      <div>\n        <div>conteúdo</div>\n      </div>\n    </div>\n  </div>\n</div>',
+      bullets: [
+        'div não é errado',
+        'o problema é usar div quando existe um elemento com significado melhor',
+        'semântica deixa a estrutura legível para pessoas e ferramentas'
+      ]
     },
     {
       id: 'semantica',
@@ -435,11 +493,11 @@ export const aula01Html: LessonDefinition = {
     {
       id: 'pagina-semantica-visual',
       kind: 'visual',
-      eyebrow: 'Estrutura visível',
-      title: 'Uma página vira um mapa lógico',
-      subtitle: 'header · nav · main · section · footer',
-      visual: 'semantic-page',
-      caption: 'A estrutura existe antes do CSS.'
+      eyebrow: 'Quebra-cabeça semântico',
+      title: 'Monte o mapa lógico da página',
+      subtitle: 'pense antes de revelar',
+      visual: 'semantic-puzzle',
+      caption: 'A ordem visual acompanha a ordem lógica do documento.'
     },
     {
       id: 'estrutura-semantica',
@@ -453,6 +511,20 @@ export const aula01Html: LessonDefinition = {
         '<main> → conteúdo principal',
         'ordem do código → ordem de leitura'
       ]
+    },
+    {
+      id: 'microdesafio-semantica',
+      kind: 'challenge',
+      eyebrow: 'Semântica',
+      title: 'Qual elemento representa o conteúdo principal?',
+      prompt: 'Em uma página comum, qual elemento deve envolver o conteúdo principal único do documento?',
+      options: [
+        { label: '<main>' },
+        { label: '<div>' },
+        { label: '<footer>' }
+      ],
+      answerIndex: 0,
+      explanation: '<main> identifica o conteúdo principal. <div> é genérico e <footer> representa encerramento ou informações complementares.'
     },
     {
       id: 'pratica-guiada',
@@ -495,25 +567,33 @@ export const aula01Html: LessonDefinition = {
     },
     {
       id: 'producao-final',
-      kind: 'exercise',
-      eyebrow: 'Produção final',
-      title: 'Sua primeira página HTML completa',
-      challenge: 'Produza uma página de apresentação profissional ou de um negócio fictício. O objetivo não é beleza visual: é qualidade estrutural.',
-      timebox: '30 min',
-      steps: [
-        'Defina quem ou o que será apresentado.',
-        'Escreva uma estrutura com header, nav, main, sections e footer.',
-        'Inclua conteúdo textual com títulos e parágrafos.',
-        'Inclua uma lista, uma imagem, um link interno e um link externo.',
-        'Adicione uma forma de contato usando mailto: ou outro link apropriado.',
-        'Abra no navegador e faça uma revisão completa antes de entregar.'
+      kind: 'missions',
+      eyebrow: 'Produção final · 30 min',
+      title: 'Escolha uma missão e entregue HTML de verdade',
+      subtitle: 'o tema muda; os critérios técnicos são os mesmos',
+      intro: 'Escolha um contexto que ajude você a escrever conteúdo com intenção. Não vale escolher pelo visual: hoje o desafio é estrutura.',
+      options: [
+        {
+          title: 'Portfólio de desenvolvedor',
+          detail: 'Apresente uma pessoa em início de carreira, estudos e formas de contato.'
+        },
+        {
+          title: 'Negócio de bairro',
+          detail: 'Apresente uma cafeteria, oficina, salão ou outro negócio local.'
+        },
+        {
+          title: 'Aluguel de patos',
+          detail: 'Uma empresa fictícia extremamente séria especializada em locação de patos.',
+          twist: 'O negócio é absurdo. O HTML não pode ser.'
+        }
       ],
-      success: [
-        'HTML organizado e corretamente aninhado.',
-        'Semântica coerente com o conteúdo.',
-        'Navegação interna funcional.',
-        'Nenhum estilo inline: CSS ficará para a próxima etapa.',
-        'O aluno consegue explicar a função de cada elemento utilizado.'
+      requirements: [
+        'header, nav, main, sections e footer',
+        'hierarquia coerente de títulos',
+        'lista, imagem com alt e links interno/externo',
+        'contato funcional',
+        'nenhum CSS inline',
+        'explicar a função de cada elemento usado'
       ]
     },
     {
