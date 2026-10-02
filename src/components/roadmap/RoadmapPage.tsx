@@ -379,11 +379,13 @@ function RoadmapNodeCard({ data }: NodeProps) {
       ) : (
         <div className="roadmap-node-static">{body}</div>
       )}
-      <Handle
-        type="source"
-        position={nodeData.sourcePosition ?? Position.Right}
-        className="roadmap-handle"
-      />
+      {nodeData.kind !== 'goal' && (
+        <Handle
+          type="source"
+          position={nodeData.sourcePosition ?? Position.Right}
+          className="roadmap-handle"
+        />
+      )}
     </div>
   );
 }
