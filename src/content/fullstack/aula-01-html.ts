@@ -590,7 +590,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Uso educacional',
       title: 'Professores podem usar este material em suas aulas.',
       lead: 'Use. Compartilhe. Preserve.',
-      detail: 'Use a apresentação original, preservando identidade visual, autoria, créditos e licença. Não redistribua versões modificadas.',
+      detail: 'Use o material em sua forma original, preservando identidade visual, autoria, créditos e licença. Não redistribua versões modificadas.',
       chips: ['uso em sala permitido', 'material íntegro', 'créditos preservados', 'licença preservada']
     }
   ]
