@@ -124,3 +124,39 @@ export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: strin
 
   return null;
 }
+
+
+export type CourseLessonNavigationItem = {
+  id: string;
+  number: number;
+  shortTitle: string;
+  title: string;
+  durationMinutes: number;
+  published: boolean;
+  href: string;
+};
+
+export function getCourseLessonNavigation(courseSlug: string): CourseLessonNavigationItem[] {
+  const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
+  if (!course) return [];
+
+  return course.ucs.flatMap((uc) =>
+    uc.modules.flatMap((module) =>
+      module.lessons.map((lesson) => ({
+        id: lesson.id,
+        number: lesson.number,
+        shortTitle: lesson.shortTitle,
+        title: lesson.title,
+        durationMinutes: lesson.durationMinutes,
+        published: lesson.status !== 'planned' && lesson.slides.length > 0,
+        href:
+          '/curso/' +
+          course.slug +
+          '/uc/' +
+          uc.slug +
+          '/aula/' +
+          lesson.slug
+      }))
+    )
+  );
+}
