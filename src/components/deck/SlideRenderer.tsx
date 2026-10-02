@@ -406,6 +406,14 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
 
       <footer className="slide-footer">
         <span>Val Lima · Material de Aulas</span>
+        <a
+          className="slide-project-url"
+          href="https://github.com/vlimap/materialdeaulas"
+          target="_blank"
+          rel="noreferrer"
+        >
+          github.com/vlimap/materialdeaulas
+        </a>
         <span>{slide.id}</span>
       </footer>
     </article>
