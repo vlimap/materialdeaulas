@@ -49,14 +49,9 @@
 
 .roadmap-track-selector {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 0 0 14px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.roadmap-track-selector::-webkit-scrollbar {
-  display: none;
 }
 
 .roadmap-track-selector button {
