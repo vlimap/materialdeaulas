@@ -5,6 +5,7 @@ import { catalog, findLesson, technologyCourses } from './content/catalog';
 import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
 import { getTechnologyIcon } from './brand/technologyIcons';
+import { SeoManager } from './seo/SeoManager';
 
 const allCourses = [...catalog, ...technologyCourses];
 
@@ -195,6 +196,7 @@ function LessonRoute() {
 export default function App() {
   return (
     <>
+      <SeoManager />
       <a className="skip-link" href="#main-content">Pular para o conteúdo principal</a>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
