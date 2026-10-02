@@ -71,11 +71,9 @@ export async function exportLessonPptx(
   pptx.subject = lesson.title;
   pptx.title = lesson.title;
   pptx.company = 'Senac';
-  pptx.lang = 'pt-BR';
   pptx.theme = {
     headFontFace: 'Rubik',
-    bodyFontFace: 'Rubik',
-    lang: 'pt-BR'
+    bodyFontFace: 'Rubik'
   };
 
   images.forEach((image) => {
