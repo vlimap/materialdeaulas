@@ -1,5 +1,5 @@
 import type { CourseDefinition } from '../types/course';
-import { aula01HtmlCss } from './fullstack/aula-01-html-css';
+import { aula01Html } from './fullstack/aula-01-html';
 
 export const catalog: CourseDefinition[] = [
   {
@@ -15,9 +15,9 @@ export const catalog: CourseDefinition[] = [
           {
             slug: 'html-css',
             title: 'HTML e CSS',
-            description: 'Fundamentos da Web, HTML semântico, CSS, responsividade e acessibilidade.',
+            description: 'HTML semântico primeiro; CSS entra na sequência da trilha.',
             status: 'active',
-            lessons: [aula01HtmlCss]
+            lessons: [aula01Html]
           },
           {
             slug: 'javascript',
@@ -97,7 +97,7 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
     slug: 'fundamentos-' + slug,
     title: 'Fundamentos de ' + title,
     description: 'Aulas e materiais de ' + title + '.',
-    modules: [{ slug, title, description: 'Conteúdo em preparação.', status: slug === 'html5' || slug === 'css3' ? 'active' : 'planned', lessons: slug === 'html5' || slug === 'css3' ? [aula01HtmlCss] : [] }]
+    modules: [{ slug, title, description: slug === 'html5' ? 'Fundamentos de HTML com aula completa disponível.' : 'Conteúdo em preparação.', status: slug === 'html5' ? 'active' : 'planned', lessons: slug === 'html5' ? [aula01Html] : [] }]
   }]
 }))
 
