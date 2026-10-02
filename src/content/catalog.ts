@@ -1,5 +1,5 @@
 import type { CourseDefinition } from '../types/course';
-import { aula01HtmlCss } from './fullstack/aula-01-html-css';
+import { htmlCourse, htmlLessons } from './html/course';
 
 export const catalog: CourseDefinition[] = [
   {
@@ -15,9 +15,9 @@ export const catalog: CourseDefinition[] = [
           {
             slug: 'html-css',
             title: 'HTML e CSS',
-            description: 'Fundamentos da Web, HTML semântico, CSS, responsividade e acessibilidade.',
+            description: 'HTML semântico primeiro; CSS entra na sequência da trilha.',
             status: 'active',
-            lessons: [aula01HtmlCss]
+            lessons: htmlLessons
           },
           {
             slug: 'javascript',
@@ -89,25 +89,37 @@ const technologySeeds = [
   ['eslint', 'ESLint', 'Ferramentas & Ambiente'], ['prettier', 'Prettier', 'Ferramentas & Ambiente']
 ] as const;
 
-export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => ({
-  slug: 'curso-' + slug,
-  title,
-  description: 'Curso de ' + title + ' · ' + category,
-  ucs: [{
-    slug: 'fundamentos-' + slug,
-    title: 'Fundamentos de ' + title,
-    description: 'Aulas e materiais de ' + title + '.',
-    modules: [{ slug, title, description: 'Conteúdo em preparação.', status: slug === 'html5' || slug === 'css3' ? 'active' : 'planned', lessons: slug === 'html5' || slug === 'css3' ? [aula01HtmlCss] : [] }]
-  }]
-}))
+export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => {
+  if (slug === 'html5') return htmlCourse;
+
+  return {
+    slug: 'curso-' + slug,
+    title,
+    description: 'Curso de ' + title + ' · ' + category,
+    ucs: [{
+      slug: 'fundamentos-' + slug,
+      title: 'Fundamentos de ' + title,
+      description: 'Aulas e materiais de ' + title + '.',
+      modules: [{
+        slug,
+        title,
+        description: 'Conteúdo em preparação.',
+        status: 'planned',
+        lessons: []
+      }]
+    }]
+  };
+});
 
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
-  const course = catalog.find((item) => item.slug === courseSlug);
+  const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
   const uc = course?.ucs.find((item) => item.slug === ucSlug);
 
   for (const module of uc?.modules ?? []) {
     const lesson = module.lessons.find((item) => item.slug === lessonSlug);
-    if (lesson) return { course, uc, module, lesson };
+    if (lesson && lesson.status !== 'planned' && lesson.slides.length > 0) {
+      return { course, uc, module, lesson };
+    }
   }
 
   return null;
