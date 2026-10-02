@@ -1,45 +1,194 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, Download, Expand, Home, LoaderCircle } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  Download,
+  Expand,
+  Home,
+  LoaderCircle,
+  Pause,
+  Play
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import type { LessonDefinition } from '../../types/course';
+import type { LessonDefinition, Slide } from '../../types/course';
 import { exportLessonPdf, exportLessonPptx } from '../../lib/exportDeck';
 import { SlideRenderer } from './SlideRenderer';
 
+const STORY_BREAKPOINT = 620;
+
+function storyDuration(slide: Slide) {
+  switch (slide.kind) {
+    case 'cover':
+      return 9000;
+    case 'statement':
+      return 13000;
+    case 'visual':
+      return 15000;
+    case 'timeline':
+    case 'cards':
+      return 18000;
+    case 'anatomy':
+      return 17000;
+    case 'code':
+      return 22000;
+    case 'exercise':
+    case 'checklist':
+      return 24000;
+    case 'references':
+      return 18000;
+    default:
+      return 15000;
+  }
+}
+
 export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   const [index, setIndex] = useState(0);
+  const [isStoryMode, setIsStoryMode] = useState(false);
+  const [storyAutoPlay, setStoryAutoPlay] = useState(true);
+  const [holdingStory, setHoldingStory] = useState(false);
+  const [storyElapsed, setStoryElapsed] = useState(0);
   const [exportState, setExportState] = useState<null | {
     kind: 'PDF' | 'PPTX';
     current: number;
     total: number;
   }>(null);
 
+  const pointerStart = useRef<{ x: number; y: number; at: number } | null>(null);
+  const elapsedRef = useRef(0);
   const current = lesson.slides[index];
+  const currentStoryDuration = storyDuration(current);
+
   const progress = useMemo(
     () => ((index + 1) / lesson.slides.length) * 100,
     [index, lesson.slides.length]
   );
 
-  const go = (delta: number) => {
-    setIndex((value) => Math.min(Math.max(value + delta, 0), lesson.slides.length - 1));
+  const goTo = (nextIndex: number) => {
+    const bounded = Math.min(Math.max(nextIndex, 0), lesson.slides.length - 1);
+    setIndex(bounded);
+    setStoryElapsed(0);
+    elapsedRef.current = 0;
   };
+
+  const go = (delta: number) => goTo(index + delta);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${STORY_BREAKPOINT}px)`);
+
+    const syncMode = () => setIsStoryMode(media.matches);
+    syncMode();
+    media.addEventListener('change', syncMode);
+
+    return () => media.removeEventListener('change', syncMode);
+  }, []);
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.matches('input, textarea, select, [contenteditable="true"]')) return;
+
       if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
         event.preventDefault();
-        go(1);
+        goTo(index + 1);
       }
+
       if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
         event.preventDefault();
-        go(-1);
+        goTo(index - 1);
       }
-      if (event.key === 'Home') setIndex(0);
-      if (event.key === 'End') setIndex(lesson.slides.length - 1);
+
+      if (event.key === 'Home') goTo(0);
+      if (event.key === 'End') goTo(lesson.slides.length - 1);
+
+      if (event.key.toLowerCase() === 'f') {
+        event.preventDefault();
+        if (document.fullscreenElement) document.exitFullscreen?.();
+        else document.documentElement.requestFullscreen?.();
+      }
+
+      if (event.key.toLowerCase() === 'p' && isStoryMode) {
+        event.preventDefault();
+        setStoryAutoPlay((value) => !value);
+      }
     };
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [lesson.slides.length]);
+  }, [index, isStoryMode, lesson.slides.length]);
+
+  useEffect(() => {
+    if (!isStoryMode || !storyAutoPlay || holdingStory) return;
+
+    let animationFrame = 0;
+    const startedAt = performance.now() - elapsedRef.current;
+
+    const tick = (now: number) => {
+      const elapsed = Math.min(now - startedAt, currentStoryDuration);
+      elapsedRef.current = elapsed;
+      setStoryElapsed(elapsed);
+
+      if (elapsed >= currentStoryDuration) {
+        if (index < lesson.slides.length - 1) goTo(index + 1);
+        else setStoryAutoPlay(false);
+        return;
+      }
+
+      animationFrame = window.requestAnimationFrame(tick);
+    };
+
+    animationFrame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [
+    currentStoryDuration,
+    holdingStory,
+    index,
+    isStoryMode,
+    lesson.slides.length,
+    storyAutoPlay
+  ]);
+
+  const storyProgress = Math.min((storyElapsed / currentStoryDuration) * 100, 100);
+
+  const onStoryPointerDown = (event: React.PointerEvent<HTMLElement>) => {
+    if (!isStoryMode || event.button !== 0) return;
+
+    pointerStart.current = {
+      x: event.clientX,
+      y: event.clientY,
+      at: performance.now()
+    };
+    setHoldingStory(true);
+  };
+
+  const onStoryPointerUp = (event: React.PointerEvent<HTMLElement>) => {
+    if (!isStoryMode || !pointerStart.current) return;
+
+    const started = pointerStart.current;
+    pointerStart.current = null;
+    setHoldingStory(false);
+
+    const deltaX = event.clientX - started.x;
+    const deltaY = event.clientY - started.y;
+    const heldFor = performance.now() - started.at;
+
+    if (Math.abs(deltaX) > 55 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      go(deltaX < 0 ? 1 : -1);
+      return;
+    }
+
+    if (heldFor >= 450) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const position = event.clientX - bounds.left;
+
+    if (position < bounds.width * 0.34) go(-1);
+    else go(1);
+  };
+
+  const cancelStoryPointer = () => {
+    pointerStart.current = null;
+    setHoldingStory(false);
+  };
 
   async function runExport(kind: 'PDF' | 'PPTX') {
     if (exportState) return;
@@ -58,10 +207,23 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
     }
   }
 
+  const toggleFullscreen = () => {
+    if (document.fullscreenElement) document.exitFullscreen?.();
+    else document.documentElement.requestFullscreen?.();
+  };
+
   return (
-    <main id="main-content" className="deck-page">
+    <main
+      id="main-content"
+      className={'deck-page' + (isStoryMode ? ' story-mode' : '')}
+    >
       <div className="deck-toolbar">
-        <Link to="/" className="toolbar-button" title="Voltar ao catálogo" aria-label="Voltar ao catálogo de materiais">
+        <Link
+          to="/"
+          className="toolbar-button"
+          title="Voltar ao catálogo"
+          aria-label="Voltar ao catálogo de materiais"
+        >
           <Home size={18} />
           <span>Materiais</span>
         </Link>
@@ -72,24 +234,62 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         </div>
 
         <div className="toolbar-actions">
-          <button className="toolbar-button" onClick={() => runExport('PDF')} disabled={!!exportState} aria-label="Baixar aula em PDF">
+          {isStoryMode && (
+            <button
+              className="toolbar-button icon-only story-autoplay-button"
+              onClick={() => setStoryAutoPlay((value) => !value)}
+              aria-label={storyAutoPlay ? 'Pausar avanço automático' : 'Retomar avanço automático'}
+              title={storyAutoPlay ? 'Pausar Stories' : 'Reproduzir Stories'}
+            >
+              {storyAutoPlay ? <Pause size={18} /> : <Play size={18} />}
+            </button>
+          )}
+
+          <button
+            className="toolbar-button"
+            onClick={() => runExport('PDF')}
+            disabled={!!exportState}
+            aria-label="Baixar aula em PDF"
+          >
             <Download size={18} />
-            PDF
+            <span>PDF</span>
           </button>
-          <button className="toolbar-button" onClick={() => runExport('PPTX')} disabled={!!exportState} aria-label="Baixar aula em PowerPoint">
+
+          <button
+            className="toolbar-button"
+            onClick={() => runExport('PPTX')}
+            disabled={!!exportState}
+            aria-label="Baixar aula em PowerPoint"
+          >
             <Download size={18} />
-            PPTX
+            <span>PPTX</span>
           </button>
+
           <button
             className="toolbar-button icon-only"
-            title="Tela cheia"
-            aria-label="Abrir aula em tela cheia"
-            onClick={() => document.documentElement.requestFullscreen?.()}
+            title="Alternar tela cheia (F)"
+            aria-label="Alternar tela cheia"
+            onClick={toggleFullscreen}
           >
             <Expand size={18} />
           </button>
         </div>
       </div>
+
+      {isStoryMode && (
+        <div className="story-progress" aria-hidden="true">
+          {lesson.slides.map((slide, slideIndex) => {
+            const width =
+              slideIndex < index ? 100 : slideIndex === index ? storyProgress : 0;
+
+            return (
+              <span key={slide.id}>
+                <i style={{ width: width + '%' }} />
+              </span>
+            );
+          })}
+        </div>
+      )}
 
       {exportState && (
         <div className="export-toast" role="status" aria-live="polite">
@@ -98,7 +298,16 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         </div>
       )}
 
-      <section className="deck-stage" aria-label="Apresentação">
+      <section
+        className="deck-stage"
+        aria-label="Apresentação"
+        onPointerDown={onStoryPointerDown}
+        onPointerUp={onStoryPointerUp}
+        onPointerCancel={cancelStoryPointer}
+        onPointerLeave={() => {
+          if (holdingStory) cancelStoryPointer();
+        }}
+      >
         <div className="deck-slide-frame" key={current.id}>
           <SlideRenderer slide={current} />
         </div>
@@ -112,10 +321,22 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
           <strong>{String(index + 1).padStart(2, '0')}</strong>
           <span>/ {String(lesson.slides.length).padStart(2, '0')}</span>
         </div>
-        <button onClick={() => go(1)} disabled={index === lesson.slides.length - 1} aria-label="Próximo slide">
+        <button
+          onClick={() => go(1)}
+          disabled={index === lesson.slides.length - 1}
+          aria-label="Próximo slide"
+        >
           <ArrowRight />
         </button>
       </div>
+
+      {isStoryMode && (
+        <div className="story-hint" aria-hidden="true">
+          <span>toque: avançar</span>
+          <span>segure: pausar</span>
+          <span>arraste: navegar</span>
+        </div>
+      )}
 
       <div className="deck-progress" aria-hidden="true">
         <span style={{ width: progress + '%' }} />
