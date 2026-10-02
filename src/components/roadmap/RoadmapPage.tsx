@@ -34,6 +34,8 @@ type RoadmapNodeData = {
   subtitle: string;
   slug?: string;
   kind?: 'goal' | 'normal';
+  targetPosition?: Position;
+  sourcePosition?: Position;
 };
 
 type RoadmapNode = Node<RoadmapNodeData>;
@@ -148,9 +150,9 @@ const tracks: Track[] = [
       { id: 'strategy', title: 'Estratégia de Testes', subtitle: 'Planejar níveis e riscos', slug: 'test-strategy' },
       { id: 'unit', title: 'Testes Unitários', subtitle: 'Validar unidades isoladas', slug: 'unit-testing' },
       { id: 'integration', title: 'Testes de Integração', subtitle: 'Validar componentes integrados', slug: 'integration-testing' },
+      { id: 'postman', title: 'Postman', subtitle: 'Testar APIs e contratos', slug: 'postman' },
       { id: 'e2e', title: 'Testes E2E', subtitle: 'Validar jornadas completas', slug: 'e2e-testing' },
-      { id: 'postman', title: 'Postman', subtitle: 'Testar APIs', slug: 'postman' },
-      { id: 'playwright', title: 'Playwright', subtitle: 'Automação de interface', slug: 'playwright' },
+      { id: 'playwright', title: 'Playwright', subtitle: 'Automatizar jornadas E2E', slug: 'playwright' },
       { id: 'a11y', title: 'Testes de Acessibilidade', subtitle: 'Validar acesso inclusivo', slug: 'accessibility-testing' },
       { id: 'load', title: 'Teste de Carga', subtitle: 'Validar capacidade', slug: 'load-testing' },
       { id: 'gates', title: 'Quality Gates', subtitle: 'Bloquear regressões', slug: 'quality-gates' },
@@ -262,6 +264,21 @@ function createLayout(track: Track): { nodes: RoadmapNode[]; edges: RoadmapEdge[
     const columnInRow = index % columns;
     const oddRow = row % 2 === 1;
     const column = oddRow ? columns - 1 - columnInRow : columnInRow;
+    const startsRow = index > 0 && columnInRow === 0;
+    const endsRow = columnInRow === columns - 1 && index < track.steps.length - 1;
+    const isLastStep = index === track.steps.length - 1;
+
+    const targetPosition = startsRow
+      ? Position.Top
+      : oddRow
+        ? Position.Right
+        : Position.Left;
+
+    const sourcePosition = isLastStep || endsRow
+      ? Position.Bottom
+      : oddRow
+        ? Position.Left
+        : Position.Right;
 
     return {
       id: step.id + '-' + index,
@@ -272,26 +289,32 @@ function createLayout(track: Track): { nodes: RoadmapNode[]; edges: RoadmapEdge[
         subtitle: step.subtitle,
         slug: step.slug,
         kind: 'normal' as const,
+        targetPosition,
+        sourcePosition,
       },
-      sourcePosition: Position.Right,
-      targetPosition: Position.Left,
+      sourcePosition,
+      targetPosition,
     };
   });
+
+  const lastNode = nodes[nodes.length - 1];
 
   nodes.push({
     id: 'goal',
     type: 'roadmap',
     position: {
-      x: ((track.steps.length % columns) || columns) * columnGap - columnGap,
-      y: Math.ceil(track.steps.length / columns) * rowGap,
+      x: lastNode?.position.x ?? 0,
+      y: (lastNode?.position.y ?? 0) + rowGap,
     },
     data: {
       title: 'Próximo passo',
       subtitle: 'Construa um projeto completo',
       kind: 'goal' as const,
+      targetPosition: Position.Top,
+      sourcePosition: Position.Bottom,
     },
-    sourcePosition: Position.Right,
-    targetPosition: Position.Left,
+    sourcePosition: Position.Bottom,
+    targetPosition: Position.Top,
   });
 
   const edges = nodes.slice(0, -1).map((current, index) => ({
@@ -340,7 +363,11 @@ function RoadmapNodeCard({ data }: NodeProps) {
         (nodeData.slug ? ' is-clickable' : '')
       }
     >
-      <Handle type="target" position={Position.Left} className="roadmap-handle" />
+      <Handle
+        type="target"
+        position={nodeData.targetPosition ?? Position.Left}
+        className="roadmap-handle"
+      />
       {nodeData.slug ? (
         <Link
           className="roadmap-node-link nodrag nopan"
@@ -352,7 +379,13 @@ function RoadmapNodeCard({ data }: NodeProps) {
       ) : (
         <div className="roadmap-node-static">{body}</div>
       )}
-      <Handle type="source" position={Position.Right} className="roadmap-handle" />
+      {nodeData.kind !== 'goal' && (
+        <Handle
+          type="source"
+          position={nodeData.sourcePosition ?? Position.Right}
+          className="roadmap-handle"
+        />
+      )}
     </div>
   );
 }

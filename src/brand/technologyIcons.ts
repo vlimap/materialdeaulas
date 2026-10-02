@@ -1,3 +1,4 @@
+import { conceptIcons } from './conceptIcons';
 import javascript from './skill-icons-main/icons/JavaScript.svg';
 import typescript from './skill-icons-main/icons/TypeScript.svg';
 import java from './skill-icons-main/icons/Java-Dark.svg';
@@ -105,6 +106,7 @@ export const technologyIcons: Record<string, string> = {
   npm,
   eslint,
   prettier,
+  ...conceptIcons,
 };
 
 export function getTechnologyIcon(courseOrTechnologySlug: string): string | undefined {
