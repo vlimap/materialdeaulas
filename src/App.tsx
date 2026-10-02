@@ -7,6 +7,7 @@ import vlimapAvatar from './brand/vlimap-avatar.png';
 import { getTechnologyIcon } from './brand/technologyIcons';
 import { SeoManager } from './seo/SeoManager';
 import { RoadmapPage } from './components/roadmap/RoadmapPage';
+import { FirstVisitRoadmapGuide } from './components/onboarding/FirstVisitRoadmapGuide';
 
 const allCourses = [...catalog, ...technologyCourses];
 
@@ -246,6 +247,7 @@ export default function App() {
   return (
     <>
       <SeoManager />
+      <FirstVisitRoadmapGuide />
       <a className="skip-link" href="#main-content">Pular para o conteúdo principal</a>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
