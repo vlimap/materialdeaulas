@@ -233,7 +233,7 @@ export default function App() {
       <a className="skip-link" href="#main-content">Pular para o conteúdo principal</a>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
-        <Route path="/roadmap" element={<><BrandHeader dark /><RoadmapPage /></>} />
+        <Route path="/roadmap" element={<div className="home-shell"><BrandHeader dark /><RoadmapPage /></div>} />
         <Route path="/curso/:courseSlug" element={<CoursePage />} />
         <Route path="/curso/:courseSlug/uc/:ucSlug/aula/:lessonSlug" element={<LessonRoute />} />
         <Route path="*" element={<CatalogPage />} />
