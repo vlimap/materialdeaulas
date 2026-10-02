@@ -319,6 +319,22 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
+      id: 'laboratorio-primeira-pagina',
+      kind: 'lab',
+      eyebrow: 'Laboratório ao vivo',
+      title: 'Edite o HTML e veja o resultado imediatamente',
+      subtitle: 'O código inicial também pode ser aberto no VS Code para Web em outra guia.',
+      language: 'html',
+      starterCode: firstDocument,
+      editorPath: 'labs/html/aula-01/index.html',
+      instructions: [
+        'Troque o conteúdo do h1 pelo seu nome.',
+        'Altere o parágrafo para uma apresentação curta.',
+        'Adicione um segundo parágrafo sem apagar a estrutura do documento.',
+        'Observe a prévia a cada mudança antes de seguir.'
+      ]
+    },
+    {
       id: 'head',
       kind: 'cards',
       eyebrow: 'Dentro de <head>',
