@@ -210,9 +210,28 @@ function staticFallback(page: SeoPage) {
   return '';
 }
 
+function normalizeAssetPaths(html: string) {
+  return html.replace(
+    /(src|href)=["']\/?assets\//g,
+    (_match, attribute: string) => attribute + '="/assets/'
+  );
+}
+
+function assertAbsoluteAssetPaths(html: string, route: string) {
+  const relativeAssets = html.match(/(?:src|href)=["'](?!\/|https?:\/\/|data:)[^"']*assets\//g);
+
+  if (relativeAssets?.length) {
+    throw new Error(
+      '[SEO] A rota ' +
+        route +
+        ' ainda contém assets relativos: ' +
+        relativeAssets.join(', ')
+    );
+  }
+}
+
 function renderPage(baseHtml: string, page: SeoPage) {
-  let html = stripExistingSeo(baseHtml)
-    .replace(/(src|href)=["']assets\//g, '$1="/assets/');
+  let html = normalizeAssetPaths(stripExistingSeo(baseHtml));
   html = html.replace('</head>', seoHead(page) + '</head>');
 
   const fallback = staticFallback(page);
@@ -220,6 +239,7 @@ function renderPage(baseHtml: string, page: SeoPage) {
     html = html.replace('</body>', fallback + '</body>');
   }
 
+  assertAbsoluteAssetPaths(html, page.path);
   return html;
 }
 
