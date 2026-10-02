@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
 import { getPublicSeoPages } from '../src/seo/metadata';
 
@@ -146,6 +147,57 @@ const tests: TestCase[] = [
         navigation.map((item) => item.number),
         Array.from({ length: 12 }, (_, index) => index + 1)
       );
+    }
+  },
+  {
+    name: 'mantém 100% dos cursos e conceitos com ícone mapeado',
+    run: () => {
+      const technologyIconSource = readFileSync(
+        'src/brand/technologyIcons.ts',
+        'utf8'
+      );
+      const conceptIconSource = readFileSync(
+        'src/brand/conceptIcons.ts',
+        'utf8'
+      );
+
+      const mapped = new Set<string>();
+
+      const collectKeys = (source: string) => {
+        const objectBody =
+          source.match(/export const \w+Icons:[\s\S]*?= \{([\s\S]*?)\n\};/)?.[1] ?? '';
+
+        for (const line of objectBody.split('\n')) {
+          const quoted = line.match(/^\s*'([^']+)'\s*:/);
+          if (quoted) {
+            mapped.add(quoted[1]);
+            continue;
+          }
+
+          const shorthand = line.match(/^\s*([A-Za-z_$][\w$-]*)\s*,\s*$/);
+          if (shorthand && shorthand[1] !== 'conceptIcons') {
+            mapped.add(shorthand[1]);
+          }
+        }
+      };
+
+      collectKeys(technologyIconSource);
+      collectKeys(conceptIconSource);
+
+      const missing = technologyCourses
+        .map((course) => course.slug.replace(/^curso-/, ''))
+        .filter((slug) => !mapped.has(slug));
+
+      assert.deepEqual(missing, []);
+
+      const conceptFiles = readdirSync('src/brand/concept-icons')
+        .filter((name) => name.endsWith('.svg'));
+
+      const unused = conceptFiles.filter(
+        (file) => !conceptIconSource.includes("/" + file + "'")
+      );
+
+      assert.deepEqual(unused, []);
     }
   },
   {
