@@ -113,9 +113,12 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
 
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
   const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
-  const uc = course?.ucs.find((item) => item.slug === ucSlug);
+  if (!course) return null;
 
-  for (const module of uc?.modules ?? []) {
+  const uc = course.ucs.find((item) => item.slug === ucSlug);
+  if (!uc) return null;
+
+  for (const module of uc.modules) {
     const lesson = module.lessons.find((item) => item.slug === lessonSlug);
     if (lesson && lesson.status !== 'planned' && lesson.slides.length > 0) {
       return { course, uc, module, lesson };
@@ -123,4 +126,40 @@ export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: strin
   }
 
   return null;
+}
+
+
+export type CourseLessonNavigationItem = {
+  id: string;
+  number: number;
+  shortTitle: string;
+  title: string;
+  durationMinutes: number;
+  published: boolean;
+  href: string;
+};
+
+export function getCourseLessonNavigation(courseSlug: string): CourseLessonNavigationItem[] {
+  const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
+  if (!course) return [];
+
+  return course.ucs.flatMap((uc) =>
+    uc.modules.flatMap((module) =>
+      module.lessons.map((lesson) => ({
+        id: lesson.id,
+        number: lesson.number,
+        shortTitle: lesson.shortTitle,
+        title: lesson.title,
+        durationMinutes: lesson.durationMinutes,
+        published: lesson.status !== 'planned' && lesson.slides.length > 0,
+        href:
+          '/curso/' +
+          course.slug +
+          '/uc/' +
+          uc.slug +
+          '/aula/' +
+          lesson.slug
+      }))
+    )
+  );
 }

@@ -1,21 +1,33 @@
-import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent
+} from 'react';
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
+  Clock3,
   Code2,
   Download,
   Expand,
   Home,
+  List,
   LoaderCircle,
   Pause,
-  Play
+  Play,
+  X
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import type { CourseLessonNavigationItem } from '../../content/catalog';
 import type { LessonDefinition, Slide } from '../../types/course';
 import { exportLessonPdf, exportLessonPptx } from '../../lib/exportDeck';
 import { SlideRenderer } from './SlideRenderer';
 
 const STORY_BREAKPOINT = 620;
+const DESKTOP_PLAYLIST_BREAKPOINT = 1180;
 
 function storyDuration(slide: Slide) {
   switch (slide.kind) {
@@ -42,12 +54,26 @@ function storyDuration(slide: Slide) {
   }
 }
 
-export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
+type DeckPlayerProps = {
+  lesson: LessonDefinition;
+  courseTitle: string;
+  courseHref: string;
+  lessonNavigation: CourseLessonNavigationItem[];
+};
+
+export function DeckPlayer({
+  lesson,
+  courseTitle,
+  courseHref,
+  lessonNavigation
+}: DeckPlayerProps) {
   const [index, setIndex] = useState(0);
   const [isStoryMode, setIsStoryMode] = useState(false);
   const [storyAutoPlay, setStoryAutoPlay] = useState(true);
   const [holdingStory, setHoldingStory] = useState(false);
   const [storyElapsed, setStoryElapsed] = useState(0);
+  const [playlistOpen, setPlaylistOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [exportState, setExportState] = useState<null | {
     kind: 'PDF' | 'PPTX';
     current: number;
@@ -58,6 +84,14 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   const elapsedRef = useRef(0);
   const current = lesson.slides[index];
   const currentStoryDuration = storyDuration(current);
+
+  const lessonPosition = lessonNavigation.findIndex((item) => item.id === lesson.id);
+  const previousLesson =
+    lessonPosition > 0 ? lessonNavigation[lessonPosition - 1] : null;
+  const nextLesson =
+    lessonPosition >= 0 && lessonPosition < lessonNavigation.length - 1
+      ? lessonNavigation[lessonPosition + 1]
+      : null;
 
   const progress = useMemo(
     () => ((index + 1) / lesson.slides.length) * 100,
@@ -74,9 +108,24 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   const go = (delta: number) => goTo(index + delta);
 
   useEffect(() => {
+    setIndex(0);
+    setStoryElapsed(0);
+    elapsedRef.current = 0;
+    setStoryAutoPlay(true);
+    setPlaylistOpen(
+      window.innerWidth >= DESKTOP_PLAYLIST_BREAKPOINT &&
+        !document.fullscreenElement
+    );
+  }, [lesson.id]);
+
+  useEffect(() => {
     const media = window.matchMedia(`(max-width: ${STORY_BREAKPOINT}px)`);
 
-    const syncMode = () => setIsStoryMode(media.matches);
+    const syncMode = () => {
+      setIsStoryMode(media.matches);
+      if (media.matches) setPlaylistOpen(false);
+    };
+
     syncMode();
     media.addEventListener('change', syncMode);
 
@@ -84,9 +133,31 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   }, []);
 
   useEffect(() => {
+    const syncFullscreen = () => {
+      const active = Boolean(document.fullscreenElement);
+      setIsFullscreen(active);
+      if (active) setPlaylistOpen(false);
+    };
+
+    document.addEventListener('fullscreenchange', syncFullscreen);
+    return () => document.removeEventListener('fullscreenchange', syncFullscreen);
+  }, []);
+
+  useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       if (target?.matches('input, textarea, select, [contenteditable="true"]')) return;
+
+      if (event.key === 'Escape' && playlistOpen) {
+        setPlaylistOpen(false);
+        return;
+      }
+
+      if (event.key.toLowerCase() === 'l') {
+        event.preventDefault();
+        setPlaylistOpen((value) => !value);
+        return;
+      }
 
       if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
         event.preventDefault();
@@ -115,10 +186,18 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [index, isStoryMode, lesson.slides.length]);
+  }, [index, isStoryMode, lesson.slides.length, playlistOpen]);
 
   useEffect(() => {
-    if (!isStoryMode || !storyAutoPlay || holdingStory || current.kind === 'lab') return;
+    if (
+      !isStoryMode ||
+      !storyAutoPlay ||
+      holdingStory ||
+      playlistOpen ||
+      current.kind === 'lab'
+    ) {
+      return;
+    }
 
     let animationFrame = 0;
     const startedAt = performance.now() - elapsedRef.current;
@@ -146,13 +225,14 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
     index,
     isStoryMode,
     lesson.slides.length,
+    playlistOpen,
     storyAutoPlay
   ]);
 
   const storyProgress = Math.min((storyElapsed / currentStoryDuration) * 100, 100);
 
   const onStoryPointerDown = (event: ReactPointerEvent<HTMLElement>) => {
-    if (!isStoryMode || event.button !== 0) return;
+    if (!isStoryMode || playlistOpen || event.button !== 0) return;
 
     pointerStart.current = {
       x: event.clientX,
@@ -163,7 +243,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   };
 
   const onStoryPointerUp = (event: ReactPointerEvent<HTMLElement>) => {
-    if (!isStoryMode || !pointerStart.current) return;
+    if (!isStoryMode || playlistOpen || !pointerStart.current) return;
 
     const started = pointerStart.current;
     pointerStart.current = null;
@@ -214,10 +294,22 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
     else document.documentElement.requestFullscreen?.();
   };
 
+  const closePlaylistAfterNavigation = () => {
+    if (isStoryMode || window.innerWidth < DESKTOP_PLAYLIST_BREAKPOINT) {
+      setPlaylistOpen(false);
+    }
+  };
+
   return (
     <main
       id="main-content"
-      className={'deck-page' + (isStoryMode ? ' story-mode' : '') + (holdingStory ? ' story-holding' : '')}
+      className={
+        'deck-page' +
+        (isStoryMode ? ' story-mode' : '') +
+        (holdingStory ? ' story-holding' : '') +
+        (playlistOpen ? ' lesson-playlist-open' : '') +
+        (isFullscreen ? ' deck-fullscreen' : '')
+      }
     >
       <div className="deck-toolbar">
         <Link
@@ -231,11 +323,25 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         </Link>
 
         <div className="toolbar-title">
-          <strong>Aula {String(lesson.number).padStart(2, '0')}</strong>
-          <span>{lesson.shortTitle}</span>
+          <strong>{courseTitle}</strong>
+          <span>
+            Aula {String(lesson.number).padStart(2, '0')} · {lesson.shortTitle}
+          </span>
         </div>
 
         <div className="toolbar-actions">
+          <button
+            className={'toolbar-button' + (playlistOpen ? ' is-active' : '')}
+            onClick={() => setPlaylistOpen((value) => !value)}
+            aria-expanded={playlistOpen}
+            aria-controls="lesson-playlist"
+            title="Abrir lista de aulas (L)"
+            aria-label="Abrir lista de aulas"
+          >
+            <List size={18} />
+            <span>Aulas</span>
+          </button>
+
           {lesson.lab && (
             <a
               className="toolbar-button"
@@ -345,6 +451,149 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
           <ArrowRight />
         </button>
       </div>
+
+      {playlistOpen && (
+        <button
+          type="button"
+          className="lesson-playlist-backdrop"
+          aria-label="Fechar lista de aulas"
+          onClick={() => setPlaylistOpen(false)}
+        />
+      )}
+
+      <aside
+        id="lesson-playlist"
+        className={'lesson-playlist' + (playlistOpen ? ' is-open' : '')}
+        aria-label={'Aulas de ' + courseTitle}
+        aria-hidden={!playlistOpen}
+      >
+        <header className="lesson-playlist-header">
+          <div>
+            <span>Curso</span>
+            <strong>{courseTitle}</strong>
+            <small>
+              Aula {lessonPosition + 1} de {lessonNavigation.length}
+            </small>
+          </div>
+          <button
+            type="button"
+            onClick={() => setPlaylistOpen(false)}
+            aria-label="Fechar lista de aulas"
+            title="Fechar lista"
+          >
+            <X size={19} />
+          </button>
+        </header>
+
+        <Link className="lesson-playlist-course-link" to={courseHref}>
+          <BookOpen size={17} />
+          <span>Ver visão geral do curso</span>
+          <ArrowRight size={16} />
+        </Link>
+
+        <div className="lesson-playlist-items">
+          {lessonNavigation.map((item, itemIndex) => {
+            const currentLesson = item.id === lesson.id;
+            const number = String(item.number).padStart(2, '0');
+
+            const body = (
+              <>
+                <span className="lesson-playlist-number">{number}</span>
+                <span className="lesson-playlist-copy">
+                  <strong>{item.shortTitle}</strong>
+                  <small>
+                    <Clock3 size={13} />
+                    {item.durationMinutes / 60}h
+                    {!item.published && <em>Em breve</em>}
+                  </small>
+                </span>
+                {currentLesson && <span className="lesson-playlist-current">Atual</span>}
+              </>
+            );
+
+            if (!item.published || currentLesson) {
+              return (
+                <div
+                  className={
+                    'lesson-playlist-item' +
+                    (currentLesson ? ' is-current' : ' is-planned')
+                  }
+                  key={item.id}
+                  aria-current={currentLesson ? 'page' : undefined}
+                  aria-disabled={!item.published || undefined}
+                >
+                  {body}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                className="lesson-playlist-item"
+                key={item.id}
+                to={item.href}
+                onClick={closePlaylistAfterNavigation}
+                aria-label={
+                  'Abrir Aula ' + number + ': ' + item.title +
+                  ', posição ' + (itemIndex + 1) + ' de ' + lessonNavigation.length
+                }
+              >
+                {body}
+              </Link>
+            );
+          })}
+        </div>
+
+        <footer className="lesson-playlist-footer">
+          <div className="lesson-sequence-status">
+            <span>Próxima aula</span>
+            {nextLesson ? (
+              <>
+                <strong>
+                  {String(nextLesson.number).padStart(2, '0')} · {nextLesson.shortTitle}
+                </strong>
+                <small>{nextLesson.published ? 'Disponível' : 'Em breve'}</small>
+              </>
+            ) : (
+              <strong>Fim da trilha</strong>
+            )}
+          </div>
+
+          <div className="lesson-sequence-actions">
+            {previousLesson?.published ? (
+              <Link
+                to={previousLesson.href}
+                onClick={closePlaylistAfterNavigation}
+                aria-label="Abrir aula anterior"
+              >
+                <ArrowLeft size={17} />
+                Anterior
+              </Link>
+            ) : (
+              <span className="is-disabled">
+                <ArrowLeft size={17} />
+                Anterior
+              </span>
+            )}
+
+            {nextLesson?.published ? (
+              <Link
+                to={nextLesson.href}
+                onClick={closePlaylistAfterNavigation}
+                aria-label="Abrir próxima aula"
+              >
+                Próxima
+                <ArrowRight size={17} />
+              </Link>
+            ) : (
+              <span className="is-disabled">
+                Próxima
+                <ArrowRight size={17} />
+              </span>
+            )}
+          </div>
+        </footer>
+      </aside>
 
       {isStoryMode && (
         <div className="story-hint" aria-hidden="true">
