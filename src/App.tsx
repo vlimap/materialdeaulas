@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { catalog, findLesson, technologyCourses } from './content/catalog';
 import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
-import { technologyIcons } from './brand/technologyIcons';
+import { getTechnologyIcon } from './brand/technologyIcons';
 
 const allCourses = [...catalog, ...technologyCourses];
 
@@ -77,14 +77,14 @@ function CatalogPage() {
             <div className="technology-badges">
               {technologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
                 <button className="technology-badge" key={technology.slug} onClick={() => setSelectedTechnology(technology.slug)} aria-label={'Abrir curso de ' + technology.title} aria-pressed={selectedTechnology === technology.slug}>
-                  <img src={technologyIcons[technology.slug]} alt="" /><span>{technology.title}</span>
+                  {getTechnologyIcon(technology.slug) && <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />}<span>{technology.title}</span>
                 </button>
               ))}
             </div>
           </section>)}
         </div> : <div className="excalidraw-lessons">
           <button className={'excalidraw-selected-tech tech-' + tone(selected.slug)} onClick={() => setSelectedTechnology(null)}>
-            <img src={technologyIcons[selected.slug]} alt="" />
+            {getTechnologyIcon(selected.slug) && <img src={getTechnologyIcon(selected.slug)} alt="" aria-hidden="true" />}
           </button>
           <strong className="excalidraw-selected-label">{selected.title}</strong>
           <div className="excalidraw-lesson-list">
