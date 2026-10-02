@@ -66,7 +66,9 @@ function lessonPath(course: CourseDefinition, uc: UcDefinition, lesson: LessonDe
 function courseLessons(course: CourseDefinition) {
   return course.ucs.flatMap((uc) =>
     uc.modules.flatMap((module) =>
-      module.lessons.map((lesson) => ({ uc, module, lesson }))
+      module.lessons
+        .filter((lesson) => lesson.status !== 'planned' && lesson.slides.length > 0)
+        .map((lesson) => ({ uc, module, lesson }))
     )
   );
 }
