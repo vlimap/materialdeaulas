@@ -23,7 +23,8 @@ export const seoSite = {
   defaultDescription:
     'Aulas gratuitas de programação e tecnologia organizadas por linguagem, frontend, backend, banco de dados, DevOps e testes.',
   fallbackUrl: 'https://materialdeaulas.vercel.app',
-  githubUrl: 'https://github.com/vlimap/materialdeaulas'
+  githubUrl: 'https://github.com/vlimap/materialdeaulas',
+  ogImageUrl: 'https://avatars.githubusercontent.com/u/117370378?v=4'
 } as const;
 
 const publicCourses = technologyCourses;
