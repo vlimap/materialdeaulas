@@ -61,7 +61,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   return (
     <main id="main-content" className="deck-page">
       <div className="deck-toolbar">
-        <Link to="/" className="toolbar-button" title="Voltar ao catálogo">
+        <Link to="/" className="toolbar-button" title="Voltar ao catálogo" aria-label="Voltar ao catálogo de materiais">
           <Home size={18} />
           <span>Materiais</span>
         </Link>
@@ -72,17 +72,18 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
         </div>
 
         <div className="toolbar-actions">
-          <button className="toolbar-button" onClick={() => runExport('PDF')} disabled={!!exportState}>
+          <button className="toolbar-button" onClick={() => runExport('PDF')} disabled={!!exportState} aria-label="Baixar aula em PDF">
             <Download size={18} />
             PDF
           </button>
-          <button className="toolbar-button" onClick={() => runExport('PPTX')} disabled={!!exportState}>
+          <button className="toolbar-button" onClick={() => runExport('PPTX')} disabled={!!exportState} aria-label="Baixar aula em PowerPoint">
             <Download size={18} />
             PPTX
           </button>
           <button
             className="toolbar-button icon-only"
             title="Tela cheia"
+            aria-label="Abrir aula em tela cheia"
             onClick={() => document.documentElement.requestFullscreen?.()}
           >
             <Expand size={18} />
@@ -91,7 +92,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
       </div>
 
       {exportState && (
-        <div className="export-toast">
+        <div className="export-toast" role="status" aria-live="polite">
           <LoaderCircle className="spin" size={18} />
           Gerando {exportState.kind}: {exportState.current}/{exportState.total}
         </div>

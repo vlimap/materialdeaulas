@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookOpen, Clock3, Layers3, Play } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { catalog, findLesson, technologyCourses } from './content/catalog';
@@ -8,14 +8,21 @@ import { getTechnologyIcon } from './brand/technologyIcons';
 
 const allCourses = [...catalog, ...technologyCourses];
 
-function BrandHeader() {
+function BrandHeader({ dark = false }: { dark?: boolean }) {
   return (
-    <header className="site-header">
+    <header className={'site-header' + (dark ? ' site-header-dark' : '')}>
       <Link className="site-brand" to="/" aria-label="Material de Aulas - início">
         <img src={vlimapAvatar} alt="" />
         <div><strong>Material de Aulas</strong><small>por Val Lima</small></div>
       </Link>
-      <a className="site-context" href="https://github.com/vlimap/materialdeaulas" target="_blank" rel="noreferrer">github.com/vlimap/materialdeaulas</a>
+      <nav className="site-actions" aria-label="Links do projeto">
+        <a className="site-action" href="https://github.com/vlimap/materialdeaulas" target="_blank" rel="noreferrer" aria-label="Abrir projeto no GitHub" title="Projeto no GitHub">
+          <Github size={18} aria-hidden="true" /><span>Projeto</span>
+        </a>
+        <a className="site-action" href="https://github.com/vlimap/materialdeaulas/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer" aria-label="Ver como contribuir com o projeto" title="Como contribuir">
+          <GitPullRequest size={18} aria-hidden="true" /><span>Contribuir</span>
+        </a>
+      </nav>
     </header>
   );
 }
@@ -57,12 +64,10 @@ function CatalogPage() {
   };
 
   return (
-    <main id="main-content" className="excalidraw-home">
-      <section className="excalidraw-board" aria-label="Tecnologias disponíveis">
-        <div className="excalidraw-profile">
-          <img src={vlimapAvatar} alt="" />
-          <div><strong>Val Lima</strong><span>Chega, bora aprender</span></div>
-        </div>
+    <div className="home-shell">
+      <BrandHeader dark />
+      <main id="main-content" className="excalidraw-home">
+        <section className="excalidraw-board" aria-label="Tecnologias disponíveis">
         {!selected ? <div className="technology-groups">
           <div className="roadmap" aria-label="Roteiro recomendado de estudos">
             <p>Por onde começar</p>
@@ -83,7 +88,7 @@ function CatalogPage() {
             </div>
           </section>)}
         </div> : <div className="excalidraw-lessons">
-          <button className={'excalidraw-selected-tech tech-' + tone(selected.slug)} onClick={() => setSelectedTechnology(null)}>
+          <button className={'excalidraw-selected-tech tech-' + tone(selected.slug)} onClick={() => setSelectedTechnology(null)} aria-label="Voltar para todas as tecnologias">
             {getTechnologyIcon(selected.slug) && <img src={getTechnologyIcon(selected.slug)} alt="" aria-hidden="true" />}
           </button>
           <strong className="excalidraw-selected-label">{selected.title}</strong>
@@ -91,8 +96,9 @@ function CatalogPage() {
             {rows.map((row) => <Link className="excalidraw-lesson" key={row.label} to={row.href}><span>{row.label}</span><span>→</span></Link>)}
           </div>
         </div>}
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }
 
