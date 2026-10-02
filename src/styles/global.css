@@ -257,7 +257,7 @@ a {
 .technology-group h2 { margin: 0 0 14px; color: #f1f1f1; font-size: 1.25rem; font-weight: 700; }
 .technology-badges { display: flex; flex-wrap: wrap; gap: 7px; }
 .technology-badge { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 9px; border: 0; color: #fff; background: #0D47A1; cursor: pointer; font-family: inherit; font-size: 1rem; line-height: 1; transition: transform 140ms ease, filter 140ms ease; }
-.technology-badge img { display: block; width: 18px; height: 18px; object-fit: contain; }
+.technology-badge img { display: block; flex: 0 0 auto; width: 20px; height: 20px; object-fit: contain; }
 .technology-badge:hover, .technology-badge:focus-visible { transform: translateY(-2px); filter: brightness(1.18); outline: 0; }
 
 .excalidraw-tech {
@@ -285,7 +285,7 @@ a {
 .excalidraw-lessons { margin-top: 42px; }
 .excalidraw-selected-tech { width: 104px; height: 104px; display: inline-grid; place-items: center; border: 3px solid #d5d5d5; border-radius: 18px; color: #ededed; background: transparent; cursor: pointer; vertical-align: middle; }
 .excalidraw-selected-tech span { font-family: Consolas, monospace; font-size: 1.8rem; }
-.excalidraw-selected-tech img { width: 24px; height: 24px; object-fit: contain; }
+.excalidraw-selected-tech img { width: 52px; height: 52px; object-fit: contain; }
 .excalidraw-selected-tech.tech-react span { color: #F2C53D; font-family: Arial, sans-serif; font-size: 2.8rem; }
 .excalidraw-selected-label { display: inline-block; margin-left: 28px; color: #d7d7d7; font-size: 1.35rem; font-weight: 400; vertical-align: middle; }
 .excalidraw-lesson-list { display: grid; gap: 14px; margin-top: 34px; }
