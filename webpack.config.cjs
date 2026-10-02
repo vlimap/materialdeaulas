@@ -7,7 +7,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'assets/js/[name].[contenthash:8].js',
     chunkFilename: 'assets/js/[name].[contenthash:8].chunk.js',
-    publicPath: '/',
+    // Resolve media relative to the loaded bundle so assets also work when
+    // the public repository is served from a subpath such as /materialdeaulas/.
+    publicPath: 'auto',
     clean: true
   },
   resolve: {
