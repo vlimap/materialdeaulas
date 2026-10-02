@@ -62,8 +62,16 @@ function CatalogPage() {
     const selectedModule = selected?.ucs.flatMap((uc) => uc.modules)[0];
     const lessons = selectedModule?.lessons ?? [];
     const rows = lessons.length > 0
-      ? lessons.map((lesson) => ({ label: 'Aula ' + String(lesson.number).padStart(2, '0') + ' · ' + lesson.shortTitle, href: '/curso/' + (selected?.slug ?? '') + '/uc/' + (selected?.ucs[0].slug ?? '') + '/aula/' + lesson.slug }))
-      : [{ label: 'Aula 01 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }, { label: 'Aula 02 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }, { label: 'Aula 03 · Em preparação', href: '/curso/' + (selected?.slug ?? '') }];
+      ? lessons.map((lesson) => ({
+          label: 'Aula ' + String(lesson.number).padStart(2, '0') + ' · ' + lesson.shortTitle,
+          href: '/curso/' + (selected?.slug ?? '') + '/uc/' + (selected?.ucs[0].slug ?? '') + '/aula/' + lesson.slug,
+          published: lesson.status !== 'planned' && lesson.slides.length > 0
+        }))
+      : [
+          { label: 'Aula 01 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false },
+          { label: 'Aula 02 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false },
+          { label: 'Aula 03 · Em preparação', href: '/curso/' + (selected?.slug ?? ''), published: false }
+        ];
 
   const tone = (slug: string) => slug.includes('react') ? 'react' : slug.includes('express') ? 'express' : slug.includes('python') ? 'python' : 'default';
   const groups = Array.from(new Set(visibleTechnologies.map((technology) => technology.description.split(' · ')[1])));
@@ -119,7 +127,15 @@ function CatalogPage() {
           </button>
           <strong className="excalidraw-selected-label">{selected.title}</strong>
           <div className="excalidraw-lesson-list">
-            {rows.map((row) => <Link className="excalidraw-lesson" key={row.label} to={row.href}><span>{row.label}</span><span>→</span></Link>)}
+            {rows.map((row) => row.published ? (
+              <Link className="excalidraw-lesson" key={row.label} to={row.href}>
+                <span>{row.label}</span><span>→</span>
+              </Link>
+            ) : (
+              <div className="excalidraw-lesson excalidraw-lesson-planned" key={row.label} aria-disabled="true">
+                <span>{row.label}</span><span>Em breve</span>
+              </div>
+            ))}
           </div>
         </div>}
         </section>
@@ -161,12 +177,25 @@ function CoursePage() {
                     <div><span>Módulo</span><h3>{module.title}</h3></div>
                     <span className={'status status-' + module.status}>{module.status === 'active' ? 'Disponível' : 'Em breve'}</span>
                   </div>
-                  {module.lessons.length === 0 ? <p className="empty-module">Aulas desta trilha serão adicionadas em breve.</p> : module.lessons.map((lesson) => (
-                    <Link className="lesson-link" key={lesson.id} to={'/curso/' + course.slug + '/uc/' + uc.slug + '/aula/' + lesson.slug}>
-                      <div><span>Aula {String(lesson.number).padStart(2, '0')}</span><strong>{lesson.shortTitle}</strong><small><Clock3 size={14} /> {lesson.durationMinutes / 60}h · {lesson.audience}</small></div>
-                      <span className="lesson-enter">Entrar <ArrowRight size={18} /></span>
-                    </Link>
-                  ))}
+                  {module.lessons.length === 0 ? <p className="empty-module">Aulas desta trilha serão adicionadas em breve.</p> : module.lessons.map((lesson) => {
+                    const published = lesson.status !== 'planned' && lesson.slides.length > 0;
+
+                    if (!published) {
+                      return (
+                        <div className="lesson-link lesson-link-planned" key={lesson.id} aria-disabled="true">
+                          <div><span>Aula {String(lesson.number).padStart(2, '0')}</span><strong>{lesson.shortTitle}</strong><small><Clock3 size={14} /> {lesson.durationMinutes / 60}h · {lesson.audience}</small></div>
+                          <span className="lesson-enter">Em breve</span>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <Link className="lesson-link" key={lesson.id} to={'/curso/' + course.slug + '/uc/' + uc.slug + '/aula/' + lesson.slug}>
+                        <div><span>Aula {String(lesson.number).padStart(2, '0')}</span><strong>{lesson.shortTitle}</strong><small><Clock3 size={14} /> {lesson.durationMinutes / 60}h · {lesson.audience}</small></div>
+                        <span className="lesson-enter">Entrar <ArrowRight size={18} /></span>
+                      </Link>
+                    );
+                  })}
                 </div>
               ))}
             </section>
