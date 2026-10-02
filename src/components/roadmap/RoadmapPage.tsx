@@ -273,6 +273,23 @@ export function RoadmapPage() {
           ))}
         </nav>
 
+        <div className="roadmap-mobile-track-picker">
+          <label htmlFor="roadmap-track">Escolha a trilha</label>
+          <select
+            id="roadmap-track"
+            value={selectedTrack}
+            onChange={(event) => setSelectedTrack(event.target.value as TrackId)}
+          >
+            {tracks.map((item) => (
+              <option key={item.id} value={item.id}>{item.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <p className="roadmap-live-status" role="status" aria-live="polite">
+          Trilha selecionada: {track.label}. {track.steps.length} etapas.
+        </p>
+
         <section className="roadmap-flow-shell" aria-label={'Roadmap de ' + track.label}>
           <ReactFlow
             key={track.id}
@@ -291,6 +308,57 @@ export function RoadmapPage() {
             <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#27313d" />
             <Controls showInteractive={false} />
           </ReactFlow>
+        </section>
+
+        <section className="roadmap-mobile-sequence" aria-labelledby="roadmap-mobile-title">
+          <h2 id="roadmap-mobile-title">Sequência de {track.label}</h2>
+          <ol className="roadmap-mobile-list">
+            {track.steps.map((step, index) => {
+              const icon = step.slug ? getTechnologyIcon(step.slug) : '';
+
+              const body = (
+                <>
+                  <span className="roadmap-mobile-number" aria-hidden="true">{index + 1}</span>
+                  <span className="roadmap-mobile-icon" aria-hidden="true">
+                    {icon ? <img src={icon} alt="" /> : <BookOpen size={22} />}
+                  </span>
+                  <span className="roadmap-mobile-copy">
+                    <strong>{step.title}</strong>
+                    <span>{step.subtitle}</span>
+                  </span>
+                  {step.slug && <ArrowRight size={18} aria-hidden="true" />}
+                </>
+              );
+
+              return (
+                <li key={step.id + '-' + index}>
+                  {step.slug ? (
+                    <Link
+                      className="roadmap-mobile-step"
+                      to={'/curso/curso-' + step.slug}
+                      aria-label={'Etapa ' + (index + 1) + ' de ' + track.steps.length + ': ' + step.title + '. Abrir curso.'}
+                    >
+                      {body}
+                    </Link>
+                  ) : (
+                    <div className="roadmap-mobile-step roadmap-mobile-step-static">
+                      {body}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+            <li>
+              <div className="roadmap-mobile-step roadmap-mobile-goal">
+                <span className="roadmap-mobile-number" aria-hidden="true">{track.steps.length + 1}</span>
+                <span className="roadmap-mobile-icon" aria-hidden="true"><CheckCircle2 size={22} /></span>
+                <span className="roadmap-mobile-copy">
+                  <strong>Próximo passo</strong>
+                  <span>Construa um projeto completo</span>
+                </span>
+              </div>
+            </li>
+          </ol>
         </section>
       </div>
     </main>
