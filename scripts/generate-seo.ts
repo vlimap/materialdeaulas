@@ -211,7 +211,8 @@ function staticFallback(page: SeoPage) {
 }
 
 function renderPage(baseHtml: string, page: SeoPage) {
-  let html = stripExistingSeo(baseHtml);
+  let html = stripExistingSeo(baseHtml)
+    .replace(/(src|href)=["']assets\//g, '$1="/assets/');
   html = html.replace('</head>', seoHead(page) + '</head>');
 
   const fallback = staticFallback(page);
