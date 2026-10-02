@@ -568,7 +568,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Próxima etapa',
       title: 'A estrutura está pronta. Depois vem a apresentação.',
       lead: 'CSS entra quando o HTML já faz sentido.',
-      detail: 'Na próxima aula vamos transformar a mesma página com cores, tipografia, espaçamento, seletores, Box Model e primeiros fundamentos de layout responsivo.',
+      detail: 'Na próxima aula: cores, tipografia, espaçamento, seletores, Box Model e layout responsivo.',
       chips: ['CSS', 'seletores', 'cores', 'tipografia', 'Box Model']
     },
     {
@@ -590,7 +590,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Uso educacional',
       title: 'Professores podem usar este material em suas aulas.',
       lead: 'Use. Compartilhe. Preserve.',
-      detail: 'O material deve permanecer em sua forma original: mesma apresentação, identidade visual, autoria, créditos e licença. Não redistribua versões modificadas nem remova este aviso.',
+      detail: 'Use a apresentação original, preservando identidade visual, autoria, créditos e licença. Não redistribua versões modificadas.',
       chips: ['uso em sala permitido', 'material íntegro', 'créditos preservados', 'licença preservada']
     }
   ]
