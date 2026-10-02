@@ -1,5 +1,5 @@
 import type { CourseDefinition } from '../types/course';
-import { aula01Html } from './fullstack/aula-01-html';
+import { htmlCourse, htmlLessons } from './html/course';
 
 export const catalog: CourseDefinition[] = [
   {
@@ -17,7 +17,7 @@ export const catalog: CourseDefinition[] = [
             title: 'HTML e CSS',
             description: 'HTML semântico primeiro; CSS entra na sequência da trilha.',
             status: 'active',
-            lessons: [aula01Html]
+            lessons: htmlLessons
           },
           {
             slug: 'javascript',
@@ -89,17 +89,27 @@ const technologySeeds = [
   ['eslint', 'ESLint', 'Ferramentas & Ambiente'], ['prettier', 'Prettier', 'Ferramentas & Ambiente']
 ] as const;
 
-export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => ({
-  slug: 'curso-' + slug,
-  title,
-  description: 'Curso de ' + title + ' · ' + category,
-  ucs: [{
-    slug: 'fundamentos-' + slug,
-    title: 'Fundamentos de ' + title,
-    description: 'Aulas e materiais de ' + title + '.',
-    modules: [{ slug, title, description: slug === 'html5' ? 'Fundamentos de HTML com aula completa disponível.' : 'Conteúdo em preparação.', status: slug === 'html5' ? 'active' : 'planned', lessons: slug === 'html5' ? [aula01Html] : [] }]
-  }]
-}))
+export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => {
+  if (slug === 'html5') return htmlCourse;
+
+  return {
+    slug: 'curso-' + slug,
+    title,
+    description: 'Curso de ' + title + ' · ' + category,
+    ucs: [{
+      slug: 'fundamentos-' + slug,
+      title: 'Fundamentos de ' + title,
+      description: 'Aulas e materiais de ' + title + '.',
+      modules: [{
+        slug,
+        title,
+        description: 'Conteúdo em preparação.',
+        status: 'planned',
+        lessons: []
+      }]
+    }]
+  };
+});
 
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
   const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
