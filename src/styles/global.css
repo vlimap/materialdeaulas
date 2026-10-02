@@ -348,7 +348,7 @@ a {
 .technology-group.is-active h2 { color: #F2C53D; }
 .technology-group h2 { margin: 0 0 14px; color: #f1f1f1; font-size: 1.25rem; font-weight: 700; }
 .technology-badges { display: flex; flex-wrap: wrap; gap: 7px; }
-.technology-badge { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 9px; border: 0; color: #fff; background: #0D47A1; cursor: pointer; font-family: inherit; font-size: 1rem; line-height: 1; transition: transform 140ms ease, filter 140ms ease; }
+.technology-badge { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 4px 9px; border: 0; color: #fff; background: #0D47A1; cursor: pointer; font-family: inherit; font-size: 1rem; line-height: 1; text-decoration: none; transition: transform 140ms ease, filter 140ms ease; }
 .technology-badge img { display: block; flex: 0 0 auto; width: 20px; height: 20px; object-fit: contain; }
 .technology-badge:hover, .technology-badge:focus-visible { transform: translateY(-2px); filter: brightness(1.18); outline: 0; }
 
