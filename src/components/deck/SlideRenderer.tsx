@@ -30,19 +30,19 @@ function vscodeWebUrl(path?: string) {
   return VSCODE_WEB_REPO + '/blob/main/' + path.replace(/^\/+/, '');
 }
 
+function stopDeckGesture(event: SyntheticEvent) {
+  event.stopPropagation();
+}
+
 function LiveLab({ slide }: { slide: Extract<Slide, { kind: 'lab' }> }) {
   const [code, setCode] = useState(slide.starterCode);
-
-  const stopStoryGesture = (event: SyntheticEvent) => {
-    event.stopPropagation();
-  };
 
   return (
     <div
       className="live-lab"
-      onPointerDown={stopStoryGesture}
-      onPointerUp={stopStoryGesture}
-      onClick={stopStoryGesture}
+      onPointerDown={stopDeckGesture}
+      onPointerUp={stopDeckGesture}
+      onClick={stopDeckGesture}
     >
       <div className="live-lab-editor">
         <div className="live-lab-toolbar">
@@ -100,7 +100,114 @@ function LiveLab({ slide }: { slide: Extract<Slide, { kind: 'lab' }> }) {
   );
 }
 
+function Challenge({ slide }: { slide: Extract<Slide, { kind: 'challenge' }> }) {
+  const [selected, setSelected] = useState<number | null>(null);
+  const correct = selected === slide.answerIndex;
+
+  return (
+    <div
+      className="micro-challenge"
+      onPointerDown={stopDeckGesture}
+      onPointerUp={stopDeckGesture}
+      onClick={stopDeckGesture}
+    >
+      <p className="micro-challenge-prompt">{slide.prompt}</p>
+      <div className="micro-challenge-options">
+        {slide.options.map((option, index) => {
+          const isSelected = selected === index;
+          const isAnswer = selected !== null && index === slide.answerIndex;
+          const stateClass = isAnswer ? ' is-correct' : isSelected ? ' is-wrong' : '';
+
+          return (
+            <button
+              type="button"
+              key={option.label + index}
+              className={'micro-challenge-option' + stateClass}
+              onClick={() => setSelected(index)}
+              aria-pressed={isSelected}
+            >
+              <span className="micro-challenge-index">{String.fromCharCode(65 + index)}</span>
+              <span>
+                <strong>{option.label}</strong>
+                {option.code && <code>{option.code}</code>}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className={'micro-challenge-feedback' + (selected === null ? '' : ' is-visible')} role="status" aria-live="polite">
+        {selected === null ? 'Escolha uma opção.' : (
+          <>
+            <strong>{correct ? 'Isso.' : 'Quase.'}</strong>
+            <span>{slide.explanation}</span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Missions({ slide }: { slide: Extract<Slide, { kind: 'missions' }> }) {
+  const [selected, setSelected] = useState(0);
+
+  return (
+    <div
+      className="missions-layout"
+      onPointerDown={stopDeckGesture}
+      onPointerUp={stopDeckGesture}
+      onClick={stopDeckGesture}
+    >
+      <p className="missions-intro">{slide.intro}</p>
+      <div className="mission-options" role="group" aria-label="Escolha uma missão">
+        {slide.options.map((option, index) => (
+          <button
+            type="button"
+            key={option.title}
+            className={selected === index ? 'is-selected' : ''}
+            onClick={() => setSelected(index)}
+            aria-pressed={selected === index}
+          >
+            <span>Missão {String.fromCharCode(65 + index)}</span>
+            <strong>{option.title}</strong>
+            <small>{option.detail}</small>
+            {option.twist && <em>{option.twist}</em>}
+          </button>
+        ))}
+      </div>
+      <aside className="mission-requirements">
+        <span>Todos precisam entregar</span>
+        <ul>
+          {slide.requirements.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+      </aside>
+    </div>
+  );
+}
+
 function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }) {
+  const [puzzleStep, setPuzzleStep] = useState(0);
+
+  if (name === 'web-birth') {
+    return (
+      <div className="web-birth" aria-label="Documentos isolados passam a ser conectados por links e formam a Web">
+        <div className="web-birth-doc doc-one">Documento A</div>
+        <div className="web-birth-doc doc-two">Documento B</div>
+        <div className="web-birth-doc doc-three">Documento C</div>
+        <svg viewBox="0 0 900 420" aria-hidden="true">
+          <path d="M210 145 C360 70 520 75 680 150" />
+          <path d="M210 145 C350 255 495 300 650 280" />
+          <path d="M680 150 C690 205 675 245 650 280" />
+        </svg>
+        <div className="web-birth-label">
+          <span>documentos isolados</span>
+          <strong>WEB</strong>
+          <small>informação conectada</small>
+        </div>
+      </div>
+    );
+  }
+
   if (name === 'hypertext-map') {
     return (
       <div className="hypertext-map" aria-label="Mapa animado de documentos conectados por hiperlinks">
@@ -138,6 +245,32 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
     );
   }
 
+  if (name === 'semantic-puzzle') {
+    const regions = ['<header>', '<nav>', '<main>', '<section>', '<footer>'];
+    return (
+      <div
+        className="semantic-puzzle"
+        onPointerDown={stopDeckGesture}
+        onPointerUp={stopDeckGesture}
+        onClick={stopDeckGesture}
+      >
+        <div className="semantic-puzzle-page" aria-label="Página sendo montada com regiões semânticas">
+          {regions.map((region, index) => (
+            <div key={region} className={index < puzzleStep ? 'is-revealed' : ''}>
+              <span>{index < puzzleStep ? region : '?'}</span>
+            </div>
+          ))}
+        </div>
+        <div className="semantic-puzzle-controls">
+          <p>{puzzleStep === 0 ? 'Qual região vem primeiro?' : puzzleStep < regions.length ? 'E agora, qual é a próxima?' : 'Mapa lógico completo.'}</p>
+          <button type="button" onClick={() => setPuzzleStep((current) => current >= regions.length ? 0 : current + 1)}>
+            {puzzleStep >= regions.length ? 'Recomeçar' : 'Revelar próxima'}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (name === 'web-internet') {
     return (
       <div className="visual-network">
@@ -151,15 +284,16 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
 
   if (name === 'request-flow') {
     const items = [
-      ['1', 'Navegador', 'pede um recurso'],
-      ['2', 'Internet', 'transporta dados'],
-      ['3', 'Servidor', 'processa o pedido'],
-      ['4', 'Resposta', 'HTML, CSS, imagens...'],
-      ['5', 'Renderização', 'a página aparece']
+      ['1', 'Navegador', 'GET /index.html'],
+      ['2', 'Rede', 'transporta o pedido'],
+      ['3', 'Servidor', 'localiza o recurso'],
+      ['4', 'Resposta', '<h1>Olá!</h1>'],
+      ['5', 'Tela', 'a página aparece']
     ];
 
     return (
-      <div className="request-flow">
+      <div className="request-flow request-flow-animated">
+        <div className="flow-packet" aria-hidden="true">&lt;h1&gt;</div>
         {items.map(([n, title, detail], index) => (
           <div className="flow-wrap" key={title}>
             <div className="flow-card">
@@ -176,21 +310,38 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
 
   if (name === 'html-css-js') {
     return (
-      <div className="technology-triad">
-        <div className="tech-card html">
-          <span>HTML</span>
+      <div className="technology-stages" aria-label="A mesma página em HTML, depois com CSS e por fim com JavaScript">
+        <div className="stage-browser stage-html">
+          <div className="stage-browser-bar"><i /><i /><i /><span>HTML</span></div>
+          <div className="stage-page">
+            <h3>Minha página</h3>
+            <p>Conteúdo organizado.</p>
+            <button type="button" tabIndex={-1}>Abrir menu</button>
+          </div>
           <strong>estrutura</strong>
-          <p>O que existe e qual é o significado.</p>
+          <small>Funciona. Bonita é outra conversa.</small>
         </div>
-        <div className="tech-card css">
-          <span>CSS</span>
+        <div className="stage-arrow">→</div>
+        <div className="stage-browser stage-css">
+          <div className="stage-browser-bar"><i /><i /><i /><span>+ CSS</span></div>
+          <div className="stage-page">
+            <h3>Minha página</h3>
+            <p>Conteúdo organizado.</p>
+            <button type="button" tabIndex={-1}>Abrir menu</button>
+          </div>
           <strong>apresentação</strong>
-          <p>Como o conteúdo é apresentado.</p>
+          <small>Agora existe aparência.</small>
         </div>
-        <div className="tech-card js">
-          <span>JS</span>
+        <div className="stage-arrow">→</div>
+        <div className="stage-browser stage-js">
+          <div className="stage-browser-bar"><i /><i /><i /><span>+ JS</span></div>
+          <div className="stage-page">
+            <h3>Minha página</h3>
+            <p>Conteúdo organizado.</p>
+            <button type="button" tabIndex={-1}>Menu aberto ✓</button>
+          </div>
           <strong>comportamento</strong>
-          <p>Como a interface reage e executa lógica.</p>
+          <small>Agora a interface reage.</small>
         </div>
       </div>
     );
@@ -198,7 +349,7 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
 
   if (name === 'document-tree') {
     return (
-      <div className="tree">
+      <div className="tree tree-growing">
         <div className="tree-root">&lt;html&gt;</div>
         <div className="tree-branches">
           <div className="tree-node">
@@ -213,6 +364,55 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
             <span>p</span>
             <span>a</span>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (name === 'head-impact') {
+    return (
+      <div className="head-impact">
+        <div className="head-impact-item">
+          <code>&lt;title&gt;</code>
+          <div className="mock-browser-tab">Minha primeira página ×</div>
+          <span>nome na aba</span>
+        </div>
+        <div className="head-impact-item">
+          <code>charset="UTF-8"</code>
+          <div className="charset-demo"><del>ProgramaÃ§Ã£o</del><strong>Programação</strong></div>
+          <span>caracteres corretos</span>
+        </div>
+        <div className="head-impact-item">
+          <code>viewport</code>
+          <div className="viewport-demo"><i className="viewport-bad">desktop espremido</i><i className="viewport-good">mobile</i></div>
+          <span>largura adequada</span>
+        </div>
+        <div className="head-impact-item">
+          <code>description</code>
+          <div className="search-snippet"><strong>Minha página</strong><small>Uma apresentação curta e clara.</small></div>
+          <span>resumo do documento</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (name === 'alt-demo') {
+    return (
+      <div className="alt-demo">
+        <div className="alt-card">
+          <div className="alt-picture" aria-hidden="true" />
+          <code>alt="Cachorro caramelo sentado"</code>
+          <span>imagem com significado</span>
+        </div>
+        <div className="alt-card">
+          <div className="alt-broken" aria-hidden="true">imagem.jpg ✕</div>
+          <code>alt="Cachorro caramelo sentado"</code>
+          <span>o texto continua informando</span>
+        </div>
+        <div className="alt-card">
+          <div className="alt-decoration" aria-hidden="true">✦ ✦ ✦</div>
+          <code>alt=""</code>
+          <span>decoração não precisa ser anunciada</span>
         </div>
       </div>
     );
@@ -343,11 +543,11 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
         )}
 
         {slide.kind === 'anatomy' && (
-          <div className="anatomy-layout">
+          <div className="anatomy-layout anatomy-animated">
             <div className="anatomy-code">{slide.code}</div>
             <div className="anatomy-labels">
-              {slide.labels.map((item) => (
-                <div key={item.token}>
+              {slide.labels.map((item, index) => (
+                <div key={item.token} style={{ animationDelay: index * 180 + 'ms' }}>
                   <code>{item.token}</code>
                   <span>{item.label}</span>
                 </div>
@@ -385,9 +585,11 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           </div>
         )}
 
-        {slide.kind === 'lab' && (
-          <LiveLab slide={slide} />
-        )}
+        {slide.kind === 'lab' && <LiveLab slide={slide} />}
+
+        {slide.kind === 'challenge' && <Challenge slide={slide} />}
+
+        {slide.kind === 'missions' && <Missions slide={slide} />}
 
         {slide.kind === 'references' && (
           <div className="references">
