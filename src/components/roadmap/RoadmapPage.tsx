@@ -11,13 +11,23 @@ import {
   type NodeProps,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import { ArrowRight, BookOpen, CheckCircle2, Database, Server, Wrench } from 'lucide-react';
+import { ArrowRight, BookOpen, Boxes, CheckCircle2, Database, ShieldCheck, Smartphone, Server, Wrench } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { getTechnologyIcon } from '../../brand/technologyIcons';
 import '../../styles/roadmap.css';
 
-type TrackId = 'frontend' | 'backend' | 'fullstack' | 'database' | 'devops';
+type TrackId =
+  | 'frontend'
+  | 'backend'
+  | 'fullstack'
+  | 'engineering'
+  | 'qa'
+  | 'architecture'
+  | 'security'
+  | 'mobile'
+  | 'database'
+  | 'devops';
 
 type RoadmapNodeData = {
   title: string;
@@ -39,7 +49,7 @@ type Step = {
 type Track = {
   id: TrackId;
   label: string;
-  icon: 'frontend' | 'backend' | 'fullstack' | 'database' | 'devops';
+  icon: TrackId;
   steps: Step[];
 };
 
@@ -103,6 +113,103 @@ const tracks: Track[] = [
     ],
   },
   {
+    id: 'engineering',
+    label: 'Engenharia de Software',
+    icon: 'engineering',
+    steps: [
+      { id: 'sdlc', title: 'SDLC', subtitle: 'Entender o ciclo completo do software', slug: 'sdlc' },
+      { id: 'logic', title: 'Lógica de Programação', subtitle: 'Base para resolver problemas', slug: 'logic-programming' },
+      { id: 'brd', title: 'BRD', subtitle: 'Problema, objetivos e escopo', slug: 'brd' },
+      { id: 'srs', title: 'SRS', subtitle: 'Especificação dos requisitos', slug: 'srs' },
+      { id: 'iso', title: 'ISO/IEC/IEEE 29148', subtitle: 'Referência para engenharia de requisitos', slug: 'iso-29148' },
+      { id: 'requirements', title: 'Engenharia de Requisitos', subtitle: 'Elicitar, analisar e validar', slug: 'requirements-engineering' },
+      { id: 'uml', title: 'UML', subtitle: 'Modelar o sistema', slug: 'uml' },
+      { id: 'ux', title: 'UX/UI', subtitle: 'Fluxos e experiência', slug: 'ux-ui' },
+      { id: 'architecture', title: 'Arquitetura de Software', subtitle: 'Estruturar a solução', slug: 'software-architecture' },
+      { id: 'git', title: 'Git', subtitle: 'Versionar e colaborar', slug: 'git' },
+      { id: 'api', title: 'REST API', subtitle: 'Contratos e integrações', slug: 'rest-api' },
+      { id: 'db', title: 'Modelagem de Banco', subtitle: 'Dados e relacionamentos', slug: 'database-modeling' },
+      { id: 'tests', title: 'Estratégia de Testes', subtitle: 'Qualidade desde o início', slug: 'test-strategy' },
+      { id: 'security', title: 'OWASP Top 10', subtitle: 'Riscos comuns da aplicação', slug: 'owasp-top-10' },
+      { id: 'cicd', title: 'CI/CD', subtitle: 'Automatizar validação e entrega', slug: 'ci-cd' },
+      { id: 'deploy', title: 'Estratégias de Deploy', subtitle: 'Publicar com controle', slug: 'deployment-strategies' },
+      { id: 'telemetry', title: 'OpenTelemetry', subtitle: 'Métricas, logs e traces', slug: 'opentelemetry' },
+      { id: 'incident', title: 'Gestão de Incidentes', subtitle: 'Responder a falhas em produção', slug: 'incident-management' },
+      { id: 'maintenance', title: 'Manutenção de Software', subtitle: 'Evoluir com segurança', slug: 'maintenance' },
+    ],
+  },
+  {
+    id: 'qa',
+    label: 'Qualidade / QA',
+    icon: 'qa',
+    steps: [
+      { id: 'requirements', title: 'Engenharia de Requisitos', subtitle: 'Entender o que deve ser validado', slug: 'requirements-engineering' },
+      { id: 'acceptance', title: 'Critérios de Aceitação', subtitle: 'Definir condições verificáveis', slug: 'acceptance-criteria' },
+      { id: 'strategy', title: 'Estratégia de Testes', subtitle: 'Planejar níveis e riscos', slug: 'test-strategy' },
+      { id: 'unit', title: 'Testes Unitários', subtitle: 'Validar unidades isoladas', slug: 'unit-testing' },
+      { id: 'integration', title: 'Testes de Integração', subtitle: 'Validar componentes integrados', slug: 'integration-testing' },
+      { id: 'e2e', title: 'Testes E2E', subtitle: 'Validar jornadas completas', slug: 'e2e-testing' },
+      { id: 'postman', title: 'Postman', subtitle: 'Testar APIs', slug: 'postman' },
+      { id: 'playwright', title: 'Playwright', subtitle: 'Automação de interface', slug: 'playwright' },
+      { id: 'a11y', title: 'Testes de Acessibilidade', subtitle: 'Validar acesso inclusivo', slug: 'accessibility-testing' },
+      { id: 'load', title: 'Teste de Carga', subtitle: 'Validar capacidade', slug: 'load-testing' },
+      { id: 'gates', title: 'Quality Gates', subtitle: 'Bloquear regressões', slug: 'quality-gates' },
+    ],
+  },
+  {
+    id: 'architecture',
+    label: 'Arquitetura',
+    icon: 'architecture',
+    steps: [
+      { id: 'architecture', title: 'Arquitetura de Software', subtitle: 'Princípios e decisões', slug: 'software-architecture' },
+      { id: 'c4', title: 'C4 Model', subtitle: 'Visualizar contexto e componentes', slug: 'c4-model' },
+      { id: 'mvc', title: 'MVC', subtitle: 'Separação de responsabilidades', slug: 'mvc' },
+      { id: 'layers', title: 'Arquitetura em Camadas', subtitle: 'Organização por responsabilidades', slug: 'layered-architecture' },
+      { id: 'clean', title: 'Clean Architecture', subtitle: 'Dependências orientadas ao domínio', slug: 'clean-architecture' },
+      { id: 'hexagonal', title: 'Arquitetura Hexagonal', subtitle: 'Ports & adapters', slug: 'hexagonal-architecture' },
+      { id: 'ddd', title: 'Domain-Driven Design', subtitle: 'Modelagem orientada ao domínio', slug: 'ddd' },
+      { id: 'solid', title: 'SOLID', subtitle: 'Princípios de design', slug: 'solid' },
+      { id: 'patterns', title: 'Design Patterns', subtitle: 'Soluções recorrentes', slug: 'design-patterns' },
+      { id: 'refactoring', title: 'Refatoração', subtitle: 'Evoluir sem mudar comportamento', slug: 'refactoring' },
+      { id: 'modular', title: 'Monólito Modular', subtitle: 'Modularidade antes da distribuição', slug: 'modular-monolith' },
+      { id: 'distributed', title: 'Sistemas Distribuídos', subtitle: 'Consistência, latência e falhas', slug: 'distributed-systems' },
+      { id: 'microservices', title: 'Microservices', subtitle: 'Serviços independentes', slug: 'microservices' },
+    ],
+  },
+  {
+    id: 'security',
+    label: 'Segurança',
+    icon: 'security',
+    steps: [
+      { id: 'secure-coding', title: 'Secure Coding', subtitle: 'Codificar com segurança por padrão', slug: 'secure-coding' },
+      { id: 'owasp', title: 'OWASP Top 10', subtitle: 'Riscos recorrentes', slug: 'owasp-top-10' },
+      { id: 'authn', title: 'Autenticação', subtitle: 'Confirmar identidade', slug: 'authentication' },
+      { id: 'authz', title: 'Autorização', subtitle: 'Controlar permissões', slug: 'authorization' },
+      { id: 'oauth', title: 'OAuth 2.0 & OIDC', subtitle: 'Delegação e identidade', slug: 'oauth2-oidc' },
+      { id: 'threat', title: 'Threat Modeling', subtitle: 'Antecipar ameaças', slug: 'threat-modeling' },
+      { id: 'secrets', title: 'Gestão de Segredos', subtitle: 'Proteger credenciais', slug: 'secrets-management' },
+      { id: 'deps', title: 'Segurança de Dependências', subtitle: 'Reduzir risco da cadeia', slug: 'dependency-security' },
+      { id: 'headers', title: 'Security Headers', subtitle: 'Endurecer aplicações web', slug: 'security-headers' },
+    ],
+  },
+  {
+    id: 'mobile',
+    label: 'Mobile',
+    icon: 'mobile',
+    steps: [
+      { id: 'logic', title: 'Lógica de Programação', subtitle: 'Base para aplicações', slug: 'logic-programming' },
+      { id: 'git', title: 'Git', subtitle: 'Versionamento', slug: 'git' },
+      { id: 'js', title: 'JavaScript', subtitle: 'Fundamentos da linguagem', slug: 'javascript' },
+      { id: 'ts', title: 'TypeScript', subtitle: 'Tipagem e contratos', slug: 'typescript' },
+      { id: 'mobile-architecture', title: 'Arquitetura Mobile', subtitle: 'Estrutura do aplicativo', slug: 'mobile-architecture' },
+      { id: 'react-native', title: 'React Native', subtitle: 'Aplicações nativas com React', slug: 'react-native' },
+      { id: 'api', title: 'REST API', subtitle: 'Integração com backend', slug: 'rest-api' },
+      { id: 'storage', title: 'Persistência Mobile', subtitle: 'Dados locais e sincronização', slug: 'mobile-storage' },
+      { id: 'tests', title: 'Testes E2E', subtitle: 'Validar jornadas críticas', slug: 'e2e-testing' },
+      { id: 'release', title: 'Publicação de Apps', subtitle: 'Build, loja e versão', slug: 'mobile-release' },
+    ],
+  },
+  {
     id: 'database',
     label: 'Banco de Dados',
     icon: 'database',
@@ -138,6 +245,10 @@ function trackIcon(track: TrackId) {
   if (track === 'backend') return <Server size={17} />;
   if (track === 'database') return <Database size={17} />;
   if (track === 'devops') return <Wrench size={17} />;
+  if (track === 'architecture') return <Boxes size={17} />;
+  if (track === 'security') return <ShieldCheck size={17} />;
+  if (track === 'mobile') return <Smartphone size={17} />;
+  if (track === 'engineering') return <BookOpen size={17} />;
   return <CheckCircle2 size={17} />;
 }
 

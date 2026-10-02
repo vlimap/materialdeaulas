@@ -103,7 +103,9 @@ function CatalogPage() {
                   to={'/curso/' + technology.slug}
                   aria-label={'Abrir curso de ' + technology.title}
                 >
-                  {getTechnologyIcon(technology.slug) && <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />}
+                  {getTechnologyIcon(technology.slug)
+                    ? <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />
+                    : <Layers3 size={20} aria-hidden="true" />}
                   <span>{technology.title}</span>
                 </Link>
               ))}
