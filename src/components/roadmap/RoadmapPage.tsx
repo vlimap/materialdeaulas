@@ -146,7 +146,7 @@ function createLayout(track: Track): { nodes: RoadmapNode[]; edges: RoadmapEdge[
   const columnGap = 290;
   const rowGap = 150;
 
-  const nodes = track.steps.map((step, index) => {
+  const nodes: RoadmapNode[] = track.steps.map((step, index): RoadmapNode => {
     const row = Math.floor(index / columns);
     const columnInRow = index % columns;
     const oddRow = row % 2 === 1;
@@ -160,7 +160,7 @@ function createLayout(track: Track): { nodes: RoadmapNode[]; edges: RoadmapEdge[
         title: step.title,
         subtitle: step.subtitle,
         slug: step.slug,
-        kind: 'normal',
+        kind: 'normal' as const,
       },
       sourcePosition: Position.Right,
       targetPosition: Position.Left,
@@ -177,7 +177,7 @@ function createLayout(track: Track): { nodes: RoadmapNode[]; edges: RoadmapEdge[
     data: {
       title: 'Próximo passo',
       subtitle: 'Construa um projeto completo',
-      kind: 'goal',
+      kind: 'goal' as const,
     },
     sourcePosition: Position.Right,
     targetPosition: Position.Left,
