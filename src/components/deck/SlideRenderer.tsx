@@ -545,7 +545,8 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
               </ul>
             )}
           </div>
-        )}
+          );
+        })()}
 
         {slide.kind === 'anatomy' && (
           <div className="anatomy-layout anatomy-animated">
