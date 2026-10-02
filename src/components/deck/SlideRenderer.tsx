@@ -155,7 +155,7 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           <h1>{slide.title}</h1>
           <p>{slide.subtitle}</p>
         </div>
-        <div className="cover-code">&lt;html&gt;<br />&nbsp;&nbsp;&lt;css /&gt;<br />&lt;/html&gt;</div>
+        <div className="cover-code">&lt;html&gt;<br />&nbsp;&nbsp;&lt;body&gt;<br />&nbsp;&nbsp;&lt;/body&gt;<br />&lt;/html&gt;</div>
       </article>
     );
   }
