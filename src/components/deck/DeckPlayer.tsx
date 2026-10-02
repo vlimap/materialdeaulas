@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -149,7 +149,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
 
   const storyProgress = Math.min((storyElapsed / currentStoryDuration) * 100, 100);
 
-  const onStoryPointerDown = (event: React.PointerEvent<HTMLElement>) => {
+  const onStoryPointerDown = (event: ReactPointerEvent<HTMLElement>) => {
     if (!isStoryMode || event.button !== 0) return;
 
     pointerStart.current = {
@@ -160,7 +160,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
     setHoldingStory(true);
   };
 
-  const onStoryPointerUp = (event: React.PointerEvent<HTMLElement>) => {
+  const onStoryPointerUp = (event: ReactPointerEvent<HTMLElement>) => {
     if (!isStoryMode || !pointerStart.current) return;
 
     const started = pointerStart.current;
@@ -176,7 +176,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
       return;
     }
 
-    if (heldFor >= 450) return;
+    if (Math.abs(deltaY) > 30 || heldFor >= 450) return;
 
     const bounds = event.currentTarget.getBoundingClientRect();
     const position = event.clientX - bounds.left;
@@ -215,7 +215,7 @@ export function DeckPlayer({ lesson }: { lesson: LessonDefinition }) {
   return (
     <main
       id="main-content"
-      className={'deck-page' + (isStoryMode ? ' story-mode' : '')}
+      className={'deck-page' + (isStoryMode ? ' story-mode' : '') + (holdingStory ? ' story-holding' : '')}
     >
       <div className="deck-toolbar">
         <Link
