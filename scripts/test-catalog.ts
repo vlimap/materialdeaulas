@@ -99,6 +99,37 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'mantém baixa densidade de texto nos slides de projeção',
+    run: () => {
+      const lesson = catalog[0].ucs[0].modules[0].lessons[0];
+
+      for (const slide of lesson.slides) {
+        if (slide.kind === 'statement') {
+          assert.ok(slide.lead.length <= 80, slide.id + ': lead muito longo');
+          assert.ok(slide.detail.length <= 150, slide.id + ': detail muito longo');
+        }
+
+        if (slide.kind === 'cards') {
+          assert.ok(
+            slide.items.every((item) => item.detail.length <= 80),
+            slide.id + ': card com texto excessivo'
+          );
+        }
+
+        if (slide.kind === 'visual') {
+          assert.ok(
+            (slide.subtitle?.length ?? 0) <= 110,
+            slide.id + ': subtítulo visual muito longo'
+          );
+          assert.ok(
+            (slide.caption?.length ?? 0) <= 100,
+            slide.id + ': legenda visual muito longa'
+          );
+        }
+      }
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
