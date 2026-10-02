@@ -44,7 +44,7 @@ export type Slide =
     })
   | (BaseSlide & {
       kind: 'visual';
-      visual: 'web-internet' | 'request-flow' | 'html-css-js' | 'document-tree' | 'box-model' | 'before-after';
+      visual: 'web-internet' | 'request-flow' | 'html-css-js' | 'document-tree' | 'box-model' | 'before-after' | 'hypertext-map' | 'semantic-page';
       caption?: string;
     })
   | (BaseSlide & {
