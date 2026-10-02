@@ -80,7 +80,22 @@ const tests: TestCase[] = [
       assert.ok(ids.indexOf('historia-web') < ids.indexOf('anatomia-elemento'));
       assert.ok(ids.indexOf('anatomia-elemento') < ids.indexOf('semantica'));
       assert.ok(ids.indexOf('semantica') < ids.indexOf('producao-final'));
-      assert.equal(ids.at(-1), 'referencias');
+      assert.equal(ids.at(-1), 'uso-educacional');
+    }
+  },
+  {
+    name: 'mantém o aviso de uso educacional como último slide',
+    run: () => {
+      const lesson = catalog[0].ucs[0].modules[0].lessons[0];
+      const last = lesson.slides.at(-1);
+
+      assert.equal(last?.id, 'uso-educacional');
+      assert.equal(last?.kind, 'statement');
+      if (last?.kind === 'statement') {
+        assert.match(last.detail, /forma original/i);
+        assert.match(last.detail, /licença/i);
+        assert.match(last.detail, /identidade visual/i);
+      }
     }
   },
   {
