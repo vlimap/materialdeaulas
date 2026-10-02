@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play, Search, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play, Search, Waypoints, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { catalog, findLesson, technologyCourses } from './content/catalog';
@@ -6,6 +6,7 @@ import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
 import { getTechnologyIcon } from './brand/technologyIcons';
 import { SeoManager } from './seo/SeoManager';
+import { RoadmapPage } from './components/roadmap/RoadmapPage';
 
 const allCourses = [...catalog, ...technologyCourses];
 
@@ -20,6 +21,9 @@ function BrandHeader({ dark = false }: { dark?: boolean }) {
         <a className="site-action" href="https://github.com/vlimap/materialdeaulas" target="_blank" rel="noreferrer" aria-label="Abrir projeto no GitHub" title="Projeto no GitHub">
           <Github size={18} aria-hidden="true" /><span>Projeto</span>
         </a>
+        <Link className="site-action" to="/roadmap" aria-label="Abrir roadmap de aprendizagem" title="Roadmap de aprendizagem">
+          <Waypoints size={18} aria-hidden="true" /><span>Roadmap</span>
+        </Link>
         <a className="site-action" href="https://github.com/vlimap/materialdeaulas/blob/main/CONTRIBUTING.md" target="_blank" rel="noreferrer" aria-label="Ver como contribuir com o projeto" title="Como contribuir">
           <GitPullRequest size={18} aria-hidden="true" /><span>Contribuir</span>
         </a>
@@ -229,6 +233,7 @@ export default function App() {
       <a className="skip-link" href="#main-content">Pular para o conteúdo principal</a>
       <Routes>
         <Route path="/" element={<CatalogPage />} />
+        <Route path="/roadmap" element={<><BrandHeader dark /><RoadmapPage /></>} />
         <Route path="/curso/:courseSlug" element={<CoursePage />} />
         <Route path="/curso/:courseSlug/uc/:ucSlug/aula/:lessonSlug" element={<LessonRoute />} />
         <Route path="*" element={<CatalogPage />} />
