@@ -68,6 +68,7 @@ export const catalog: CourseDefinition[] = [
 ];
 
 const technologySeeds = [
+  ['sdlc', 'Ciclo de Vida de Software (SDLC)', 'Fundamentos de Software'],
   ['logic-programming', 'Lógica de Programação', 'Fundamentos de Software'],
   ['algorithms', 'Algoritmos', 'Fundamentos de Software'],
   ['data-structures', 'Estruturas de Dados', 'Fundamentos de Software'],
@@ -78,6 +79,7 @@ const technologySeeds = [
 
   ['brd', 'BRD', 'Análise & Requisitos'],
   ['srs', 'SRS', 'Análise & Requisitos'],
+  ['iso-29148', 'ISO/IEC/IEEE 29148', 'Análise & Requisitos'],
   ['requirements-engineering', 'Engenharia de Requisitos', 'Análise & Requisitos'],
   ['requirements-elicitation', 'Elicitação de Requisitos', 'Análise & Requisitos'],
   ['functional-requirements', 'Requisitos Funcionais', 'Análise & Requisitos'],
@@ -97,6 +99,7 @@ const technologySeeds = [
   ['activity-diagrams', 'Diagrama de Atividades', 'Modelagem'],
 
   ['software-architecture', 'Arquitetura de Software', 'Arquitetura & Design'],
+  ['system-design', 'System Design', 'Arquitetura & Design'],
   ['mvc', 'MVC', 'Arquitetura & Design'],
   ['layered-architecture', 'Arquitetura em Camadas', 'Arquitetura & Design'],
   ['clean-architecture', 'Clean Architecture', 'Arquitetura & Design'],
@@ -133,6 +136,7 @@ const technologySeeds = [
   ['sequelize', 'Sequelize', 'Backend'],
   ['prisma', 'Prisma', 'Backend'],
 
+  ['api-design', 'API Design', 'APIs & Integrações'],
   ['rest-api', 'REST API', 'APIs & Integrações'],
   ['openapi', 'OpenAPI', 'APIs & Integrações'],
   ['swagger', 'Swagger', 'APIs & Integrações'],
@@ -184,7 +188,9 @@ const technologySeeds = [
   ['insomnia', 'Insomnia', 'Testes & Qualidade'],
   ['accessibility-testing', 'Testes de Acessibilidade', 'Testes & Qualidade'],
   ['quality-gates', 'Quality Gates', 'Testes & Qualidade'],
+  ['iso-25010', 'ISO/IEC 25010', 'Testes & Qualidade'],
 
+  ['secure-sdlc', 'Secure SDLC', 'Segurança'],
   ['owasp-top-10', 'OWASP Top 10', 'Segurança'],
   ['secure-coding', 'Secure Coding', 'Segurança'],
   ['authentication', 'Autenticação', 'Segurança'],
@@ -193,6 +199,8 @@ const technologySeeds = [
   ['secrets-management', 'Gestão de Segredos', 'Segurança'],
   ['dependency-security', 'Segurança de Dependências', 'Segurança'],
   ['security-headers', 'Security Headers', 'Segurança'],
+  ['privacy-by-design', 'Privacy by Design', 'Segurança'],
+  ['lgpd', 'LGPD para Software', 'Segurança'],
 
   ['web-performance', 'Performance Web', 'Performance'],
   ['core-web-vitals', 'Core Web Vitals', 'Performance'],
@@ -248,6 +256,7 @@ const technologySeeds = [
   ['runbooks', 'Runbooks', 'Documentação'],
   ['changelog', 'Changelog', 'Documentação'],
 
+  ['release-management', 'Release Management', 'Entrega & Operação'],
   ['deployment-strategies', 'Estratégias de Deploy', 'Entrega & Operação'],
   ['rollback', 'Rollback', 'Entrega & Operação'],
   ['blue-green', 'Blue-Green Deployment', 'Entrega & Operação'],
