@@ -75,12 +75,20 @@ export type Slide =
       prompt?: string;
     })
   | (BaseSlide & {
+      kind: 'lab';
+      language: 'html' | 'css' | 'javascript';
+      starterCode: string;
+      instructions: string[];
+      editorPath?: string;
+    })
+  | (BaseSlide & {
       kind: 'references';
       items: ReferenceItem[];
     });
 
 export type LessonDefinition = {
   id: string;
+  status?: 'published' | 'planned';
   slug: string;
   number: number;
   title: string;
@@ -89,6 +97,10 @@ export type LessonDefinition = {
   audience: string;
   ucSlug: string;
   objectives: string[];
+  lab?: {
+    workspacePath: string;
+    editorLabel?: string;
+  };
   slides: Slide[];
 };
 
