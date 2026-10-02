@@ -125,61 +125,97 @@ function CoursePage() {
   const { courseSlug = '' } = useParams();
   const course = allCourses.find((item) => item.slug === courseSlug);
 
-  if (!course) return <main id="main-content" className="not-found"><h1>Trilha não encontrada</h1><Link to="/">Voltar ao início</Link></main>;
+  if (!course) {
+    return (
+      <main id="main-content" className="not-found">
+        <h1>Trilha não encontrada</h1>
+        <Link to="/">Voltar ao início</Link>
+      </main>
+    );
+  }
+
+  const lessons = course.ucs.flatMap((uc) =>
+    uc.modules.flatMap((module) =>
+      module.lessons.map((lesson) => ({
+        lesson,
+        ucSlug: uc.slug,
+      }))
+    )
+  );
+
+  const tone = (slug: string) =>
+    slug.includes('react')
+      ? 'react'
+      : slug.includes('express')
+        ? 'express'
+        : slug.includes('python')
+          ? 'python'
+          : 'default';
 
   return (
-    <main id="main-content" className="catalog-page course-page">
-      <BrandHeader />
-      <section className="catalog-content course-content">
-        <Link className="back-link" to="/"><ArrowLeft size={17} /> Todas as tecnologias</Link>
-        <div className="course-page-heading">
-          <div>
-            <p className="eyebrow">Tecnologia</p>
-            <h1>{course.title}</h1>
-            <p>{course.description}</p>
-          </div>
-          <Layers3 size={42} />
-        </div>
-        <div className="course-sections">
-          {course.ucs.map((uc) => (
-            <section className="course-section" key={uc.slug}>
-              <div className="course-section-heading">
-                <BookOpen size={20} />
-                <div><span>Unidade curricular</span><h2>{uc.title}</h2></div>
-              </div>
-              <p>{uc.description}</p>
-              {uc.modules.map((module) => (
-                <div className="module-row" key={module.slug}>
-                  <div className="module-row-heading">
-                    <div><span>Módulo</span><h3>{module.title}</h3></div>
-                    <span className={'status status-' + module.status}>{module.status === 'active' ? 'Disponível' : 'Em breve'}</span>
-                  </div>
-                  {module.lessons.length === 0 ? <p className="empty-module">Aulas desta trilha serão adicionadas em breve.</p> : module.lessons.map((lesson) => {
-                    const published = lesson.status !== 'planned' && lesson.slides.length > 0;
+    <div className="home-shell">
+      <BrandHeader dark />
+      <main id="main-content" className="excalidraw-home">
+        <section className="excalidraw-board" aria-label={'Aulas de ' + course.title}>
+          <div className="excalidraw-lessons">
+            <Link
+              className={'excalidraw-selected-tech tech-' + tone(course.slug)}
+              to="/"
+              aria-label="Voltar para todas as tecnologias"
+              title="Voltar para todas as tecnologias"
+            >
+              {getTechnologyIcon(course.slug) && (
+                <img src={getTechnologyIcon(course.slug)} alt="" aria-hidden="true" />
+              )}
+            </Link>
 
-                    if (!published) {
-                      return (
-                        <div className="lesson-link lesson-link-planned" key={lesson.id} aria-disabled="true">
-                          <div><span>Aula {String(lesson.number).padStart(2, '0')}</span><strong>{lesson.shortTitle}</strong><small><Clock3 size={14} /> {lesson.durationMinutes / 60}h · {lesson.audience}</small></div>
-                          <span className="lesson-enter">Em breve</span>
-                        </div>
-                      );
-                    }
+            <strong className="excalidraw-selected-label">{course.title}</strong>
 
-                    return (
-                      <Link className="lesson-link" key={lesson.id} to={'/curso/' + course.slug + '/uc/' + uc.slug + '/aula/' + lesson.slug}>
-                        <div><span>Aula {String(lesson.number).padStart(2, '0')}</span><strong>{lesson.shortTitle}</strong><small><Clock3 size={14} /> {lesson.durationMinutes / 60}h · {lesson.audience}</small></div>
-                        <span className="lesson-enter">Entrar <ArrowRight size={18} /></span>
-                      </Link>
-                    );
-                  })}
+            <div className="excalidraw-lesson-list">
+              {lessons.length === 0 ? (
+                <div className="excalidraw-lesson excalidraw-lesson-planned" aria-disabled="true">
+                  <span>Aulas em preparação</span>
+                  <span>Em breve</span>
                 </div>
-              ))}
-            </section>
-          ))}
-        </div>
-      </section>
-    </main>
+              ) : (
+                lessons.map(({ lesson, ucSlug }) => {
+                  const published = lesson.status !== 'planned' && lesson.slides.length > 0;
+                  const label =
+                    'Aula ' +
+                    String(lesson.number).padStart(2, '0') +
+                    ' · ' +
+                    lesson.shortTitle;
+
+                  if (!published) {
+                    return (
+                      <div
+                        className="excalidraw-lesson excalidraw-lesson-planned"
+                        key={lesson.id}
+                        aria-disabled="true"
+                      >
+                        <span>{label}</span>
+                        <span>Em breve</span>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      className="excalidraw-lesson"
+                      key={lesson.id}
+                      to={'/curso/' + course.slug + '/uc/' + ucSlug + '/aula/' + lesson.slug}
+                    >
+                      <span>{label}</span>
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
 
