@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play, Search, Waypoints, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { catalog, findLesson, technologyCourses } from './content/catalog';
+import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from './content/catalog';
 import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
 import { getTechnologyIcon } from './brand/technologyIcons';
@@ -232,7 +232,14 @@ function LessonRoute() {
     );
   }
 
-  return <DeckPlayer lesson={result.lesson} />;
+  return (
+    <DeckPlayer
+      lesson={result.lesson}
+      courseTitle={result.course.title}
+      courseHref={'/curso/' + result.course.slug}
+      lessonNavigation={getCourseLessonNavigation(result.course.slug)}
+    />
+  );
 }
 
 export default function App() {
