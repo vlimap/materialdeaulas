@@ -5,8 +5,8 @@ Plataforma web para organizar materiais por **curso → unidade curricular → m
 ## Primeira entrega
 
 - UC: Desenvolvimento Front-End
-- módulo: HTML e CSS
-- Aula 01: **Como a Web funciona: primeiros passos com HTML e CSS**
+- trilha: HTML
+- Aula 01: **HTML: da história da Web à primeira página**
 - duração: 4 horas
 - público: iniciantes
 - deck navegável no navegador
@@ -86,3 +86,12 @@ Consulte [docs/WINDOWS.md](docs/WINDOWS.md).
 Nesta primeira versão, o PPTX preserva **fidelidade visual**: cada slide é inserido como imagem 16:9. Isso evita divergência entre a versão web e o PowerPoint. A arquitetura permite evoluir depois para exportação semântica/editável.
 
 Consulte [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+
+## Uso do material por professores
+
+Professores podem utilizar e apresentar este material em atividades educacionais. A apresentação deve ser utilizada **em sua forma original**, preservando conteúdo, identidade visual, autoria, créditos e licença.
+
+Não é permitida a redistribuição de versões modificadas nem a substituição da identidade visual.
+
+Consulte [CONTENT-LICENSE.md](CONTENT-LICENSE.md) para os termos completos.

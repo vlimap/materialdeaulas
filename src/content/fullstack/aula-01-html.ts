@@ -583,6 +583,15 @@ export const aula01Html: LessonDefinition = {
         { label: 'MDN — Iniciando com HTML', url: 'https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax' },
         { label: 'WHATWG — HTML Living Standard', url: 'https://html.spec.whatwg.org/' }
       ]
+    },
+    {
+      id: 'uso-educacional',
+      kind: 'statement',
+      eyebrow: 'Uso educacional',
+      title: 'Professores podem usar este material em suas aulas.',
+      lead: 'Use. Compartilhe. Preserve.',
+      detail: 'O material deve permanecer em sua forma original: mesma apresentação, identidade visual, autoria, créditos e licença. Não redistribua versões modificadas nem remova este aviso.',
+      chips: ['uso em sala permitido', 'material íntegro', 'créditos preservados', 'licença preservada']
     }
   ]
 };
