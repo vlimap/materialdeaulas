@@ -77,6 +77,12 @@ const technologySeeds = [
   ['http', 'HTTP', 'Fundamentos de Software'],
   ['terminal-cli', 'Terminal & CLI', 'Fundamentos de Software'],
 
+  ['big-o', 'Big-O', 'Computação'],
+  ['memory', 'Memória', 'Computação'],
+  ['processes', 'Processos', 'Computação'],
+  ['threads', 'Threads', 'Computação'],
+  ['concurrency', 'Concorrência', 'Computação'],
+
   ['brd', 'BRD', 'Análise & Requisitos'],
   ['srs', 'SRS', 'Análise & Requisitos'],
   ['iso-29148', 'ISO/IEC/IEEE 29148', 'Análise & Requisitos'],
@@ -112,6 +118,9 @@ const technologySeeds = [
   ['microservices', 'Microservices', 'Arquitetura & Design'],
   ['modular-monolith', 'Monólito Modular', 'Arquitetura & Design'],
 
+  ['cqrs', 'CQRS', 'Arquitetura Avançada'],
+  ['event-sourcing', 'Event Sourcing', 'Arquitetura Avançada'],
+
   ['javascript', 'JavaScript', 'Linguagens'],
   ['typescript', 'TypeScript', 'Linguagens'],
   ['java', 'Java', 'Linguagens'],
@@ -136,6 +145,10 @@ const technologySeeds = [
   ['sequelize', 'Sequelize', 'Backend'],
   ['prisma', 'Prisma', 'Backend'],
 
+  ['background-jobs', 'Jobs', 'Backend Avançado'],
+  ['workers', 'Workers', 'Backend Avançado'],
+  ['rate-limiting', 'Rate Limiting', 'Backend Avançado'],
+
   ['api-design', 'API Design', 'APIs & Integrações'],
   ['rest-api', 'REST API', 'APIs & Integrações'],
   ['openapi', 'OpenAPI', 'APIs & Integrações'],
@@ -147,6 +160,14 @@ const technologySeeds = [
   ['oauth2-oidc', 'OAuth 2.0 & OpenID Connect', 'APIs & Integrações'],
   ['api-versioning', 'Versionamento de APIs', 'APIs & Integrações'],
 
+  ['tcp-ip', 'TCP/IP', 'Redes & Infra'],
+  ['dns', 'DNS', 'Redes & Infra'],
+  ['tls', 'TLS', 'Redes & Infra'],
+  ['http2-http3', 'HTTP/2 e HTTP/3', 'Redes & Infra'],
+  ['reverse-proxy', 'Proxy Reverso', 'Redes & Infra'],
+  ['cdn', 'CDN', 'Redes & Infra'],
+  ['load-balancing', 'Load Balancing', 'Redes & Infra'],
+
   ['postgresql', 'PostgreSQL', 'Banco de Dados'],
   ['mysql', 'MySQL', 'Banco de Dados'],
   ['sql-server', 'SQL Server', 'Banco de Dados'],
@@ -155,6 +176,24 @@ const technologySeeds = [
   ['dbeaver', 'DBeaver', 'Banco de Dados'],
   ['database-modeling', 'Modelagem de Banco', 'Banco de Dados'],
   ['database-migrations', 'Migrations', 'Banco de Dados'],
+
+  ['acid', 'ACID', 'Banco Avançado'],
+  ['transactions', 'Transações', 'Banco Avançado'],
+  ['isolation-levels', 'Isolamento', 'Banco Avançado'],
+  ['indexes', 'Índices', 'Banco Avançado'],
+  ['query-plans', 'Planos de Execução', 'Banco Avançado'],
+  ['normalization', 'Normalização', 'Banco Avançado'],
+
+  ['cap-theorem', 'Teorema CAP', 'Distribuídos & Mensageria'],
+  ['eventual-consistency', 'Consistência Eventual', 'Distribuídos & Mensageria'],
+  ['idempotency', 'Idempotência', 'Distribuídos & Mensageria'],
+  ['message-queues', 'Filas', 'Distribuídos & Mensageria'],
+  ['events', 'Eventos', 'Distribuídos & Mensageria'],
+  ['sagas', 'Sagas', 'Distribuídos & Mensageria'],
+  ['rabbitmq', 'RabbitMQ', 'Distribuídos & Mensageria'],
+  ['kafka', 'Kafka', 'Distribuídos & Mensageria'],
+  ['pub-sub', 'Pub/Sub', 'Distribuídos & Mensageria'],
+  ['event-driven-architecture', 'Arquitetura Orientada a Eventos', 'Distribuídos & Mensageria'],
 
   ['react-native', 'React Native', 'Mobile'],
   ['flutter', 'Flutter', 'Mobile'],
@@ -190,6 +229,10 @@ const technologySeeds = [
   ['quality-gates', 'Quality Gates', 'Testes & Qualidade'],
   ['iso-25010', 'ISO/IEC 25010', 'Testes & Qualidade'],
 
+  ['contract-testing', 'Contract Testing', 'Qualidade Avançada'],
+  ['mutation-testing', 'Mutation Testing', 'Qualidade Avançada'],
+  ['property-based-testing', 'Property-based Testing', 'Qualidade Avançada'],
+
   ['secure-sdlc', 'Secure SDLC', 'Segurança'],
   ['owasp-top-10', 'OWASP Top 10', 'Segurança'],
   ['secure-coding', 'Secure Coding', 'Segurança'],
@@ -201,6 +244,12 @@ const technologySeeds = [
   ['security-headers', 'Security Headers', 'Segurança'],
   ['privacy-by-design', 'Privacy by Design', 'Segurança'],
   ['lgpd', 'LGPD para Software', 'Segurança'],
+
+  ['cryptography', 'Criptografia', 'Segurança Avançada'],
+  ['hashing', 'Hashing', 'Segurança Avançada'],
+  ['cors', 'CORS', 'Segurança Avançada'],
+  ['csrf', 'CSRF', 'Segurança Avançada'],
+  ['supply-chain-security', 'Supply Chain Security', 'Segurança Avançada'],
 
   ['web-performance', 'Performance Web', 'Performance'],
   ['core-web-vitals', 'Core Web Vitals', 'Performance'],
@@ -220,6 +269,14 @@ const technologySeeds = [
   ['ubuntu', 'Ubuntu', 'DevOps & Cloud'],
   ['environments', 'Ambientes', 'DevOps & Cloud'],
   ['feature-flags', 'Feature Flags', 'DevOps & Cloud'],
+
+  ['aws', 'AWS', 'Cloud & Plataforma'],
+  ['gcp', 'Google Cloud', 'Cloud & Plataforma'],
+  ['iam', 'IAM', 'Cloud & Plataforma'],
+  ['kubernetes', 'Kubernetes', 'Cloud & Plataforma'],
+  ['serverless', 'Serverless', 'Cloud & Plataforma'],
+  ['autoscaling', 'Autoscaling', 'Cloud & Plataforma'],
+  ['object-storage', 'Storage', 'Cloud & Plataforma'],
 
   ['logs', 'Logs', 'Observabilidade & SRE'],
   ['metrics', 'Métricas', 'Observabilidade & SRE'],
@@ -249,6 +306,16 @@ const technologySeeds = [
   ['product-roadmap', 'Roadmap de Produto', 'Gestão Ágil & Produto'],
   ['product-metrics', 'Métricas de Produto', 'Gestão Ágil & Produto'],
 
+  ['risk-management', 'Gestão de Riscos', 'Produto & Descoberta'],
+  ['prioritization', 'Priorização', 'Produto & Descoberta'],
+  ['continuous-discovery', 'Discovery Contínuo', 'Produto & Descoberta'],
+  ['analytics', 'Analytics', 'Produto & Descoberta'],
+
+  ['technical-debt', 'Dívida Técnica', 'Engenharia Avançada'],
+  ['static-analysis', 'Análise Estática', 'Engenharia Avançada'],
+  ['code-metrics', 'Métricas de Código', 'Engenharia Avançada'],
+  ['legacy-systems', 'Legacy Systems', 'Engenharia Avançada'],
+
   ['readme', 'README', 'Documentação'],
   ['adr', 'ADR', 'Documentação'],
   ['api-documentation', 'Documentação de API', 'Documentação'],
@@ -264,6 +331,11 @@ const technologySeeds = [
   ['incident-management', 'Gestão de Incidentes', 'Entrega & Operação'],
   ['maintenance', 'Manutenção de Software', 'Entrega & Operação'],
 
+  ['unicode', 'Unicode', 'Internacionalização'],
+  ['i18n', 'i18n', 'Internacionalização'],
+  ['l10n', 'l10n', 'Internacionalização'],
+  ['timezones', 'Timezones', 'Internacionalização'],
+
   ['ai-assisted-development', 'IA no Desenvolvimento', 'IA para Desenvolvimento'],
   ['coding-agents', 'Agentes de Código', 'IA para Desenvolvimento'],
   ['mcp', 'MCP', 'IA para Desenvolvimento'],
@@ -271,11 +343,14 @@ const technologySeeds = [
   ['llm-evals', 'Avaliação de LLMs', 'IA para Desenvolvimento'],
   ['prompt-engineering', 'Prompt Engineering', 'IA para Desenvolvimento'],
 
+  ['machine-learning', 'Machine Learning', 'IA & Sistemas'],
+  ['llm-systems', 'LLM Systems', 'IA & Sistemas'],
+
   ['vs-code', 'VS Code', 'Ferramentas & Ambiente'],
   ['intellij-idea', 'IntelliJ IDEA', 'Ferramentas & Ambiente'],
   ['npm', 'npm', 'Ferramentas & Ambiente'],
   ['eslint', 'ESLint', 'Ferramentas & Ambiente'],
-  ['prettier', 'Prettier', 'Ferramentas & Ambiente']
+  ['prettier', 'Prettier', 'Ferramentas & Ambiente'],
 ] as const;
 
 export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => {
