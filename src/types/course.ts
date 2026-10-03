@@ -18,6 +18,15 @@ export type ReferenceItem = {
   url: string;
 };
 
+export type LessonSource = {
+  label: string;
+  author?: string;
+  edition?: string;
+  chapters?: string[];
+  pages?: string;
+  note?: string;
+};
+
 type BaseSlide = {
   id: string;
   eyebrow?: string;
@@ -56,7 +65,13 @@ export type Slide =
         | 'web-birth'
         | 'head-impact'
         | 'alt-demo'
-        | 'semantic-puzzle';
+        | 'semantic-puzzle'
+        | 'sdlc-four-activities'
+        | 'sdlc-waterfall'
+        | 'sdlc-incremental'
+        | 'sdlc-feedback'
+        | 'sdlc-artifacts'
+        | 'sdlc-models';
       caption?: string;
     })
   | (BaseSlide & {
@@ -122,6 +137,8 @@ export type LessonDefinition = {
   audience: string;
   ucSlug: string;
   objectives: string[];
+  sources?: LessonSource[];
+  visualPlan?: string[];
   lab?: {
     workspacePath: string;
     editorLabel?: string;
