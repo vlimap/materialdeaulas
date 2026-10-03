@@ -188,6 +188,146 @@ function Missions({ slide }: { slide: Extract<Slide, { kind: 'missions' }> }) {
 function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }) {
   const [puzzleStep, setPuzzleStep] = useState(0);
 
+  if (name === 'sdlc-four-activities') {
+    const activities = [
+      ['01', 'Especificação', 'o que e sob quais restrições'],
+      ['02', 'Desenvolvimento', 'projetar e construir'],
+      ['03', 'Validação', 'conferir e testar'],
+      ['04', 'Evolução', 'mudar para continuar útil']
+    ];
+
+    return (
+      <div className="sdlc-orbit" aria-label="Quatro atividades fundamentais do processo de software">
+        <div className="sdlc-orbit-ring" aria-hidden="true"><span /></div>
+        <div className="sdlc-orbit-center"><strong>SOFTWARE</strong><small>produto vivo</small></div>
+        {activities.map(([number, title, detail], index) => (
+          <div key={title} className={'sdlc-orbit-node node-' + (index + 1)}>
+            <span>{number}</span>
+            <strong>{title}</strong>
+            <small>{detail}</small>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (name === 'sdlc-waterfall') {
+    const stages = [
+      ['01', 'Requisitos'],
+      ['02', 'Projeto'],
+      ['03', 'Implementação'],
+      ['04', 'Integração + testes'],
+      ['05', 'Operação + manutenção']
+    ];
+
+    return (
+      <div className="sdlc-waterfall" aria-label="Modelo em cascata redesenhado">
+        <div className="sdlc-waterfall-path" aria-hidden="true"><span /></div>
+        {stages.map(([number, label], index) => (
+          <div
+            key={label}
+            className="sdlc-waterfall-step"
+            style={{ '--sdlc-step': index } as React.CSSProperties}
+          >
+            <span>{number}</span>
+            <strong>{label}</strong>
+          </div>
+        ))}
+        <div className="sdlc-waterfall-feedback">feedback entre estágios ↶</div>
+      </div>
+    );
+  }
+
+  if (name === 'sdlc-incremental') {
+    return (
+      <div className="sdlc-incremental" aria-label="Desenvolvimento incremental com atividades intercaladas">
+        <div className="sdlc-incremental-activities">
+          <div><span>01</span><strong>Especificação</strong></div>
+          <div><span>02</span><strong>Desenvolvimento</strong></div>
+          <div><span>03</span><strong>Validação</strong></div>
+        </div>
+        <div className="sdlc-incremental-exchange" aria-hidden="true">
+          <i /><i /><i />
+        </div>
+        <div className="sdlc-incremental-versions">
+          <div><span>v1</span><strong>versão inicial</strong></div>
+          <div><span>v2</span><strong>versão intermediária</strong></div>
+          <div><span>v3</span><strong>versão útil ampliada</strong></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (name === 'sdlc-feedback') {
+    const nodes = ['Especificar', 'Projetar', 'Construir', 'Validar', 'Operar'];
+    return (
+      <div className="sdlc-feedback" aria-label="Fluxo de desenvolvimento com retorno de feedback">
+        <div className="sdlc-feedback-flow">
+          {nodes.map((node, index) => (
+            <div className="sdlc-feedback-wrap" key={node}>
+              <div className="sdlc-feedback-node"><span>{String(index + 1).padStart(2, '0')}</span><strong>{node}</strong></div>
+              {index < nodes.length - 1 && <b aria-hidden="true">→</b>}
+            </div>
+          ))}
+        </div>
+        <div className="sdlc-feedback-return" aria-hidden="true">
+          <span>uso real · erros · novas necessidades · mudança</span>
+          <i>← feedback ← feedback ← feedback ←</i>
+        </div>
+      </div>
+    );
+  }
+
+  if (name === 'sdlc-artifacts') {
+    const artifacts = [
+      ['Necessidade', 'visão'],
+      ['Requisitos', 'especificação'],
+      ['Projeto', 'modelos'],
+      ['Código', 'versão'],
+      ['Teste', 'evidência'],
+      ['Operação', 'feedback']
+    ];
+
+    return (
+      <div className="sdlc-artifacts" aria-label="Rastreabilidade de artefatos ao longo do ciclo">
+        {artifacts.map(([phase, artifact], index) => (
+          <div className="sdlc-artifact-wrap" key={phase}>
+            <div className="sdlc-artifact-card">
+              <span>{phase}</span>
+              <strong>{artifact}</strong>
+            </div>
+            {index < artifacts.length - 1 && <b aria-hidden="true">→</b>}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (name === 'sdlc-models') {
+    return (
+      <div className="sdlc-models" aria-label="Comparação visual entre modelos de processo">
+        <div className="sdlc-model-card">
+          <span>CASCATA</span>
+          <div className="mini-waterfall" aria-hidden="true"><i/><i/><i/><i/></div>
+          <strong>estágios visíveis</strong>
+          <small>bom quando requisitos são estáveis</small>
+        </div>
+        <div className="sdlc-model-card">
+          <span>INCREMENTAL</span>
+          <div className="mini-incremental" aria-hidden="true"><i/><i/><i/></div>
+          <strong>versões + feedback</strong>
+          <small>valor chega em partes</small>
+        </div>
+        <div className="sdlc-model-card">
+          <span>RISCO / ITERAÇÃO</span>
+          <div className="mini-spiral" aria-hidden="true"><i/></div>
+          <strong>decisões por risco</strong>
+          <small>processo adapta-se ao contexto</small>
+        </div>
+      </div>
+    );
+  }
+
   if (name === 'web-birth') {
     return (
       <div className="web-birth" aria-label="Documentos isolados passam a ser conectados por links e formam a Web">

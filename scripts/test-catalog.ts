@@ -227,9 +227,45 @@ const tests: TestCase[] = [
 
       const ids = routedLesson?.lesson.slides.map((slide) => slide.id) ?? [];
       assert.equal(new Set(ids).size, ids.length);
-      assert.ok(ids.indexOf('antes-do-codigo') < ids.indexOf('fases-centrais'));
-      assert.ok(ids.indexOf('fases-centrais') < ids.indexOf('fase-entrega-operacao'));
-      assert.ok(ids.indexOf('fase-entrega-operacao') < ids.indexOf('fase-manutencao'));
+      assert.ok(ids.indexOf('software-profissional') < ids.indexOf('quatro-atividades'));
+      assert.ok(ids.indexOf('quatro-atividades') < ids.indexOf('cascata-visual'));
+      assert.ok(ids.indexOf('cascata-visual') < ids.indexOf('incremental-visual'));
+      assert.ok(ids.indexOf('incremental-visual') < ids.indexOf('feedback-ciclo') || ids.indexOf('feedback-ciclo') < ids.indexOf('cascata-visual'));
+    }
+  },
+  {
+    name: 'mantém Sommerville e plano visual em todas as aulas de SDLC',
+    run: () => {
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      const lessons = sdlc?.ucs[0].modules[0].lessons ?? [];
+
+      assert.equal(lessons.length, 12);
+
+      for (const lesson of lessons) {
+        assert.ok(
+          lesson.sources?.some((source) => /Sommerville/i.test(source.author ?? '') || /Engenharia de Software/i.test(source.label)),
+          lesson.id + ': referência-base ausente'
+        );
+        assert.ok((lesson.visualPlan?.length ?? 0) >= 4, lesson.id + ': plano visual insuficiente');
+      }
+    }
+  },
+  {
+    name: 'mantém a Aula 01 de SDLC predominantemente visual e interativa',
+    run: () => {
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      const lesson = sdlc?.ucs[0].modules[0].lessons[0];
+      const slides = lesson?.slides ?? [];
+      const visual = slides.filter((slide) => slide.kind === 'visual');
+      const interactive = slides.filter((slide) =>
+        ['challenge', 'exercise', 'missions'].includes(slide.kind)
+      );
+
+      assert.ok(visual.length >= 6);
+      assert.ok(interactive.length >= 3);
+      assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-waterfall'));
+      assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-incremental'));
+      assert.ok(slides.some((slide) => slide.kind === 'references'));
     }
   },
   {

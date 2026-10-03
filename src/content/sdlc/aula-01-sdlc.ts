@@ -5,18 +5,37 @@ export const aula01Sdlc: LessonDefinition = {
   status: 'published',
   slug: 'aula-01-visao-geral-ciclo-vida-software',
   number: 1,
-  title: 'SDLC: visão geral do ciclo de vida de software',
-  shortTitle: 'SDLC · Visão geral',
+  title: 'SDLC: processos e ciclo de vida de software',
+  shortTitle: 'SDLC · Processos',
   durationMinutes: 240,
   audience: 'Iniciantes em desenvolvimento e engenharia de software',
   ucSlug: 'fundamentos-sdlc',
   objectives: [
-    'Explicar por que software precisa de um ciclo de vida e não apenas de codificação.',
-    'Reconhecer as principais fases do SDLC e o objetivo de cada uma.',
-    'Relacionar fases do ciclo de vida com artefatos, decisões e responsáveis.',
-    'Distinguir fase do ciclo de vida de modelo de processo de desenvolvimento.',
-    'Identificar feedback, validação e rastreabilidade ao longo do ciclo.',
-    'Mapear um problema simples do negócio até operação e manutenção.'
+    'Explicar por que software profissional exige processo e não apenas programação.',
+    'Reconhecer especificação, desenvolvimento, validação e evolução como atividades fundamentais.',
+    'Comparar visualmente processo em cascata e desenvolvimento incremental.',
+    'Relacionar requisitos, projeto, implementação, testes, operação e manutenção.',
+    'Identificar feedback e mudança como partes naturais do ciclo de vida.',
+    'Escolher uma organização de processo coerente com o contexto do sistema.'
+  ],
+  sources: [
+    {
+      label: 'Engenharia de Software',
+      author: 'Ian Sommerville',
+      edition: '9ª edição · Pearson · 2011',
+      chapters: ['Capítulo 1 — Introdução', 'Capítulo 2 — Processos de software'],
+      pages: '3–37',
+      note: 'Referência-base da aula. Diagramas da apresentação são redesenhos autorais dos conceitos do livro.'
+    }
+  ],
+  visualPlan: [
+    'Software profissional = programa + configuração + documentação.',
+    'Ciclo animado das quatro atividades fundamentais.',
+    'Cascata redesenhada com progressão e retorno entre fases.',
+    'Desenvolvimento incremental com especificação, desenvolvimento e validação intercalados.',
+    'Feedback da operação retornando para especificação e evolução.',
+    'Mapa visual de artefatos produzidos ao longo do ciclo.',
+    'Comparação visual entre cascata, incremental e abordagem orientada a risco.'
   ],
   slides: [
     {
@@ -24,336 +43,265 @@ export const aula01Sdlc: LessonDefinition = {
       kind: 'cover',
       eyebrow: 'Fundamentos de Software · Engenharia',
       title: 'Ciclo de Vida de Software',
-      subtitle: 'Da necessidade ao uso, operação, evolução e retirada',
+      subtitle: 'Processos, atividades, feedback e evolução',
       badge: 'Aula 01',
       duration: '4 horas',
-      note: 'Abra com a pergunta: em que momento um software começa a existir?'
+      note: 'Pergunta de abertura: software profissional é somente código?'
     },
     {
-      id: 'objetivo',
+      id: 'software-profissional',
       kind: 'statement',
-      eyebrow: 'Objetivo',
-      title: 'Software não começa no código e não termina no deploy.',
-      lead: 'O código é uma parte do ciclo.',
-      detail: 'O SDLC organiza decisões, trabalho, validação, entrega, operação e evolução.',
-      chips: ['problema', 'requisitos', 'design', 'construção', 'validação', 'operação']
+      eyebrow: 'Antes do SDLC',
+      title: 'Software profissional é mais do que um programa.',
+      lead: 'Código + dados + configuração + documentação.',
+      detail: 'O produto precisa ser usado, mantido e modificado por outras pessoas ao longo do tempo.',
+      chips: ['programa', 'configuração', 'documentação', 'manutenção']
     },
     {
-      id: 'roteiro-4h',
-      kind: 'cards',
-      eyebrow: 'Plano de 4 horas',
-      title: 'Como a aula está organizada',
-      subtitle: 'Do problema ao ciclo completo',
-      items: [
-        { kicker: '20 min', title: 'Problema', detail: 'Por que precisamos de ciclo de vida?', tone: 'blue' },
-        { kicker: '35 min', title: 'Mapa do SDLC', detail: 'Fases e objetivos', tone: 'innovation' },
-        { kicker: '30 min', title: 'Artefatos', detail: 'O que cada fase produz', tone: 'orange' },
-        { kicker: '25 min', title: 'Papéis', detail: 'Quem participa e decide', tone: 'green' },
-        { kicker: '15 min', title: 'Intervalo', detail: 'Pausa', tone: 'neutral' },
-        { kicker: '35 min', title: 'Modelos', detail: 'Cascata, iterativo, ágil e DevOps', tone: 'blue' },
-        { kicker: '35 min', title: 'Caso guiado', detail: 'Mapear um software realista', tone: 'innovation' },
-        { kicker: '30 min', title: 'Atividade', detail: 'Construir o ciclo em equipe', tone: 'orange' },
-        { kicker: '15 min', title: 'Fechamento', detail: 'Checkpoint e revisão', tone: 'green' }
-      ]
-    },
-    {
-      id: 'antes-do-codigo',
-      kind: 'statement',
-      eyebrow: 'Ponto de partida',
-      title: 'Antes de existir código, existe uma necessidade.',
-      lead: 'Alguém precisa resolver alguma coisa.',
-      detail: 'O primeiro trabalho é entender o problema, o contexto e o resultado esperado.',
-      chips: ['necessidade', 'stakeholders', 'valor', 'restrições']
-    },
-    {
-      id: 'cenario-caotico',
-      kind: 'cards',
-      eyebrow: 'Sem ciclo',
-      title: 'O que costuma acontecer quando tudo começa pelo código?',
-      items: [
-        { title: 'Escopo muda sem controle', detail: 'Cada pessoa entende o produto de um jeito.', tone: 'orange' },
-        { title: 'Decisões desaparecem', detail: 'Ninguém sabe por que algo foi feito.', tone: 'neutral' },
-        { title: 'Testes chegam tarde', detail: 'Problemas aparecem perto da entrega.', tone: 'orange' },
-        { title: 'Deploy vira susto', detail: 'Produção passa a ser o ambiente de descoberta.', tone: 'neutral' }
-      ]
-    },
-    {
-      id: 'desafio-ordem',
+      id: 'por-que-processo',
       kind: 'challenge',
-      eyebrow: 'Raciocínio rápido',
-      title: 'Qual atividade deveria acontecer primeiro?',
-      prompt: 'Uma empresa quer um sistema para reduzir filas de atendimento. Qual é o primeiro movimento mais coerente?',
+      eyebrow: '30 segundos',
+      title: 'O que muda quando o software deixa de ser pessoal?',
+      prompt: 'Um sistema será usado por clientes e mantido por uma equipe. O que passa a ser necessário?',
       options: [
-        { label: 'Escolher React e PostgreSQL' },
-        { label: 'Entender o problema, os usuários e o resultado esperado' },
-        { label: 'Criar a tela de login' }
+        { label: 'Somente mais código' },
+        { label: 'Processo, documentação, qualidade e gestão de mudanças' },
+        { label: 'Apenas escolher um framework moderno' }
       ],
       answerIndex: 1,
-      explanation: 'Tecnologia e implementação vêm depois de compreender a necessidade, o contexto e as restrições.'
+      explanation: 'Software profissional precisa continuar compreensível, verificável, operável e modificável.'
     },
     {
-      id: 'definicao-sdlc',
+      id: 'quatro-atividades',
+      kind: 'visual',
+      eyebrow: 'Base conceitual',
+      title: 'Quatro atividades aparecem em qualquer processo de software',
+      subtitle: 'Especificação · desenvolvimento · validação · evolução',
+      visual: 'sdlc-four-activities',
+      caption: 'Redesenho autoral baseado em Sommerville, 9ª ed., cap. 1.'
+    },
+    {
+      id: 'atividade-especificacao',
       kind: 'statement',
-      eyebrow: 'SDLC',
-      title: 'SDLC organiza o ciclo completo do software.',
-      lead: 'Planejar → construir → validar → operar → evoluir.',
-      detail: 'As fases existem para tornar decisões e resultados verificáveis ao longo do tempo.',
-      chips: ['Software Development Life Cycle', 'processo', 'feedback', 'qualidade']
+      eyebrow: '01 · Especificação',
+      title: 'Definir o que será produzido e sob quais restrições.',
+      lead: 'O que o sistema precisa fazer?',
+      detail: 'Clientes e equipe tornam necessidades e restrições suficientemente claras para orientar o desenvolvimento.',
+      chips: ['necessidades', 'restrições', 'requisitos', 'viabilidade']
     },
     {
-      id: 'fases-centrais',
-      kind: 'cards',
-      eyebrow: 'Mapa principal',
-      title: '7 blocos para enxergar o ciclo',
-      items: [
-        { kicker: '01', title: 'Descoberta e planejamento', detail: 'Problema, valor, viabilidade e direção.', tone: 'blue' },
-        { kicker: '02', title: 'Requisitos', detail: 'O que precisa ser atendido e sob quais condições.', tone: 'innovation' },
-        { kicker: '03', title: 'Design e arquitetura', detail: 'Como a solução será estruturada.', tone: 'orange' },
-        { kicker: '04', title: 'Implementação', detail: 'Construção, integração e revisão.', tone: 'green' },
-        { kicker: '05', title: 'Verificação e validação', detail: 'Evidências de que o software atende ao esperado.', tone: 'blue' },
-        { kicker: '06', title: 'Entrega e operação', detail: 'Publicação, observabilidade e suporte.', tone: 'innovation' },
-        { kicker: '07', title: 'Manutenção e retirada', detail: 'Evolução, correção e encerramento responsável.', tone: 'neutral' }
-      ]
-    },
-    {
-      id: 'nao-e-seta-reta',
+      id: 'atividade-desenvolvimento',
       kind: 'statement',
-      eyebrow: 'Atenção',
-      title: 'O ciclo não precisa ser uma linha reta.',
-      lead: 'Feedback faz o trabalho voltar.',
-      detail: 'Uma descoberta em teste, operação ou manutenção pode exigir revisão de requisitos e design.',
-      chips: ['feedback', 'iterações', 'mudança', 'aprendizado']
+      eyebrow: '02 · Desenvolvimento',
+      title: 'Transformar a especificação em software executável.',
+      lead: 'Projeto + implementação.',
+      detail: 'Estrutura, dados, interfaces, componentes e código materializam a solução.',
+      chips: ['design', 'arquitetura', 'código', 'integração']
     },
     {
-      id: 'fase-planejamento',
+      id: 'atividade-validacao',
+      kind: 'statement',
+      eyebrow: '03 · Validação',
+      title: 'Produzir evidências de que o software atende ao esperado.',
+      lead: 'O sistema faz o que deveria fazer?',
+      detail: 'Testes e avaliações confrontam o produto com especificações e necessidades reais.',
+      chips: ['testes', 'aceitação', 'qualidade', 'evidência']
+    },
+    {
+      id: 'atividade-evolucao',
+      kind: 'statement',
+      eyebrow: '04 · Evolução',
+      title: 'Software útil precisa continuar mudando.',
+      lead: 'Mudança não é exceção.',
+      detail: 'Novas necessidades, defeitos, ambiente e negócio fazem o sistema evoluir depois da entrega.',
+      chips: ['manutenção', 'mudança', 'legado', 'evolução']
+    },
+    {
+      id: 'feedback-ciclo',
+      kind: 'visual',
+      eyebrow: 'Ciclo real',
+      title: 'O processo tem retorno, não apenas avanço',
+      subtitle: 'Uma descoberta tardia pode alterar decisões anteriores',
+      visual: 'sdlc-feedback',
+      caption: 'O próprio modelo em cascata admite feedback entre estágios na prática.'
+    },
+    {
+      id: 'modelo-versus-atividade',
+      kind: 'statement',
+      eyebrow: 'Distinção importante',
+      title: 'Atividade fundamental não é a mesma coisa que modelo de processo.',
+      lead: 'As atividades permanecem. A organização muda.',
+      detail: 'Cascata, incremental, ágil ou orientado a risco organizam especificação, desenvolvimento, validação e evolução de formas diferentes.',
+      chips: ['atividade', 'modelo', 'sequência', 'iteração']
+    },
+    {
+      id: 'cascata-visual',
+      kind: 'visual',
+      eyebrow: 'Modelo de processo',
+      title: 'Cascata organiza o trabalho em estágios encadeados',
+      subtitle: 'Requisitos → projeto → implementação → integração/teste → operação/manutenção',
+      visual: 'sdlc-waterfall',
+      caption: 'Redesenho autoral baseado na Figura 2.1 de Sommerville.'
+    },
+    {
+      id: 'cascata-quando',
       kind: 'cards',
-      eyebrow: 'Fase 1',
-      title: 'Descoberta e planejamento',
+      eyebrow: 'Cascata',
+      title: 'O que o modelo evidencia',
       items: [
-        { title: 'Problema', detail: 'Qual situação precisa mudar?', tone: 'blue' },
-        { title: 'Valor', detail: 'Por que vale a pena resolver?', tone: 'green' },
-        { title: 'Viabilidade', detail: 'Há condições técnicas, econômicas e operacionais?', tone: 'orange' },
-        { title: 'Risco', detail: 'O que pode inviabilizar ou comprometer a iniciativa?', tone: 'neutral' }
+        { title: 'Planejamento forte', detail: 'Atividades e entregas ficam visíveis.', tone: 'blue' },
+        { title: 'Documentação', detail: 'Cada estágio tende a deixar artefatos claros.', tone: 'innovation' },
+        { title: 'Mudança cara', detail: 'Revisar fases anteriores pode gerar retrabalho.', tone: 'orange' },
+        { title: 'Requisitos estáveis', detail: 'Funciona melhor quando a mudança esperada é baixa.', tone: 'green' }
       ]
     },
     {
-      id: 'fase-requisitos',
+      id: 'incremental-visual',
+      kind: 'visual',
+      eyebrow: 'Modelo de processo',
+      title: 'Incremental intercala especificação, desenvolvimento e validação',
+      subtitle: 'Cada versão adiciona funcionalidade e gera feedback',
+      visual: 'sdlc-incremental',
+      caption: 'Redesenho autoral baseado na Figura 2.2 de Sommerville.'
+    },
+    {
+      id: 'incremental-vantagens',
       kind: 'cards',
-      eyebrow: 'Fase 2',
-      title: 'Requisitos tornam expectativa verificável',
+      eyebrow: 'Incremental',
+      title: 'Por que o feedback chega mais cedo?',
       items: [
-        { title: 'Funcionais', detail: 'Comportamentos e capacidades esperadas.', tone: 'blue' },
-        { title: 'Não funcionais', detail: 'Qualidade, segurança, desempenho e restrições.', tone: 'innovation' },
-        { title: 'Regras de negócio', detail: 'Condições impostas pelo domínio.', tone: 'orange' },
-        { title: 'Aceitação', detail: 'Como saberemos que a necessidade foi atendida?', tone: 'green' }
+        { title: 'Mudança localizada', detail: 'Menos trabalho precisa ser refeito.', tone: 'green' },
+        { title: 'Feedback real', detail: 'Usuários avaliam software funcionando.', tone: 'blue' },
+        { title: 'Valor antecipado', detail: 'Parte útil pode chegar antes do sistema completo.', tone: 'innovation' },
+        { title: 'Arquitetura exige cuidado', detail: 'Mudanças contínuas podem degradar a estrutura.', tone: 'orange' }
       ]
     },
     {
-      id: 'fase-design',
-      kind: 'cards',
-      eyebrow: 'Fase 3',
-      title: 'Design transforma intenção em solução estruturada',
-      items: [
-        { title: 'UX/UI', detail: 'Fluxos e interação com usuários.', tone: 'blue' },
-        { title: 'Arquitetura', detail: 'Componentes, fronteiras e dependências.', tone: 'innovation' },
-        { title: 'Dados', detail: 'Entidades, persistência e relacionamentos.', tone: 'green' },
-        { title: 'Decisões', detail: 'Trade-offs registrados e justificáveis.', tone: 'orange' }
-      ]
+      id: 'comparacao-modelos',
+      kind: 'visual',
+      eyebrow: 'Comparação',
+      title: 'Não existe um único processo ideal para todo software',
+      subtitle: 'Contexto, risco, mudança e criticidade alteram a escolha',
+      visual: 'sdlc-models',
+      caption: 'Síntese visual baseada nos modelos discutidos no capítulo 2.'
     },
     {
-      id: 'fase-implementacao',
-      kind: 'cards',
-      eyebrow: 'Fase 4',
-      title: 'Implementação é mais do que digitar código',
-      items: [
-        { title: 'Versionamento', detail: 'Histórico e colaboração controlados.', tone: 'blue' },
-        { title: 'Revisão', detail: 'Código analisado antes de integrar.', tone: 'green' },
-        { title: 'Build', detail: 'Processo reproduzível de construção.', tone: 'innovation' },
-        { title: 'Integração', detail: 'Partes precisam funcionar juntas.', tone: 'orange' }
-      ]
-    },
-    {
-      id: 'fase-qualidade',
-      kind: 'cards',
-      eyebrow: 'Fase 5',
-      title: 'Verificar e validar são atividades diferentes',
-      items: [
-        { title: 'Verificação', detail: 'Estamos construindo conforme especificado?', tone: 'blue' },
-        { title: 'Validação', detail: 'Estamos resolvendo a necessidade certa?', tone: 'green' },
-        { title: 'Testes', detail: 'Produzem evidências sobre comportamento e risco.', tone: 'innovation' },
-        { title: 'Aceite', detail: 'Critérios acordados são confirmados.', tone: 'orange' }
-      ]
-    },
-    {
-      id: 'desafio-verificacao-validacao',
+      id: 'desafio-modelo',
       kind: 'challenge',
-      eyebrow: 'Checkpoint',
-      title: 'Verificação ou validação?',
-      prompt: 'O sistema implementou exatamente o campo obrigatório descrito no requisito. Isso é principalmente:',
+      eyebrow: 'Decisão',
+      title: 'Qual contexto pede mais estabilidade antecipada?',
+      prompt: 'Qual cenário tende a exigir análise e especificação mais rigorosas antes da implementação?',
       options: [
-        { label: 'Verificação' },
-        { label: 'Validação' },
-        { label: 'Operação' }
+        { label: 'Protótipo de interface para testar uma ideia' },
+        { label: 'Sistema crítico de controle com requisitos de segurança' },
+        { label: 'Landing page promocional de curta duração' }
       ],
-      answerIndex: 0,
-      explanation: 'A comparação entre implementação e especificação é uma atividade de verificação.'
+      answerIndex: 1,
+      explanation: 'Sistemas críticos normalmente exigem análise mais rigorosa de requisitos, riscos e evidências.'
     },
     {
-      id: 'fase-entrega-operacao',
-      kind: 'cards',
-      eyebrow: 'Fase 6',
-      title: 'Produção também faz parte do ciclo',
-      items: [
-        { title: 'Deploy', detail: 'Software chega ao ambiente de uso.', tone: 'blue' },
-        { title: 'Observabilidade', detail: 'Logs, métricas e traces mostram comportamento real.', tone: 'innovation' },
-        { title: 'Incidentes', detail: 'Falhas precisam de resposta e aprendizado.', tone: 'orange' },
-        { title: 'Feedback', detail: 'Uso real alimenta novas decisões.', tone: 'green' }
-      ]
+      id: 'artefatos-visual',
+      kind: 'visual',
+      eyebrow: 'Evidências do processo',
+      title: 'O trabalho deixa artefatos que conectam decisões',
+      subtitle: 'Necessidade → requisito → design → código → teste → operação',
+      visual: 'sdlc-artifacts',
+      caption: 'A rastreabilidade reduz decisões soltas e ajuda a analisar impacto de mudanças.'
     },
     {
-      id: 'fase-manutencao',
-      kind: 'cards',
-      eyebrow: 'Fase 7',
-      title: 'Software útil continua mudando',
-      items: [
-        { title: 'Corretiva', detail: 'Corrigir defeitos.', tone: 'orange' },
-        { title: 'Adaptativa', detail: 'Responder a mudanças externas.', tone: 'blue' },
-        { title: 'Evolutiva', detail: 'Adicionar ou melhorar capacidades.', tone: 'green' },
-        { title: 'Retirada', detail: 'Encerrar uso, dados e dependências com controle.', tone: 'neutral' }
-      ]
-    },
-    {
-      id: 'artefatos',
-      kind: 'timeline',
-      eyebrow: 'Rastreabilidade',
-      title: 'Cada fase deixa evidências',
-      subtitle: 'Artefatos conectam decisões ao longo do ciclo',
-      items: [
-        { year: 'Problema', title: 'Brief / visão', detail: 'Necessidade, objetivos e contexto.' },
-        { year: 'Requisitos', title: 'BRD / SRS / backlog', detail: 'Expectativas e condições verificáveis.' },
-        { year: 'Design', title: 'Modelos / protótipos / ADRs', detail: 'Estrutura e decisões da solução.' },
-        { year: 'Construção', title: 'Código / commits / builds', detail: 'Implementação e integração.' },
-        { year: 'Qualidade', title: 'Casos e evidências de teste', detail: 'Resultados de verificação e validação.' },
-        { year: 'Operação', title: 'Métricas / runbooks / incidentes', detail: 'Evidências do comportamento em uso.' }
-      ]
-    },
-    {
-      id: 'rastreabilidade',
+      id: 'mudanca',
       kind: 'statement',
-      eyebrow: 'Conexão',
-      title: 'Um requisito deve conseguir chegar até sua evidência.',
-      lead: 'Necessidade → requisito → implementação → teste → operação.',
-      detail: 'Rastreabilidade reduz decisões soltas e facilita análise de impacto quando algo muda.',
-      chips: ['origem', 'implementação', 'teste', 'mudança']
+      eyebrow: 'Mudança',
+      title: 'Processos precisam prever que os requisitos vão mudar.',
+      lead: 'Evitar mudança não é uma estratégia.',
+      detail: 'Prototipação, desenvolvimento incremental e feedback reduzem o custo de descobrir problemas tarde demais.',
+      chips: ['prototipação', 'incrementos', 'feedback', 'risco']
     },
     {
-      id: 'papeis',
+      id: 'rup-contexto',
       kind: 'cards',
-      eyebrow: 'Pessoas',
-      title: 'O ciclo é multidisciplinar',
+      eyebrow: 'Outro exemplo',
+      title: 'RUP separa fases de atividades técnicas',
       items: [
-        { title: 'Negócio / Produto', detail: 'Problema, valor e prioridade.', tone: 'green' },
-        { title: 'Análise / Requisitos', detail: 'Necessidades e critérios verificáveis.', tone: 'blue' },
-        { title: 'Design / Arquitetura', detail: 'Experiência e estrutura da solução.', tone: 'innovation' },
-        { title: 'Desenvolvimento', detail: 'Construção e integração.', tone: 'orange' },
-        { title: 'QA / Segurança', detail: 'Risco, evidências e controles.', tone: 'blue' },
-        { title: 'Operação / SRE', detail: 'Entrega, confiabilidade e resposta.', tone: 'neutral' }
+        { title: 'Concepção', detail: 'Business case e escopo inicial.', tone: 'blue' },
+        { title: 'Elaboração', detail: 'Problema, arquitetura, plano e riscos.', tone: 'innovation' },
+        { title: 'Construção', detail: 'Projeto, programação, testes e integração.', tone: 'green' },
+        { title: 'Transição', detail: 'Software chega ao ambiente real dos usuários.', tone: 'orange' }
       ]
     },
     {
-      id: 'fase-versus-modelo',
-      kind: 'statement',
-      eyebrow: 'Distinção essencial',
-      title: 'Fase do SDLC não é modelo de desenvolvimento.',
-      lead: 'As necessidades permanecem. A organização do trabalho muda.',
-      detail: 'Cascata, iterativo, incremental, ágil e DevOps distribuem as atividades de formas diferentes.',
-      chips: ['fases', 'processo', 'fluxo', 'feedback']
-    },
-    {
-      id: 'modelos',
-      kind: 'cards',
-      eyebrow: 'Modelos',
-      title: 'Quatro formas de organizar o trabalho',
-      items: [
-        { title: 'Sequencial', detail: 'Fases com forte dependência e passagem formal.', tone: 'neutral' },
-        { title: 'Iterativo', detail: 'A solução é refinada em ciclos sucessivos.', tone: 'blue' },
-        { title: 'Incremental / Ágil', detail: 'Valor é entregue em partes pequenas e frequentes.', tone: 'green' },
-        { title: 'DevOps', detail: 'Entrega e operação entram no fluxo contínuo de feedback.', tone: 'innovation' }
-      ]
-    },
-    {
-      id: 'caso-fila',
+      id: 'caso-clinica',
       kind: 'exercise',
       eyebrow: 'Caso guiado',
-      title: 'Sistema de atendimento sem fila física',
-      subtitle: 'Mapeie o problema pelo ciclo',
-      challenge: 'Uma clínica quer reduzir espera presencial e permitir agendamento e acompanhamento de atendimento.',
+      title: 'Clínica quer reduzir filas presenciais',
+      subtitle: 'Mapeie o processo sem desenhar telas',
+      challenge: 'A clínica quer agendamento digital e acompanhamento do atendimento.',
       steps: [
-        'Defina o problema e um resultado de negócio mensurável.',
-        'Liste dois requisitos funcionais e dois não funcionais.',
-        'Escolha uma decisão de arquitetura ou dados que precisará ser tomada.',
-        'Defina como validar o fluxo principal.',
-        'Explique o que observar depois do deploy.'
+        'Defina a necessidade e uma restrição relevante.',
+        'Escreva um requisito verificável.',
+        'Indique uma decisão de projeto.',
+        'Defina uma evidência de validação.',
+        'Explique uma mudança provável depois do uso real.'
       ],
       success: [
-        'Há conexão clara entre problema e requisito.',
-        'Existe pelo menos uma evidência de validação.',
-        'A operação gera feedback para uma próxima decisão.'
+        'As quatro atividades fundamentais aparecem.',
+        'Existe pelo menos um feedback para etapa anterior.',
+        'A equipe consegue explicar por que escolheu sua organização de processo.'
       ],
       timebox: '20 min'
     },
     {
-      id: 'missoes',
+      id: 'atividade-equipe',
       kind: 'missions',
       eyebrow: 'Atividade em equipe',
-      title: 'Escolha um produto e desenhe o ciclo',
-      intro: 'Não crie telas. Construa o raciocínio do ciclo de vida.',
+      title: 'Escolha um sistema e monte seu ciclo',
+      intro: 'O objetivo é justificar o processo, não decorar um desenho.',
       options: [
-        { title: 'Biblioteca', detail: 'Empréstimo, reserva e devolução.', twist: 'Há usuários com atraso.' },
-        { title: 'Loja local', detail: 'Pedidos e retirada no balcão.', twist: 'O estoque muda durante o dia.' },
-        { title: 'Escola', detail: 'Solicitação e acompanhamento de documentos.', twist: 'Há dados pessoais.' }
+        { title: 'Biblioteca', detail: 'Empréstimo, reserva e devolução.', twist: 'Regras são conhecidas e relativamente estáveis.' },
+        { title: 'Loja local', detail: 'Pedidos e retirada no balcão.', twist: 'Prioridades mudam rapidamente.' },
+        { title: 'Sistema crítico', detail: 'Controle de equipamento sensível.', twist: 'Falhas podem causar dano.' }
       ],
       requirements: [
-        'Problema e objetivo.',
-        'Stakeholders principais.',
-        'Fases do ciclo em ordem lógica.',
-        'Um artefato ou evidência por fase.',
-        'Um exemplo de feedback que faria o time voltar a uma fase anterior.'
+        'Quatro atividades fundamentais.',
+        'Modelo de processo escolhido.',
+        'Um artefato importante.',
+        'Um risco de mudança.',
+        'Justificativa da escolha.'
       ]
     },
     {
       id: 'checkpoint',
       kind: 'checklist',
-      eyebrow: 'Revisão',
-      title: 'Você consegue explicar o ciclo sem decorar nomes?',
+      eyebrow: 'Fechamento',
+      title: 'O essencial da Aula 01',
       items: [
-        'O software começa por uma necessidade, não pelo código.',
-        'Requisitos tornam expectativas verificáveis.',
-        'Design e arquitetura estruturam a solução antes e durante a construção.',
-        'Testes produzem evidências de verificação e validação.',
-        'Deploy, operação e manutenção pertencem ao ciclo.',
-        'Feedback conecta as fases e permite evolução.'
+        'Software profissional inclui mais do que código.',
+        'Especificação, desenvolvimento, validação e evolução são atividades fundamentais.',
+        'Cascata organiza estágios de forma mais sequencial.',
+        'Incremental intercala atividades e entrega versões progressivas.',
+        'Feedback e mudança fazem parte do ciclo.',
+        'O contexto define qual organização de processo faz mais sentido.'
       ],
-      prompt: 'Se uma fase mudar, quais outras podem ser impactadas?'
+      prompt: 'Você consegue explicar SDLC sem usar a frase “é só um conjunto de etapas”?'
     },
     {
       id: 'proxima-aula',
       kind: 'statement',
       eyebrow: 'Próxima aula',
-      title: 'Da visão geral para a descoberta do problema.',
-      lead: 'Antes de requisito, existe contexto.',
-      detail: 'Na próxima aula: stakeholders, objetivos, viabilidade, restrições, riscos e definição do problema.',
-      chips: ['discovery', 'stakeholders', 'viabilidade', 'risco']
+      title: 'Antes de especificar, precisamos entender se vale a pena construir.',
+      lead: 'Problema → stakeholders → viabilidade → risco.',
+      detail: 'A próxima aula entra em descoberta, viabilidade e análise inicial do contexto.',
+      chips: ['problema', 'stakeholders', 'viabilidade', 'risco']
     },
     {
       id: 'referencias',
       kind: 'references',
-      eyebrow: 'Referências',
-      title: 'Para aprofundar',
+      eyebrow: 'Referência-base',
+      title: 'Fonte principal e aprofundamento',
       items: [
+        { label: 'Ian Sommerville — Engenharia de Software, 9ª ed. — capítulos 1 e 2', url: 'https://www.pearson.com' },
         { label: 'ISO/IEC/IEEE 12207 — Software life cycle processes', url: 'https://www.iso.org/standard/63712.html' },
-        { label: 'SWEBOK — Software Engineering Body of Knowledge', url: 'https://www.computer.org/education/bodies-of-knowledge/software-engineering' },
-        { label: 'Manifesto for Agile Software Development', url: 'https://agilemanifesto.org/' }
+        { label: 'SWEBOK — Software Engineering Body of Knowledge', url: 'https://www.computer.org/education/bodies-of-knowledge/software-engineering' }
       ]
     }
   ]
