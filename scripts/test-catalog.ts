@@ -233,6 +233,41 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'mantém Sommerville e plano visual em todas as aulas de SDLC',
+    run: () => {
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      const lessons = sdlc?.ucs[0].modules[0].lessons ?? [];
+
+      assert.equal(lessons.length, 12);
+
+      for (const lesson of lessons) {
+        assert.ok(
+          lesson.sources?.some((source) => /Sommerville/i.test(source.author ?? '') || /Engenharia de Software/i.test(source.label)),
+          lesson.id + ': referência-base ausente'
+        );
+        assert.ok((lesson.visualPlan?.length ?? 0) >= 4, lesson.id + ': plano visual insuficiente');
+      }
+    }
+  },
+  {
+    name: 'mantém a Aula 01 de SDLC predominantemente visual e interativa',
+    run: () => {
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      const lesson = sdlc?.ucs[0].modules[0].lessons[0];
+      const slides = lesson?.slides ?? [];
+      const visual = slides.filter((slide) => slide.kind === 'visual');
+      const interactive = slides.filter((slide) =>
+        ['challenge', 'exercise', 'missions'].includes(slide.kind)
+      );
+
+      assert.ok(visual.length >= 6);
+      assert.ok(interactive.length >= 3);
+      assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-waterfall'));
+      assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-incremental'));
+      assert.ok(slides.some((slide) => slide.kind === 'references'));
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
