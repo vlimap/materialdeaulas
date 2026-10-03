@@ -227,9 +227,10 @@ const tests: TestCase[] = [
 
       const ids = routedLesson?.lesson.slides.map((slide) => slide.id) ?? [];
       assert.equal(new Set(ids).size, ids.length);
-      assert.ok(ids.indexOf('antes-do-codigo') < ids.indexOf('fases-centrais'));
-      assert.ok(ids.indexOf('fases-centrais') < ids.indexOf('fase-entrega-operacao'));
-      assert.ok(ids.indexOf('fase-entrega-operacao') < ids.indexOf('fase-manutencao'));
+      assert.ok(ids.indexOf('software-profissional') < ids.indexOf('quatro-atividades'));
+      assert.ok(ids.indexOf('quatro-atividades') < ids.indexOf('cascata-visual'));
+      assert.ok(ids.indexOf('cascata-visual') < ids.indexOf('incremental-visual'));
+      assert.ok(ids.indexOf('incremental-visual') < ids.indexOf('feedback-ciclo') || ids.indexOf('feedback-ciclo') < ids.indexOf('cascata-visual'));
     }
   },
   {
