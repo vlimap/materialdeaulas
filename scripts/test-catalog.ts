@@ -201,6 +201,38 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'organiza o curso de SDLC em 12 aulas de 4 horas',
+    run: () => {
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      const lessons = sdlc?.ucs[0].modules[0].lessons ?? [];
+
+      assert.equal(lessons.length, 12);
+      assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
+      assert.equal(lessons[0].status, 'published');
+      assert.equal(lessons.slice(1).filter((lesson) => lesson.status === 'planned').length, 11);
+      assert.match(lessons[0].title, /SDLC/i);
+    }
+  },
+  {
+    name: 'publica a Aula 01 de SDLC com sequência do problema à operação',
+    run: () => {
+      const routedLesson = findLesson(
+        'curso-sdlc',
+        'fundamentos-sdlc',
+        'aula-01-visao-geral-ciclo-vida-software'
+      );
+
+      assert.equal(routedLesson?.lesson.id, 'sdlc-aula-01');
+      assert.equal(routedLesson?.lesson.status, 'published');
+
+      const ids = routedLesson?.lesson.slides.map((slide) => slide.id) ?? [];
+      assert.equal(new Set(ids).size, ids.length);
+      assert.ok(ids.indexOf('antes-do-codigo') < ids.indexOf('fases-centrais'));
+      assert.ok(ids.indexOf('fases-centrais') < ids.indexOf('fase-entrega-operacao'));
+      assert.ok(ids.indexOf('fase-entrega-operacao') < ids.indexOf('fase-manutencao'));
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
@@ -215,6 +247,19 @@ const tests: TestCase[] = [
       assert.equal(
         lessonPages.some((page) =>
           page.path.endsWith('/aula/aula-02-textos-links-listas-caminhos')
+        ),
+        false
+      );
+
+      assert.ok(
+        lessonPages.some((page) =>
+          page.path.endsWith('/curso/curso-sdlc/uc/fundamentos-sdlc/aula/aula-01-visao-geral-ciclo-vida-software')
+        )
+      );
+
+      assert.equal(
+        lessonPages.some((page) =>
+          page.path.endsWith('/aula/aula-02-discovery-problema-viabilidade')
         ),
         false
       );
