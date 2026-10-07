@@ -212,7 +212,7 @@ export const aula01Html: LessonDefinition = {
         { kicker: '20 min', title: 'Multimídia', detail: 'imagem + áudio + vídeo', tone: 'orange' },
         { kicker: '15 min', title: 'Intervalo', detail: 'pausa', tone: 'neutral' },
         { kicker: '15 min', title: 'CSS', detail: 'inline + interno + externo', tone: 'green' },
-        { kicker: '20 min', title: 'Integração', detail: 'primeira página completa', tone: 'blue' }
+        { kicker: '25 min', title: 'Integração', detail: 'primeira página completa', tone: 'blue' }
       ]
     },
     {
@@ -451,6 +451,39 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
+      id: 'imagem-responsiva-intro',
+      kind: 'cards',
+      eyebrow: 'Imagem responsiva · visão inicial',
+      title: 'A mesma imagem não precisa ser enviada para todas as telas',
+      items: [
+        { title: 'img', detail: 'imagem padrão e texto alternativo', tone: 'blue' },
+        { title: 'srcset', detail: 'oferece diferentes arquivos ao navegador', tone: 'innovation' },
+        { title: 'sizes', detail: 'informa o espaço provável da imagem', tone: 'orange' },
+        { title: 'picture', detail: 'permite direção de arte e formatos', tone: 'green' }
+      ]
+    },
+    {
+      id: 'video-local-ou-plataforma',
+      kind: 'cards',
+      eyebrow: 'Vídeo na Web',
+      title: 'Hospedar o vídeo ou incorporar uma plataforma?',
+      items: [
+        { title: 'Vídeo próprio', detail: 'mais controle sobre arquivo e experiência', tone: 'blue' },
+        { title: 'Custo próprio', detail: 'mais tráfego, armazenamento e processamento', tone: 'orange' },
+        { title: 'YouTube / Vimeo', detail: 'distribuição e player já resolvidos', tone: 'innovation' },
+        { title: 'Trade-off', detail: 'dependência externa, privacidade e interface', tone: 'green' }
+      ]
+    },
+    {
+      id: 'intervalo',
+      kind: 'statement',
+      eyebrow: '15 minutos',
+      title: 'Intervalo',
+      lead: 'Salve o projeto antes da pausa.',
+      detail: 'Na volta: primeiros passos com CSS e integração da página.',
+      chips: ['salvar', 'organizar', 'retomar em 15 min']
+    },
+    {
       id: 'html-css-visual',
       kind: 'visual',
       eyebrow: 'Primeiros passos com CSS',
@@ -475,7 +508,7 @@ export const aula01Html: LessonDefinition = {
     {
       id: 'producao-final',
       kind: 'lab',
-      eyebrow: 'Integração · 20 minutos',
+      eyebrow: 'Integração · 25 minutos',
       title: 'Monte sua primeira página completa',
       subtitle: 'estrutura + texto + link + imagem + CSS externo',
       language: 'html',
