@@ -53,7 +53,7 @@ const tests: TestCase[] = [
           .map((slide) => slide.kind === 'visual' ? slide.visual : '')
       );
 
-      [
+      const requiredVisuals = [
         'html-internet-packets-cartoon',
         'html-domain-hosting-cartoon',
         'html-frontend-backend-cartoon',
@@ -61,7 +61,11 @@ const tests: TestCase[] = [
         'html-text-symbols-emoji-cartoon',
         'html-multimedia-cartoon',
         'html-css-cartoon'
-      ].forEach((visual) => assert.ok(visuals.has(visual), 'visual ausente: ' + visual));
+      ] as const;
+
+      requiredVisuals.forEach((visual) =>
+        assert.ok(visuals.has(visual), 'visual ausente: ' + visual)
+      );
     }
   },
   {
