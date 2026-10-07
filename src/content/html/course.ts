@@ -1,6 +1,6 @@
 import type { CourseDefinition, LessonDefinition } from '../../types/course';
 import { aula01Html } from '../fullstack/aula-01-html';
-import { aula02Html } from './aula-02-textos-links-imagens';
+import { aula02Html } from './aula-02-texto-semantica';
 
 function plannedLesson(
   number: number,
