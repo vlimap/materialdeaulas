@@ -5953,3 +5953,30 @@ a.lesson-playlist-item:focus-visible {
     animation: none !important;
   }
 }
+
+
+/* Reusable lesson SVG visuals */
+.lesson-svg-visual {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 1.4cqw;
+}
+
+.lesson-svg-visual img {
+  display: block;
+  width: 100%;
+  max-width: 72cqw;
+  max-height: 31cqw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1.2cqw 2.2cqw rgba(6, 27, 58, 0.10));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-svg-visual img {
+    scroll-behavior: auto;
+  }
+}
