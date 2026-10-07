@@ -75,15 +75,26 @@ const tests: TestCase[] = [
       const routedLesson02 = findLesson(
         'curso-html5',
         'fundamentos-html5',
-        'aula-02-textos-links-imagens'
+        'aula-02-texto-semantica'
       );
 
       assert.equal(routedLesson02?.lesson.id, 'html-aula-02');
       assert.equal(routedLesson02?.lesson.lab?.workspacePath, 'labs/html/aula-02/index.html');
       assert.ok(routedLesson02?.lesson.slides.some((slide) => slide.kind === 'lab'));
+      assert.match(routedLesson02?.lesson.title ?? '', /texto e semântica/i);
       assert.ok(
         routedLesson02?.lesson.slides.some(
-          (slide) => slide.kind === 'visual' && slide.visual === 'html-links-network-svg'
+          (slide) => slide.kind === 'visual' && slide.visual === 'html-text-semantics-svg'
+        )
+      );
+      assert.ok(
+        routedLesson02?.lesson.slides.some(
+          (slide) => slide.kind === 'visual' && slide.visual === 'html-article-anatomy-svg'
+        )
+      );
+      assert.ok(
+        routedLesson02?.lesson.slides.some(
+          (slide) => slide.kind === 'exercise' && /artigo/i.test(slide.title)
         )
       );
     }
@@ -294,6 +305,12 @@ const tests: TestCase[] = [
       assert.ok(
         lessonPages.some((page) =>
           page.path.endsWith('/aula/aula-01-html-primeira-pagina')
+        )
+      );
+
+      assert.ok(
+        lessonPages.some((page) =>
+          page.path.endsWith('/aula/aula-02-texto-semantica')
         )
       );
 
