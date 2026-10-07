@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Textos, símbolos e emojis</title>
+<desc id="desc">Cartoon preto e branco com balões de texto, símbolos reservados e um rosto sorridente em estilo desenhado.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.wig{transform-box:fill-box;transform-origin:center;animation:wig 3s ease-in-out infinite}@keyframes wig{50%{transform:rotate(4deg)}}@media(prefers-reduced-motion:reduce){.wig{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(90 100)">
+  <path class="s" d="M40 40h390q40 0 40 40v190q0 40-40 40H180l-90 75 25-75H40q-40 0-40-40V80q0-40 40-40z"/>
+  <text class="t" x="235" y="145" text-anchor="middle" font-size="42">Texto longo</text><text class="t" x="235" y="205" text-anchor="middle" font-size="28">parágrafos e conteúdo</text>
+</g>
+<g transform="translate(575 95)">
+  <rect class="s" width="240" height="250" rx="24"/><text class="t" x="120" y="90" text-anchor="middle" font-size="52">&lt; &amp; &gt;</text><text class="t" x="120" y="150" text-anchor="middle" font-size="28">símbolos</text><text class="t" x="120" y="195" text-anchor="middle" font-size="22">entidades HTML</text>
+</g>
+<g class="wig" transform="translate(865 110)">
+  <circle class="s" cx="110" cy="110" r="100"/><circle cx="75" cy="85" r="10" fill="#111"/><circle cx="145" cy="85" r="10" fill="#111"/><path class="s" d="M65 135q45 55 90 0"/>
+  <text class="t" x="110" y="255" text-anchor="middle" font-size="26">emoji</text>
+</g>
+<text class="t" x="600" y="560" text-anchor="middle" font-size="36">conteúdo também pode ter símbolos e caracteres especiais</text>
+</svg>
