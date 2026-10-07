@@ -1,5 +1,6 @@
 import type { CourseDefinition, LessonDefinition } from '../../types/course';
 import { aula01Html } from '../fullstack/aula-01-html';
+import { aula02Html } from './aula-02-textos-links-imagens';
 
 function plannedLesson(
   number: number,
@@ -38,18 +39,7 @@ export const htmlLessons: LessonDefinition[] = [
       editorLabel: 'Abrir código da Aula 01 no VS Code Web'
     }
   },
-  plannedLesson(
-    2,
-    'aula-02-textos-links-imagens',
-    'HTML: textos, links, imagens e organização de conteúdo',
-    'Conteúdo HTML',
-    [
-      'Criar hierarquia textual coerente com títulos e parágrafos.',
-      'Usar ênfase, citações, trechos de código e diferentes tipos de lista.',
-      'Construir links internos, externos, relativos e absolutos.',
-      'Inserir imagens com texto alternativo e caminhos corretos.'
-    ]
-  ),
+  aula02Html,
   plannedLesson(
     3,
     'aula-03-html-semantico',
