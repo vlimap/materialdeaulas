@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Hierarquia de conteúdo HTML</title>
+  <desc id="desc">Diagrama animado mostrando um título principal, seções e parágrafos organizados em níveis.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#061b3a" flood-opacity=".12"/>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6edf4"/>
+    </linearGradient>
+    <style>
+      .card{filter:url(#shadow)}
+      .line{stroke:#b3c9dd;stroke-width:4;stroke-linecap:round}
+      .accent{fill:#f7df1e}
+      .blue{fill:#0d47a1}
+      .blue2{fill:#1565c0}
+      .muted{fill:#d0defe}
+      .txt{font-family:Arial,Helvetica,sans-serif;font-weight:700}
+      .small{font-size:24px;fill:#545454}
+      .tag{font-size:26px;fill:#fff}
+      .node{transform-box:fill-box;transform-origin:center;animation:rise 4.8s ease-in-out infinite}
+      .node:nth-of-type(2){animation-delay:.18s}
+      .node:nth-of-type(3){animation-delay:.36s}
+      .node:nth-of-type(4){animation-delay:.54s}
+      .pulse{animation:pulse 2.4s ease-in-out infinite}
+      @keyframes rise{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+      @keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+      @media (prefers-reduced-motion:reduce){.node,.pulse{animation:none}}
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <circle cx="1050" cy="95" r="112" fill="#d0defe" opacity=".55"/>
+  <circle cx="1060" cy="100" r="36" class="accent" opacity=".9"/>
+
+  <g class="card">
+    <rect x="82" y="72" width="1036" height="532" rx="34" fill="#fff" stroke="#d4d4d4" stroke-width="2"/>
+    <rect x="82" y="72" width="14" height="532" rx="7" class="blue"/>
+  </g>
+
+  <g>
+    <rect x="142" y="116" width="162" height="54" rx="14" class="blue"/>
+    <text x="223" y="151" text-anchor="middle" class="txt tag">&lt;h1&gt;</text>
+    <rect x="330" y="122" width="430" height="18" rx="9" class="blue"/>
+    <rect x="330" y="153" width="300" height="12" rx="6" fill="#6693bb"/>
+  </g>
+
+  <path d="M222 190V262M222 226H462M462 226V262M222 226H802M802 226V262" class="line"/>
+
+  <g class="node">
+    <rect x="132" y="262" width="250" height="132" rx="24" fill="#f7f9fc" stroke="#b3c9dd" stroke-width="3"/>
+    <rect x="154" y="286" width="92" height="42" rx="11" class="blue2"/>
+    <text x="200" y="314" text-anchor="middle" class="txt tag" font-size="20">&lt;h2&gt;</text>
+    <rect x="266" y="292" width="82" height="12" rx="6" class="blue"/>
+    <rect x="154" y="346" width="188" height="11" rx="6" fill="#aaaaaa"/>
+    <rect x="154" y="370" width="145" height="11" rx="6" fill="#d4d4d4"/>
+  </g>
+
+  <g class="node">
+    <rect x="412" y="262" width="250" height="132" rx="24" fill="#f7f9fc" stroke="#b3c9dd" stroke-width="3"/>
+    <rect x="434" y="286" width="92" height="42" rx="11" class="blue2"/>
+    <text x="480" y="314" text-anchor="middle" class="txt tag" font-size="20">&lt;h2&gt;</text>
+    <rect x="546" y="292" width="82" height="12" rx="6" class="blue"/>
+    <rect x="434" y="346" width="188" height="11" rx="6" fill="#aaaaaa"/>
+    <rect x="434" y="370" width="145" height="11" rx="6" fill="#d4d4d4"/>
+  </g>
+
+  <g class="node">
+    <rect x="692" y="262" width="250" height="132" rx="24" fill="#f7f9fc" stroke="#b3c9dd" stroke-width="3"/>
+    <rect x="714" y="286" width="92" height="42" rx="11" class="blue2"/>
+    <text x="760" y="314" text-anchor="middle" class="txt tag" font-size="20">&lt;h2&gt;</text>
+    <rect x="826" y="292" width="82" height="12" rx="6" class="blue"/>
+    <rect x="714" y="346" width="188" height="11" rx="6" fill="#aaaaaa"/>
+    <rect x="714" y="370" width="145" height="11" rx="6" fill="#d4d4d4"/>
+  </g>
+
+  <path d="M537 394V454M537 426H392M392 426V454M537 426H682M682 426V454" class="line"/>
+
+  <g class="node">
+    <rect x="298" y="454" width="188" height="92" rx="20" fill="#061b3a"/>
+    <text x="392" y="492" text-anchor="middle" class="txt tag" font-size="19">&lt;h3&gt;</text>
+    <rect x="335" y="513" width="114" height="9" rx="5" fill="#7296fc"/>
+  </g>
+
+  <g class="node">
+    <rect x="588" y="454" width="188" height="92" rx="20" fill="#061b3a"/>
+    <text x="682" y="492" text-anchor="middle" class="txt tag" font-size="19">&lt;h3&gt;</text>
+    <rect x="625" y="513" width="114" height="9" rx="5" fill="#7296fc"/>
+  </g>
+
+  <g transform="translate(955 490)" class="pulse">
+    <circle r="48" class="accent"/>
+    <path d="M-16 0l11 11 23-27" fill="none" stroke="#292929" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="142" y="580" class="txt small">estrutura visível antes da aparência</text>
+</svg>
