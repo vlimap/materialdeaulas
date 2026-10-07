@@ -1,33 +1,46 @@
-# Aula 02 — Textos, links e imagens
+# Aula 02 — Texto e semântica
 
 Laboratório da segunda aula da trilha HTML.
 
-## Objetivos
+## Projeto
 
-- praticar hierarquia de headings e parágrafos;
-- usar elementos de ênfase e código pelo significado;
-- construir listas ordenadas e não ordenadas;
-- criar links para fragmentos, arquivos relativos e URLs externas;
-- inserir uma imagem com `alt`, dimensões, `figure` e `figcaption`.
+Criar uma página de artigo/blog com o tema:
 
-## Arquivos
+> Como comecei na programação
 
-```text
-aula-02/
-├── index.html
-├── sobre.html
-└── images/
-    └── web.svg
-```
+## Conteúdos praticados
 
-## Exercício
+- hierarquia de `h1` a `h6`;
+- `p`;
+- `strong`;
+- `em`;
+- `mark`;
+- `small`;
+- `del`;
+- `ins`;
+- `sub`;
+- `sup`;
+- `br`;
+- `hr`;
+- `blockquote`;
+- `q`;
+- `cite`;
+- `code`;
+- `pre`;
+- entidades HTML.
 
-Use `index.html` como base e modifique o conteúdo sem adicionar CSS ou JavaScript. A página deve continuar compreensível apenas pela estrutura HTML.
+## Regra principal
 
-Valide ao final:
+Escolha os elementos pelo **significado do conteúdo**, não pela aparência visual.
 
-1. os headings formam uma hierarquia coerente;
-2. os links possuem texto descritivo;
-3. os caminhos relativos funcionam;
-4. a imagem possui alternativa textual adequada;
-5. listas representam corretamente sequência ou agrupamento.
+Não use `br` para criar espaçamento. A apresentação visual será trabalhada posteriormente com CSS.
+
+## Critérios de conclusão
+
+1. existe um `h1` que representa o assunto principal;
+2. os níveis de heading formam uma hierarquia coerente;
+3. os parágrafos representam unidades reais de texto;
+4. elementos de ênfase são usados por significado;
+5. existe pelo menos uma citação;
+6. existe um trecho ou bloco de código;
+7. caracteres reservados são exibidos corretamente com entidades HTML.
