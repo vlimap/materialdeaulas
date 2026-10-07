@@ -66,8 +66,6 @@ export type Slide =
         | 'head-impact'
         | 'alt-demo'
         | 'html-content-hierarchy-svg'
-        | 'html-links-network-svg'
-        | 'html-alt-fallback-svg'
         | 'html-text-semantics-svg'
         | 'html-article-anatomy-svg'
         | 'semantic-puzzle'
