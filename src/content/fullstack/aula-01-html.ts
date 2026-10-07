@@ -558,7 +558,7 @@ export const aula01Html: LessonDefinition = {
       eyebrow: 'Material de aula',
       title: 'Use, adapte e produza de forma original.',
       lead: 'O objetivo é aprender construindo.',
-      detail: 'Mantenha autoria, licença dos recursos e identidade visual ao reutilizar este material em contexto educacional.',
+      detail: 'Adapte de forma original, preservando autoria, licença dos recursos e identidade visual em contexto educacional.',
       chips: ['autoria', 'licença', 'identidade visual', 'educação']
     }
   ]
