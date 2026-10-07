@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Multimídia na Web</title>
+<desc id="desc">Cartoon preto e branco mostrando imagem, áudio e vídeo como três tipos de mídia dentro de uma página web.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.play{animation:pulse 2.5s ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.08)}}@media(prefers-reduced-motion:reduce){.play{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(90 130)">
+  <rect class="s" width="300" height="310" rx="24"/><rect class="s" x="35" y="40" width="230" height="170" rx="16"/><circle cx="95" cy="95" r="24" fill="#111"/><path class="s" d="M55 195l75-70 55 45 45-35 35 60"/>
+  <text class="t" x="150" y="265" text-anchor="middle" font-size="30">IMAGEM</text>
+</g>
+<g transform="translate(450 130)">
+  <rect class="s" width="300" height="310" rx="24"/><path class="s" d="M75 155c35-85 55 85 90 0s55 85 90 0"/><circle class="s" cx="70" cy="155" r="20"/><circle class="s" cx="260" cy="155" r="20"/>
+  <text class="t" x="150" y="265" text-anchor="middle" font-size="30">ÁUDIO</text>
+</g>
+<g transform="translate(810 130)">
+  <rect class="s" width="300" height="310" rx="24"/><rect class="s" x="35" y="40" width="230" height="170" rx="16"/><g class="play" transform="translate(150 125)"><circle class="s" r="52"/><path d="M-10-22L28 0-10 22z" fill="#111"/></g>
+  <text class="t" x="150" y="265" text-anchor="middle" font-size="30">VÍDEO</text>
+</g>
+<text class="t" x="600" y="520" text-anchor="middle" font-size="34">mídia local ou incorporada</text><text class="t" x="600" y="565" text-anchor="middle" font-size="24">peso · controle · desempenho · plataforma externa</text>
+</svg>
