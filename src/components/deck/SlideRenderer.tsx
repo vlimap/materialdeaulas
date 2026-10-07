@@ -2,6 +2,9 @@ import { useState, type SyntheticEvent } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
+import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
+import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
+import htmlAltFallbackVisual from '../../assets/lessons/html/aula-02/alt-fallback.svg';
 
 function Brand() {
   return (
@@ -187,6 +190,39 @@ function Missions({ slide }: { slide: Extract<Slide, { kind: 'missions' }> }) {
 
 function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }) {
   const [puzzleStep, setPuzzleStep] = useState(0);
+
+  if (name === 'html-content-hierarchy-svg') {
+    return (
+      <div className="lesson-svg-visual">
+        <img
+          src={htmlContentHierarchyVisual}
+          alt="Hierarquia visual com h1, seções h2 e subseções h3 organizadas como árvore de conteúdo"
+        />
+      </div>
+    );
+  }
+
+  if (name === 'html-links-network-svg') {
+    return (
+      <div className="lesson-svg-visual">
+        <img
+          src={htmlLinksNetworkVisual}
+          alt="Rede de documentos conectados por hiperlinks, com pulsos percorrendo diferentes caminhos"
+        />
+      </div>
+    );
+  }
+
+  if (name === 'html-alt-fallback-svg') {
+    return (
+      <div className="lesson-svg-visual">
+        <img
+          src={htmlAltFallbackVisual}
+          alt="Comparação entre imagem informativa, imagem indisponível com texto alternativo e imagem decorativa"
+        />
+      </div>
+    );
+  }
 
   if (name === 'sdlc-four-activities') {
     const activities = [
