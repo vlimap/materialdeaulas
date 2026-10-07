@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Semântica de texto em HTML</title>
+  <desc id="desc">Elementos de texto HTML organizados por significado: importância, ênfase, destaque, edição, ciência e código.</desc>
+  <defs>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#061b3a" flood-opacity=".12"/>
+    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e6edf4"/>
+    </linearGradient>
+    <style>
+      .card{filter:url(#shadow);transform-box:fill-box;transform-origin:center;animation:float 5.4s ease-in-out infinite}
+      .card:nth-of-type(2){animation-delay:.25s}.card:nth-of-type(3){animation-delay:.5s}
+      .card:nth-of-type(4){animation-delay:.75s}.card:nth-of-type(5){animation-delay:1s}.card:nth-of-type(6){animation-delay:1.25s}
+      .tag{font-family:Consolas,monospace;font-weight:700;font-size:24px;fill:#fff}
+      .label{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:22px;fill:#292929}
+      .small{font-family:Arial,Helvetica,sans-serif;font-size:17px;fill:#7e7e7e}
+      .pulse{animation:pulse 2.8s ease-in-out infinite}
+      @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+      @keyframes pulse{0%,100%{opacity:.35;transform:scale(.92)}50%{opacity:1;transform:scale(1)}}
+      @media(prefers-reduced-motion:reduce){.card,.pulse{animation:none}}
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <rect x="58" y="50" width="1084" height="575" rx="34" fill="#fff" stroke="#d4d4d4" stroke-width="2"/>
+
+  <g transform="translate(104 112)" class="card">
+    <rect width="300" height="150" rx="26" fill="#061b3a"/>
+    <rect x="22" y="22" width="112" height="44" rx="12" fill="#1565c0"/>
+    <text x="78" y="52" text-anchor="middle" class="tag">&lt;strong&gt;</text>
+    <text x="22" y="103" class="label" fill="#fff">importância</text>
+    <text x="22" y="132" class="small" fill="#d0defe">o conteúdo é relevante</text>
+  </g>
+
+  <g transform="translate(450 112)" class="card">
+    <rect width="300" height="150" rx="26" fill="#0d47a1"/>
+    <rect x="22" y="22" width="88" height="44" rx="12" fill="#f7df1e"/>
+    <text x="66" y="52" text-anchor="middle" font-family="Consolas,monospace" font-weight="700" font-size="24" fill="#292929">&lt;em&gt;</text>
+    <text x="22" y="103" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="22" fill="#fff">ênfase</text>
+    <text x="22" y="132" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#d0defe">a entonação muda</text>
+  </g>
+
+  <g transform="translate(796 112)" class="card">
+    <rect width="300" height="150" rx="26" fill="#f7f9fc" stroke="#b3c9dd" stroke-width="3"/>
+    <rect x="22" y="22" width="112" height="44" rx="12" fill="#f7df1e"/>
+    <text x="78" y="52" text-anchor="middle" font-family="Consolas,monospace" font-weight="700" font-size="24" fill="#292929">&lt;mark&gt;</text>
+    <text x="22" y="103" class="label">relevância</text>
+    <text x="22" y="132" class="small">trecho destacado no contexto</text>
+  </g>
+
+  <g transform="translate(104 320)" class="card">
+    <rect width="300" height="150" rx="26" fill="#f7f9fc" stroke="#b3c9dd" stroke-width="3"/>
+    <rect x="22" y="22" width="102" height="44" rx="12" fill="#1565c0"/>
+    <text x="73" y="52" text-anchor="middle" class="tag">&lt;del&gt;</text>
+    <rect x="142" y="22" width="102" height="44" rx="12" fill="#0d47a1"/>
+    <text x="193" y="52" text-anchor="middle" class="tag">&lt;ins&gt;</text>
+    <text x="22" y="103" class="label">edição</text>
+    <text x="22" y="132" class="small">remoção e inserção</text>
+  </g>
+
+  <g transform="translate(450 320)" class="card">
+    <rect width="300" height="150" rx="26" fill="#061b3a"/>
+    <rect x="22" y="22" width="102" height="44" rx="12" fill="#1565c0"/>
+    <text x="73" y="52" text-anchor="middle" class="tag">&lt;sub&gt;</text>
+    <rect x="142" y="22" width="102" height="44" rx="12" fill="#1565c0"/>
+    <text x="193" y="52" text-anchor="middle" class="tag">&lt;sup&gt;</text>
+    <text x="22" y="103" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="22" fill="#fff">notação</text>
+    <text x="22" y="132" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#d0defe">H₂O · 10²</text>
+  </g>
+
+  <g transform="translate(796 320)" class="card">
+    <rect width="300" height="150" rx="26" fill="#0d47a1"/>
+    <rect x="22" y="22" width="112" height="44" rx="12" fill="#f7df1e"/>
+    <text x="78" y="52" text-anchor="middle" font-family="Consolas,monospace" font-weight="700" font-size="24" fill="#292929">&lt;code&gt;</text>
+    <text x="22" y="103" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="22" fill="#fff">código</text>
+    <text x="22" y="132" font-family="Arial,Helvetica,sans-serif" font-size="17" fill="#d0defe">conteúdo técnico identificável</text>
+  </g>
+
+  <g transform="translate(600 555)" class="pulse">
+    <circle r="38" fill="#f7df1e"/>
+    <path d="M-13 0l9 9 20-23" fill="none" stroke="#292929" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="655" y="565" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="22" fill="#0d47a1">marcação comunica significado</text>
+</svg>
