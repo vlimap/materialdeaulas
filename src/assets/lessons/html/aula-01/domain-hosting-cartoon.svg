@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Domínio e hospedagem</title>
+<desc id="desc">Cartoon preto e branco comparando uma placa com endereço de site e um prédio de servidores onde os arquivos ficam armazenados.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.a{stroke-dasharray:14 14;animation:dash 4s linear infinite}@keyframes dash{to{stroke-dashoffset:-120}}@media(prefers-reduced-motion:reduce){.a{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(80 120)">
+  <circle class="s" cx="230" cy="210" r="170"/><path class="s" d="M140 150h180M140 210h180M140 270h180M230 40c-70 70-70 270 0 340M230 40c70 70 70 270 0 340"/>
+  <rect class="s" x="90" y="405" width="280" height="90" rx="18"/><text class="t" x="230" y="460" text-anchor="middle" font-size="30">meusite.com</text>
+  <text class="t" x="230" y="545" text-anchor="middle" font-size="28">DOMÍNIO = endereço</text>
+</g>
+<path class="s a" d="M500 335h190"/><path class="s" d="M650 305l40 30-40 30"/>
+<g transform="translate(720 100)">
+  <rect class="s" width="360" height="390" rx="24"/><rect class="s" x="52" y="50" width="256" height="62" rx="12"/><rect class="s" x="52" y="138" width="256" height="62" rx="12"/><rect class="s" x="52" y="226" width="256" height="62" rx="12"/>
+  <circle cx="278" cy="81" r="8" fill="#111"/><circle cx="278" cy="169" r="8" fill="#111"/><circle cx="278" cy="257" r="8" fill="#111"/>
+  <text class="t" x="180" y="445" text-anchor="middle" font-size="28">HOSPEDAGEM = arquivos</text>
+</g>
+</svg>

@@ -23,6 +23,52 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'mantém a Aula 01 como panorama completo dos fundamentos da Web',
+    run: () => {
+      const lesson = findLesson(
+        'curso-html5',
+        'fundamentos-html5',
+        'aula-01-html-primeira-pagina'
+      )?.lesson;
+
+      assert.match(lesson?.title ?? '', /Fundamentos da Web/i);
+      assert.equal(lesson?.durationMinutes, 240);
+
+      const ids = lesson?.slides.map((slide) => slide.id) ?? [];
+      assert.ok(ids.includes('historia-web'));
+      assert.ok(ids.includes('dominio-hospedagem'));
+      assert.ok(ids.includes('front-back'));
+      assert.ok(ids.includes('ambiente'));
+      assert.ok(ids.includes('primeiro-documento'));
+      assert.ok(ids.includes('textos-simbolos'));
+      assert.ok(ids.includes('semantica'));
+      assert.ok(ids.includes('links'));
+      assert.ok(ids.includes('multimidia'));
+      assert.ok(ids.includes('css-formas'));
+      assert.ok(ids.includes('producao-final'));
+
+      const visuals = new Set(
+        (lesson?.slides ?? [])
+          .filter((slide) => slide.kind === 'visual')
+          .map((slide) => slide.kind === 'visual' ? slide.visual : '')
+      );
+
+      const requiredVisuals = [
+        'html-internet-packets-cartoon',
+        'html-domain-hosting-cartoon',
+        'html-frontend-backend-cartoon',
+        'html-dev-environment-cartoon',
+        'html-text-symbols-emoji-cartoon',
+        'html-multimedia-cartoon',
+        'html-css-cartoon'
+      ] as const;
+
+      requiredVisuals.forEach((visual) =>
+        assert.ok(visuals.has(visual), 'visual ausente: ' + visual)
+      );
+    }
+  },
+  {
     name: 'não permite ids duplicados nos slides da Aula 01',
     run: () => {
       const lesson = catalog[0].ucs[0].modules[0].lessons[0];

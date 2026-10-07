@@ -212,3 +212,34 @@ imagem decorativa + alt=""
 ```
 
 Objetivo: explicar o propósito de `alt`, e não apenas sua sintaxe.
+
+## Modo cartoon preto e branco
+
+Para aulas introdutórias, metáforas e conceitos abstratos, use preferencialmente **cartoon P&B em SVG**:
+
+- fundo branco;
+- traço preto espesso;
+- formas simples e arredondadas;
+- poucas palavras dentro da ilustração;
+- personagens/objetos com leitura imediata;
+- sem gradientes coloridos;
+- sem depender de textura raster;
+- movimento discreto apenas quando explica fluxo ou transformação.
+
+Exemplos adequados:
+
+- navegador enviando pacotes até um servidor;
+- domínio como endereço e hospedagem como prédio/servidor;
+- front-end como vitrine e back-end como área interna;
+- imagem, áudio e vídeo como objetos visuais;
+- HTML como estrutura e CSS como apresentação.
+
+### Quando usar animação programática
+
+Prefira primeiro:
+
+1. estado estático bem resolvido;
+2. CSS/SVG para movimento simples;
+3. GSAP apenas quando houver timeline, sequência coordenada ou interação que seria difícil manter com CSS.
+
+Todo movimento deve continuar compreensível com `prefers-reduced-motion: reduce`.

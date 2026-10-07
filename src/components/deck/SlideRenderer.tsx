@@ -5,6 +5,13 @@ import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
 import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
 import htmlAltFallbackVisual from '../../assets/lessons/html/aula-02/alt-fallback.svg';
+import htmlInternetPacketsCartoon from '../../assets/lessons/html/aula-01/internet-packets-cartoon.svg';
+import htmlDomainHostingCartoon from '../../assets/lessons/html/aula-01/domain-hosting-cartoon.svg';
+import htmlFrontendBackendCartoon from '../../assets/lessons/html/aula-01/frontend-backend-cartoon.svg';
+import htmlDevEnvironmentCartoon from '../../assets/lessons/html/aula-01/dev-environment-cartoon.svg';
+import htmlTextSymbolsEmojiCartoon from '../../assets/lessons/html/aula-01/text-symbols-emoji-cartoon.svg';
+import htmlMultimediaCartoon from '../../assets/lessons/html/aula-01/multimedia-cartoon.svg';
+import htmlCssCartoon from '../../assets/lessons/html/aula-01/html-css-cartoon.svg';
 
 function Brand() {
   return (
@@ -190,6 +197,34 @@ function Missions({ slide }: { slide: Extract<Slide, { kind: 'missions' }> }) {
 
 function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }) {
   const [puzzleStep, setPuzzleStep] = useState(0);
+
+  if (name === 'html-internet-packets-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlInternetPacketsCartoon} alt="Cartoon preto e branco mostrando pacotes saindo do navegador, atravessando roteadores e chegando ao servidor" /></div>;
+  }
+
+  if (name === 'html-domain-hosting-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlDomainHostingCartoon} alt="Cartoon preto e branco comparando domínio como endereço e hospedagem como local onde os arquivos ficam armazenados" /></div>;
+  }
+
+  if (name === 'html-frontend-backend-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlFrontendBackendCartoon} alt="Cartoon preto e branco comparando a parte visível de uma aplicação com a área interna de processamento" /></div>;
+  }
+
+  if (name === 'html-dev-environment-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlDevEnvironmentCartoon} alt="Cartoon preto e branco com notebook, VS Code, navegador e extensões do ambiente de desenvolvimento" /></div>;
+  }
+
+  if (name === 'html-text-symbols-emoji-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlTextSymbolsEmojiCartoon} alt="Cartoon preto e branco mostrando texto, símbolos especiais e emoji como conteúdos da página" /></div>;
+  }
+
+  if (name === 'html-multimedia-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlMultimediaCartoon} alt="Cartoon preto e branco mostrando imagem, áudio e vídeo como mídias da Web" /></div>;
+  }
+
+  if (name === 'html-css-cartoon') {
+    return <div className="lesson-svg-visual lesson-svg-monochrome"><img src={htmlCssCartoon} alt="Cartoon preto e branco comparando HTML como estrutura e CSS como apresentação" /></div>;
+  }
 
   if (name === 'html-content-hierarchy-svg') {
     return (
