@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Pacotes atravessando a Internet</title>
+<desc id="desc">Cartoon preto e branco com computador, roteadores e servidor conectados, enquanto pequenos pacotes percorrem a rede.</desc>
+<style>
+  .s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+  .t{font-family:Arial,sans-serif;font-weight:700;fill:#111}
+  .p{fill:#111;animation:move 4.5s linear infinite}
+  .p2{animation-delay:1.5s}.p3{animation-delay:3s}
+  @keyframes move{0%{transform:translate(220px,340px)}35%{transform:translate(480px,220px)}70%{transform:translate(730px,390px)}100%{transform:translate(980px,280px)}}
+  @media(prefers-reduced-motion:reduce){.p{animation:none}.p{transform:translate(600px,300px)}}
+</style>
+<rect width="1200" height="675" fill="#fff"/>
+<path d="M220 340C350 340 360 220 480 220S610 390 730 390S840 280 980 280" fill="none" stroke="#111" stroke-width="6" stroke-dasharray="16 18"/>
+<g transform="translate(90 250)">
+  <rect class="s" width="210" height="150" rx="22"/><rect class="s" x="42" y="25" width="126" height="76" rx="8"/>
+  <path class="s" d="M80 150v42m50-42v42M52 192h106"/><text class="t" x="105" y="230" text-anchor="middle" font-size="24">NAVEGADOR</text>
+</g>
+<g transform="translate(400 150)">
+  <circle class="s" cx="80" cy="80" r="70"/><path class="s" d="M35 80h90M80 35v90"/><text class="t" x="80" y="180" text-anchor="middle" font-size="22">ROTEADOR</text>
+</g>
+<g transform="translate(650 320)">
+  <circle class="s" cx="80" cy="80" r="70"/><path class="s" d="M35 80h90M80 35v90"/><text class="t" x="80" y="180" text-anchor="middle" font-size="22">ROTEADOR</text>
+</g>
+<g transform="translate(900 185)">
+  <rect class="s" width="210" height="200" rx="22"/><rect class="s" x="30" y="30" width="150" height="38" rx="8"/><rect class="s" x="30" y="82" width="150" height="38" rx="8"/><rect class="s" x="30" y="134" width="150" height="38" rx="8"/>
+  <text class="t" x="105" y="238" text-anchor="middle" font-size="24">SERVIDOR</text>
+</g>
+<rect class="p" width="34" height="24" rx="6"/><rect class="p p2" width="34" height="24" rx="6"/><rect class="p p3" width="34" height="24" rx="6"/>
+<text class="t" x="600" y="610" text-anchor="middle" font-size="34">dados viajam em pacotes</text>
+</svg>
