@@ -48,11 +48,12 @@ const tests: TestCase[] = [
       assert.equal(lessons.length, 12);
       assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
       assert.equal(lessons[0].status, 'published');
-      assert.equal(lessons.slice(1).filter((lesson) => lesson.status === 'planned').length, 11);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 2);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 10);
     }
   },
   {
-    name: 'publica a Aula 01 na rota da trilha HTML5 e mantém o laboratório',
+    name: 'publica as Aulas 01 e 02 na trilha HTML5 e mantém seus laboratórios',
     run: () => {
       const html = technologyCourses.find((course) => course.slug === 'curso-html5');
       const css = technologyCourses.find((course) => course.slug === 'curso-css3');
@@ -70,6 +71,21 @@ const tests: TestCase[] = [
       assert.equal(routedLesson?.lesson.id, 'fullstack-front-html-aula-01');
       assert.equal(routedLesson?.lesson.lab?.workspacePath, 'labs/html/aula-01/index.html');
       assert.ok(routedLesson?.lesson.slides.some((slide) => slide.kind === 'lab'));
+
+      const routedLesson02 = findLesson(
+        'curso-html5',
+        'fundamentos-html5',
+        'aula-02-textos-links-imagens'
+      );
+
+      assert.equal(routedLesson02?.lesson.id, 'html-aula-02');
+      assert.equal(routedLesson02?.lesson.lab?.workspacePath, 'labs/html/aula-02/index.html');
+      assert.ok(routedLesson02?.lesson.slides.some((slide) => slide.kind === 'lab'));
+      assert.ok(
+        routedLesson02?.lesson.slides.some(
+          (slide) => slide.kind === 'visual' && slide.visual === 'html-links-network-svg'
+        )
+      );
     }
   },
   {
@@ -138,7 +154,8 @@ const tests: TestCase[] = [
       assert.equal(navigation.length, 12);
       assert.equal(navigation[0].id, 'fullstack-front-html-aula-01');
       assert.equal(navigation[0].published, true);
-      assert.equal(navigation[1].published, false);
+      assert.equal(navigation[1].published, true);
+      assert.equal(navigation[2].published, false);
       assert.match(
         navigation[0].href,
         /^\/curso\/curso-html5\/uc\/fundamentos-html5\/aula\//
