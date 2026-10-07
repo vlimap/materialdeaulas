@@ -3,8 +3,6 @@ import { ExternalLink, RotateCcw } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
-import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
-import htmlAltFallbackVisual from '../../assets/lessons/html/aula-02/alt-fallback.svg';
 import htmlTextSemanticsVisual from '../../assets/lessons/html/aula-02/text-semantics.svg';
 import htmlArticleAnatomyVisual from '../../assets/lessons/html/aula-02/article-anatomy.svg';
 
@@ -204,27 +202,6 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
     );
   }
 
-  if (name === 'html-links-network-svg') {
-    return (
-      <div className="lesson-svg-visual">
-        <img
-          src={htmlLinksNetworkVisual}
-          alt="Rede de documentos conectados por hiperlinks, com pulsos percorrendo diferentes caminhos"
-        />
-      </div>
-    );
-  }
-
-  if (name === 'html-alt-fallback-svg') {
-    return (
-      <div className="lesson-svg-visual">
-        <img
-          src={htmlAltFallbackVisual}
-          alt="Comparação entre imagem informativa, imagem indisponível com texto alternativo e imagem decorativa"
-        />
-      </div>
-    );
-  }
 
   if (name === 'html-text-semantics-svg') {
     return (
