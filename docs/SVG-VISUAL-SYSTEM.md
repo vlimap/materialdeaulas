@@ -70,8 +70,8 @@ Exemplo:
 ```text
 src/assets/lessons/html/aula-02/
 ├── content-hierarchy.svg
-├── links-network.svg
-└── alt-fallback.svg
+├── text-semantics.svg
+└── article-anatomy.svg
 ```
 
 ## Direção visual
@@ -195,20 +195,31 @@ h1
 
 Objetivo: mostrar que headings representam estrutura, não tamanho visual.
 
-### `links-network.svg`
+### `text-semantics.svg`
 
-Mostra documentos conectados por diferentes caminhos.
-
-Objetivo: representar `href` como relação entre recursos.
-
-### `alt-fallback.svg`
-
-Compara:
+Organiza elementos de texto por significado:
 
 ```text
-imagem informativa
-imagem indisponível + alternativa textual
-imagem decorativa + alt=""
+strong → importância
+em     → ênfase
+mark   → relevância contextual
+del/ins → edição
+sub/sup → notação
+code    → código
 ```
 
-Objetivo: explicar o propósito de `alt`, e não apenas sua sintaxe.
+Objetivo: separar semântica de aparência visual.
+
+### `article-anatomy.svg`
+
+Mostra um artigo sendo composto por:
+
+```text
+título
+introdução
+parágrafos
+citação
+bloco de código
+```
+
+Objetivo: mostrar como diferentes papéis textuais se integram em uma página real.
