@@ -68,6 +68,8 @@ export type Slide =
         | 'html-content-hierarchy-svg'
         | 'html-links-network-svg'
         | 'html-alt-fallback-svg'
+        | 'html-text-semantics-svg'
+        | 'html-article-anatomy-svg'
         | 'semantic-puzzle'
         | 'sdlc-four-activities'
         | 'sdlc-waterfall'
