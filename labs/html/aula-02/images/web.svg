@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Documentos conectados por links</title>
+  <desc id="desc">Três cartões representando documentos conectados por linhas azuis e pontos amarelos.</desc>
+  <rect width="640" height="360" fill="#f7f7f7"/>
+  <g fill="none" stroke="#0D47A1" stroke-width="8" stroke-linecap="round">
+    <path d="M190 180H300"/>
+    <path d="M340 180H450"/>
+  </g>
+  <g fill="#F2C53D">
+    <circle cx="245" cy="180" r="10"/>
+    <circle cx="395" cy="180" r="10"/>
+  </g>
+  <g fill="#ffffff" stroke="#1565C0" stroke-width="6">
+    <rect x="50" y="100" width="140" height="160" rx="18"/>
+    <rect x="250" y="100" width="140" height="160" rx="18"/>
+    <rect x="450" y="100" width="140" height="160" rx="18"/>
+  </g>
+  <g fill="#1565C0">
+    <rect x="80" y="135" width="80" height="12" rx="6"/>
+    <rect x="80" y="165" width="64" height="12" rx="6"/>
+    <rect x="80" y="195" width="92" height="12" rx="6"/>
+
+    <rect x="280" y="135" width="80" height="12" rx="6"/>
+    <rect x="280" y="165" width="64" height="12" rx="6"/>
+    <rect x="280" y="195" width="92" height="12" rx="6"/>
+
+    <rect x="480" y="135" width="80" height="12" rx="6"/>
+    <rect x="480" y="165" width="64" height="12" rx="6"/>
+    <rect x="480" y="195" width="92" height="12" rx="6"/>
+  </g>
+</svg>
