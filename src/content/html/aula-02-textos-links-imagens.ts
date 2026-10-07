@@ -61,7 +61,7 @@ const imageExample = [
   '<figure>',
   '  <img',
   '    src="images/web.svg"',
-  '    alt="Diagrama com três documentos conectados por links"',
+  '    alt="Diagrama com quatro documentos conectados por hiperlinks"',
   '    width="640"',
   '    height="360"',
   '  />',
