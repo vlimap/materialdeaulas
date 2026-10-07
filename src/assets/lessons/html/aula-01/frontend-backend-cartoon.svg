@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Front-end e back-end</title>
+<desc id="desc">Cartoon preto e branco comparando a vitrine visível de uma loja com a área interna onde pedidos são processados.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.arrow{animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateX(15px)}}@media(prefers-reduced-motion:reduce){.arrow{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(80 100)">
+  <path class="s" d="M40 170h420v330H40z"/><path class="s" d="M20 170l55-100h350l55 100z"/><rect class="s" x="90" y="245" width="130" height="140" rx="8"/><rect class="s" x="280" y="245" width="120" height="255" rx="8"/>
+  <text class="t" x="250" y="560" text-anchor="middle" font-size="34">FRONT-END</text><text class="t" x="250" y="600" text-anchor="middle" font-size="22">o que a pessoa vê e usa</text>
+</g>
+<g class="arrow"><path class="s" d="M545 335h105"/><path class="s" d="M620 305l35 30-35 30"/></g>
+<g transform="translate(710 100)">
+  <rect class="s" x="20" y="60" width="390" height="440" rx="24"/><path class="s" d="M70 140h290M70 220h290M70 300h290"/><circle class="s" cx="115" cy="390" r="42"/><path class="s" d="M115 360v60M85 390h60"/><rect class="s" x="205" y="350" width="120" height="82" rx="12"/>
+  <text class="t" x="215" y="560" text-anchor="middle" font-size="34">BACK-END</text><text class="t" x="215" y="600" text-anchor="middle" font-size="22">dados, regras e processamento</text>
+</g>
+</svg>
