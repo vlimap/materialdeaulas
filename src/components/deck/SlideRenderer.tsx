@@ -5,6 +5,8 @@ import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
 import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
 import htmlAltFallbackVisual from '../../assets/lessons/html/aula-02/alt-fallback.svg';
+import htmlTextSemanticsVisual from '../../assets/lessons/html/aula-02/text-semantics.svg';
+import htmlArticleAnatomyVisual from '../../assets/lessons/html/aula-02/article-anatomy.svg';
 
 function Brand() {
   return (
@@ -219,6 +221,28 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
         <img
           src={htmlAltFallbackVisual}
           alt="Comparação entre imagem informativa, imagem indisponível com texto alternativo e imagem decorativa"
+        />
+      </div>
+    );
+  }
+
+  if (name === 'html-text-semantics-svg') {
+    return (
+      <div className="lesson-svg-visual">
+        <img
+          src={htmlTextSemanticsVisual}
+          alt="Mapa visual de elementos HTML de texto organizados por significado, como importância, ênfase, edição, notação e código"
+        />
+      </div>
+    );
+  }
+
+  if (name === 'html-article-anatomy-svg') {
+    return (
+      <div className="lesson-svg-visual">
+        <img
+          src={htmlArticleAnatomyVisual}
+          alt="Estrutura visual de um artigo HTML com título, parágrafos, citação e bloco de código"
         />
       </div>
     );
