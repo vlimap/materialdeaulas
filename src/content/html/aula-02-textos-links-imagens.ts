@@ -137,10 +137,10 @@ export const aula02Html: LessonDefinition = {
     }
   ],
   visualPlan: [
-    'Reutilizar o mapa animado de hipertexto para explicar links como relações entre recursos.',
-    'Reutilizar o visual alt-demo para comparar imagem disponível, imagem indisponível e texto alternativo.',
-    'Runway: gerar futuramente um clipe curto mostrando documentos conectados e navegação entre recursos, sem texto incorporado no vídeo.',
-    'Runway: gerar futuramente um clipe curto mostrando uma imagem falhando e o conteúdo permanecendo compreensível por meio de contexto textual.'
+    'SVG autoral animado para mostrar a hierarquia h1 → h2 → h3 como estrutura de conteúdo.',
+    'SVG autoral animado para representar documentos conectados por hiperlinks e caminhos de navegação.',
+    'SVG autoral animado para comparar imagem informativa, fallback com alt e imagem decorativa.',
+    'Todos os SVGs usam a paleta do projeto e respeitam prefers-reduced-motion.'
   ],
   lab: {
     workspacePath: 'labs/html/aula-02/index.html',
@@ -191,6 +191,15 @@ export const aula02Html: LessonDefinition = {
       lead: 'É um nível na estrutura do documento.',
       detail: 'A aparência pode mudar com CSS; o significado do elemento permanece no HTML.',
       chips: ['h1', 'h2', 'h3', 'estrutura', 'significado']
+    },
+    {
+      id: 'hierarquia-visual',
+      kind: 'visual',
+      eyebrow: 'Estrutura antes da aparência',
+      title: 'Headings formam uma árvore de conteúdo',
+      subtitle: 'h1 → seções h2 → subseções h3',
+      visual: 'html-content-hierarchy-svg',
+      caption: 'A hierarquia deve fazer sentido mesmo antes de qualquer CSS.'
     },
     {
       id: 'hierarquia-textual',
@@ -281,7 +290,7 @@ export const aula02Html: LessonDefinition = {
       eyebrow: 'O H de HTML',
       title: 'Links transformam documentos em uma rede',
       subtitle: 'recurso atual → destino',
-      visual: 'hypertext-map',
+      visual: 'html-links-network-svg',
       caption: 'O elemento a cria um hiperlink quando possui um href apontando para outro recurso ou fragmento.'
     },
     {
@@ -375,7 +384,7 @@ export const aula02Html: LessonDefinition = {
       eyebrow: 'Texto alternativo',
       title: 'A página precisa continuar comunicando quando a imagem não aparece',
       subtitle: 'imagem disponível · falha · alternativa textual',
-      visual: 'alt-demo',
+      visual: 'html-alt-fallback-svg',
       caption: 'A descrição deve refletir o propósito da imagem naquele contexto, não uma transcrição mecânica de pixels.'
     },
     {
