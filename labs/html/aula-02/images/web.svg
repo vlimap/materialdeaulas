@@ -1,31 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
-  <title id="title">Documentos conectados por links</title>
-  <desc id="desc">Três cartões representando documentos conectados por linhas azuis e pontos amarelos.</desc>
-  <rect width="640" height="360" fill="#f7f7f7"/>
-  <g fill="none" stroke="#0D47A1" stroke-width="8" stroke-linecap="round">
-    <path d="M190 180H300"/>
-    <path d="M340 180H450"/>
-  </g>
-  <g fill="#F2C53D">
-    <circle cx="245" cy="180" r="10"/>
-    <circle cx="395" cy="180" r="10"/>
-  </g>
-  <g fill="#ffffff" stroke="#1565C0" stroke-width="6">
-    <rect x="50" y="100" width="140" height="160" rx="18"/>
-    <rect x="250" y="100" width="140" height="160" rx="18"/>
-    <rect x="450" y="100" width="140" height="160" rx="18"/>
-  </g>
-  <g fill="#1565C0">
-    <rect x="80" y="135" width="80" height="12" rx="6"/>
-    <rect x="80" y="165" width="64" height="12" rx="6"/>
-    <rect x="80" y="195" width="92" height="12" rx="6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Rede de hiperlinks</title>
+  <desc id="desc">Quatro documentos conectados por caminhos animados, representando navegação entre recursos HTML.</desc>
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#061b3a" flood-opacity=".13"/>
+    </filter>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#061b3a"/>
+      <stop offset="1" stop-color="#0d47a1"/>
+    </linearGradient>
+    <style>
+      .path{fill:none;stroke:#6693bb;stroke-width:5;stroke-linecap:round;stroke-dasharray:12 16;animation:dash 8s linear infinite}
+      .card{filter:url(#shadow);transform-box:fill-box;transform-origin:center;animation:float 5s ease-in-out infinite}
+      .card.b{animation-delay:.4s}.card.c{animation-delay:.8s}.card.d{animation-delay:1.2s}
+      .dot{fill:#f7df1e;filter:url(#shadow)}
+      .label{font-family:Arial,Helvetica,sans-serif;font-weight:700;fill:#fff;font-size:24px}
+      .meta{font-family:Arial,Helvetica,sans-serif;fill:#d0defe;font-size:18px}
+      .pulse1{animation:travel1 6s ease-in-out infinite}
+      .pulse2{animation:travel2 7s ease-in-out infinite .8s}
+      .pulse3{animation:travel3 6.5s ease-in-out infinite 1.4s}
+      @keyframes dash{to{stroke-dashoffset:-140}}
+      @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+      @keyframes travel1{0%,10%{transform:translate(235px,174px)}45%{transform:translate(585px,116px)}80%,100%{transform:translate(900px,210px)}}
+      @keyframes travel2{0%,15%{transform:translate(235px,174px)}50%{transform:translate(450px,500px)}85%,100%{transform:translate(900px,210px)}}
+      @keyframes travel3{0%,15%{transform:translate(900px,210px)}52%{transform:translate(450px,500px)}90%,100%{transform:translate(585px,116px)}}
+      @media (prefers-reduced-motion:reduce){.path,.card,.pulse1,.pulse2,.pulse3{animation:none}.pulse1{transform:translate(585px,116px)}.pulse2{transform:translate(450px,500px)}.pulse3{transform:translate(900px,210px)}}
+    </style>
+  </defs>
 
-    <rect x="280" y="135" width="80" height="12" rx="6"/>
-    <rect x="280" y="165" width="64" height="12" rx="6"/>
-    <rect x="280" y="195" width="92" height="12" rx="6"/>
+  <rect width="1200" height="675" rx="36" fill="#f5f6f8"/>
+  <rect x="55" y="48" width="1090" height="579" rx="34" fill="#fff" stroke="#d4d4d4" stroke-width="2"/>
 
-    <rect x="480" y="135" width="80" height="12" rx="6"/>
-    <rect x="480" y="165" width="64" height="12" rx="6"/>
-    <rect x="480" y="195" width="92" height="12" rx="6"/>
+  <path class="path" d="M235 174C365 72 470 72 585 116S790 112 900 210"/>
+  <path class="path" d="M235 174C235 320 318 420 450 500S760 490 900 210"/>
+  <path class="path" d="M585 116C560 280 520 390 450 500"/>
+  <path class="path" d="M900 210C840 340 680 445 450 500"/>
+
+  <g class="card a" transform="translate(118 104)">
+    <rect width="235" height="150" rx="26" fill="url(#panel)"/>
+    <rect x="25" y="24" width="74" height="38" rx="10" fill="#1565c0"/>
+    <text x="62" y="50" text-anchor="middle" class="label" font-size="19">A</text>
+    <rect x="25" y="83" width="160" height="11" rx="6" fill="#d0defe"/>
+    <rect x="25" y="108" width="115" height="10" rx="5" fill="#7296fc"/>
+  </g>
+
+  <g class="card b" transform="translate(468 46)">
+    <rect width="235" height="150" rx="26" fill="#0d47a1"/>
+    <rect x="25" y="24" width="74" height="38" rx="10" fill="#f7df1e"/>
+    <text x="62" y="50" text-anchor="middle" class="label" font-size="19" fill="#292929">B</text>
+    <rect x="25" y="83" width="160" height="11" rx="6" fill="#d0defe"/>
+    <rect x="25" y="108" width="115" height="10" rx="5" fill="#7296fc"/>
+  </g>
+
+  <g class="card c" transform="translate(782 138)">
+    <rect width="235" height="150" rx="26" fill="#061b3a"/>
+    <rect x="25" y="24" width="74" height="38" rx="10" fill="#1565c0"/>
+    <text x="62" y="50" text-anchor="middle" class="label" font-size="19">C</text>
+    <rect x="25" y="83" width="160" height="11" rx="6" fill="#d0defe"/>
+    <rect x="25" y="108" width="115" height="10" rx="5" fill="#7296fc"/>
+  </g>
+
+  <g class="card d" transform="translate(333 425)">
+    <rect width="235" height="150" rx="26" fill="#1565c0"/>
+    <rect x="25" y="24" width="74" height="38" rx="10" fill="#f7df1e"/>
+    <text x="62" y="50" text-anchor="middle" class="label" font-size="19" fill="#292929">D</text>
+    <rect x="25" y="83" width="160" height="11" rx="6" fill="#e6edf4"/>
+    <rect x="25" y="108" width="115" height="10" rx="5" fill="#d0defe"/>
+  </g>
+
+  <circle r="12" class="dot pulse1"/>
+  <circle r="12" class="dot pulse2"/>
+  <circle r="12" class="dot pulse3"/>
+
+  <g transform="translate(812 510)">
+    <rect width="238" height="64" rx="18" fill="#e6edf4"/>
+    <path d="M26 32h40m-10-10 10 10-10 10" fill="none" stroke="#0d47a1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="88" y="39" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="20" fill="#0d47a1">href conecta recursos</text>
   </g>
 </svg>
