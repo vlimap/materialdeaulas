@@ -1,43 +1,30 @@
 import type { CourseDefinition, LessonDefinition } from '../../types/course';
 import { aula01Logic } from './aula-01-pensar-em-passos';
 import { aula02Logic } from './aula-02-problemas-e-algoritmos';
-
-type LessonPlan = [string, string, string, string[]];
-
-const syllabus: LessonPlan[] = [
-  ['aula-02-problemas-e-algoritmos', 'Decomposição de problemas e algoritmos', 'Problemas e algoritmos', ['Quebrar problemas em partes menores', 'Escrever algoritmos precisos', 'Testar com exemplos']],
-  ['aula-03-pseudocodigo-e-fluxogramas', 'Pseudocódigo e fluxogramas', 'Pseudocódigo e fluxogramas', ['Descrever algoritmos com pseudocódigo', 'Ler fluxogramas', 'Comparar formas de representação']],
-  ['aula-04-dados-e-variaveis', 'Dados, constantes e variáveis', 'Variáveis e dados', ['Identificar tipos de dados', 'Criar variáveis conceituais', 'Acompanhar mudanças de estado']],
-  ['aula-05-operadores-e-expressoes', 'Operadores e expressões', 'Operadores', ['Construir expressões aritméticas', 'Comparar valores', 'Aplicar operadores lógicos']],
-  ['aula-06-decisao-e-condicoes', 'Decisões e condições compostas', 'Estruturas condicionais', ['Usar condições encadeadas', 'Combinar condições', 'Testar caminhos alternativos']],
-  ['aula-07-lacos-e-contadores', 'Laços, contadores e acumuladores', 'Repetições', ['Aplicar laços contados', 'Implementar acumuladores', 'Evitar laços infinitos']],
-  ['aula-08-listas-e-vetores', 'Listas e vetores', 'Listas e vetores', ['Percorrer coleções', 'Buscar valores', 'Calcular totais']],
-  ['aula-09-funcoes', 'Funções e reutilização', 'Funções', ['Dividir soluções em funções', 'Distinguir parâmetros e retorno', 'Reutilizar operações']],
-  ['aula-10-testes-e-depuracao', 'Testes de mesa e depuração', 'Testes de mesa', ['Simular valores manualmente', 'Encontrar erros de lógica', 'Testar casos-limite']],
-  ['aula-11-desafios-integrados', 'Desafios integrados de lógica', 'Desafios integrados', ['Combinar sequência, seleção e repetição', 'Planejar soluções', 'Explicar escolhas']],
-  ['aula-12-projeto-final', 'Projeto final de lógica de programação', 'Projeto final', ['Definir um problema', 'Elaborar um algoritmo', 'Validar entradas e saídas']]
-];
-
-function plannedLesson(plan: LessonPlan, index: number): LessonDefinition {
-  return {
-    id: 'logic-aula-' + String(index + 2).padStart(2, '0'),
-    status: 'planned',
-    number: index + 2,
-    slug: plan[0],
-    title: plan[1],
-    shortTitle: plan[2],
-    durationMinutes: 240,
-    audience: 'Iniciantes em programação',
-    ucSlug: 'fundamentos-logic-programming',
-    objectives: plan[3],
-    slides: []
-  };
-}
+import { aula03Logic } from './aula-03-pseudocodigo-e-fluxogramas';
+import { aula04Logic } from './aula-04-dados-e-variaveis';
+import { aula05Logic } from './aula-05-operadores-e-expressoes';
+import { aula06Logic } from './aula-06-decisao-e-condicoes';
+import { aula07Logic } from './aula-07-lacos-e-contadores';
+import { aula08Logic } from './aula-08-listas-e-vetores';
+import { aula09Logic } from './aula-09-funcoes';
+import { aula10Logic } from './aula-10-testes-e-depuracao';
+import { aula11Logic } from './aula-11-desafios-integrados';
+import { aula12Logic } from './aula-12-projeto-final';
 
 export const logicLessons: LessonDefinition[] = [
   aula01Logic,
   aula02Logic,
-  ...syllabus.slice(1).map((plan, index) => plannedLesson(plan, index + 1))
+  aula03Logic,
+  aula04Logic,
+  aula05Logic,
+  aula06Logic,
+  aula07Logic,
+  aula08Logic,
+  aula09Logic,
+  aula10Logic,
+  aula11Logic,
+  aula12Logic,
 ];
 
 export const logicCourse: CourseDefinition = {
