@@ -385,7 +385,7 @@ const tests: TestCase[] = [
 
       assert.match(question.title, /valores entram no algoritmo/);
       assert.match(question.prompt, /três produtos/);
-      assert.match(question.prompt, /R\\$ 12/);
+      assert.ok(question.prompt.includes('R$ 12'));
       assert.equal(question.answerIndex, 0);
       assert.deepEqual(question.options.map(option => option.label), [
         'Os preços: R$ 12, R$ 8 e R$ 5',
