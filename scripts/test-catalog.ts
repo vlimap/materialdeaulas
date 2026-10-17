@@ -330,6 +330,26 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'distingue controles reais de visualizações estáticas nos exercícios de lógica',
+    run: () => {
+      const problems = readFileSync('src/components/deck/ProblemPlayground.tsx', 'utf8');
+      const logic = readFileSync('src/components/deck/LogicPlayground.tsx', 'utf8');
+      const problemStyles = readFileSync('src/components/deck/ProblemPlayground.css', 'utf8');
+      const logicStyles = readFileSync('src/components/deck/LogicPlayground.css', 'utf8');
+
+      assert.match(problems, /<input\s+type="checkbox"/);
+      assert.match(problems, /VISUALIZAÇÃO/);
+      assert.match(problems, /SUA VEZ/);
+      assert.match(problems, /Progresso da marcação de opções/);
+      assert.doesNotMatch(problems, /problem-pipeline|problem-preview-step|problem-task-checkbox/);
+      assert.match(problemStyles, /\.problem-task:focus-within/);
+      assert.match(logic, /ROTEIRO · SOMENTE LEITURA/);
+      assert.match(logic, /CÓDIGO · SOMENTE LEITURA/);
+      assert.match(logic, /SUA VEZ/);
+      assert.match(logicStyles, /\.logic-steps li\.is-current \{ border-left-color/);
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
