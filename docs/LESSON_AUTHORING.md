@@ -84,6 +84,17 @@ O modo Stories deve ocupar **uma única área visível da tela**, sem barra de r
 
 **Critério de aceite visual:** cena completa, instruções e botões visíveis simultaneamente, sem rolar e sem sobreposição, em telas pequenas. Caso não seja possível, reparta o conteúdo em dois slides.
 
+## Questões com algoritmos ou trechos de código
+
+Em desafios sobre lógica, **não escreva algoritmos inteiros no enunciado como uma frase corrida**. Utilize os campos opcionais do slide `challenge`:
+
+- `prompt`: pergunta em linguagem natural.
+- `exampleCode`: algoritmo multilinha exibido em `pre > code`, somente leitura.
+- `testInput`: dados de entrada apresentados separadamente do algoritmo.
+- `options`: alternativas selecionáveis, sem misturar código com comandos de navegação.
+
+Mantenha indentação consistente e indique o início e o fim das estruturas condicionais e de repetição. Prefira pseudocódigo para os fundamentos da lógica e sintaxe real somente ao apresentar uma linguagem específica. No celular, a pergunta, o algoritmo, a entrada e todas as alternativas precisam caber no slide visível.
+
 ## Sequência pedagógica
 
 1. **Capa** — assunto, tecnologia e duração.
