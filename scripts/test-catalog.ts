@@ -355,6 +355,7 @@ const tests: TestCase[] = [
         }
         const prediction = lesson.slides.find(item => item.id.endsWith('-output-check'));
         assert.ok(prediction && prediction.kind === 'challenge');
+        assert.ok(captured.length > 0, lesson.slug + ': nenhuma saída foi registrada');
         const printed = captured.join('\n').replace(/\u00a0/g, ' ');
         const expected = prediction.options[0].label.replace(/\u00a0/g,' ');
         assert.equal(printed, expected, lesson.slug);
