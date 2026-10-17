@@ -1,6 +1,7 @@
 import { useState, type SyntheticEvent } from 'react';
 import { ExternalLink, RotateCcw } from 'lucide-react';
 import { LogicPlayground } from './LogicPlayground';
+import { ProblemPlayground } from './ProblemPlayground';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
@@ -771,6 +772,8 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
         {slide.kind === 'lab' && <LiveLab slide={slide} />}
 
         {slide.kind === 'logic-playground' && <LogicPlayground key={slide.id} slide={slide} />}
+
+        {slide.kind === 'problem-playground' && <ProblemPlayground key={slide.id} slide={slide} />}
 
         {slide.kind === 'challenge' && <Challenge slide={slide} />}
 
