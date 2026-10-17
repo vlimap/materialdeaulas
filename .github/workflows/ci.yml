@@ -40,5 +40,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check production preview server
+        run: npm run test:server
+
       - name: Dependency security audit
         run: npm audit --audit-level=low
