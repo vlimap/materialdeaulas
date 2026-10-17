@@ -6229,3 +6229,45 @@ a.lesson-playlist-item:focus-visible {
   .story-mode .deck-stage .micro-challenge-example { padding: 6px 9px; }
   .story-mode .deck-stage .micro-challenge-example code { font-size: 11px; line-height: 1.3; }
 }
+
+/* Keep the slide position visible on phones even when bottom deck controls are hidden. */
+@media (max-width: 620px) {
+  .deck-page.story-mode .story-status {
+    position: fixed;
+    z-index: 40;
+    top: 59px;
+    left: 10px;
+    right: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    pointer-events: none;
+  }
+  .deck-page.story-mode .story-status .story-progress {
+    position: static;
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 3px;
+    align-items: center;
+    margin: 0;
+  }
+  .deck-page.story-mode .story-counter {
+    display: block;
+    flex: 0 0 auto;
+    min-width: 40px;
+    padding: 3px 4px;
+    border-radius: 4px;
+    background: rgba(16, 21, 29, .94);
+    color: #f6f7fa;
+    font: 700 11px/1.15 Arial, sans-serif;
+    letter-spacing: .01em;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .deck-page.story-mode .story-counter span { color: #afbdcd; }
+  .deck-page.story-mode .deck-stage .slide-canvas:not(.cover-slide) {
+    padding-top: 20px;
+  }
+}
