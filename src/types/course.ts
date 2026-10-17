@@ -135,6 +135,10 @@ export type Slide =
       operator: 'and' | 'or' | 'not';
     })
   | (BaseSlide & {
+      kind: 'algorithm-visualization';
+      scenario: import('../components/deck/algorithm-visualization-engine').AlgorithmScenario;
+    })
+  | (BaseSlide & {
       kind: 'algorithm-lab';
       scenario: 'flowchart' | 'variables' | 'operators' | 'conditions' | 'loops' | 'arrays' | 'functions' | 'debugging' | 'integrated' | 'project';
     })
