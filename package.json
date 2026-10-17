@@ -13,12 +13,12 @@
     "@fontsource/rubik": "^5.2.5",
     "@rollup/wasm-node": "^4.63.6",
     "html-to-image": "^1.11.13",
-    "jspdf": "^2.5.2",
+    "jspdf": "^4.2.1",
     "lucide-react": "^0.468.0",
     "pptxgenjs": "^3.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
+    "react-router-dom": "^7.18.4",
     "@xyflow/react": "^12.12.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "typescript": "^5.7.2",
     "webpack": "^5.0.0",
     "webpack-cli": "^6.0.0",
-    "webpack-dev-server": "^5.0.0"
+    "webpack-dev-server": "^6.0.0"
   },
   "engines": {
     "node": ">=20.18 <25"
