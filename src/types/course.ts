@@ -131,6 +131,10 @@ export type Slide =
       scenario: 'sequence' | 'decision' | 'loop';
     })
   | (BaseSlide & {
+      kind: 'algorithm-lab';
+      scenario: 'flowchart' | 'variables' | 'operators' | 'conditions' | 'loops' | 'arrays' | 'functions' | 'debugging' | 'integrated' | 'project';
+    })
+  | (BaseSlide & {
       kind: 'problem-playground';
       scenario: 'decompose' | 'order' | 'trace';
     })
