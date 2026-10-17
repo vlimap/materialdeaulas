@@ -373,6 +373,35 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'mantém as animações dentro da área visível do Stories mobile',
+    run: () => {
+      const styles = readFileSync('src/styles/global.css', 'utf8');
+      const logicStyles = readFileSync('src/components/deck/LogicPlayground.css', 'utf8');
+      const problemStyles = readFileSync('src/components/deck/ProblemPlayground.css', 'utf8');
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx', 'utf8');
+
+      const singleScreenRules = styles.slice(styles.indexOf('/* Mobile story layout: ONE viewport'));
+      const logicMobileRules = logicStyles.slice(logicStyles.indexOf('/* Story simulations: both the characters'));
+      const problemMobileRules = problemStyles.slice(problemStyles.indexOf('/* Lessons use the available Story height'));
+
+      assert.ok(singleScreenRules.length > 500);
+      assert.match(singleScreenRules, /\.story-mode \.deck-stage \.slide-canvas:not\(\.cover-slide\)/);
+      assert.match(singleScreenRules, /\.story-mode \.deck-stage \.slide-canvas:not\(\.cover-slide\) > \.slide-body \{[\s\S]*?overflow: hidden/);
+      assert.match(singleScreenRules, /\.story-mode \.deck-stage \.slide-canvas:not\(\.cover-slide\) > \.slide-footer/);
+      assert.doesNotMatch(singleScreenRules, /overflow-y:\s*auto/);
+
+      for (const mobileRules of [logicMobileRules, problemMobileRules]) {
+        assert.ok(mobileRules.length > 500);
+        assert.match(mobileRules, /grid-template-rows:\s*minmax\(0,/);
+        assert.match(mobileRules, /min-height:\s*0/);
+        assert.doesNotMatch(mobileRules, /overflow-y:\s*auto/);
+        assert.doesNotMatch(mobileRules, /\.story-mode \.export-stage/);
+      }
+
+      assert.match(player, /'exercise', 'checklist', 'references'\].includes\(current.kind\)/);
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
