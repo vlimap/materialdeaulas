@@ -9,7 +9,7 @@ function makeDocument(code: string): string {
   // A script closing sequence must never be able to terminate its script element.
   // sandbox="allow-scripts" creates an opaque, cross-origin execution environment.
   const safeCode = code.replace(/<\/script/gi, '<\\/script');
-  return \`<!doctype html>
+  return `<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>
 html,body{margin:0;min-height:100%;background:#0f1b2d;color:#e7f2ff;font:13px/1.5 Consolas,monospace}
 #console{padding:10px;white-space:pre-wrap;overflow-wrap:anywhere}
@@ -41,9 +41,9 @@ html,body{margin:0;min-height:100%;background:#0f1b2d;color:#e7f2ff;font:13px/1.
   });
   write('', ['Pronto. A saída aparecerá abaixo.']);
 })();
-<\/script><script>
-\${safeCode}
-<\/script></body></html>\`;
+</script><script>
+${safeCode}
+</script></body></html>`;
 }
 
 function stop(event: SyntheticEvent) { event.stopPropagation(); }
