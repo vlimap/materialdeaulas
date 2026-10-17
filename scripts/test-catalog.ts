@@ -286,6 +286,35 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'publica a Aula 01 de lógica com três simulações interativas',
+    run: () => {
+      const course = technologyCourses.find((item) => item.slug === 'curso-logic-programming');
+      const lessons = course?.ucs[0].modules[0].lessons ?? [];
+      assert.equal(lessons.length, 12);
+      assert.equal(lessons[0].status, 'published');
+      assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 11);
+
+      const route = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-01-pensar-em-passos');
+      assert.equal(route?.lesson.id, 'logic-aula-01');
+      const slides = route?.lesson.slides ?? [];
+      assert.equal(slides.length, 20);
+      assert.equal(new Set(slides.map((slide) => slide.id)).size, slides.length);
+
+      const simulations = slides
+        .filter((slide) => slide.kind === 'logic-playground')
+        .map((slide) => slide.kind === 'logic-playground' ? slide.scenario : '');
+      assert.deepEqual(simulations, ['sequence', 'decision', 'loop']);
+      assert.ok(slides.filter((slide) => slide.kind === 'challenge').length >= 3);
+      assert.ok(slides.some((slide) => slide.kind === 'exercise'));
+      assert.ok(slides.some((slide) => slide.kind === 'references'));
+      const nav = getCourseLessonNavigation('curso-logic-programming');
+      assert.equal(nav.length, 12);
+      assert.equal(nav[0].published, true);
+      assert.equal(nav[1].published, false);
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
