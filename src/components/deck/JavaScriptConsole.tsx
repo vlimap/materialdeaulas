@@ -25,12 +25,11 @@ html,body{margin:0;min-height:100%;background:#0f1b2d;color:#e7f2ff;font:13px/1.
     line.textContent = args.map(arg => {
       if (typeof arg === 'string') return arg;
       if (arg instanceof Error) return arg.name + ': ' + arg.message;
-      try { return JSON.stringify(arg, null, 2) ?? String(arg); }
+      try { return JSON.stringify(arg) ?? String(arg); }
       catch { return String(arg); }
     }).join(' ');
     output.appendChild(line);
   };
-  const log = console.log.bind(console);
   for (const kind of ['log', 'info', 'warn', 'error', 'table']) {
     console[kind] = (...args) => { write(kind === 'error' ? 'error' : kind === 'warn' ? 'warn' : '', args); };
   }
