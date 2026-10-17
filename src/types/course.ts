@@ -129,6 +129,10 @@ export type Slide =
       scenario: 'sequence' | 'decision' | 'loop';
     })
   | (BaseSlide & {
+      kind: 'problem-playground';
+      scenario: 'decompose' | 'order' | 'trace';
+    })
+  | (BaseSlide & {
       kind: 'references';
       items: ReferenceItem[];
     });
