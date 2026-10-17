@@ -1,0 +1,44 @@
+name: Temporary dependency lockfile regeneration
+
+on:
+  push:
+    branches: [security/remediate-2026-dependencies]
+    paths:
+      - '.github/workflows/security-lock-regeneration.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    # Temporary trusted maintainer-only branch job. Delete before merging.
+    if: github.repository == 'vlimap/materialdeaulas' && github.actor == 'vlimap' && github.ref == 'refs/heads/security/remediate-2026-dependencies'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Resolve lockfile without lifecycle scripts
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - name: Commit resolved lockfile to trusted branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'security(deps): regenerate deterministic lockfile from patched packages'
+            git push origin HEAD:security/remediate-2026-dependencies
+          fi
+      - name: Install lockfile
+        run: npm ci --no-audit --no-fund
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Audit all dependencies
+        run: npm audit --audit-level=low
