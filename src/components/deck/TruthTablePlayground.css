@@ -1,0 +1,66 @@
+.truth-lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.3cqw;width:100%;height:100%;min-height:0;font-family:Arial,sans-serif}
+.truth-lab-controls,.truth-lab-display{display:flex;flex-direction:column;min-height:0;padding:1cqw;border-radius:1cqw}
+.truth-lab-controls{color:#15365c;background:#f7fbff;border:1px solid #c8d9ee;gap:.7cqw}
+.truth-lab-display{color:#163960;background:#eaf3fc;border:1px solid #b6d3f0;gap:.55cqw}
+.truth-lab-step,.truth-table-heading{margin:0;color:#1b4e87;font-size:.96cqw;font-weight:700;line-height:1.3}
+.truth-operator-options,.truth-choice-options{display:flex;gap:.5cqw;min-width:0}
+.truth-lab button{font-family:inherit;font-size:.96cqw;min-height:3cqw;padding:.55cqw .65cqw;border-radius:.6cqw;border:1px solid #90a8c3;color:#163b6a;background:#fff;font-weight:700;cursor:pointer}
+.truth-lab button:hover{border-color:#0b549f}
+.truth-lab button.is-selected{background:#0e53a4;color:#fff;border-color:#0e53a4}
+.truth-lab button:focus-visible{outline:.25cqw solid #e5ad19;outline-offset:2px}
+.truth-operator-options button{flex:1}
+.truth-inputs{display:flex;flex-direction:column;gap:.6cqw}
+.truth-choice{display:grid;grid-template-columns:2.4cqw minmax(0,1fr);gap:.55cqw;align-items:center}
+.truth-choice-label{font-size:1.35cqw;font-weight:800;color:#194f92}
+.truth-choice-options button{flex:1;min-width:0}
+.truth-rule{margin-top:auto;padding:.8cqw .9cqw;border-left:.25cqw solid #1b72c7;background:#e5f2ff;color:#1b3f68}
+.truth-rule strong{font-size:1.02cqw}
+.truth-rule p{margin:.3cqw 0 0;font-size:.91cqw;line-height:1.4}
+.truth-table-heading{display:flex;justify-content:space-between;gap:.5cqw;align-items:baseline}
+.truth-table-heading span{font-size:.69cqw;white-space:nowrap;font-weight:400;color:#516e8e}
+.truth-table{width:100%;border-collapse:separate;border-spacing:0 .24cqw;table-layout:fixed;font-size:1cqw}
+.truth-table caption{caption-side:bottom;padding:.4cqw 0;color:#395b79;text-align:left;font-size:.75cqw;line-height:1.3}
+.truth-table th{height:2.5cqw;padding:.35cqw .5cqw;color:#fff;background:#1b528f;text-align:center;font-size:.96cqw}
+.truth-table td{height:2.85cqw;padding:.4cqw .5cqw;color:#1a456f;background:#fff;border-top:1px solid #d7e4f1;border-bottom:1px solid #d7e4f1;text-align:center;font-weight:600;position:relative}
+.truth-table tr.is-current td{background:#d7ebff;color:#0a4081;border-top:2px solid #1669bf;border-bottom:2px solid #1669bf}
+.truth-table tr.is-current td:first-child{border-left:4px solid #1669bf}
+.truth-current-marker{display:inline-block;margin-left:.6cqw;color:#0e5e9b;font-size:.71cqw}
+.truth-output{display:flex;flex-direction:column;gap:.4cqw;padding:.8cqw;margin-top:auto;border:1px solid #b6d0eb;border-radius:.7cqw;background:#fff}
+.truth-output>div{display:flex;align-items:baseline;gap:.8cqw;flex-wrap:wrap}
+.truth-output>div span{font-size:.89cqw;color:#325477}
+.truth-output strong{color:#0a559a;font-size:1.55cqw}
+.truth-output p{margin:0;color:#274966;font-size:.89cqw;line-height:1.36}
+@media(max-width:620px){
+ .story-mode .deck-stage .slide-truth-table .truth-lab{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,43fr) minmax(0,57fr);gap:6px;height:100%;min-height:0}
+ .story-mode .deck-stage .truth-lab-controls,.story-mode .deck-stage .truth-lab-display{padding:7px 9px;border-radius:8px;gap:4px;overflow:hidden}
+ .story-mode .deck-stage .truth-lab-step,.story-mode .deck-stage .truth-table-heading{font-size:11px;line-height:1.2}
+ .story-mode .deck-stage .truth-table-heading span{font-size:9px}
+ .story-mode .deck-stage .truth-lab button{min-height:35px;font-size:11px;padding:5px 7px;border-radius:6px}
+ .story-mode .deck-stage .truth-operator-options,.story-mode .deck-stage .truth-choice-options{gap:5px}
+ .story-mode .deck-stage .truth-inputs{gap:4px}
+ .story-mode .deck-stage .truth-choice{grid-template-columns:19px minmax(0,1fr);gap:6px}
+ .story-mode .deck-stage .truth-choice-label{font-size:14px}
+ .story-mode .deck-stage .truth-rule{padding:4px 7px;border-left-width:3px}
+ .story-mode .deck-stage .truth-rule strong{font-size:10px}
+ .story-mode .deck-stage .truth-rule p{font-size:10px;line-height:1.2;margin-top:2px}
+ .story-mode .deck-stage .truth-table{font-size:11px;border-spacing:0 2px}
+ .story-mode .deck-stage .truth-table th{height:22px;padding:2px 3px;font-size:11px}
+ .story-mode .deck-stage .truth-table td{height:26px;padding:2px 3px;font-size:11px}
+ .story-mode .deck-stage .truth-table caption{font-size:9px;line-height:1.1;padding:3px 0}
+ .story-mode .deck-stage .truth-current-marker{font-size:9px;margin-left:6px}
+ .story-mode .deck-stage .truth-output{gap:3px;padding:5px 7px;border-radius:6px}
+ .story-mode .deck-stage .truth-output>div{gap:6px}
+ .story-mode .deck-stage .truth-output>div span{font-size:10px}
+ .story-mode .deck-stage .truth-output strong{font-size:15px}
+ .story-mode .deck-stage .truth-output p{font-size:10px;line-height:1.17}
+}
+@media(max-width:620px) and (max-height:660px){
+ .story-mode .deck-stage .slide-truth-table .truth-lab{grid-template-rows:minmax(0,43fr) minmax(0,57fr);gap:4px}
+ .story-mode .deck-stage .truth-lab-controls,.story-mode .deck-stage .truth-lab-display{padding:4px 7px;gap:2px}
+ .story-mode .deck-stage .truth-lab button{min-height:31px;padding:4px 5px}
+ .story-mode .deck-stage .truth-rule p{font-size:9px;line-height:1.1}
+ .story-mode .deck-stage .truth-table td{height:22px}
+ .story-mode .deck-stage .truth-table th{height:19px}
+ .story-mode .deck-stage .truth-output p{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.truth-lab *{transition:none!important;animation:none!important}}
