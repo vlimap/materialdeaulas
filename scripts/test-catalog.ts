@@ -402,6 +402,30 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'exibe condições de lógica em pseudocódigo legível e com entrada separada',
+    run: () => {
+      const lesson = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-01-pensar-em-passos')?.lesson;
+      const slide = lesson?.slides.find(item => item.id === 'logic-01-decisao-desafio');
+      assert.equal(slide?.kind, 'challenge');
+      if (!slide || slide.kind !== 'challenge') return;
+
+      assert.equal(slide.testInput, 'idade = 16');
+      assert.equal(slide.exampleCode?.split('\n').length, 5);
+      assert.ok(slide.exampleCode?.includes('SE idade >= 18 ENTÃO'));
+      assert.ok(slide.exampleCode?.includes('FIM SE'));
+      assert.equal(slide.answerIndex, 1);
+      assert.equal(slide.options[1].label, 'Exibir "menor de idade"');
+      assert.doesNotMatch(slide.prompt, /SE idade >=/);
+
+      const renderer = readFileSync('src/components/deck/SlideRenderer.tsx', 'utf8');
+      const styles = readFileSync('src/styles/global.css', 'utf8');
+      assert.match(renderer, /className="micro-challenge-example"/);
+      assert.match(renderer, /<pre><code>\{slide.exampleCode\}<\/code><\/pre>/);
+      assert.match(renderer, /micro-challenge-input/);
+      assert.match(styles, /\.story-mode \.deck-stage \.micro-challenge\.has-example-code/);
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
