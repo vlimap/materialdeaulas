@@ -372,6 +372,36 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'questão inicial de Algoritmos usa dados concretos e diferencia entrada, processamento e saída',
+    run: () => {
+      const lesson = findLesson(
+        'curso-algorithms',
+        'fundamentos-algorithms',
+        'aula-01-algoritmos-e-execucao'
+      )?.lesson;
+      const question = lesson?.slides.find(slide => slide.id === 'alg-01-diagnostic');
+      assert.equal(question?.kind, 'challenge');
+      if (!question || question.kind !== 'challenge') return;
+
+      assert.match(question.title, /valores entram no algoritmo/);
+      assert.match(question.prompt, /três produtos/);
+      assert.ok(question.prompt.includes('R$ 12'));
+      assert.equal(question.answerIndex, 0);
+      assert.deepEqual(question.options.map(option => option.label), [
+        'Os preços: R$ 12, R$ 8 e R$ 5',
+        'A quantidade: 3 produtos',
+        'O total da compra: R$ 25'
+      ]);
+      assert.match(question.explanation, /entradas/);
+      assert.match(question.explanation, /processamento/);
+      assert.match(question.explanation, /saída/);
+      assert.doesNotMatch(
+        JSON.stringify(question),
+        /Uma cor para a página|Uma marca de computador|Qual informação é necessária antes/
+      );
+    }
+  },
+  {
     name: 'publica as 12 aulas do curso Algoritmos com laboratórios, provas e rotas',
     run: () => {
       const course = technologyCourses.find(course => course.slug === 'curso-algorithms');
