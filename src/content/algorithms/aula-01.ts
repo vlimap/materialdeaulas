@@ -98,15 +98,15 @@ export const algorithmsLesson01 = makeAlgorithmLesson({
   ],
   "quiz": [
     {
-      "title": "Por onde começar?",
-      "prompt": "Qual informação é necessária antes de executar?",
+      "title": "Quais valores entram no algoritmo?",
+      "prompt": "Uma compra contém três produtos de R$ 12, R$ 8 e R$ 5. Quais dados o algoritmo deve receber para calcular o total?",
       "answers": [
-        "Uma entrada definida",
-        "Uma cor para a página",
-        "Uma marca de computador"
+        "Os preços: R$ 12, R$ 8 e R$ 5",
+        "A quantidade: 3 produtos",
+        "O total da compra: R$ 25"
       ],
       "correct": 0,
-      "explanation": "É preciso conhecer os dados ou recursos utilizados."
+      "explanation": "Os preços (12, 8 e 5) são as entradas. Somá-los é o processamento, e R$ 25 é a saída. Só a quantidade de produtos não basta para calcular o total."
     },
     {
       "title": "Qual ação altera o total?",
