@@ -325,7 +325,7 @@ const tests: TestCase[] = [
         assert.equal(lesson.slides.filter(slide => slide.kind === 'algorithm-lab').length, 1);
         const lab = lesson.slides.find(slide => slide.kind === 'algorithm-lab');
         assert.ok(lab && lab.kind === 'algorithm-lab' && lab.scenario === scenario);
-        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, 4);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, lesson.number === 5 ? 5 : 4);
         assert.equal(lesson.slides.filter(slide => slide.kind === 'exercise').length, 3);
         assert.equal(lesson.slides.filter(slide => slide.kind === 'references').length, 1);
         assert.ok(lesson.objectives.length >= 4);
