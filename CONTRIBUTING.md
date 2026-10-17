@@ -16,6 +16,23 @@ git switch -c feat/aula-javascript-01
 
 Use nomes objetivos: `feat/`, `fix/`, `docs/`, `a11y/` ou `chore/`.
 
+## Revisão obrigatória e responsabilidade pelo merge
+
+- **Todo PR deve ter `base: main`**. Crie uma branch no seu fork; não
+  trabalhe diretamente na branch principal deste repositório.
+- Abrir um PR **não concede permissão de merge**. O mantenedor `@vlimap`
+  revisa e decide sobre a integração; não utilize automerge.
+- A aprovação do mantenedor deve ser exigida pela proteção da branch
+  `main` no GitHub, além de `.github/CODEOWNERS`. Sem a regra de
+  proteção, este arquivo é apenas um pedido de revisão.
+- Nenhuma contribuição externa pode alterar credenciais, workflows com
+  permissões elevadas, comandos de instalação/deploy ou scripts sem
+  justificativa específica e revisão reforçada.
+- Não use `pull_request_target` para executar código de forks, não
+  habilite permissões de escrita nem disponibilize segredos em CI de PR.
+- Aguarde testes, build, auditoria e aprovação humana. Um workflow verde
+  **não é autorização de merge**.
+
 ## Fluxo de cada PR
 
 1. **Issue** — explique objetivo, público, pré-requisitos e resultado esperado.
@@ -25,9 +42,11 @@ Use nomes objetivos: `feat/`, `fix/`, `docs/`, `a11y/` ou `chore/`.
 5. **Testes locais**:
 
 ```powershell
-npm install
+npm ci
 npm test
 npm run build
+npm run test:server
+npm audit --audit-level=low
 ```
 
 6. **PR** — preencha o template, explique como testar e inclua imagens quando houver mudança visual.
