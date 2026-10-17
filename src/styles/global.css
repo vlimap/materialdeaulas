@@ -5992,7 +5992,8 @@ a.lesson-playlist-item:focus-visible {
   }
 
   .story-mode .deck-stage {
-    touch-action: pan-x;
+    /* Keep horizontal swipes available to the custom slide navigator. */
+    touch-action: pan-y;
   }
 
   .story-mode .slide-canvas:not(.cover-slide) {
