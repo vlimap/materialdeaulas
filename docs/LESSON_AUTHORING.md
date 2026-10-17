@@ -69,6 +69,21 @@ As atividades são operadas diretamente pelo estudante. Evite usar a mesma apar�
 
 Ao testar com iniciantes, verifique se a pessoa consegue identificar onde clicar sem explicações adicionais e se distingue os elementos que apenas mostram o resultado.
 
+## Slides responsivos no celular
+
+O modo Stories deve ocupar **uma única área visível da tela**, sem barra de rolagem interna ou corte de personagens, botões e resultados. A interface deve funcionar mesmo com as barras do navegador móvel abertas.
+
+- Prefira um título curto e **uma única ideia principal por slide**.
+- Remova textos redundantes, avatares decorativos e rodapés do layout mobile; preserve as informações necessárias para executar e interpretar a atividade.
+- Adapte personagens SVG à altura disponível, sem aplicar `min-height` que force a cena a ultrapassar o quadro.
+- Mantenha os controles sempre visíveis, com rótulos claros e áreas de toque confortáveis.
+- Evite `overflow-y: auto` no corpo do slide e dentro das simulações. Se o conteúdo não couber, divida-o em slides menores em vez de esconder partes essenciais ou tornar o texto ilegível.
+- Use `100svh`/`100dvh` com cuidado e confirme os tamanhos de 320–430 px de largura em celulares com barras do navegador abertas.
+- As regras de compactação do modo Stories devem atingir somente a apresentação visível em `.deck-stage`, **não** os slides da `.export-stage`, que são utilizados na geração de PDF e PPTX.
+- Atividades longas não devem avançar automaticamente antes de uma ação explícita do estudante.
+
+**Critério de aceite visual:** cena completa, instruções e botões visíveis simultaneamente, sem rolar e sem sobreposição, em telas pequenas. Caso não seja possível, reparta o conteúdo em dois slides.
+
 ## Sequência pedagógica
 
 1. **Capa** — assunto, tecnologia e duração.
