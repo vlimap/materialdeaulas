@@ -1,6 +1,7 @@
 import type { CourseDefinition } from '../types/course';
 import { htmlCourse, htmlLessons } from './html/course';
 import { sdlcCourse } from './sdlc/course';
+import { logicCourse } from './logic-programming/course';
 
 export const catalog: CourseDefinition[] = [
   {
@@ -357,6 +358,7 @@ const technologySeeds = [
 export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug, title, category]) => {
   if (slug === 'html5') return htmlCourse;
   if (slug === 'sdlc') return sdlcCourse;
+  if (slug === 'logic-programming') return logicCourse;
 
   return {
     slug: 'curso-' + slug,
