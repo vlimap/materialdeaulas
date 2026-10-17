@@ -3,6 +3,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
+import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
 
 type TestCase = {
   name: string;
@@ -319,7 +320,7 @@ const tests: TestCase[] = [
         const lesson = lessons[offset + 2];
         const resolved = findLesson('curso-logic-programming', 'fundamentos-logic-programming', lesson.slug);
         assert.equal(resolved?.lesson.id, lesson.id);
-        assert.equal(lesson.slides.length, 18, lesson.slug);
+        assert.equal(lesson.slides.length, lesson.number === 5 ? 28 : 18, lesson.slug);
         assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length);
         assert.equal(lesson.slides.filter(slide => slide.kind === 'algorithm-lab').length, 1);
         const lab = lesson.slides.find(slide => slide.kind === 'algorithm-lab');
@@ -337,6 +338,55 @@ const tests: TestCase[] = [
       const navigation = getCourseLessonNavigation('curso-logic-programming');
       assert.equal(navigation.length, 12);
       assert.ok(navigation.every(item => item.published), 'navegação deve habilitar as doze aulas');
+    }
+  },
+  {
+    name: 'tabelas-verdade completas e interativas na Aula 05',
+    run: () => {
+      const operators = ['and', 'or', 'not'] as const;
+      const expectations = {
+        and: [false, false, false, true],
+        or: [false, true, true, true],
+        not: [true, false]
+      };
+
+      for (const operator of operators) {
+        const rows = getTruthRows(operator);
+        assert.deepEqual(rows.map(row => row.output), expectations[operator], operator);
+        assert.equal(rows.length, operator === 'not' ? 2 : 4);
+        for (const row of rows) {
+          assert.equal(row.output, evaluateTruth(operator, row.a, row.b), operator);
+          assert.ok(explainTruth(operator, row.a, row.b).length > 40, operator);
+        }
+      }
+      assert.equal(evaluateTruth('and', true, false), false);
+      assert.equal(evaluateTruth('or', true, true), true);
+      assert.equal(evaluateTruth('not', false), true);
+
+      const lesson = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-05-operadores-e-expressoes')?.lesson;
+      assert.ok(lesson);
+      const slides = lesson?.slides ?? [];
+      const truthTables = slides.filter(slide => slide.kind === 'truth-table');
+      assert.equal(truthTables.length, 3);
+      assert.deepEqual(truthTables.map(slide => slide.kind === 'truth-table' ? slide.operator : ''), operators);
+      assert.equal(new Set(slides.map(slide => slide.id)).size, slides.length);
+      assert.ok(slides.some(slide => slide.id === 'logic-05-tabela-introducao'));
+      assert.ok(slides.some(slide => slide.id === 'logic-05-tabela-como-ler'));
+      for (const operator of operators) {
+        const index = slides.findIndex(slide => slide.kind === 'truth-table' && slide.operator === operator);
+        assert.ok(index >= 0, operator);
+        assert.equal(slides[index - 1].kind, 'statement', 'cada tabela tem explicação anterior');
+      }
+
+      const component = readFileSync('src/components/deck/TruthTablePlayground.tsx', 'utf8');
+      const css = readFileSync('src/components/deck/TruthTablePlayground.css', 'utf8');
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx', 'utf8');
+      assert.match(component, /aria-pressed=\{value === option\}/);
+      assert.match(component, /className="truth-table"/);
+      assert.match(component, /aria-live="polite"/);
+      assert.match(component, /somente leitura/);
+      assert.match(css, /\.story-mode \.deck-stage \.slide-truth-table \.truth-lab/);
+      assert.match(player, /'truth-table'/);
     }
   },
   {
