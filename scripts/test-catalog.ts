@@ -4,6 +4,7 @@ import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } fro
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
+import { createAlgorithmVisualization } from '../src/components/deck/algorithm-visualization-engine';
 
 type TestCase = {
   name: string;
@@ -285,6 +286,72 @@ const tests: TestCase[] = [
       assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-waterfall'));
       assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-incremental'));
       assert.ok(slides.some((slide) => slide.kind === 'references'));
+    }
+  },
+  {
+    name: 'publica as 12 aulas do curso Algoritmos com laboratórios, provas e rotas',
+    run: () => {
+      const course = technologyCourses.find(course => course.slug === 'curso-algorithms');
+      const lessons = course?.ucs[0]?.modules[0]?.lessons ?? [];
+      assert.equal(course?.ucs[0]?.slug, 'fundamentos-algorithms');
+      assert.equal(lessons.length, 12);
+      assert.ok(lessons.every(lesson => lesson.status === 'published' && lesson.durationMinutes === 240));
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({length:12}, (_, i) => i + 1));
+      assert.equal(lessons.reduce((sum, lesson) => sum + lesson.slides.length, 0), 219);
+      assert.equal(lessons.flatMap(lesson => lesson.slides).filter(slide => slide.kind === 'algorithm-visualization').length, 15);
+      for (const lesson of lessons) {
+        const route = findLesson('curso-algorithms', 'fundamentos-algorithms', lesson.slug);
+        assert.equal(route?.lesson.id, lesson.id, lesson.slug);
+        assert.ok(lesson.objectives.length === 4);
+        assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, 4);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'exercise').length, 3);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'));
+        assert.ok(lesson.slides.some(slide => slide.kind === 'references'));
+        assert.ok(lesson.slides.filter(slide => slide.kind === 'algorithm-visualization').length >= 1);
+        assert.ok(lesson.slides.length >= 18);
+        assert.ok((lesson.sources?.length ?? 0) >= 2);
+        assert.doesNotMatch(JSON.stringify(lesson.slides), /Peça à dupla|O professor deve|solicite aos alunos|divida a turma/i);
+      }
+      const navigation = getCourseLessonNavigation('curso-algorithms');
+      assert.equal(navigation.length, 12);
+      assert.ok(navigation.every(item => item.published));
+      assert.equal(navigation[0].href, '/curso/curso-algorithms/uc/fundamentos-algorithms/aula/aula-01-algoritmos-e-execucao');
+    }
+  },
+  {
+    name: 'visualizações de algoritmos geram respostas reproduzíveis e estados corretos',
+    run: () => {
+      const expected = [
+        ['walkthrough', '12'], ['invariant', '12'], ['complexity', '4 contra 16 operações'],
+        ['linear-search', 'Encontrado no índice 4'], ['binary-search', 'Índice 3'],
+        ['bubble-sort', '1, 2, 4, 5'], ['selection-sort', '1, 2, 4, 5'],
+        ['insertion-sort', '1, 2, 4, 5'], ['merge-sort', '1, 2, 4, 5'],
+        ['quick-sort', '1, 2, 4, 5'], ['factorial', '24'],
+        ['graph-bfs', 'A → B → C → D'], ['graph-dfs', 'A → B → D → C'],
+        ['greedy', '10 + 10 + 5 + 1 + 1'], ['dynamic-programming', '3']
+      ] as const;
+      for (const [scenario, answer] of expected) {
+        const result = createAlgorithmVisualization(scenario, 4);
+        assert.equal(result.answer, answer, scenario);
+        assert.deepEqual(result, createAlgorithmVisualization(scenario, 4), scenario);
+        assert.ok(result.frames.length >= 3, scenario);
+        assert.ok(result.code.length >= 4, scenario);
+        assert.ok(result.frames.every(frame => frame.line < result.code.length && frame.line >= 0), scenario);
+        assert.ok(result.frames.every(frame => frame.active.every(index => index >= 0 && index < frame.cells.length)), scenario);
+        assert.equal(result.frames.at(-1)?.message.length! > 0, true);
+      }
+      for (const scenario of ['bubble-sort', 'selection-sort', 'insertion-sort', 'merge-sort', 'quick-sort'] as const) {
+        const result = createAlgorithmVisualization(scenario, 6);
+        assert.equal(result.answer, '1, 2, 3, 4, 5, 6', scenario);
+      }
+      assert.equal(createAlgorithmVisualization('linear-search', 5).answer, 'Valor não encontrado');
+      assert.equal(createAlgorithmVisualization('dynamic-programming', 6).answer, '8');
+      assert.equal(createAlgorithmVisualization('factorial', 6).answer, '720');
+      const css = readFileSync('src/components/deck/AlgorithmVisualizer.css','utf8');
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx','utf8');
+      assert.match(css, /\.story-mode \.deck-stage \.slide-algorithm-visualization/);
+      assert.match(player, /'algorithm-visualization'/);
     }
   },
   {
