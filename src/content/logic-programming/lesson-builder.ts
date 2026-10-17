@@ -111,7 +111,7 @@ export function buildLogicLesson(def: LogicLessonConfig): LessonDefinition {
     }
   ];
   return {
-    id: prefix === 'logic-03' ? 'logic-aula-03' : 'logic-aula-' + String(def.number).padStart(2, '0'),
+    id: 'logic-aula-' + String(def.number).padStart(2, '0'),
     status: 'published',
     number: def.number,
     slug: def.slug,
