@@ -62,6 +62,7 @@ As atividades são operadas diretamente pelo estudante. Evite usar a mesma apar�
 - **Visualização:** imagens, fluxos e indicadores devem ser identificados como "Visualização" ou "Resultado" e não apresentar quadrados, botões falsos ou cartões que imitam controles.
 - **Seleção:** utilize inputs nativos (checkbox/radio), botões com rótulos claros e feedback visual e textual; não desenhe controles falsos com divs.
 - **Progresso:** prefira indicadores textuais e barras de progresso não clicáveis, informando a contagem e o que o resultado significa.
+- **Conceitos-chave:** nos slides explicativos, palavras-chave (`chips`) são texto informativo precedido do rótulo "Conceitos-chave". Nunca apresentá-las como cápsulas coloridas ou elementos que se pareçam com botões.
 - **Separação:** diagramas e exemplos de pseudocódigo devem indicar "Somente leitura" quando estiverem ao lado de controles interativos.
 - **Validação:** não dependa apenas da cor ou da animação; informe o resultado por texto e não conclua a tarefa automaticamente sem a ação do estudante.
 - **Tela pequena:** preserve instruções e controles completos, evite alvos diminutos e respeite `prefers-reduced-motion`.

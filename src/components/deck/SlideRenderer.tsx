@@ -664,10 +664,11 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
           <div className="statement-layout">
             <p className="statement-lead">{slide.lead}</p>
             <p className="statement-detail">{slide.detail}</p>
-            {slide.chips && (
-              <div className="chip-row">
-                {slide.chips.map((chip) => <span key={chip}>{chip}</span>)}
-              </div>
+            {slide.chips && slide.chips.length > 0 && (
+              <p className="statement-keywords">
+                <span className="statement-keywords-label">Conceitos-chave: </span>
+                <span>{slide.chips.join(' · ')}</span>
+              </p>
             )}
           </div>
         )}
