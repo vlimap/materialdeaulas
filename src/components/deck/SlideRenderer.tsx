@@ -111,7 +111,7 @@ function Challenge({ slide }: { slide: Extract<Slide, { kind: 'challenge' }> }) 
 
   return (
     <div
-      className="micro-challenge"
+      className={'micro-challenge' + (slide.exampleCode ? ' has-example-code' : '')}
       onPointerDown={stopDeckGesture}
       onPointerUp={stopDeckGesture}
       onClick={stopDeckGesture}
