@@ -144,6 +144,160 @@ export const aula05Logic = buildLogicLesson({
     }
   ],
   "scenario": "operators",
+  "afterConceptC": [
+    {
+      "id": "logic-05-tabela-introducao",
+      "kind": "statement",
+      "eyebrow": "Lógica booleana · 01",
+      "title": "O que é uma tabela-verdade?",
+      "lead": "Ela mostra todas as combinações de entradas e o resultado de uma expressão lógica.",
+      "detail": "Cada condição pode ser V (verdadeiro) ou F (falso). Duas condições, A e B, geram 2 × 2 = 4 combinações possíveis. Cada linha é um caso a ser testado.",
+      "chips": [
+        "entradas A e B",
+        "quatro combinações",
+        "resultado"
+      ]
+    },
+    {
+      "id": "logic-05-tabela-como-ler",
+      "kind": "cards",
+      "eyebrow": "Aprenda a ler",
+      "title": "Uma linha por combinação",
+      "items": [
+        {
+          "title": "Colunas A e B",
+          "detail": "Representam as entradas: cada uma vale verdadeiro (V) ou falso (F).",
+          "kicker": "Entrada",
+          "tone": "blue"
+        },
+        {
+          "title": "Coluna da expressão",
+          "detail": "Exibe o resultado após aplicar E, OU ou NÃO às entradas.",
+          "kicker": "Saída",
+          "tone": "green"
+        },
+        {
+          "title": "Linha destacada",
+          "detail": "Mostra o caso correspondente aos valores escolhidos.",
+          "kicker": "Execução",
+          "tone": "orange"
+        }
+      ]
+    },
+    {
+      "id": "logic-05-tabela-e-conceito",
+      "kind": "statement",
+      "eyebrow": "Operador lógico · E",
+      "title": "E: duas condições obrigatórias",
+      "lead": "A E B só é verdadeiro quando A e B são verdadeiros.",
+      "detail": "Se A e B forem falsos, o resultado é falso. Se somente uma das condições for verdadeira, também será falso. Apenas V E V produz V.",
+      "chips": [
+        "F E F = F",
+        "F E V = F",
+        "V E F = F",
+        "V E V = V"
+      ]
+    },
+    {
+      "id": "logic-05-tabela-e-interativa",
+      "kind": "truth-table",
+      "eyebrow": "Experimente · operador E",
+      "title": "Tabela-verdade do operador E",
+      "subtitle": "Escolha A e B para destacar cada uma das quatro possibilidades.",
+      "operator": "and"
+    },
+    {
+      "id": "logic-05-tabela-ou-conceito",
+      "kind": "statement",
+      "eyebrow": "Operador lógico · OU",
+      "title": "OU: ao menos uma condição",
+      "lead": "A OU B é verdadeiro quando uma ou ambas são verdadeiras.",
+      "detail": "Na lógica booleana, OU é inclusivo: V OU V também produz V. O único caso falso ocorre quando A e B são falsos.",
+      "chips": [
+        "F OU F = F",
+        "F OU V = V",
+        "V OU F = V",
+        "V OU V = V"
+      ]
+    },
+    {
+      "id": "logic-05-tabela-ou-interativa",
+      "kind": "truth-table",
+      "eyebrow": "Experimente · operador OU",
+      "title": "Tabela-verdade do operador OU",
+      "subtitle": "Teste os quatro casos, inclusive quando A e B são verdadeiros.",
+      "operator": "or"
+    },
+    {
+      "id": "logic-05-tabela-nao-conceito",
+      "kind": "statement",
+      "eyebrow": "Operador lógico · NÃO",
+      "title": "NÃO: inverta o valor lógico",
+      "lead": "NÃO A transforma verdadeiro em falso e falso em verdadeiro.",
+      "detail": "Diferentemente de E e OU, NÃO utiliza apenas uma condição. Por isso sua tabela tem duas linhas: NÃO V = F e NÃO F = V.",
+      "chips": [
+        "uma entrada",
+        "duas linhas",
+        "inversão"
+      ]
+    },
+    {
+      "id": "logic-05-tabela-nao-interativa",
+      "kind": "truth-table",
+      "eyebrow": "Experimente · operador NÃO",
+      "title": "Tabela-verdade do operador NÃO",
+      "subtitle": "Alterne A entre verdadeiro e falso e observe a inversão.",
+      "operator": "not"
+    },
+    {
+      "id": "logic-05-tabela-comparacao",
+      "kind": "cards",
+      "eyebrow": "Síntese · operadores lógicos",
+      "title": "Como diferenciar E, OU e NÃO?",
+      "items": [
+        {
+          "title": "E — conjunção",
+          "detail": "Duas condições precisam ser verdadeiras ao mesmo tempo.",
+          "kicker": "Ambas",
+          "tone": "blue"
+        },
+        {
+          "title": "OU — disjunção",
+          "detail": "Uma condição verdadeira já basta; ambas também servem.",
+          "kicker": "Pelo menos uma",
+          "tone": "green"
+        },
+        {
+          "title": "NÃO — negação",
+          "detail": "Inverte uma condição, sem utilizar uma segunda entrada.",
+          "kicker": "Inversão",
+          "tone": "orange"
+        }
+      ]
+    },
+    {
+      "id": "logic-05-tabela-desafio",
+      "kind": "challenge",
+      "eyebrow": "Teste seu entendimento",
+      "title": "Qual será a saída da expressão?",
+      "prompt": "Leia o pseudocódigo e aplique a regra do operador OU.",
+      "exampleCode": "A ← verdadeiro\nB ← falso\nESCREVER (A OU B)",
+      "testInput": "A = verdadeiro; B = falso",
+      "options": [
+        {
+          "label": "Verdadeiro"
+        },
+        {
+          "label": "Falso"
+        },
+        {
+          "label": "Indefinido"
+        }
+      ],
+      "answerIndex": 0,
+      "explanation": "A OU B produz verdadeiro quando pelo menos uma das duas condições é verdadeira. Como A é verdadeiro, o resultado é verdadeiro."
+    }
+  ],
   "practice": [
     {
       "title": "Calcule descontos",
