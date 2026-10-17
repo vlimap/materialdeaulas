@@ -63,12 +63,14 @@ function SequenceDemo() {
         <p className="logic-scene-caption" aria-live="polite">{current?.result ?? 'Clique em Executar passo para começar.'}</p>
       </div>
       <div className="logic-panel">
-        <strong>O algoritmo</strong>
-        <p>Um passo só acontece depois do anterior.</p>
+        <span className="logic-action-label">SUA VEZ · CLIQUE NO BOTÃO</span>
+        <strong>Execute um passo por vez</strong>
+        <p>Use o botão <b>Executar passo</b>. A lista abaixo apenas mostra as instruções.</p>
+        <span className="logic-readonly-label">ROTEIRO · SOMENTE LEITURA</span>
         <ol className="logic-steps">
           {sandwichSteps.map((item, index) => (
             <li key={item.line} className={step > index ? 'is-complete' : step === index ? 'is-current' : ''}>
-              <span>{index + 1}</span>{item.line}
+              <span aria-hidden="true">{step > index ? "✓" : index + 1}</span>{item.line}
             </li>
           ))}
         </ol>
@@ -117,13 +119,15 @@ function DecisionDemo() {
         </p>
       </div>
       <div className="logic-panel">
+        <span className="logic-action-label">SUA VEZ · SELECIONE E EXECUTE</span>
         <strong>Teste uma condição</strong>
-        <p>Altere o clima para descobrir qual caminho será executado.</p>
+        <p><b>1.</b> Selecione um clima nos botões. <b>2.</b> Clique em Executar decisão.</p>
         <div role="group" aria-label="Condição do tempo" className="logic-options">
           <button type="button" aria-pressed={raining} className={raining ? 'is-selected' : ''} onClick={() => choose(true)}>Chovendo</button>
           <button type="button" aria-pressed={!raining} className={!raining ? 'is-selected' : ''} onClick={() => choose(false)}>Sem chuva</button>
         </div>
-        <div className="logic-code" aria-label="Pseudocódigo de decisão">
+        <span className="logic-readonly-label">CÓDIGO · SOMENTE LEITURA</span>
+        <div className="logic-code" aria-label="Pseudocódigo de decisão, apenas para leitura">
           <div>SE (chovendo) ENTÃO</div>
           <div className={result === true ? 'is-running' : ''}>　levar guarda-chuva</div>
           <div>SENÃO</div>
@@ -158,14 +162,16 @@ function LoopDemo() {
         <p className="logic-scene-caption" aria-live="polite">{watered === quantity ? 'Todas as plantas foram regadas!' : watered === 0 ? 'Uma ação repetida para várias plantas.' : 'Regamos a planta ' + watered + '. Continue.'}</p>
       </div>
       <div className="logic-panel">
+        <span className="logic-action-label">SUA VEZ · AJUSTE E EXECUTE</span>
         <strong>Quantas repetições?</strong>
-        <p>O mesmo comando é executado uma vez para cada planta.</p>
+        <p><b>1.</b> Ajuste a quantidade usando + e −. <b>2.</b> Clique em Próxima repetição.</p>
         <div className="logic-quantity" role="group" aria-label="Quantidade de plantas">
           <button type="button" onClick={() => change(Math.max(1, quantity - 1))} disabled={quantity <= 1} aria-label="Diminuir quantidade"><Minus size={18}/></button>
           <output>{quantity} plantas</output>
           <button type="button" onClick={() => change(Math.min(5, quantity + 1))} disabled={quantity >= 5} aria-label="Aumentar quantidade"><Plus size={18}/></button>
         </div>
-        <div className="logic-code" aria-label="Pseudocódigo de repetição">
+        <span className="logic-readonly-label">CÓDIGO · SOMENTE LEITURA</span>
+        <div className="logic-code" aria-label="Pseudocódigo de repetição, apenas para leitura">
           <div>PARA planta DE 1 ATÉ {quantity}</div>
           <div className={watered > 0 ? 'is-running' : ''}>　regar(planta)</div>
           <div>FIM PARA</div>
