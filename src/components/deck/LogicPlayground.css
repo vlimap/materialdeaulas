@@ -1,0 +1,85 @@
+.logic-interaction-root { width: 100%; height: 100%; }
+.logic-playground { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); height: 100%; min-height: 0; gap: 2cqw; font-family: 'Rubik', 'Segoe UI', sans-serif; }
+.logic-scene { position: relative; min-height: 0; overflow: hidden; display: flex; flex-direction: column; border: .12cqw solid #d5e5f4; border-radius: 1.3cqw; background: linear-gradient(180deg, #eaf5ff, #fff 80%); }
+.logic-scene-heading { display: flex; justify-content: space-between; gap: .7cqw; padding: 1cqw 1.1cqw; font-weight: 700; color: #134a8c; font-size: 1.04cqw; }
+.logic-characters { display: flex; justify-content: space-between; align-items: end; width: 61%; margin: .2cqw auto 0; height: 12cqw; }
+.logic-fox, .logic-owl { width: 10cqw; height: 11.5cqw; filter: drop-shadow(0 .5cqw .5cqw #21467322); }
+.logic-fox.is-active { animation: logic-bounce .55s ease-out; }
+.logic-sandwich { position: relative; display: flex; flex-direction: column-reverse; align-items: center; justify-content: center; min-height: 6cqw; margin: -.5cqw auto 0; width: 100%; }
+.logic-bread { height: 1.7cqw; width: 10cqw; background: #ebb46d; border: .2cqw solid #b77630; border-radius: .6cqw; animation: logic-appear .35s ease-out both; }
+.logic-bread-top { border-radius: 4cqw 4cqw .5cqw .5cqw; }
+.logic-lettuce { width: 10cqw; height: .6cqw; background: #77b960; border-radius: 60%; animation: logic-appear .3s ease-out both; }
+.logic-cheese { width: 9cqw; height: .6cqw; background: #f0c950; animation: logic-appear .3s ease-out both; }
+.logic-empty { font-size: 1.1cqw; color: #607690; }
+.logic-scene-caption { margin: auto 1cqw 1cqw; color: #254667; font-size: 1.1cqw; text-align: center; font-weight: 600; }
+.logic-panel { display: flex; flex-direction: column; min-height: 0; padding: 1cqw .2cqw; color: #162e50; }
+.logic-panel > strong { font-size: 1.7cqw; }
+.logic-panel > p { margin: .4cqw 0 1cqw; font-size: 1.08cqw; line-height: 1.4; }
+.logic-steps { display: grid; gap: .6cqw; margin: .2cqw 0 0; padding: 0; list-style: none; }
+.logic-steps li { display: flex; align-items: center; gap: .8cqw; padding: .8cqw; border-radius: .8cqw; border: .1cqw solid #dce5f1; color: #60718a; font-size: 1.03cqw; }
+.logic-steps li span { display: grid; place-content: center; width: 1.8cqw; height: 1.8cqw; border-radius: 50%; background: #d8e1ed; flex-shrink: 0; }
+.logic-steps li.is-current { border-color: #327bd1; color: #133d7a; background: #e9f3ff; }
+.logic-steps li.is-complete { border-color: #73ba86; color: #1a6641; background: #e9f8eb; }
+.logic-steps li.is-complete span { background: #278b50; color: #fff; }
+.logic-actions { display: flex; gap: .7cqw; flex-wrap: wrap; margin-top: auto; padding-top: 1cqw; }
+.logic-actions button, .logic-options button, .logic-quantity button { display: inline-flex; align-items: center; justify-content: center; gap: .55cqw; padding: .72cqw 1cqw; border: .13cqw solid #0d47a1; background: #0d47a1; border-radius: .65cqw; color: #fff; font-size: 1cqw; font-weight: 700; transition: transform .15s, background .15s; }
+.logic-actions button:hover:not(:disabled), .logic-options button:hover, .logic-quantity button:hover:not(:disabled) { transform: translateY(-.15cqw); }
+.logic-actions .logic-secondary { background: #fff; color: #0d47a1; }
+.logic-actions button:disabled { opacity: .55; }
+.logic-success { color: #167043; font-weight: 700; }
+.logic-options { display: flex; gap: .65cqw; margin-bottom: .8cqw; }
+.logic-options button { background: #f4f7fc; border-color: #cad8e9; color: #254b77; }
+.logic-options button.is-selected { background: #0d47a1; border-color: #0d47a1; color: #fff; }
+.logic-code { padding: .85cqw; border-radius: .7cqw; background: #14233b; color: #e8f3fe; line-height: 1.6; font: 1.02cqw/1.65 Consolas, monospace; }
+.logic-code .is-running { background: #335c53; color: #c6f6d5; }
+.logic-weather { display: grid; place-items: center; height: 6.2cqw; }
+.logic-cloud { width: 7cqw; height: 3cqw; border-radius: 3cqw; background: #8fa9c0; box-shadow: -1.4cqw .2cqw 0 #9eb7cd, 1cqw -.4cqw 0 #90aabe; }
+.logic-rain { color: #317ec2; font-size: 2.2cqw; letter-spacing: .3cqw; animation: logic-rain 1s linear infinite; }
+.logic-sun { width: 4.5cqw; height: 4.5cqw; border-radius: 50%; background: #ffce60; box-shadow: 0 0 0 .7cqw #ffe3a5; }
+.logic-garden { display: flex; justify-content: center; align-items: flex-end; gap: .65cqw; min-height: 6cqw; padding: .8cqw; }
+.logic-plant { display: flex; flex-direction: column; align-items: center; opacity: .65; }
+.logic-plant.is-watered { opacity: 1; animation: logic-bounce .5s ease-out; }
+.logic-flower { color: #b8bbc3; font-size: 2.3cqw; line-height: 1; }
+.logic-plant.is-watered .logic-flower { color: #ec7b8e; }
+.logic-stem { width: .25cqw; height: 2cqw; background: #549b67; }
+.logic-pot { width: 2.2cqw; height: 1.5cqw; background: #bb7c55; clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%); }
+.logic-quantity { display: flex; justify-content: space-between; align-items: center; margin: .2cqw 0 1cqw; }
+.logic-quantity output { font-size: 1.3cqw; font-weight: 700; }
+.logic-quantity button { width: 2.8cqw; height: 2.8cqw; padding: .4cqw; }
+@keyframes logic-bounce { 40% { transform: translateY(-.7cqw) } }
+@keyframes logic-appear { from { opacity: 0; transform: translateY(-1cqw) } to { opacity: 1; transform: translateY(0) } }
+@keyframes logic-rain { 50% { transform: translateY(.4cqw) } }
+@media (max-width: 620px) {
+  .story-mode .logic-playground { grid-template-columns: 1fr; gap: 9px; height: auto; }
+  .story-mode .logic-scene { min-height: 240px; border-radius: 14px; }
+  .story-mode .logic-scene-heading { padding: 12px; font-size: 12px; }
+  .story-mode .logic-characters { height: 110px; }
+  .story-mode .logic-fox, .story-mode .logic-owl { width: 86px; height: 96px; }
+  .story-mode .logic-sandwich { min-height: 56px; }
+  .story-mode .logic-bread { width: 94px; height: 15px; border-width: 2px; border-radius: 8px; }
+  .story-mode .logic-lettuce, .story-mode .logic-cheese { width: 87px; height: 6px; }
+  .story-mode .logic-scene-caption { font-size: 12px; }
+  .story-mode .logic-panel { padding: 8px 2px 18px; }
+  .story-mode .logic-panel > strong { font-size: 20px; }
+  .story-mode .logic-panel > p, .story-mode .logic-steps li { font-size: 12px; }
+  .story-mode .logic-steps { gap: 6px; }
+  .story-mode .logic-steps li { padding: 8px; border-radius: 8px; }
+  .story-mode .logic-steps li span { width: 22px; height: 22px; }
+  .story-mode .logic-actions button, .story-mode .logic-options button, .story-mode .logic-quantity button { font-size: 12px; padding: 10px; border-radius: 7px; gap: 5px; }
+  .story-mode .logic-options { gap: 8px; }
+  .story-mode .logic-code { font-size: 11px; padding: 10px; border-radius: 8px; }
+  .story-mode .logic-weather { height: 75px; }
+  .story-mode .logic-cloud { width: 70px; height: 31px; border-radius: 40px; box-shadow: -13px 2px 0 #9eb7cd, 10px -5px 0 #90aabe; }
+  .story-mode .logic-rain { font-size: 20px; }
+  .story-mode .logic-sun { width: 48px; height: 48px; box-shadow: 0 0 0 8px #ffe3a5; }
+  .story-mode .logic-garden { min-height: 70px; gap: 7px; }
+  .story-mode .logic-flower { font-size: 30px; }
+  .story-mode .logic-stem { width: 3px; height: 23px; }
+  .story-mode .logic-pot { width: 28px; height: 17px; }
+  .story-mode .logic-quantity output { font-size: 14px; }
+  .story-mode .logic-quantity button { width: 38px; height: 38px; }
+  .story-mode .logic-empty { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logic-fox, .logic-plant, .logic-bread, .logic-lettuce, .logic-cheese, .logic-rain { animation: none !important; transition: none !important; }
+}

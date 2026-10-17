@@ -125,6 +125,10 @@ export type Slide =
       requirements: string[];
     })
   | (BaseSlide & {
+      kind: 'logic-playground';
+      scenario: 'sequence' | 'decision' | 'loop';
+    })
+  | (BaseSlide & {
       kind: 'references';
       items: ReferenceItem[];
     });
