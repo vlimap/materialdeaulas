@@ -1,5 +1,5 @@
-import { useState, type KeyboardEvent, type SyntheticEvent } from 'react';
-import { ArrowDown, ArrowUp, BookOpen, Check, CircleHelp, ClipboardList, Play, RotateCcw, Search, ShoppingBasket } from 'lucide-react';
+import { useState, type KeyboardEvent, type ReactNode, type SyntheticEvent } from 'react';
+import { ArrowDown, ArrowUp, BookOpen, Check, ClipboardList, Play, RotateCcw, Search } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import './ProblemPlayground.css';
 
@@ -23,7 +23,7 @@ const orderSteps = [
   { id: 4, label: 'Confirmar ao estudante', description: 'Entregar a resposta depois do registro.' }
 ] as const;
 
-function StopEvents({ children }: { children: React.ReactNode }) {
+function StopEvents({ children }: { children: ReactNode }) {
   const isolate = (event: SyntheticEvent) => event.stopPropagation();
   const stopKeys = (event: KeyboardEvent) => event.stopPropagation();
   return (
@@ -34,7 +34,7 @@ function StopEvents({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Scene({ heading, children, status }: { heading: string; children: React.ReactNode; status: string }) {
+function Scene({ heading, children, status }: { heading: string; children: ReactNode; status: string }) {
   return (
     <div className="problem-scene">
       <div className="problem-scene-label"><BookOpen size={18} aria-hidden="true" /><span>{heading}</span></div>
