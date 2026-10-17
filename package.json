@@ -7,7 +7,8 @@
     "build": "webpack --mode production && npm run seo:generate",
     "preview": "node scripts/dev-server.cjs --preview",
     "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts && ts-node --project tsconfig.test.json scripts/test-pptx.ts",
-    "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts"
+    "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts",
+    "test:server": "node scripts/test-server.cjs"
   },
   "dependencies": {
     "@fontsource/rubik": "^5.2.5",
