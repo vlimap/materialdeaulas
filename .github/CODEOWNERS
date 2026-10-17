@@ -1,0 +1,6 @@
+* @vlimap
+.github/ @vlimap
+package.json @vlimap
+package-lock.json @vlimap
+src/lib/exportDeck.ts @vlimap
+SECURITY.md @vlimap

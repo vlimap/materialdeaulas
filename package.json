@@ -3,23 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --mode development",
+    "dev": "node scripts/dev-server.cjs",
     "build": "webpack --mode production && npm run seo:generate",
-    "preview": "webpack serve --mode production --no-hot",
-    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts",
-    "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts"
+    "preview": "node scripts/dev-server.cjs --preview",
+    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts && ts-node --project tsconfig.test.json scripts/test-pptx.ts",
+    "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts",
+    "test:server": "node scripts/test-server.cjs"
   },
   "dependencies": {
     "@fontsource/rubik": "^5.2.5",
     "@rollup/wasm-node": "^4.63.6",
     "html-to-image": "^1.11.13",
-    "jspdf": "^2.5.2",
+    "jspdf": "4.2.1",
     "lucide-react": "^0.468.0",
-    "pptxgenjs": "^3.12.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0",
-    "@xyflow/react": "^12.12.0"
+    "react-router-dom": "^7.18.0",
+    "@xyflow/react": "^12.12.0",
+    "jszip": "^3.10.1"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
@@ -32,10 +33,13 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "webpack": "^5.0.0",
-    "webpack-cli": "^6.0.0",
-    "webpack-dev-server": "^5.0.0"
+    "webpack-cli": "^6.0.0"
   },
   "engines": {
-    "node": ">=20.18 <25"
+    "node": ">=22.15 <25"
+  },
+  "overrides": {
+    "dompurify": ">=3.4.16 <4",
+    "uuid": "^11.1.1"
   }
 }

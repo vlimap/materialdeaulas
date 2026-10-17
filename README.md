@@ -18,7 +18,7 @@ Plataforma web para organizar materiais por **curso → unidade curricular → m
 ## Stack
 
 - React + TypeScript
-- Webpack 5 + webpack-dev-server
+- Webpack 5 + servidor de desenvolvimento nativo Node.js (sem proxy ou dependências HTTP de terceiros)
 - TypeScript compiler via ts-loader
 - conteúdo tipado e reutilizável
 - html-to-image para captura visual
@@ -31,17 +31,18 @@ A toolchain evita Vite/Rollup/esbuild para não depender dos binários nativos q
 
 ## Executar no Windows 11
 
-Depois de atualizar o repositório, faça uma instalação limpa para eliminar dependências antigas do Vite/Rollup:
+Use **Node.js 22.15+ (recomendado Node.js 24)** e preserve o lockfile auditado:
 
 ```powershell
+git switch main
 git pull origin main
-
-Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
-Remove-Item -Force package-lock.json -ErrorAction SilentlyContinue
-
-npm install
+npm ci
 npm run dev
 ```
+
+O servidor usa `node:http` e `webpack --watch`, atualiza a página após
+compilação e preserva as rotas internas. Não depende de `webpack-dev-server`.
+Não exclua `package-lock.json` ao instalar.
 
 Acesse:
 
@@ -54,6 +55,8 @@ http://localhost:5173
 ```powershell
 npm test
 npm run build
+npm run test:server
+npm audit --audit-level=low
 npm run preview
 ```
 
@@ -67,7 +70,7 @@ O projeto aceita contribuições de conteúdo, código, acessibilidade e documen
 4. Para aulas, siga o [guia de criação de aulas](docs/LESSON_AUTHORING.md).
 5. Abra um PR usando o checklist do repositório.
 
-Cada PR deve ter escopo pequeno, testes executados e uma explicação simples de como revisar a mudança. A CI verifica `npm test` e `npm run build` antes do merge.
+Cada PR deve ter escopo pequeno, testes executados e uma explicação simples de como revisar a mudança. A CI usa permissões de leitura e executa `npm ci`, `npm test`, `npm run build`, teste HTTP e auditoria de dependências. **A aprovação humana e o merge são responsabilidade do mantenedor**, desde que a proteção da `main` esteja ativada.
 
 ## Acessibilidade
 
