@@ -8,10 +8,13 @@
 .problem-control > strong { font-size: 1.52cqw; color: #123c7a; }
 .problem-control > p { margin: .35cqw 0 .8cqw; font-size: 1.01cqw; line-height: 1.35; color: #345476; }
 .problem-tasks { display: grid; grid-template-columns: 1fr 1fr; gap: .55cqw; }
-.problem-task { display: flex; align-items: center; gap: .6cqw; padding: .65cqw; min-height: 3.2cqw; border: .12cqw solid #bfcee1; border-radius: .6cqw; text-align: left; color: #173862; background: #fff; font-size: .9cqw; font-weight: 600; }
+.problem-task { display: flex; align-items: center; gap: .6cqw; padding: .65cqw; min-height: 3.2cqw; border: .12cqw solid #91a8c3; border-radius: .6cqw; text-align: left; color: #173862; background: #fff; font-size: .9cqw; font-weight: 600; cursor: pointer; }
 .problem-task.is-chosen { border-color: #1363bc; color: #0b4b94; background: #e7f3ff; }
-.problem-task-checkbox { display: grid; place-items: center; flex-shrink: 0; width: 1.6cqw; height: 1.6cqw; border: .1cqw solid #80a5d1; border-radius: .3cqw; }
-.problem-task.is-chosen .problem-task-checkbox { background: #0d5cad; color: #fff; }
+.problem-task:hover { border-color: #0b62b9; background: #eef6ff; }
+.problem-task:focus-within { outline: .22cqw solid #ffc642; outline-offset: .1cqw; }
+.problem-task input[type="checkbox"] { width: 1.65cqw; height: 1.65cqw; flex-shrink: 0; margin: 0; accent-color: #0d47a1; cursor: pointer; }
+.problem-task span { line-height: 1.25; }
+
 .problem-actions { display: flex; gap: .6cqw; flex-wrap: wrap; margin-top: auto; padding-top: .9cqw; }
 .problem-actions button, .problem-quantity button, .problem-move button { display: inline-flex; justify-content: center; align-items: center; gap: .4cqw; border: .12cqw solid #0d47a1; border-radius: .6cqw; background: #0d47a1; color: #fff; padding: .64cqw .9cqw; font: 700 1cqw 'Rubik','Segoe UI',sans-serif; }
 .problem-actions .is-secondary { background: #fff; color: #0d47a1; }
@@ -26,15 +29,18 @@
 .problem-books span:nth-child(3) { height: 9cqw; background: #73a5da; box-shadow: inset -.5cqw 0 #4376ae; transform: rotate(-4deg); }
 .problem-reader { display: grid; place-items: center; width: 8.8cqw; height: 8.8cqw; border: .4cqw solid #2c5b98; border-radius: 50%; color: #2a5c9c; background: #f7fbff; }
 .problem-reader span { position: absolute; margin-left: 7cqw; margin-top: -4.4cqw; color: #e7a14e; font-size: 3cqw; font-weight: 700; }
-.problem-pipeline { display: flex; align-items: center; justify-content: center; gap: .8cqw; width: 100%; }
-.problem-node { display: flex; flex-direction: column; align-items: center; gap: .5cqw; width: 5.3cqw; height: 5.3cqw; border: .16cqw solid #7e9fc6; border-radius: .9cqw; background: #edf3f9; color: #31537a; padding: .5cqw; }
-.problem-node span { font-size: .9cqw; font-weight: 700; }
-.problem-node.is-complete { border-color: #1b8a50; background: #e6f7ed; color: #156c3c; }
-.problem-ordered-preview { display: flex; flex-direction: column; gap: .5cqw; width: 88%; }
-.problem-preview-step { display: flex; align-items: center; gap: 1cqw; padding: .7cqw; background: #fff; border: .1cqw solid #a6c3e1; border-radius: .6cqw; color: #214a79; }
-.problem-preview-step span { display: grid; place-items: center; width: 2.5cqw; height: 2.5cqw; flex-shrink: 0; border-radius: 50%; background: #dbeaf8; font-size: 1.1cqw; }
-.problem-preview-step strong { font-size: 1.04cqw; font-weight: 600; }
-.problem-preview-step.is-complete { background: #e3f6e8; border-color: #52a777; animation: problem-pop .35s ease-in-out; }
+.problem-selection-status { display: grid; gap: .7cqw; width: 86%; padding: 1.1cqw; background: rgba(255,255,255,.72); border-radius: .9cqw; text-align: center; color: #284a72; }
+.problem-selection-status strong { font-size: 1.15cqw; }
+.problem-selection-status progress { width: 100%; height: 1.2cqw; accent-color: #1974c7; }
+.problem-selection-status small { font-size: .92cqw; line-height: 1.3; }
+.problem-action-label { display: block; width: fit-content; margin-bottom: .65cqw; padding: .4cqw .65cqw; border-radius: .4cqw; background: #fff0cc; color: #754500; font-size: .88cqw; font-weight: 800; letter-spacing: .04em; }
+.problem-readonly-label { margin: .7cqw 0 .3cqw; font-size: .76cqw; color: #3c5271; letter-spacing: .02em; font-weight: 700; }
+.problem-order-illustration { display: flex; justify-content: center; align-items: center; gap: 1.2cqw; width: 100%; }
+.problem-order-icon { display: flex; flex-direction: column; align-items: center; gap: .9cqw; padding: 1.2cqw; color: #24558b; }
+.problem-order-icon strong { font-size: 1.18cqw; }
+.problem-order-arrow { display: grid; place-items: center; width: 5cqw; height: 5cqw; border-radius: 50%; font-size: 3.5cqw; color: #6e86a3; background: #e9f0f8; }
+.problem-order-arrow.is-complete { color: #177645; background: #dbf5e4; }
+.problem-order-note { font-size: 1.03cqw; max-width: 80%; line-height: 1.4; text-align: center; color: #34577e; }
 .problem-sort { display: grid; gap: .45cqw; margin: .3cqw 0 0; padding: 0; list-style: none; }
 .problem-sort li { display: flex; align-items: center; gap: .65cqw; min-height: 3.25cqw; padding: .45cqw; border: .12cqw solid #c9d9e9; border-radius: .55cqw; background: #fff; }
 .problem-sort-number { display: grid; place-items: center; width: 2.1cqw; height: 2.1cqw; flex-shrink: 0; border-radius: 50%; background: #dceafa; color: #15549b; font-size: 1cqw; font-weight: 700; }
@@ -68,7 +74,6 @@
   .story-mode .problem-control > p { font-size: 12px; }
   .story-mode .problem-tasks { gap: 7px; }
   .story-mode .problem-task { font-size: 11px; min-height: 40px; padding: 7px; border-radius: 7px; }
-  .story-mode .problem-task-checkbox { width: 20px; height: 20px; }
   .story-mode .problem-actions button { padding: 9px; font-size: 12px; border-radius: 7px; }
   .story-mode .problem-tip { font-size: 11px !important; }
   .story-mode .problem-book-illustration { height: 100px; gap: 24px; }
@@ -76,12 +81,18 @@
   .story-mode .problem-books span { width: 29px; height: 75px; border-radius: 5px; }
   .story-mode .problem-reader { width: 70px; height: 70px; }
   .story-mode .problem-reader span { font-size: 27px; margin-left: 58px; margin-top: -42px; }
-  .story-mode .problem-node { width: 50px; height: 50px; border-radius: 8px; padding: 6px; }
-  .story-mode .problem-node span { font-size: 10px; }
-  .story-mode .problem-ordered-preview { gap: 6px; }
-  .story-mode .problem-preview-step { gap: 10px; padding: 7px; }
-  .story-mode .problem-preview-step span { width: 25px; height: 25px; font-size: 11px; }
-  .story-mode .problem-preview-step strong { font-size: 11px; }
+  .story-mode .problem-selection-status { width: 90%; gap: 7px; padding: 10px; border-radius: 10px; }
+  .story-mode .problem-selection-status strong { font-size: 13px; }
+  .story-mode .problem-selection-status progress { height: 12px; }
+  .story-mode .problem-selection-status small { font-size: 11px; }
+  .story-mode .problem-action-label { font-size: 11px; padding: 5px 8px; margin-bottom: 8px; }
+  .story-mode .problem-readonly-label { font-size: 10px; margin: 8px 0 5px; }
+  .story-mode .problem-order-illustration { gap: 7px; }
+  .story-mode .problem-order-icon { padding: 8px; gap: 7px; }
+  .story-mode .problem-order-icon strong { font-size: 12px; }
+  .story-mode .problem-order-arrow { width: 46px; height: 46px; font-size: 30px; }
+  .story-mode .problem-order-note { font-size: 11px; }
+  .story-mode .problem-task input[type="checkbox"] { width: 20px; height: 20px; }
   .story-mode .problem-sort { gap: 6px; }
   .story-mode .problem-sort li { padding: 6px; min-height: 42px; gap: 7px; }
   .story-mode .problem-sort-number { width: 25px; height: 25px; font-size: 11px; }
@@ -97,4 +108,5 @@
   .story-mode .problem-quantity output { font-size: 19px; }
   .story-mode .problem-pseudocode { padding: 12px; font-size: 10px; border-radius: 7px; }
 }
-@media (prefers-reduced-motion: reduce) { .problem-notebook,.problem-preview-step { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .problem-notebook,/* Deprecated static preview removed. */
+.problem-preview-step { animation: none !important; } }

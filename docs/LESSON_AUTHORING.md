@@ -54,6 +54,20 @@ O slide é lido diretamente pelo estudante, não é um roteiro para o professor.
 - Descreva o problema, as instruções, os dados de entrada, o resultado esperado e os critérios de conclusão de forma autossuficiente.
 - Informações exclusivas do docente devem ser registradas fora do texto projetado, como metadados internos ou orientações do autor.
 
+## Interface das atividades interativas
+
+As atividades são operadas diretamente pelo estudante. Evite usar a mesma aparência para instruções informativas e controles de interação.
+
+- **Ação:** agrupe campos e botões em uma área claramente intitulada "Sua vez", com instruções numeradas e verbos específicos (marcar, mover, executar).
+- **Visualização:** imagens, fluxos e indicadores devem ser identificados como "Visualização" ou "Resultado" e não apresentar quadrados, botões falsos ou cartões que imitam controles.
+- **Seleção:** utilize inputs nativos (checkbox/radio), botões com rótulos claros e feedback visual e textual; não desenhe controles falsos com divs.
+- **Progresso:** prefira indicadores textuais e barras de progresso não clicáveis, informando a contagem e o que o resultado significa.
+- **Separação:** diagramas e exemplos de pseudocódigo devem indicar "Somente leitura" quando estiverem ao lado de controles interativos.
+- **Validação:** não dependa apenas da cor ou da animação; informe o resultado por texto e não conclua a tarefa automaticamente sem a ação do estudante.
+- **Tela pequena:** preserve instruções e controles completos, evite alvos diminutos e respeite `prefers-reduced-motion`.
+
+Ao testar com iniciantes, verifique se a pessoa consegue identificar onde clicar sem explicações adicionais e se distingue os elementos que apenas mostram o resultado.
+
 ## Sequência pedagógica
 
 1. **Capa** — assunto, tecnologia e duração.

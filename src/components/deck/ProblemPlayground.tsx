@@ -1,5 +1,5 @@
 import { useState, type KeyboardEvent, type ReactNode, type SyntheticEvent } from 'react';
-import { ArrowDown, ArrowUp, BookOpen, Check, ClipboardList, Play, RotateCcw, Search } from 'lucide-react';
+import { ArrowDown, ArrowUp, BookOpen, Check, ClipboardList, Play, RotateCcw, Search, UserRound } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import './ProblemPlayground.css';
 
@@ -37,7 +37,7 @@ function StopEvents({ children }: { children: ReactNode }) {
 function Scene({ heading, children, status }: { heading: string; children: ReactNode; status: string }) {
   return (
     <div className="problem-scene">
-      <div className="problem-scene-label"><BookOpen size={18} aria-hidden="true" /><span>{heading}</span></div>
+      <div className="problem-scene-label"><BookOpen size={18} aria-hidden="true" /><span>VISUALIZAÇÃO · {heading}</span></div>
       <div className="problem-scene-art">{children}</div>
       <p className="problem-scene-status" role="status" aria-live="polite">{status}</p>
     </div>
@@ -61,30 +61,31 @@ function DecomposeDemo() {
             <div className="problem-books"><span/><span/><span/></div>
             <div className="problem-reader"><Search size={34}/><span>?</span></div>
           </div>
-          <div className="problem-pipeline" aria-label="Tarefas selecionadas">
-            {essential.map((id, i) => (
-              <div key={id} className={'problem-node' + (chosen.includes(id) ? ' is-complete' : '')}>
-                <span>{i + 1}</span>{chosen.includes(id) ? <Check size={19}/> : '?'}
-              </div>
-            ))}
+          <div className="problem-selection-status">
+            <strong>{chosen.length} de {taskOptions.length} opções marcadas</strong>
+            <progress aria-label="Progresso da marcação de opções" value={chosen.length} max={taskOptions.length} />
+            <small>O resultado aparece aqui. A seleção é feita à direita.</small>
           </div>
         </Scene>
         <div className="problem-control">
-          <strong>O que realmente precisamos resolver?</strong>
-          <p>Selecione somente as tarefas necessárias para emprestar um livro a um estudante.</p>
+          <span className="problem-action-label">SUA VEZ · MARQUE AS OPÇÕES</span>
+          <strong>Quais tarefas são necessárias?</strong>
+          <p><b>1.</b> Marque as tarefas essenciais na lista abaixo. <b>2.</b> Clique em Conferir seleção.</p>
           <div className="problem-tasks" role="group" aria-label="Tarefas candidatas">
             {taskOptions.map(task => (
-              <button key={task.id} type="button"
-                aria-pressed={chosen.includes(task.id)}
-                className={'problem-task' + (chosen.includes(task.id) ? ' is-chosen' : '')}
-                onClick={() => toggle(task.id)}>
-                <span className="problem-task-checkbox">{chosen.includes(task.id) ? <Check size={17}/> : null}</span>
-                {task.label}
-              </button>
+              <label key={task.id}
+                className={'problem-task' + (chosen.includes(task.id) ? ' is-chosen' : '')}>
+                <input
+                  type="checkbox"
+                  checked={chosen.includes(task.id)}
+                  onChange={() => toggle(task.id)}
+                />
+                <span>{task.label}</span>
+              </label>
             ))}
           </div>
           <div className="problem-actions">
-            <button type="button" onClick={() => setChecked(true)}>Conferir seleção</button>
+            <button type="button" disabled={chosen.length === 0} onClick={() => setChecked(true)}><Check size={16}/> Conferir minhas escolhas</button>
             <button className="is-secondary" type="button" onClick={() => { setChosen([]); setChecked(false); }}><RotateCcw size={16}/> Reiniciar</button>
           </div>
           {checked && <p className={correct ? 'problem-ok' : 'problem-tip'}>
@@ -115,25 +116,24 @@ function OrderDemo() {
       <div className="problem-layout">
         <Scene heading="Fluxo de empréstimo"
           status={!checked ? 'Organize as etapas da primeira até a última.' : correct ? 'Sequência validada: agora a confirmação vem depois do registro.' : 'A sequência ainda contém uma dependência fora de ordem.'}>
-          <div className="problem-ordered-preview" aria-label="Fluxo organizado">
-            {steps.map((id, index) => {
-              const step = orderSteps.find(item => item.id === id)!;
-              return <div className={'problem-preview-step' + (checked && correct ? ' is-complete' : '')} key={id}>
-                <span>{index + 1}</span><strong>{step.label}</strong>
-              </div>;
-            })}
+          <div className="problem-order-illustration" role="img" aria-label={checked && correct ? 'O livro foi transferido corretamente ao estudante' : 'O livro ainda não foi entregue ao estudante'}>
+            <div className="problem-order-icon"><BookOpen size={56} aria-hidden="true"/><strong>Biblioteca</strong></div>
+            <div className={'problem-order-arrow' + (checked && correct ? ' is-complete' : '')} aria-hidden="true">{checked && correct ? '✓' : '→'}</div>
+            <div className="problem-order-icon"><UserRound size={56} aria-hidden="true"/><strong>Estudante</strong></div>
           </div>
+          <p className="problem-order-note">A entrega só é confirmada quando a sequência está correta.</p>
         </Scene>
         <div className="problem-control">
+          <span className="problem-action-label">SUA VEZ · USE AS SETAS</span>
           <strong>Coloque as instruções em ordem</strong>
-          <p>Use as setas para mover cada instrução. Verifique se uma etapa depende da anterior.</p>
+          <p><b>1.</b> Use os botões ↑ e ↓ em cada linha. <b>2.</b> Clique em Validar algoritmo.</p>
           <ol className="problem-sort">
             {steps.map((id, index) => {
               const step = orderSteps.find(item => item.id === id)!;
               return <li key={id}>
                 <span className="problem-sort-number">{index + 1}</span>
                 <span className="problem-sort-label">{step.label}</span>
-                <div className="problem-move">
+                <div className="problem-move" role="group" aria-label={"Mover etapa " + step.label}>
                   <button type="button" disabled={index === 0} aria-label={'Mover ' + step.label + ' para cima'} onClick={() => move(index, -1)}><ArrowUp size={17}/></button>
                   <button type="button" disabled={index === steps.length - 1} aria-label={'Mover ' + step.label + ' para baixo'} onClick={() => move(index, 1)}><ArrowDown size={17}/></button>
                 </div>
@@ -141,7 +141,7 @@ function OrderDemo() {
             })}
           </ol>
           <div className="problem-actions">
-            <button type="button" onClick={() => setChecked(true)}>Validar algoritmo</button>
+            <button type="button" onClick={() => setChecked(true)}><Check size={16}/> Validar minha sequência</button>
             <button type="button" className="is-secondary" onClick={() => {setSteps([4, 2, 1, 3]); setChecked(false);}}><RotateCcw size={16}/> Reiniciar</button>
           </div>
           {checked && <p className={correct ? 'problem-ok' : 'problem-tip'}>
@@ -175,14 +175,16 @@ function TraceDemo() {
           </div>
         </Scene>
         <div className="problem-control">
+          <span className="problem-action-label">SUA VEZ · ALTERE O VALOR</span>
           <strong>Teste de mesa: entrada → saída</strong>
-          <p>Cada caderno custa R$ 8,00. Escolha uma quantidade e execute o cálculo.</p>
+          <p><b>1.</b> Altere a quantidade com + e −. <b>2.</b> Clique em Executar para ver o resultado.</p>
           <label className="problem-quantity-label" htmlFor="problem-quantity">Quantidade de cadernos</label>
           <div className="problem-quantity">
             <button type="button" aria-label="Diminuir quantidade" disabled={quantity <= 1} onClick={() => setInput(Math.max(1, quantity - 1))}>−</button>
             <output id="problem-quantity">{quantity}</output>
             <button type="button" aria-label="Aumentar quantidade" disabled={quantity >= 5} onClick={() => setInput(Math.min(5, quantity + 1))}>+</button>
           </div>
+          <div className="problem-readonly-label">CÓDIGO EXPLICATIVO · SOMENTE LEITURA</div>
           <div className="problem-pseudocode">
             <div>preço_unitário ← 8</div>
             <div>quantidade ← {quantity}</div>
