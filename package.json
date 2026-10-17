@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --mode development",
+    "dev": "node scripts/dev-server.cjs",
     "build": "webpack --mode production && npm run seo:generate",
-    "preview": "webpack serve --mode production --no-hot",
+    "preview": "node scripts/dev-server.cjs --preview",
     "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts && ts-node --project tsconfig.test.json scripts/test-pptx.ts",
     "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts"
   },
@@ -32,8 +32,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "webpack": "^5.0.0",
-    "webpack-cli": "^6.0.0",
-    "webpack-dev-server": "^6.0.0"
+    "webpack-cli": "^6.0.0"
   },
   "engines": {
     "node": ">=22.15 <25"
