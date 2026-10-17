@@ -135,7 +135,9 @@ export const aula01Logic: LessonDefinition = {
       kind: 'challenge',
       eyebrow: 'Verificação de aprendizagem',
       title: 'Qual caminho será executado?',
-      prompt: 'SE idade >= 18 ENTÃO exibir "maior de idade"; SENÃO exibir "menor de idade". Para idade = 16:',
+      prompt: 'Observe o algoritmo e identifique qual mensagem será exibida.',
+      exampleCode: 'SE idade >= 18 ENTÃO\n    EXIBIR "maior de idade"\nSENÃO\n    EXIBIR "menor de idade"\nFIM SE',
+      testInput: 'idade = 16',
       options: [
         { label: 'Exibir "maior de idade"' },
         { label: 'Exibir "menor de idade"' },

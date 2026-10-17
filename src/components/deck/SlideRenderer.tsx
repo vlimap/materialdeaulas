@@ -111,12 +111,21 @@ function Challenge({ slide }: { slide: Extract<Slide, { kind: 'challenge' }> }) 
 
   return (
     <div
-      className="micro-challenge"
+      className={'micro-challenge' + (slide.exampleCode ? ' has-example-code' : '')}
       onPointerDown={stopDeckGesture}
       onPointerUp={stopDeckGesture}
       onClick={stopDeckGesture}
     >
       <p className="micro-challenge-prompt">{slide.prompt}</p>
+      {slide.exampleCode && (
+        <div className="micro-challenge-example" aria-label="Pseudocódigo do exercício, somente leitura">
+          <span className="micro-challenge-example-label">Pseudocódigo · somente leitura</span>
+          <pre><code>{slide.exampleCode}</code></pre>
+        </div>
+      )}
+      {slide.testInput && (
+        <p className="micro-challenge-input"><strong>Entrada para o teste:</strong> <code>{slide.testInput}</code></p>
+      )}
       <div className="micro-challenge-options">
         {slide.options.map((option, index) => {
           const isSelected = selected === index;
