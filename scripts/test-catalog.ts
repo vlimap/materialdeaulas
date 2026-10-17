@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
+import { Script, runInNewContext } from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
+import { javascriptLessons } from '../src/content/javascript/course';
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
@@ -286,6 +288,80 @@ const tests: TestCase[] = [
       assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-waterfall'));
       assert.ok(visual.some((slide) => slide.kind === 'visual' && slide.visual === 'sdlc-incremental'));
       assert.ok(slides.some((slide) => slide.kind === 'references'));
+    }
+  },
+  {
+    name: 'publica trinta aulas JavaScript progressivas com código executável e rotas',
+    run: () => {
+      const course = technologyCourses.find(item => item.slug === 'curso-javascript');
+      assert.ok(course);
+      const lessons = course?.ucs[0]?.modules[0]?.lessons ?? [];
+      assert.equal(lessons.length, 30);
+      assert.deepEqual(lessons.map(item => item.number), Array.from({length:30}, (_,i) => i+1));
+      assert.equal(lessons.reduce((sum, item) => sum + item.slides.length, 0), 544);
+      assert.equal(lessons.reduce((sum, item) => sum + item.durationMinutes, 0), 7200);
+      assert.equal(lessons.filter(item => item.status === 'published').length, 30);
+      const navigation = getCourseLessonNavigation('curso-javascript');
+      assert.equal(navigation.length, 30);
+      assert.ok(navigation.every(item => item.published));
+      assert.equal(navigation[0].href, '/curso/curso-javascript/uc/fundamentos-javascript/aula/aula-01-introducao-ambientes');
+      const ids = new Set<string>();
+      for (const lesson of lessons) {
+        assert.equal(lesson.slides.filter(s => s.kind === 'javascript-console').length, 1, lesson.slug);
+        assert.equal(lesson.slides.filter(s => s.kind === 'challenge').length, 4, lesson.slug);
+        assert.equal(lesson.slides.filter(s => s.kind === 'exercise').length, 3, lesson.slug);
+        assert.ok(lesson.objectives.length >= 4);
+        assert.ok((lesson.sources?.length ?? 0) > 0);
+        assert.equal(findLesson('curso-javascript','fundamentos-javascript',lesson.slug)?.lesson.id,lesson.id);
+        for (const slide of lesson.slides) {
+          assert.ok(!ids.has(slide.id), 'duplicate slide id: ' + slide.id);
+          ids.add(slide.id);
+          assert.doesNotMatch(JSON.stringify(slide), /Peça à dupla|O professor deve|solicite aos alunos|divida a turma/i);
+          if (slide.kind === 'javascript-console') {
+            assert.ok(slide.starterCode.includes('console.log'), slide.id);
+            assert.ok(slide.task.length >= 12);
+            new Script(slide.starterCode, { filename: lesson.slug + '.js' });
+          }
+        }
+      }
+      assert.deepEqual(
+        lessons[3].slides.filter(slide => slide.kind === 'truth-table').map(slide =>
+          slide.kind === 'truth-table' ? slide.operator : ''),
+        ['and','or','not']
+      );
+      assert.equal(javascriptLessons.length, lessons.length);
+    }
+  },
+  {
+    name: 'exemplos de JavaScript produzem resultados reais em código síncrono',
+    run: () => {
+      const numbers = [1,2,3,4,5,6,7,8,9,10,11,12,20,21,22,23,24,25,26,27,29,30];
+      for (const number of numbers) {
+        const lesson = javascriptLessons[number - 1];
+        const slide = lesson.slides.find(item => item.kind === 'javascript-console');
+        assert.ok(slide && slide.kind === 'javascript-console');
+        const captured: string[] = [];
+        const fake = { log: (...args: unknown[]) =>
+          captured.push(args.map(arg => typeof arg === 'string' ? arg : JSON.stringify(arg)).join(' ')) };
+        runInNewContext(slide.starterCode, {
+          console: fake, Number, Object, Array, Set, Map, Intl, JSON, URLSearchParams,
+          RegExp, Date, String, Promise, Symbol
+        }, {timeout: 250});
+        const prediction = lesson.slides.find(item => item.id.endsWith('-output-check'));
+        assert.ok(prediction && prediction.kind === 'challenge');
+        const printed = captured.join('\n').replace(/\u00a0/g, ' ');
+        const expected = prediction.options[0].label.replace(/\u00a0/g,' ');
+        assert.equal(printed, expected, lesson.slug);
+      }
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx','utf8');
+      const css = readFileSync('src/components/deck/JavaScriptConsole.css','utf8');
+      const render = readFileSync('src/components/deck/SlideRenderer.tsx','utf8');
+      const source = readFileSync('src/components/deck/JavaScriptConsole.tsx','utf8');
+      assert.match(player, /'javascript-console'/);
+      assert.match(render, /codeLanguage === 'javascript'/);
+      assert.match(source, /sandbox="allow-scripts"/);
+      assert.match(source, /code\.replace\(\/<\\\/script\/gi/);
+      assert.match(css, /\.story-mode \.deck-stage \.slide-javascript-console/);
     }
   },
   {

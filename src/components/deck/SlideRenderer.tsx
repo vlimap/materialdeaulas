@@ -5,6 +5,7 @@ import { ProblemPlayground } from './ProblemPlayground';
 import { AlgorithmLab } from './AlgorithmLab';
 import { AlgorithmVisualizer } from './AlgorithmVisualizer';
 import { TruthTablePlayground } from './TruthTablePlayground';
+import { JavaScriptConsole } from './JavaScriptConsole';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
@@ -122,7 +123,7 @@ function Challenge({ slide }: { slide: Extract<Slide, { kind: 'challenge' }> }) 
       <p className="micro-challenge-prompt">{slide.prompt}</p>
       {slide.exampleCode && (
         <div className="micro-challenge-example" aria-label="Pseudocódigo do exercício, somente leitura">
-          <span className="micro-challenge-example-label">Pseudocódigo · somente leitura</span>
+          <span className="micro-challenge-example-label">{slide.codeLanguage === 'javascript' ? 'JavaScript · somente leitura' : 'Pseudocódigo · somente leitura'}</span>
           <pre><code>{slide.exampleCode}</code></pre>
         </div>
       )}
@@ -793,6 +794,8 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
         {slide.kind === 'algorithm-visualization' && <AlgorithmVisualizer key={slide.id} slide={slide} />}
 
         {slide.kind === 'truth-table' && <TruthTablePlayground key={slide.id} slide={slide} />}
+
+        {slide.kind === 'javascript-console' && <JavaScriptConsole key={slide.id} slide={slide} />}
 
         {slide.kind === 'challenge' && <Challenge slide={slide} />}
 

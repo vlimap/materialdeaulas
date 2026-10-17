@@ -115,6 +115,7 @@ export type Slide =
       kind: 'challenge';
       prompt: string;
       exampleCode?: string;
+      codeLanguage?: 'javascript' | 'pseudocode';
       testInput?: string;
       options: Array<{ label: string; code?: string }>;
       answerIndex: number;
@@ -137,6 +138,12 @@ export type Slide =
   | (BaseSlide & {
       kind: 'algorithm-visualization';
       scenario: import('../components/deck/algorithm-visualization-engine').AlgorithmScenario;
+    })
+  | (BaseSlide & {
+      kind: 'javascript-console';
+      starterCode: string;
+      task: string;
+      explanation: string;
     })
   | (BaseSlide & {
       kind: 'algorithm-lab';
