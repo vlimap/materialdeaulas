@@ -117,13 +117,13 @@ export const aula02Logic: LessonDefinition = {
       kind: 'exercise',
       eyebrow: 'Prática guiada · 20 minutos',
       title: 'Divida um problema real em subtarefas',
-      challenge: 'Uma turma quer organizar empréstimos de equipamentos em sala.',
+      challenge: 'O empréstimo de equipamentos de uma sala precisa ser organizado.',
       steps: [
         'Descreva o problema em uma frase, sem sugerir tecnologia.',
         'Defina o resultado que deverá ser alcançado.',
         'Liste entre quatro e seis subtarefas essenciais.',
         'Exclua tarefas que não contribuem para o objetivo.',
-        'Explique a divisão para outra pessoa.'
+        'Confira se cada subtarefa é clara, necessária e contribui para o objetivo.'
       ],
       success: ['Problema e objetivo diferentes', 'Subtarefas relevantes', 'Nenhuma ação importante omitida'],
       timebox: '20 minutos'
@@ -238,7 +238,7 @@ export const aula02Logic: LessonDefinition = {
     {
       id: 'logic-02-teste-pratica',
       kind: 'exercise',
-      eyebrow: 'Prática individual · 25 minutos',
+      eyebrow: 'Prática guiada · 25 minutos',
       title: 'Faça um teste de mesa completo',
       challenge: 'Calcule o custo de ingressos de R$ 12,00, conforme a quantidade escolhida.',
       steps: [
@@ -254,7 +254,7 @@ export const aula02Logic: LessonDefinition = {
     {
       id: 'logic-02-missao-final',
       kind: 'missions',
-      eyebrow: 'Desafio em equipe · 40 minutos',
+      eyebrow: 'Desafio final · 40 minutos',
       title: 'Escolha um problema e construa o algoritmo',
       intro: 'Resolva um problema pequeno usando as técnicas desta aula.',
       options: [
