@@ -50,18 +50,6 @@ module.exports = {
       inject: 'body'
     })
   ],
-  devServer: {
-    host: '0.0.0.0',
-    port: 5173,
-    historyApiFallback: true,
-    hot: true,
-    client: {
-      overlay: {
-        errors: true,
-        warnings: false
-      }
-    }
-  },
   optimization: {
     splitChunks: {
       chunks: 'all'
