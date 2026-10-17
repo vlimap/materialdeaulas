@@ -95,6 +95,17 @@ Em desafios sobre lógica, **não escreva algoritmos inteiros no enunciado como 
 
 Mantenha indentação consistente e indique o início e o fim das estruturas condicionais e de repetição. Prefira pseudocódigo para os fundamentos da lógica e sintaxe real somente ao apresentar uma linguagem específica. No celular, a pergunta, o algoritmo, a entrada e todas as alternativas precisam caber no slide visível.
 
+## Tabela-verdade nas aulas de operadores lógicos
+
+Ao introduzir os operadores **E**, **OU** e **NÃO**, apresente sempre a tabela-verdade completa ao lado de uma interação em que o estudante possa escolher entradas verdadeiras ou falsas.
+
+- Use o tipo de slide `truth-table` com `operator: 'and' | 'or' | 'not'`. O componente permite alternar operador e entradas, destaca a linha ativa e explica o resultado.
+- E/OU são operadores binários: exiba as quatro combinações `F/F`, `F/V`, `V/F`, `V/V`. NÃO é unário: exiba duas combinações de A e o resultado da negação.
+- Explique separadamente a conjunção (ambos verdadeiros), a disjunção **inclusiva** (ao menos um verdadeiro, inclusive ambos) e a negação (inversão da única entrada).
+- Mantenha as escolhas em botões reais com `aria-pressed`; a tabela é de **somente leitura**. A linha ativa deve ter indicação textual, não apenas cor.
+- Apresente a regra, a tabela e um exemplo testável, distribuídos em slides menores quando necessário para preservar a tela única no Android.
+- Garanta que `E`, `OU` e `NÃO` não sejam confundidos com operadores aritméticos ou atribuição; prefira pseudocódigo na introdução à lógica.
+
 ## Sequência pedagógica
 
 1. **Capa** — assunto, tecnologia e duração.

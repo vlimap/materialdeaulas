@@ -131,6 +131,10 @@ export type Slide =
       scenario: 'sequence' | 'decision' | 'loop';
     })
   | (BaseSlide & {
+      kind: 'truth-table';
+      operator: 'and' | 'or' | 'not';
+    })
+  | (BaseSlide & {
       kind: 'algorithm-lab';
       scenario: 'flowchart' | 'variables' | 'operators' | 'conditions' | 'loops' | 'arrays' | 'functions' | 'debugging' | 'integrated' | 'project';
     })
