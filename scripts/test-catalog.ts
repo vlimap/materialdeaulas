@@ -426,6 +426,18 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'contagem de slides fica visível no modo Stories mobile',
+    run: () => {
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx', 'utf8');
+      const css = readFileSync('src/styles/global.css', 'utf8');
+      assert.match(player, /className="story-counter"/);
+      assert.match(player, /Slide \$\{index \+ 1\} de \$\{lesson.slides.length\}/);
+      assert.match(css, /\.deck-page\.story-mode \.story-status/);
+      assert.match(css, /\.deck-page\.story-mode \.story-counter/);
+      assert.match(css, /\.story-status \.story-progress/);
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
