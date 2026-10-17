@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
 import { getPublicSeoPages } from '../src/seo/metadata';
+import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 
 type TestCase = {
   name: string;
@@ -336,6 +337,35 @@ const tests: TestCase[] = [
       const navigation = getCourseLessonNavigation('curso-logic-programming');
       assert.equal(navigation.length, 12);
       assert.ok(navigation.every(item => item.published), 'navegação deve habilitar as doze aulas');
+    }
+  },
+  {
+    name: 'laboratórios geram traços determinísticos, resultados e fim para cada cenário',
+    run: () => {
+      const cases: Array<[Parameters<typeof buildAlgorithmTrace>[0], number, string]> = [
+        ['flowchart', 2, 'Insuficiente'],
+        ['variables', 3, 'numero = 5; copia = 3'],
+        ['operators', 5, '17'],
+        ['conditions', 3, '10%'],
+        ['loops', 4, '10'],
+        ['arrays', 3, '13'],
+        ['functions', 5, '10'],
+        ['debugging', 3, '3'],
+        ['integrated', 2, 'Confirmado; restante: 1'],
+        ['project', 5, 'Indisponível']
+      ];
+      for (const [scenario, input, expected] of cases) {
+        const actual = buildAlgorithmTrace(scenario, input);
+        assert.equal(actual.result, expected, scenario);
+        assert.ok(actual.steps.length >= 3);
+        assert.ok(actual.source.length >= 3);
+        assert.ok(actual.steps.every(step => step.line >= 0 && step.line < actual.source.length), scenario);
+        assert.deepEqual(actual, buildAlgorithmTrace(scenario, input));
+      }
+      assert.equal(buildAlgorithmTrace('debugging', 3, true).result, '6');
+      assert.equal(buildAlgorithmTrace('conditions', 5).result, '0%');
+      assert.equal(buildAlgorithmTrace('project', 4).result, 'Reserva: R$ 48,00');
+      assert.equal(buildAlgorithmTrace('loops', 1).result, '1');
     }
   },
   {
