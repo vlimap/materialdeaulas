@@ -194,7 +194,7 @@ export function DeckPlayer({
       !storyAutoPlay ||
       holdingStory ||
       playlistOpen ||
-      ['lab', 'logic-playground', 'problem-playground', 'algorithm-lab', 'truth-table', 'challenge', 'missions', 'exercise', 'checklist', 'references'].includes(current.kind)
+      ['lab', 'logic-playground', 'problem-playground', 'algorithm-lab', 'algorithm-visualization', 'truth-table', 'challenge', 'missions', 'exercise', 'checklist', 'references'].includes(current.kind)
     ) {
       return;
     }
