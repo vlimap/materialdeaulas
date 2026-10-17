@@ -246,14 +246,14 @@ export const aula01Sdlc: LessonDefinition = {
       success: [
         'As quatro atividades fundamentais aparecem.',
         'Existe pelo menos um feedback para etapa anterior.',
-        'A equipe consegue explicar por que escolheu sua organização de processo.'
+        'A escolha do processo está justificada de maneira clara.'
       ],
       timebox: '20 min'
     },
     {
       id: 'atividade-equipe',
       kind: 'missions',
-      eyebrow: 'Atividade em equipe',
+      eyebrow: 'Desafio aplicado',
       title: 'Escolha um sistema e monte seu ciclo',
       intro: 'O objetivo é justificar o processo, não decorar um desenho.',
       options: [
