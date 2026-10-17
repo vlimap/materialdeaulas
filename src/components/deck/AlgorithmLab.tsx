@@ -1,5 +1,5 @@
 import { useMemo, useState, type KeyboardEvent, type SyntheticEvent } from 'react';
-import { ArrowRight, RotateCcw, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, RotateCcw, CheckCircle2, Settings } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import './AlgorithmLab.css';
 
@@ -177,7 +177,7 @@ export function AlgorithmLab({ slide }: { slide: LabSlide }) {
           <div className="algorithm-machine-input"><small>ENTRADA</small><b>{trace.inputValue}</b></div>
           <span className="algorithm-machine-arrow">→</span>
           <div className={'algorithm-machine-unit' + (index ? ' is-running' : '')}>
-            <span className="algorithm-machine-gear">⚙</span>
+            <Settings className="algorithm-machine-gear" aria-hidden="true" />
             <small>ALGORITMO</small>
           </div>
           <span className="algorithm-machine-arrow">→</span>
