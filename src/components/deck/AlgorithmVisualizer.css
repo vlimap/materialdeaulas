@@ -1,0 +1,62 @@
+.algo-viz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);height:100%;min-height:0;gap:1.3cqw;font-family:Arial,sans-serif}
+.algo-viz-scene,.algo-viz-actions{min-width:0;min-height:0;display:flex;flex-direction:column;padding:1cqw;border-radius:1cqw;border:1px solid #c6dded}
+.algo-viz-scene{background:linear-gradient(160deg,#e3f2ff,#fff);color:#193b63;gap:.6cqw}
+.algo-viz-actions{background:#f6faff;color:#153d70;gap:.6cqw}
+.algo-viz-label,.algo-viz-code-heading{font-size:.72cqw;letter-spacing:.035em;font-weight:700;color:#355b7d}
+.algo-viz-values{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:.4cqw;flex-wrap:nowrap}
+.algo-viz-cell{position:relative;flex:0 1 4.9cqw;min-width:0;max-width:5cqw;height:8cqw;display:flex;align-items:center;justify-content:center;border:1px solid #8aa9ce;border-radius:.6cqw;background:#fff;color:#1a4b84;font-size:1.7cqw;font-weight:700;transition:background .18s}
+.algo-viz-cell.is-complete{background:#d9f2e6;border-color:#65ac80}
+.algo-viz-cell.is-active{background:#f6d878;border:2px solid #ab710d;color:#3d300a}
+.algo-viz-cell small{position:absolute;bottom:.3cqw;font-size:.68cqw;color:#476580}
+.algo-viz-status{min-height:6.4cqw;padding:.9cqw;background:#fff;border:1px solid #a5c5e0;border-radius:.7cqw}
+.algo-viz-status strong{font-size:1.26cqw;color:#0b4785}
+.algo-viz-status p{font-size:.92cqw;line-height:1.35;margin:.4cqw 0 0}
+.algo-viz-meter{display:flex;align-items:center;gap:.6cqw;font-size:.8cqw}
+.algo-viz-meter progress{width:100%;flex:1;min-width:0;height:.6cqw;accent-color:#1768bc}
+.algo-viz-meter span{white-space:nowrap}
+.algo-viz-heading{display:flex;justify-content:space-between;align-items:baseline;gap:.4cqw}
+.algo-viz-heading strong{font-size:1.35cqw;line-height:1.15}
+.algo-viz-heading span{font-size:.85cqw;color:#416589}
+.algo-viz-actions label{font-weight:700;font-size:.92cqw}
+.algo-viz-actions select{width:6cqw;min-height:2.8cqw;border:1px solid #8aa9ce;background:#fff;color:#0b3c72;border-radius:.5cqw;font-size:1cqw;padding:.3cqw}
+.algo-viz-actions select:focus-visible,.algo-viz-footer button:focus-visible{outline:3px solid #e7b52b;outline-offset:2px}
+.algo-viz-code{flex:1;min-height:0;margin:0;padding:.7cqw;background:#12233d;color:#eef6ff;border-radius:.5cqw;overflow:hidden}
+.algo-viz-code code{display:grid;align-content:start;white-space:pre-wrap;overflow-wrap:anywhere;font:1cqw/1.55 Consolas,monospace}
+.algo-viz-code span{display:block;padding:0 .3cqw;border-left:3px solid transparent}
+.algo-viz-code span.is-running{background:#2e5d55;color:#d0f9d9;border-left-color:#74d796}
+.algo-viz-footer{display:flex;gap:.6cqw}
+.algo-viz-footer button{flex:1;min-height:3cqw;display:flex;align-items:center;justify-content:center;gap:.4cqw;padding:.5cqw .6cqw;background:#0d47a1;color:#fff;border:1px solid #0d47a1;border-radius:.6cqw;font-size:.95cqw;font-weight:700}
+.algo-viz-footer button.is-secondary{background:#fff;color:#0d47a1}
+.algo-viz-footer button:disabled{opacity:.55}
+.algo-viz-conclusion{font-size:.85cqw;line-height:1.32;margin:0;color:#345674}
+@media(max-width:620px){
+.story-mode .deck-stage .slide-algorithm-visualization .algo-viz{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,35fr) minmax(0,65fr);gap:6px;height:100%}
+.story-mode .deck-stage .algo-viz-scene,.story-mode .deck-stage .algo-viz-actions{padding:7px 9px;border-radius:8px;gap:4px;overflow:hidden}
+.story-mode .deck-stage .algo-viz-label,.story-mode .deck-stage .algo-viz-code-heading{font-size:9px}
+.story-mode .deck-stage .algo-viz-values{gap:4px}
+.story-mode .deck-stage .algo-viz-cell{max-width:43px;height:49px;border-radius:5px;font-size:15px}
+.story-mode .deck-stage .algo-viz-cell small{bottom:2px;font-size:9px}
+.story-mode .deck-stage .algo-viz-status{min-height:0;padding:5px 6px;border-radius:6px}
+.story-mode .deck-stage .algo-viz-status strong{font-size:12px}
+.story-mode .deck-stage .algo-viz-status p{font-size:10px;line-height:1.18;margin-top:2px}
+.story-mode .deck-stage .algo-viz-meter{font-size:10px;gap:6px}
+.story-mode .deck-stage .algo-viz-meter progress{height:7px}
+.story-mode .deck-stage .algo-viz-heading strong{font-size:14px}
+.story-mode .deck-stage .algo-viz-heading span{font-size:10px}
+.story-mode .deck-stage .algo-viz-actions label{font-size:11px}
+.story-mode .deck-stage .algo-viz-actions select{width:66px;min-height:34px;font-size:12px;padding:5px}
+.story-mode .deck-stage .algo-viz-code{padding:6px;min-height:0}
+.story-mode .deck-stage .algo-viz-code code{font-size:clamp(10px,2.8vw,12px);line-height:1.32}
+.story-mode .deck-stage .algo-viz-footer{gap:6px}
+.story-mode .deck-stage .algo-viz-footer button{min-height:40px;padding:5px 7px;font-size:11px;gap:4px;border-radius:7px}
+.story-mode .deck-stage .algo-viz-footer svg{width:14px;height:14px}
+.story-mode .deck-stage .algo-viz-conclusion{font-size:9px;line-height:1.16}
+}
+@media(max-width:620px) and (max-height:660px){
+.story-mode .deck-stage .slide-algorithm-visualization .algo-viz{grid-template-rows:minmax(0,31fr) minmax(0,69fr)}
+.story-mode .deck-stage .algo-viz-scene,.story-mode .deck-stage .algo-viz-actions{padding:4px 7px;gap:3px}
+.story-mode .deck-stage .algo-viz-cell{height:36px;max-width:37px}
+.story-mode .deck-stage .algo-viz-status p{font-size:9px}
+.story-mode .deck-stage .algo-viz-code code{font-size:10px;line-height:1.23}
+}
+@media(prefers-reduced-motion:reduce){.algo-viz-cell{transition:none}}
