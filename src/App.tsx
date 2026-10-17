@@ -1,6 +1,7 @@
 import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers3, Play, Search, Waypoints, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { searchCourseCatalog } from './lib/courseSearch';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from './content/catalog';
 import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
@@ -46,23 +47,14 @@ function CatalogPage() {
   const [courseQuery, setCourseQuery] = useState('');
   const technologies = technologyCourses;
 
-  const normalizedQuery = courseQuery
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .trim()
-    .toLowerCase();
-
-  const visibleTechnologies = normalizedQuery
-    ? technologies.filter((technology) =>
-        technology.title
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .includes(normalizedQuery)
-      )
-    : technologies;
-
-  const groups = Array.from(new Set(visibleTechnologies.map((technology) => technology.description.split(' · ')[1])));
+  const searching = courseQuery.trim().length > 0;
+  const results = useMemo(
+    () => searchCourseCatalog(allCourses, courseQuery, 24),
+    [courseQuery]
+  );
+  const courses = results.filter(result => result.kind === 'course');
+  const lessons = results.filter(result => result.kind === 'lesson');
+  const groups = Array.from(new Set(technologies.map(technology => technology.description.split(' · ')[1])));
 
   return (
     <div className="home-shell">
@@ -76,8 +68,8 @@ function CatalogPage() {
               type="search"
               value={courseQuery}
               onChange={(event) => setCourseQuery(event.target.value)}
-              placeholder="Buscar curso pelo nome"
-              aria-label="Buscar curso pelo nome"
+              placeholder="Buscar cursos, aulas ou assuntos (ex.: merge sort)"
+              aria-label="Buscar cursos, aulas e assuntos"
               autoComplete="off"
             />
             {courseQuery && (
@@ -93,29 +85,70 @@ function CatalogPage() {
             )}
           </div>
 
-          {groups.map((group) => <section className="technology-group" id={'group-' + group.toLowerCase().replace(/[^a-z]+/g, '-')} key={group}>
-            <h2>{group}</h2>
-            <div className="technology-badges">
-              {visibleTechnologies.filter((technology) => technology.description.endsWith(group)).map((technology) => (
-                <Link
-                  className="technology-badge"
-                  key={technology.slug}
-                  to={'/curso/' + technology.slug}
-                  aria-label={'Abrir curso de ' + technology.title}
-                >
-                  {getTechnologyIcon(technology.slug)
-                    ? <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />
-                    : <Layers3 size={20} aria-hidden="true" />}
-                  <span>{technology.title}</span>
-                </Link>
-              ))}
+          {searching ? (
+            <div className="catalog-search-results" role="region" aria-label="Resultados da pesquisa">
+              <p className="catalog-search-summary" role="status" aria-live="polite">
+                {results.length > 0
+                  ? results.length + (results.length === 24 ? ' ou mais resultados' : ' resultados') +
+                    ' para “' + courseQuery.trim() + '”'
+                  : 'Nenhum curso, aula ou assunto encontrado para “' + courseQuery.trim() + '”.'}
+              </p>
+              {courses.length > 0 && (
+                <section className="catalog-results-section" aria-labelledby="search-course-title">
+                  <h2 id="search-course-title">Cursos</h2>
+                  <div className="catalog-result-list">
+                    {courses.map(result => (
+                      <Link className="catalog-result" key={result.href} to={result.href}>
+                        <span className="catalog-result-kind">Curso</span>
+                        <strong>{result.title}</strong>
+                        <small>{result.detail}</small>
+                        <ArrowRight size={17} aria-hidden="true" />
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {lessons.length > 0 && (
+                <section className="catalog-results-section" aria-labelledby="search-lesson-title">
+                  <h2 id="search-lesson-title">Aulas e assuntos</h2>
+                  <div className="catalog-result-list">
+                    {lessons.map(result => (
+                      <Link className="catalog-result" key={result.href} to={result.href}>
+                        <span className="catalog-result-kind">Aula · {result.courseTitle}</span>
+                        <strong>{result.title}</strong>
+                        <small>{result.detail}</small>
+                        <ArrowRight size={17} aria-hidden="true" />
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+              {results.length === 0 && (
+                <div className="course-search-empty">
+                  Experimente o nome de um curso, uma técnica ou um assunto, como
+                  “JavaScript”, “recursão”, “merge sort” ou “tabela verdade”.
+                </div>
+              )}
             </div>
-          </section>)}
-
-          {visibleTechnologies.length === 0 && (
-            <div className="course-search-empty" role="status">
-              Nenhum curso encontrado para <strong>“{courseQuery.trim()}”</strong>.
-            </div>
+          ) : (
+            groups.map(group => <section className="technology-group" id={'group-' + group.toLowerCase().replace(/[^a-z]+/g, '-')} key={group}>
+              <h2>{group}</h2>
+              <div className="technology-badges">
+                {technologies.filter(technology => technology.description.endsWith(group)).map(technology => (
+                  <Link
+                    className="technology-badge"
+                    key={technology.slug}
+                    to={'/curso/' + technology.slug}
+                    aria-label={'Abrir curso de ' + technology.title}
+                  >
+                    {getTechnologyIcon(technology.slug)
+                      ? <img src={getTechnologyIcon(technology.slug)} alt="" aria-hidden="true" />
+                      : <Layers3 size={20} aria-hidden="true" />}
+                    <span>{technology.title}</span>
+                  </Link>
+                ))}
+              </div>
+            </section>)
           )}
         </div>
         </section>
