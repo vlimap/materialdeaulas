@@ -6088,3 +6088,35 @@ a.lesson-playlist-item:focus-visible {
   .story-mode .slide-subtitle { font-size: 11px; line-height: 1.2; margin-top: 3px; }
   .story-mode .statement-lead { font-size: clamp(24px, 7vw, 32px); }
 }
+
+
+/* Keep the remaining instructional slide types inside the same mobile frame. */
+@media (max-width: 620px) {
+  .story-mode .exercise-layout,
+  .story-mode .checklist-layout,
+  .story-mode .missions-layout {
+    height: 100%;
+    min-height: 0;
+    align-content: start;
+  }
+  .story-mode .exercise-layout { display: flex; flex-direction: column; gap: 6px; }
+  .story-mode .exercise-main { flex: 1 1 auto; min-height: 0; padding: 10px; }
+  .story-mode .exercise-main h3 { font-size: .91rem; line-height: 1.2; margin-bottom: 7px; }
+  .story-mode .exercise-main ol { gap: 4px; font-size: .76rem; line-height: 1.25; }
+  .story-mode .success-box { flex: 0 0 auto; padding: 8px 10px; }
+  .story-mode .success-box ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 4px 0 0; font-size: .68rem; line-height: 1.2; }
+  .story-mode .checklist-layout { gap: 6px; }
+  .story-mode .checklist { gap: 5px; }
+  .story-mode .checklist > div { min-height: 0; padding: 6px 8px; grid-template-columns: 24px 1fr; gap: 6px; }
+  .story-mode .checklist span { height: 23px; width: 23px; }
+  .story-mode .checklist p { font-size: .74rem; line-height: 1.2; }
+  .story-mode .checkpoint-prompt { padding: 8px; font-size: .72rem; line-height: 1.2; }
+  .story-mode .mission-options { gap: 5px; }
+  .story-mode .mission-options button { min-height: 72px; padding: 7px 9px; gap: 3px; }
+  .story-mode .mission-requirements { padding: 7px; }
+  .story-mode .mission-requirements ul { gap: 3px 10px; margin-top: 4px; }
+  .story-mode .references > div { padding: 7px 4px; }
+  .story-mode .code-window pre { max-height: 100%; overflow: hidden; }
+  .story-mode .visual-layout { min-height: 0; height: 100%; }
+}
+
