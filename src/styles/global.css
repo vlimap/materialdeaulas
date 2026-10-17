@@ -5996,7 +5996,7 @@ a.lesson-playlist-item:focus-visible {
     touch-action: pan-y;
   }
 
-  .story-mode .slide-canvas:not(.cover-slide) {
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) {
     display: grid;
     grid-template-rows: auto minmax(0, 1fr);
     gap: 7px;
@@ -6004,38 +6004,38 @@ a.lesson-playlist-item:focus-visible {
     overflow: hidden;
   }
 
-  .story-mode .slide-canvas:not(.cover-slide) > .slide-brand,
-  .story-mode .slide-canvas:not(.cover-slide) > .slide-footer,
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) > .slide-brand,
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) > .slide-footer,
   .story-mode .story-hint {
     display: none;
   }
 
-  .story-mode .slide-canvas:not(.cover-slide) > .slide-header {
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) > .slide-header {
     position: static;
     width: 100%;
     min-width: 0;
     padding: 0 2px;
   }
 
-  .story-mode .slide-header .eyebrow {
+  .story-mode .deck-stage .slide-header .eyebrow {
     margin: 0 0 4px;
     font-size: clamp(10px, 2.8vw, 12px);
   }
 
-  .story-mode .slide-header h2 {
+  .story-mode .deck-stage .slide-header h2 {
     max-width: 100%;
     font-size: clamp(21px, 6vw, 27px);
     line-height: 1.05;
     letter-spacing: -.035em;
   }
 
-  .story-mode .slide-subtitle {
+  .story-mode .deck-stage .slide-subtitle {
     margin: 5px 0 0;
     font-size: clamp(11px, 3.15vw, 13px);
     line-height: 1.25;
   }
 
-  .story-mode .slide-canvas:not(.cover-slide) > .slide-body {
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) > .slide-body {
     position: static;
     inset: auto;
     min-width: 0;
@@ -6047,76 +6047,76 @@ a.lesson-playlist-item:focus-visible {
     overscroll-behavior: none;
   }
 
-  .story-mode .slide-body::-webkit-scrollbar { display: none; }
+  .story-mode .deck-stage .slide-body::-webkit-scrollbar { display: none; }
 
-  .story-mode .statement-layout {
+  .story-mode .deck-stage .statement-layout {
     height: 100%;
     align-content: center;
     gap: clamp(8px, 2vh, 15px);
   }
 
-  .story-mode .statement-lead { font-size: clamp(26px, 7.8vw, 37px); }
-  .story-mode .statement-detail { font-size: clamp(13px, 3.6vw, 15px); line-height: 1.4; }
-  .story-mode .statement-keywords { font-size: clamp(12px, 3.4vw, 14px); }
+  .story-mode .deck-stage .statement-lead { font-size: clamp(26px, 7.8vw, 37px); }
+  .story-mode .deck-stage .statement-detail { font-size: clamp(13px, 3.6vw, 15px); line-height: 1.4; }
+  .story-mode .deck-stage .statement-keywords { font-size: clamp(12px, 3.4vw, 14px); }
 
-  .story-mode .cards-grid {
+  .story-mode .deck-stage .cards-grid {
     height: 100%;
     min-height: 0;
     align-content: center;
     gap: clamp(6px, 1vh, 10px);
   }
 
-  .story-mode .info-card {
+  .story-mode .deck-stage .info-card {
     min-height: 0;
     padding: clamp(9px, 1.7vh, 14px);
   }
 
-  .story-mode .info-card h3 { margin: 4px 0; font-size: 1rem; }
-  .story-mode .info-card p { font-size: .8rem; line-height: 1.3; }
-  .story-mode .slide-project-url { display: none; }
+  .story-mode .deck-stage .info-card h3 { margin: 4px 0; font-size: 1rem; }
+  .story-mode .deck-stage .info-card p { font-size: .8rem; line-height: 1.3; }
+  .story-mode .deck-stage .slide-project-url { display: none; }
 }
 
 /* Very short mobile browser viewports: preserve content and controls by reducing decoration. */
 @media (max-width: 620px) and (max-height: 660px) {
-  .story-mode .slide-canvas:not(.cover-slide) {
+  .story-mode .deck-stage .slide-canvas:not(.cover-slide) {
     gap: 4px;
     padding: 9px 11px 10px;
   }
 
-  .story-mode .slide-header h2 { font-size: clamp(19px, 5.6vw, 23px); }
-  .story-mode .slide-header .eyebrow { font-size: 10px; margin-bottom: 2px; }
-  .story-mode .slide-subtitle { font-size: 11px; line-height: 1.2; margin-top: 3px; }
-  .story-mode .statement-lead { font-size: clamp(24px, 7vw, 32px); }
+  .story-mode .deck-stage .slide-header h2 { font-size: clamp(19px, 5.6vw, 23px); }
+  .story-mode .deck-stage .slide-header .eyebrow { font-size: 10px; margin-bottom: 2px; }
+  .story-mode .deck-stage .slide-subtitle { font-size: 11px; line-height: 1.2; margin-top: 3px; }
+  .story-mode .deck-stage .statement-lead { font-size: clamp(24px, 7vw, 32px); }
 }
 
 
 /* Keep the remaining instructional slide types inside the same mobile frame. */
 @media (max-width: 620px) {
-  .story-mode .exercise-layout,
-  .story-mode .checklist-layout,
-  .story-mode .missions-layout {
+  .story-mode .deck-stage .exercise-layout,
+  .story-mode .deck-stage .checklist-layout,
+  .story-mode .deck-stage .missions-layout {
     height: 100%;
     min-height: 0;
     align-content: start;
   }
-  .story-mode .exercise-layout { display: flex; flex-direction: column; gap: 6px; }
-  .story-mode .exercise-main { flex: 1 1 auto; min-height: 0; padding: 10px; }
-  .story-mode .exercise-main h3 { font-size: .91rem; line-height: 1.2; margin-bottom: 7px; }
-  .story-mode .exercise-main ol { gap: 4px; font-size: .76rem; line-height: 1.25; }
-  .story-mode .success-box { flex: 0 0 auto; padding: 8px 10px; }
-  .story-mode .success-box ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 4px 0 0; font-size: .68rem; line-height: 1.2; }
-  .story-mode .checklist-layout { gap: 6px; }
-  .story-mode .checklist { gap: 5px; }
-  .story-mode .checklist > div { min-height: 0; padding: 6px 8px; grid-template-columns: 24px 1fr; gap: 6px; }
-  .story-mode .checklist span { height: 23px; width: 23px; }
-  .story-mode .checklist p { font-size: .74rem; line-height: 1.2; }
-  .story-mode .checkpoint-prompt { padding: 8px; font-size: .72rem; line-height: 1.2; }
-  .story-mode .mission-options { gap: 5px; }
-  .story-mode .mission-options button { min-height: 72px; padding: 7px 9px; gap: 3px; }
-  .story-mode .mission-requirements { padding: 7px; }
-  .story-mode .mission-requirements ul { gap: 3px 10px; margin-top: 4px; }
-  .story-mode .references > div { padding: 7px 4px; }
-  .story-mode .code-window pre { max-height: 100%; overflow: hidden; }
-  .story-mode .visual-layout { min-height: 0; height: 100%; }
+  .story-mode .deck-stage .exercise-layout { display: flex; flex-direction: column; gap: 6px; }
+  .story-mode .deck-stage .exercise-main { flex: 1 1 auto; min-height: 0; padding: 10px; }
+  .story-mode .deck-stage .exercise-main h3 { font-size: .91rem; line-height: 1.2; margin-bottom: 7px; }
+  .story-mode .deck-stage .exercise-main ol { gap: 4px; font-size: .76rem; line-height: 1.25; }
+  .story-mode .deck-stage .success-box { flex: 0 0 auto; padding: 8px 10px; }
+  .story-mode .deck-stage .success-box ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 4px 0 0; font-size: .68rem; line-height: 1.2; }
+  .story-mode .deck-stage .checklist-layout { gap: 6px; }
+  .story-mode .deck-stage .checklist { gap: 5px; }
+  .story-mode .deck-stage .checklist > div { min-height: 0; padding: 6px 8px; grid-template-columns: 24px 1fr; gap: 6px; }
+  .story-mode .deck-stage .checklist span { height: 23px; width: 23px; }
+  .story-mode .deck-stage .checklist p { font-size: .74rem; line-height: 1.2; }
+  .story-mode .deck-stage .checkpoint-prompt { padding: 8px; font-size: .72rem; line-height: 1.2; }
+  .story-mode .deck-stage .mission-options { gap: 5px; }
+  .story-mode .deck-stage .mission-options button { min-height: 72px; padding: 7px 9px; gap: 3px; }
+  .story-mode .deck-stage .mission-requirements { padding: 7px; }
+  .story-mode .deck-stage .mission-requirements ul { gap: 3px 10px; margin-top: 4px; }
+  .story-mode .deck-stage .references > div { padding: 7px 4px; }
+  .story-mode .deck-stage .code-window pre { max-height: 100%; overflow: hidden; }
+  .story-mode .deck-stage .visual-layout { min-height: 0; height: 100%; }
 }
 
