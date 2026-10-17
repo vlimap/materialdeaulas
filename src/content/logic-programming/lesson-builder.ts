@@ -37,6 +37,7 @@ export type LogicLessonConfig = {
   cards: [CardItem[], CardItem[]];
   quizzes: [LogicQuiz, LogicQuiz, LogicQuiz, LogicQuiz];
   scenario: Extract<Slide, { kind: 'algorithm-lab' }>['scenario'];
+  afterConceptC?: Slide[];
   practice: [LogicPractice, LogicPractice, LogicPractice];
   synthesis: LogicTopic;
   checklist: [string, string, string, string, string];
@@ -94,6 +95,7 @@ export function buildLogicLesson(def: LogicLessonConfig): LessonDefinition {
     quiz('leitura-algoritmo', def.quizzes[2]),
     exercise('pratica-guiada', def.practice[0]),
     statement('conceito-c', def.concepts[2], 'Conceito 03'),
+    ...(def.afterConceptC ?? []),
     cards('mapa-b', 'Compare os resultados', def.cards[1]),
     quiz('verificacao', def.quizzes[3]),
     exercise('pratica-autonoma', def.practice[1]),
