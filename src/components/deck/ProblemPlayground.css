@@ -110,3 +110,119 @@
 }
 @media (prefers-reduced-motion: reduce) { .problem-notebook,/* Deprecated static preview removed. */
 .problem-preview-step { animation: none !important; } }
+
+
+/* Lessons use the available Story height, never a second vertical scroller. */
+@media (max-width: 620px) {
+  .story-mode .slide-problem-playground .problem-interaction,
+  .story-mode .slide-problem-playground .problem-layout {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+  }
+  .story-mode .slide-problem-playground .problem-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 27fr) minmax(0, 73fr);
+    gap: 6px;
+  }
+  .story-mode .slide-problem-playground .problem-scene {
+    min-height: 0;
+    height: 100%;
+    border-radius: 9px;
+    padding: 4px;
+    overflow: hidden;
+  }
+  .story-mode .problem-scene-label { display: none; }
+  .story-mode .problem-scene-art { min-height: 0; height: auto; gap: 2px; padding: 2px 6px; }
+  .story-mode .problem-scene-status {
+    min-height: 0;
+    margin: auto 5px 3px;
+    font-size: 10px;
+    line-height: 1.15;
+  }
+  .story-mode .problem-book-illustration { height: 54px; gap: 13px; flex: 0 0 54px; }
+  .story-mode .problem-books { height: 50px; }
+  .story-mode .problem-books span { width: 22px; height: 47px; }
+  .story-mode .problem-reader { width: 51px; height: 51px; border-width: 2px; }
+  .story-mode .problem-reader svg { width: 23px; height: 23px; }
+  .story-mode .problem-reader span { font-size: 19px; margin-left: 40px; margin-top: -25px; }
+  .story-mode .problem-selection-status {
+    width: 100%;
+    gap: 2px;
+    padding: 2px 6px;
+    background: transparent;
+  }
+  .story-mode .problem-selection-status strong { font-size: 11px; }
+  .story-mode .problem-selection-status progress { height: 7px; }
+  .story-mode .problem-selection-status small { display: none; }
+  .story-mode .problem-order-illustration { gap: 7px; }
+  .story-mode .problem-order-icon { padding: 3px; gap: 3px; }
+  .story-mode .problem-order-icon svg { width: 32px; height: 32px; }
+  .story-mode .problem-order-icon strong { font-size: 10px; }
+  .story-mode .problem-order-arrow { width: 30px; height: 30px; font-size: 22px; }
+  .story-mode .problem-order-note { display: none; }
+  .story-mode .problem-notebooks { min-height: 0; height: 52px; gap: 5px; }
+  .story-mode .problem-notebook { width: 28px; height: 39px; border-width: 2px; border-left-width: 5px; }
+  .story-mode .problem-notebook svg { width: 20px; height: 20px; }
+  .story-mode .problem-dataflow { gap: 3px; }
+  .story-mode .problem-dataflow > div { width: 76px; height: 39px; }
+  .story-mode .problem-dataflow small { font-size: 8px; }
+  .story-mode .problem-dataflow strong { font-size: 9px; margin-top: 2px; }
+
+  .story-mode .slide-problem-playground .problem-control {
+    min-height: 0;
+    height: 100%;
+    padding: 7px 9px;
+    overflow: hidden;
+    border-radius: 9px;
+  }
+  .story-mode .problem-action-label { display: none; }
+  .story-mode .problem-control > strong { font-size: 15px; line-height: 1.15; }
+  .story-mode .problem-control > p { margin: 3px 0 5px; font-size: 11px; line-height: 1.22; }
+  .story-mode .problem-tasks { gap: 5px; }
+  .story-mode .problem-task {
+    min-height: 38px;
+    padding: 5px;
+    gap: 5px;
+    border-radius: 6px;
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  .story-mode .problem-task input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+  }
+  .story-mode .problem-sort { gap: 4px; margin: 0; }
+  .story-mode .problem-sort li { min-height: 38px; padding: 3px 5px; gap: 6px; }
+  .story-mode .problem-sort-number { width: 20px; height: 20px; font-size: 10px; flex: 0 0 20px; }
+  .story-mode .problem-sort-label { font-size: 11px; line-height: 1.1; }
+  .story-mode .problem-move { gap: 4px; }
+  .story-mode .problem-move button { width: 34px; height: 34px; padding: 3px; }
+  .story-mode .problem-readonly-label { display: none; }
+  .story-mode .problem-pseudocode { padding: 6px 8px; font-size: 10px; line-height: 1.4; }
+  .story-mode .problem-quantity-label { font-size: 11px; }
+  .story-mode .problem-quantity { margin: 2px 0 5px; }
+  .story-mode .problem-quantity button { width: 36px; height: 36px; }
+  .story-mode .problem-quantity output { font-size: 15px; }
+  .story-mode .problem-actions { padding-top: 5px; flex-wrap: nowrap; gap: 6px; }
+  .story-mode .problem-actions button {
+    min-height: 40px;
+    padding: 6px 8px;
+    font-size: 11px;
+    line-height: 1.15;
+    flex: 1 1 auto;
+    white-space: nowrap;
+  }
+  .story-mode .problem-control > .problem-ok,
+  .story-mode .problem-control > .problem-tip { display: none; }
+}
+
+@media (max-width: 620px) and (max-height: 660px) {
+  .story-mode .problem-control > p { margin: 2px 0 3px; }
+  .story-mode .problem-tasks { gap: 3px; }
+  .story-mode .problem-task { min-height: 35px; font-size: 10px; }
+  .story-mode .problem-sort li { min-height: 35px; }
+  .story-mode .problem-move button { width: 30px; height: 30px; }
+}
