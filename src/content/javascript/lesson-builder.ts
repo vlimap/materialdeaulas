@@ -85,6 +85,21 @@ export function buildJsLesson(def: JsLessonSpec): LessonDefinition {
       answerIndex: 0, explanation: def.explanation },
     exercise('practice-a', def.practices[0], 25),
     statement('concept-c', def.concepts[2].title, def.concepts[2].lead, def.concepts[2].detail, [def.terms[2].title]),
+    ...(def.number === 4 ? ([
+      { kind: 'statement', id: prefix + '-truth-intro',
+        eyebrow: 'Operadores lógicos · Tabela-verdade',
+        title: 'Todas as combinações possíveis',
+        lead: 'Dois booleanos A e B geram quatro combinações de verdadeiro e falso.',
+        detail: '&& corresponde ao E lógico, || ao OU inclusivo e ! ao NÃO. Para operandos booleanos, a tabela descreve o resultado; para outros tipos, && e || podem retornar operandos.',
+        chips: ['E: A && B', 'OU: A || B', 'NÃO: !A'] },
+      { kind: 'truth-table', id: prefix + '-truth-and', eyebrow: 'Teste os quatro casos',
+        title: 'Tabela-verdade: E (&&)', subtitle: 'Alterne os valores de A e B e observe o resultado.', operator: 'and' },
+      { kind: 'truth-table', id: prefix + '-truth-or', eyebrow: 'OU inclusivo',
+        title: 'Tabela-verdade: OU (||)', subtitle: 'V OU V também é verdadeiro.', operator: 'or' },
+      { kind: 'truth-table', id: prefix + '-truth-not', eyebrow: 'Negação',
+        title: 'Tabela-verdade: NÃO (!)', subtitle: 'A negação usa apenas uma entrada.', operator: 'not' }
+    ] as Slide[]) : []),
+
     cards('contrast', 'Evite estas confusões', def.contrasts),
     quiz('application-check', def.questions[2]),
     exercise('practice-b', def.practices[1], 35),
