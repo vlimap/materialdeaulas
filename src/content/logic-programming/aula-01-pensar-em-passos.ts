@@ -90,13 +90,13 @@ export const aula01Logic: LessonDefinition = {
     {
       id: 'logic-01-sequencia-pratica',
       kind: 'exercise',
-      eyebrow: 'Prática em dupla · 15 minutos',
+      eyebrow: 'Prática guiada · 15 minutos',
       title: 'Descreva um algoritmo do cotidiano',
       challenge: 'Escreva instruções para organizar uma mochila antes de sair.',
       steps: [
         'Identifique os materiais necessários (entrada).',
         'Escreva de 5 a 7 passos em ordem.',
-        'Peça à dupla para seguir suas instruções literalmente.',
+        'Simule a execução dos passos exatamente como foram escritos.',
         'Corrija qualquer passo ambíguo ou fora de ordem.'
       ],
       success: ['Início e fim definidos', 'Passos claros e executáveis', 'Resultado verificável'],
@@ -239,7 +239,7 @@ export const aula01Logic: LessonDefinition = {
         'O que é uma iteração e quando um laço termina.',
         'Como testar um algoritmo com entradas diferentes.'
       ],
-      prompt: 'Refaça as três simulações anteriores e explique cada etapa para outra pessoa.'
+      prompt: 'Refaça as três simulações e descreva com suas palavras o que ocorre em cada etapa.'
     },
     {
       id: 'logic-01-referencias',
