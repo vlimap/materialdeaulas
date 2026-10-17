@@ -744,21 +744,20 @@ a {
   line-height: 1.55;
 }
 
-.chip-row {
+.statement-keywords {
   grid-column: 2;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7cqw;
   align-self: start;
+  margin: 0;
+  padding-left: 1cqw;
+  border-left: 0.2cqw solid var(--innovation-500);
+  color: var(--gray-900);
+  font-size: 1.12cqw;
+  line-height: 1.55;
 }
 
-.chip-row span {
-  padding: 0.6cqw 0.9cqw;
-  border-radius: 99px;
+.statement-keywords-label {
+  font-weight: 700;
   color: var(--innovation-600);
-  background: var(--innovation-100);
-  font-size: 0.9cqw;
-  font-weight: 600;
 }
 
 .timeline {
@@ -1918,9 +1917,13 @@ a {
   color: #f7f7f7;
 }
 
-.deck-page .chip-row span {
-  color: #f7f7f7;
-  background: #0d47a1;
+.deck-page .statement-keywords {
+  color: #d6dee7;
+  border-left-color: #F2C53D;
+}
+
+.deck-page .statement-keywords-label {
+  color: #F2C53D;
 }
 
 .deck-page .timeline-item,
@@ -2297,14 +2300,12 @@ a {
     line-height: 1.5;
   }
 
-  .story-mode .chip-row {
+  .story-mode .statement-keywords {
     grid-column: 1;
-    gap: 7px;
-  }
-
-  .story-mode .chip-row span {
-    padding: 7px 10px;
-    font-size: .78rem;
+    padding-left: 12px;
+    border-left-width: 3px;
+    font-size: .94rem;
+    line-height: 1.5;
   }
 
   .story-mode .timeline {
@@ -5096,8 +5097,8 @@ a.lesson-playlist-item:focus-visible {
     line-height: 1.45;
   }
 
-  .deck-page .chip-row span {
-    font-size: clamp(16px, 1cqw, 20px);
+  .deck-page .statement-keywords {
+    font-size: clamp(16px, 1.05cqw, 21px);
   }
 
   .deck-page .timeline-year {
