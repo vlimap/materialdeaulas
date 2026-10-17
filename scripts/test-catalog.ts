@@ -350,6 +350,29 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'palavras-chave explicativas não parecem botões em nenhuma aula',
+    run: () => {
+      const renderer = readFileSync('src/components/deck/SlideRenderer.tsx', 'utf8');
+      const styles = readFileSync('src/styles/global.css', 'utf8');
+      assert.match(renderer, /className="statement-keywords"/);
+      assert.match(renderer, /Conceitos-chave:/);
+      assert.match(renderer, /slide\.chips\.join\(' · '\)/);
+      assert.doesNotMatch(renderer, /className="chip-row"/);
+      assert.doesNotMatch(styles, /\.chip-row(?:\s|\.)/);
+      assert.match(styles, /\.story-mode \.statement-keywords/);
+      assert.match(styles, /\.deck-page \.statement-keywords/);
+      assert.doesNotMatch(styles, /\.statement-keywords \{[^}]*border-radius:/);
+      assert.doesNotMatch(styles, /\.statement-keywords \{[^}]*background:/);
+      const keywords = [...catalog, ...technologyCourses]
+        .flatMap(course => course.ucs)
+        .flatMap(uc => uc.modules)
+        .flatMap(module => module.lessons)
+        .flatMap(lesson => lesson.slides)
+        .filter(slide => slide.kind === 'statement' && Boolean(slide.chips?.length));
+      assert.ok(keywords.length > 4, 'deve haver palavras-chave em vários slides');
+    }
+  },
+  {
     name: 'gera SEO somente para aulas publicadas',
     run: () => {
       const pages = getPublicSeoPages();
