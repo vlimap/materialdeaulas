@@ -114,6 +114,8 @@ export type Slide =
   | (BaseSlide & {
       kind: 'challenge';
       prompt: string;
+      exampleCode?: string;
+      testInput?: string;
       options: Array<{ label: string; code?: string }>;
       answerIndex: number;
       explanation: string;
