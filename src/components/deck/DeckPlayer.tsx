@@ -399,17 +399,23 @@ export function DeckPlayer({
       </div>
 
       {isStoryMode && (
-        <div className="story-progress" aria-hidden="true">
-          {lesson.slides.map((slide, slideIndex) => {
-            const width =
-              slideIndex < index ? 100 : slideIndex === index ? storyProgress : 0;
+        <div className="story-status">
+          <div className="story-progress" aria-hidden="true">
+            {lesson.slides.map((slide, slideIndex) => {
+              const width =
+                slideIndex < index ? 100 : slideIndex === index ? storyProgress : 0;
 
-            return (
-              <span key={slide.id}>
-                <i style={{ width: width + '%' }} />
-              </span>
-            );
-          })}
+              return (
+                <span key={slide.id}>
+                  <i style={{ width: width + '%' }} />
+                </span>
+              );
+            })}
+          </div>
+          <output className="story-counter" aria-live="polite" aria-label={`Slide ${index + 1} de ${lesson.slides.length}`}>
+            <strong>{String(index + 1).padStart(2, '0')}</strong>
+            <span> / {String(lesson.slides.length).padStart(2, '0')}</span>
+          </output>
         </div>
       )}
 
