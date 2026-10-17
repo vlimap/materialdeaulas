@@ -32,6 +32,8 @@ jobs:
           git add package-lock.json
           if ! git diff --cached --quiet; then
             git commit -m 'security(deps): regenerate deterministic lockfile from patched packages'
+            git fetch origin security/remediate-2026-dependencies
+            git rebase origin/security/remediate-2026-dependencies
             git push origin HEAD:security/remediate-2026-dependencies
           fi
       # Second pass: rebuild lockfile after upgrading webpack-dev-server v6.
