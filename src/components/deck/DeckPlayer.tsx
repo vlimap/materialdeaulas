@@ -194,7 +194,7 @@ export function DeckPlayer({
       !storyAutoPlay ||
       holdingStory ||
       playlistOpen ||
-      current.kind === 'lab'
+      ['lab', 'logic-playground', 'challenge', 'missions'].includes(current.kind)
     ) {
       return;
     }
