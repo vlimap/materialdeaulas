@@ -1,0 +1,9 @@
+# Responsável pela revisão do conteúdo e do código.
+# CODEOWNERS solicita revisão, mas a obrigação de aprovação requer
+# uma regra de proteção de main no GitHub.
+* @vlimap
+
+# Proteja também os próprios controles de governança.
+.github/ @vlimap
+CONTRIBUTING.md @vlimap
+SECURITY.md @vlimap
