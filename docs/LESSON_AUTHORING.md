@@ -43,6 +43,17 @@ export const aula01Variaveis: LessonDefinition = {
 };
 ```
 
+## Linguagem dos slides: conteúdo voltado a quem estuda
+
+O slide é lido diretamente pelo estudante, não é um roteiro para o professor. Todas as explicações, perguntas e atividades devem funcionar sem mediação de um docente.
+
+- Escreva instruções que possam ser executadas diretamente por quem estuda: "Execute os passos", "Confira o resultado", "Compare as saídas".
+- Evite comandos de mediação ou organização de turma, como "Peça à dupla", "Divida os alunos em grupos", "Solicite que os estudantes..." ou "O professor deve...".
+- Não obrigue interação com colegas: exercícios devem poder ser realizados individualmente, ainda que também sejam adequados ao trabalho colaborativo.
+- Retire referências a papéis didáticos nos títulos de slides ("prática em dupla", "desafio em equipe") quando não forem indispensáveis à resolução.
+- Descreva o problema, as instruções, os dados de entrada, o resultado esperado e os critérios de conclusão de forma autossuficiente.
+- Informações exclusivas do docente devem ser registradas fora do texto projetado, como metadados internos ou orientações do autor.
+
 ## Sequência pedagógica
 
 1. **Capa** — assunto, tecnologia e duração.
