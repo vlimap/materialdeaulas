@@ -286,47 +286,56 @@ const tests: TestCase[] = [
     }
   },
   {
-    name: 'publica duas aulas de lógica com simulações interativas',
+    name: 'publica as doze aulas de lógica com simulações e conteúdos próprios',
     run: () => {
-      const course = technologyCourses.find((item) => item.slug === 'curso-logic-programming');
+      const course = technologyCourses.find(item => item.slug === 'curso-logic-programming');
       const lessons = course?.ucs[0].modules[0].lessons ?? [];
       assert.equal(lessons.length, 12);
-      assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
-      assert.deepEqual(lessons.slice(0, 2).map((lesson) => lesson.status), ['published', 'published']);
-      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 10);
-      assert.deepEqual(lessons.map((lesson) => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
+      assert.ok(lessons.every(lesson => lesson.status === 'published'));
+      assert.ok(lessons.every(lesson => lesson.durationMinutes === 240));
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
 
       const lesson1 = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-01-pensar-em-passos')?.lesson;
-      assert.equal(lesson1?.id, 'logic-aula-01');
-      const firstSlides = lesson1?.slides ?? [];
-      assert.equal(firstSlides.length, 20);
-      assert.equal(new Set(firstSlides.map((slide) => slide.id)).size, firstSlides.length);
+      const lesson2 = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-02-problemas-e-algoritmos')?.lesson;
+      assert.equal(lesson1?.slides.length, 20);
+      assert.equal(lesson2?.slides.length, 23);
       assert.deepEqual(
-        firstSlides.filter((slide) => slide.kind === 'logic-playground').map((slide) => slide.kind === 'logic-playground' ? slide.scenario : ''),
+        lesson1?.slides.filter(slide => slide.kind === 'logic-playground')
+          .map(slide => slide.kind === 'logic-playground' ? slide.scenario : ''),
         ['sequence', 'decision', 'loop']
       );
-
-      const lesson2 = findLesson('curso-logic-programming', 'fundamentos-logic-programming', 'aula-02-problemas-e-algoritmos')?.lesson;
-      assert.equal(lesson2?.id, 'logic-aula-02');
-      const secondSlides = lesson2?.slides ?? [];
-      assert.equal(secondSlides.length, 23);
-      assert.equal(new Set(secondSlides.map((slide) => slide.id)).size, secondSlides.length);
       assert.deepEqual(
-        secondSlides.filter((slide) => slide.kind === 'problem-playground').map((slide) => slide.kind === 'problem-playground' ? slide.scenario : ''),
+        lesson2?.slides.filter(slide => slide.kind === 'problem-playground')
+          .map(slide => slide.kind === 'problem-playground' ? slide.scenario : ''),
         ['decompose', 'order', 'trace']
       );
-      assert.ok(secondSlides.some((slide) => slide.kind === 'missions'));
-      assert.ok(secondSlides.filter((slide) => slide.kind === 'challenge').length >= 3);
-      assert.ok(secondSlides.some((slide) => slide.kind === 'references'));
 
-      for (const slide of [...firstSlides, ...secondSlides]) {
-        const text = JSON.stringify(slide);
-        assert.doesNotMatch(text, /Peça à dupla|Explique a divisão para outra pessoa|em equipe|em dupla|O professor deve|solicite aos alunos/i, slide.id);
+      const expectedScenarios = [
+        'flowchart', 'variables', 'operators', 'conditions', 'loops',
+        'arrays', 'functions', 'debugging', 'integrated', 'project'
+      ];
+      for (const [offset, scenario] of expectedScenarios.entries()) {
+        const lesson = lessons[offset + 2];
+        const resolved = findLesson('curso-logic-programming', 'fundamentos-logic-programming', lesson.slug);
+        assert.equal(resolved?.lesson.id, lesson.id);
+        assert.equal(lesson.slides.length, 18, lesson.slug);
+        assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'algorithm-lab').length, 1);
+        const lab = lesson.slides.find(slide => slide.kind === 'algorithm-lab');
+        assert.ok(lab && lab.kind === 'algorithm-lab' && lab.scenario === scenario);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, 4);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'exercise').length, 3);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'references').length, 1);
+        assert.ok(lesson.objectives.length >= 4);
+        for (const slide of lesson.slides) {
+          const value = JSON.stringify(slide);
+          assert.doesNotMatch(value, /Peça à dupla|Explique para outra pessoa|O professor deve|solicite aos alunos|divida a turma/i, slide.id);
+        }
       }
 
       const navigation = getCourseLessonNavigation('curso-logic-programming');
       assert.equal(navigation.length, 12);
-      assert.deepEqual(navigation.slice(0, 3).map((item) => item.published), [true, true, false]);
+      assert.ok(navigation.every(item => item.published), 'navegação deve habilitar as doze aulas');
     }
   },
   {
