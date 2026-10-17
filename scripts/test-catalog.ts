@@ -343,10 +343,16 @@ const tests: TestCase[] = [
         const captured: string[] = [];
         const fake = { log: (...args: unknown[]) =>
           captured.push(args.map(arg => typeof arg === 'string' ? arg : JSON.stringify(arg)).join(' ')) };
-        runInNewContext(slide.starterCode, {
-          console: fake, Number, Object, Array, Set, Map, Intl, JSON, URLSearchParams,
-          RegExp, Date, String, Promise, Symbol
-        }, {timeout: 250});
+        // VM initialization and Intl caches may be cold on hosted CI runners.
+        // Keep a finite timeout to detect runaway scripts without flaking on startup.
+        try {
+          runInNewContext(slide.starterCode, {
+            console: fake, Number, Object, Array, Set, Map, Intl, JSON, URLSearchParams,
+            RegExp, Date, String, Promise, Symbol
+          }, {timeout: 2000});
+        } catch (error) {
+          throw new Error('Exemplo falhou: ' + lesson.slug, { cause: error });
+        }
         const prediction = lesson.slides.find(item => item.id.endsWith('-output-check'));
         assert.ok(prediction && prediction.kind === 'challenge');
         const printed = captured.join('\n').replace(/\u00a0/g, ' ');
