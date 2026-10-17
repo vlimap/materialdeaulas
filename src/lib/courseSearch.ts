@@ -22,7 +22,7 @@ function slideText(slide: Slide): string {
   const parts: string[] = [slide.title, slide.eyebrow ?? '', slide.subtitle ?? ''];
   switch (slide.kind) {
     case 'statement':
-      parts.push(slide.lead, slide.detail, ...slide.chips);
+      parts.push(slide.lead, slide.detail, ...(slide.chips ?? []));
       break;
     case 'cards':
       parts.push(...slide.items.flatMap(item => [item.title, item.detail, item.kicker ?? '']));
@@ -32,8 +32,10 @@ function slideText(slide: Slide): string {
       break;
     case 'algorithm-visualization':
     case 'algorithm-lab':
+      parts.push(slide.scenario);
+      break;
     case 'truth-table':
-      parts.push(slide.scenario ?? ('operator' in slide ? slide.operator : ''));
+      parts.push(slide.operator);
       break;
     default:
       break;
