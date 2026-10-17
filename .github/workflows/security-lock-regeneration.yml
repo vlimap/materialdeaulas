@@ -34,6 +34,7 @@ jobs:
             git commit -m 'security(deps): regenerate deterministic lockfile from patched packages'
             git push origin HEAD:security/remediate-2026-dependencies
           fi
+      # Second pass: rebuild lockfile after upgrading webpack-dev-server v6.
       - name: Install lockfile
         run: npm ci --no-audit --no-fund
       - name: Run tests
