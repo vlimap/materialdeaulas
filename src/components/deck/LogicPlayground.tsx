@@ -1,4 +1,4 @@
-import { useState, type KeyboardEvent, type SyntheticEvent } from 'react';
+import { useId, useState, type KeyboardEvent, type SyntheticEvent } from 'react';
 import { ArrowRight, RotateCcw, Minus, Plus, Play } from 'lucide-react';
 import type { Slide } from '../../types/course';
 import './LogicPlayground.css';
@@ -82,6 +82,24 @@ function SequenceDemo() {
   );
 }
 
+function Umbrella() {
+  const gradientId = useId();
+  return (
+    <svg className="logic-umbrella" viewBox="0 0 190 190" role="img" aria-label="Guarda-chuva azul aberto sobre a raposa">
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#6db7fa" />
+          <stop offset="100%" stopColor="#1458ae" />
+        </linearGradient>
+      </defs>
+      <path d="M96 13V9" stroke="#16395f" strokeWidth="5" strokeLinecap="round" />
+      <path d="M12 83Q28 20 96 16Q163 20 180 83Q161 68 143 83Q125 68 108 83Q91 68 74 83Q57 68 38 83Q24 71 12 83Z" fill={`url(#${gradientId})`} stroke="#194c8c" strokeWidth="4" strokeLinejoin="round" />
+      <path d="M96 18Q70 43 74 83M96 18Q122 43 108 83" stroke="#d4edff" strokeWidth="2.5" opacity=".8" fill="none" />
+      <path d="M96 83V162Q96 180 109 180Q122 180 122 168" stroke="#2c4a65" strokeWidth="5" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+
 function DecisionDemo() {
   const [raining, setRaining] = useState(true);
   const [result, setResult] = useState<boolean | null>(null);
@@ -93,7 +111,7 @@ function DecisionDemo() {
         <div className="logic-weather" aria-label={raining ? 'Céu com chuva' : 'Céu ensolarado'} role="img">
           {raining ? <><span className="logic-cloud" /><span className="logic-rain">╱ ╱ ╱ ╱</span></> : <span className="logic-sun" />}
         </div>
-        <div className="logic-characters"><Fox active={result !== null}/><Owl /></div>
+        <div className="logic-characters"><div className="logic-fox-rain-wrap"><Fox active={result !== null}/>{result === true && <Umbrella />}</div><Owl /></div>
         <p className="logic-scene-caption" aria-live="polite">
           {result === null ? 'Observe o clima e execute a condição.' : result ? 'Está chovendo: leve o guarda-chuva.' : 'Não está chovendo: pode sair sem guarda-chuva.'}
         </p>

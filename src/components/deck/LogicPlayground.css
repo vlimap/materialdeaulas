@@ -83,3 +83,43 @@
 @media (prefers-reduced-motion: reduce) {
   .logic-fox, .logic-plant, .logic-bread, .logic-lettuce, .logic-cheese, .logic-rain { animation: none !important; transition: none !important; }
 }
+
+
+/* Explicit light surface keeps controls legible on the dark presentation theme. */
+.slide-logic-playground .logic-panel {
+  padding: 1.15cqw;
+  border: 1px solid #dae6f3;
+  border-radius: 1.2cqw;
+  background: #f8fbff;
+  color: #122d51;
+}
+.slide-logic-playground .logic-panel > p { color: #334d6e; }
+.slide-logic-playground .logic-panel > strong { color: #113e7d; }
+.slide-logic-playground .logic-success { color: #106239; }
+.logic-fox-rain-wrap { position: relative; width: 10cqw; height: 11.5cqw; isolation: isolate; }
+.logic-fox-rain-wrap > .logic-fox { position: relative; z-index: 1; }
+.logic-umbrella {
+  position: absolute;
+  z-index: 2;
+  width: 14cqw;
+  height: 15cqw;
+  top: -7.5cqw;
+  left: -2cqw;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 .3cqw .3cqw rgba(9,35,66,.25));
+  animation: logic-umbrella-open .5s cubic-bezier(.18,.8,.25,1) both;
+  transform-origin: center 52%;
+}
+@keyframes logic-umbrella-open {
+  from { opacity: 0; transform: translateY(1cqw) scale(.5); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 620px) {
+  .story-mode .slide-logic-playground .logic-panel { padding: 12px; border-radius: 12px; }
+  .story-mode .logic-fox-rain-wrap { width: 86px; height: 96px; }
+  .story-mode .logic-umbrella { width: 120px; height: 128px; top: -63px; left: -17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logic-umbrella { animation: none !important; }
+}

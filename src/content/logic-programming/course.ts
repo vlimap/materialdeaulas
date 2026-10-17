@@ -1,5 +1,6 @@
 import type { CourseDefinition, LessonDefinition } from '../../types/course';
 import { aula01Logic } from './aula-01-pensar-em-passos';
+import { aula02Logic } from './aula-02-problemas-e-algoritmos';
 
 type LessonPlan = [string, string, string, string[]];
 
@@ -35,7 +36,8 @@ function plannedLesson(plan: LessonPlan, index: number): LessonDefinition {
 
 export const logicLessons: LessonDefinition[] = [
   aula01Logic,
-  ...syllabus.map(plannedLesson)
+  aula02Logic,
+  ...syllabus.slice(1).map((plan, index) => plannedLesson(plan, index + 1))
 ];
 
 export const logicCourse: CourseDefinition = {
