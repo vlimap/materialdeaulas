@@ -3,6 +3,7 @@ import { ExternalLink, RotateCcw } from 'lucide-react';
 import { LogicPlayground } from './LogicPlayground';
 import { ProblemPlayground } from './ProblemPlayground';
 import { AlgorithmLab } from './AlgorithmLab';
+import { AlgorithmVisualizer } from './AlgorithmVisualizer';
 import { TruthTablePlayground } from './TruthTablePlayground';
 import type { Slide } from '../../types/course';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
@@ -788,6 +789,8 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
         {slide.kind === 'problem-playground' && <ProblemPlayground key={slide.id} slide={slide} />}
 
         {slide.kind === 'algorithm-lab' && <AlgorithmLab key={slide.id} slide={slide} />}
+
+        {slide.kind === 'algorithm-visualization' && <AlgorithmVisualizer key={slide.id} slide={slide} />}
 
         {slide.kind === 'truth-table' && <TruthTablePlayground key={slide.id} slide={slide} />}
 
