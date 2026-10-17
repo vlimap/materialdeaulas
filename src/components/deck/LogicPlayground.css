@@ -16,10 +16,10 @@
 .logic-panel > strong { font-size: 1.7cqw; }
 .logic-panel > p { margin: .4cqw 0 1cqw; font-size: 1.08cqw; line-height: 1.4; }
 .logic-steps { display: grid; gap: .6cqw; margin: .2cqw 0 0; padding: 0; list-style: none; }
-.logic-steps li { display: flex; align-items: center; gap: .8cqw; padding: .8cqw; border-radius: .8cqw; border: .1cqw solid #dce5f1; color: #60718a; font-size: 1.03cqw; }
+.logic-steps li { display: flex; align-items: center; gap: .8cqw; padding: .65cqw .5cqw; border: none; border-left: .27cqw solid transparent; border-radius: 0; background: transparent; color: #4c627d; font-size: 1.03cqw; }
 .logic-steps li span { display: grid; place-content: center; width: 1.8cqw; height: 1.8cqw; border-radius: 50%; background: #d8e1ed; flex-shrink: 0; }
-.logic-steps li.is-current { border-color: #327bd1; color: #133d7a; background: #e9f3ff; }
-.logic-steps li.is-complete { border-color: #73ba86; color: #1a6641; background: #e9f8eb; }
+.logic-steps li.is-current { border-left-color: #327bd1; color: #133d7a; background: transparent; font-weight: 700; }
+.logic-steps li.is-complete { color: #1a6641; background: transparent; }
 .logic-steps li.is-complete span { background: #278b50; color: #fff; }
 .logic-actions { display: flex; gap: .7cqw; flex-wrap: wrap; margin-top: auto; padding-top: 1cqw; }
 .logic-actions button, .logic-options button, .logic-quantity button { display: inline-flex; align-items: center; justify-content: center; gap: .55cqw; padding: .72cqw 1cqw; border: .13cqw solid #0d47a1; background: #0d47a1; border-radius: .65cqw; color: #fff; font-size: 1cqw; font-weight: 700; transition: transform .15s, background .15s; }
@@ -122,4 +122,15 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .logic-umbrella { animation: none !important; }
+}
+
+/* Legibilidade: a lista de passos é uma linha do tempo somente informativa, não um conjunto de botões. */
+.logic-action-label { display: block; width: fit-content; margin-bottom: .55cqw; padding: .36cqw .65cqw; background: #fff0cc; color: #704400; border-radius: .4cqw; font-size: .84cqw; font-weight: 800; letter-spacing: .035em; }
+.logic-readonly-label { display: block; margin: .3cqw 0 .55cqw; color: #3c5676; font-size: .78cqw; font-weight: 700; letter-spacing: .025em; }
+.logic-steps { padding-left: .2cqw; }
+.logic-steps li:focus, .logic-steps li:hover { cursor: default; }
+@media (max-width: 620px) {
+  .story-mode .logic-action-label { font-size: 11px; padding: 5px 8px; margin-bottom: 7px; }
+  .story-mode .logic-readonly-label { font-size: 10px; margin: 5px 0; }
+  .story-mode .logic-steps li { padding: 7px 4px; border-left-width: 3px; border-radius: 0; }
 }
