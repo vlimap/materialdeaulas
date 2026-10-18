@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { Script, runInNewContext } from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
+import { searchCourseCatalog } from '../src/lib/courseSearch';
 import { javascriptLessons } from '../src/content/javascript/course';
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
@@ -511,6 +512,39 @@ const tests: TestCase[] = [
       const player = readFileSync('src/components/deck/DeckPlayer.tsx','utf8');
       assert.match(css, /\.story-mode \.deck-stage \.slide-algorithm-visualization/);
       assert.match(player, /'algorithm-visualization'/);
+    }
+  },
+  {
+    name: 'busca por curso, título de aula e assunto aponta diretamente para material publicado',
+    run: () => {
+      const courses = [...catalog, ...technologyCourses];
+      assert.deepEqual(searchCourseCatalog(courses, ''), []);
+      assert.deepEqual(searchCourseCatalog(courses, '   '), []);
+      assert.deepEqual(searchCourseCatalog(courses, 'merge', 0), []);
+
+      const merge = searchCourseCatalog(courses, 'merg');
+      const mergeLesson = merge.find(item => item.kind === 'lesson' &&
+        item.href.includes('/aula/aula-08-merge-sort'));
+      assert.ok(mergeLesson, 'Busca parcial merge deve encontrar Merge Sort.');
+      assert.match(mergeLesson?.title ?? '', /merge sort/i);
+
+      const queries = ['JavaScript', 'lógica', 'recursão', 'tabela verdade'];
+      for (const query of queries) {
+        const results = searchCourseCatalog(courses, query);
+        assert.ok(results.length > 0, 'Nenhum resultado para ' + query);
+        assert.ok(results.every(item => item.href.startsWith('/curso/')));
+        assert.equal(new Set(results.map(item => item.href)).size, results.length);
+      }
+      assert.ok(searchCourseCatalog(courses, 'tabela verdade').some(item =>
+        item.kind === 'lesson' && item.href.includes('curso-javascript')));
+      assert.equal(searchCourseCatalog(courses, 'zzzxxyy11').length, 0);
+      assert.ok(searchCourseCatalog(courses, 'merg', 1).length <= 1);
+
+      const app = readFileSync('src/App.tsx', 'utf8');
+      assert.match(app, /Buscar cursos, aulas e assuntos/);
+      assert.match(app, /searchCourseCatalog/);
+      assert.match(app, /catalog-result-list/);
+      assert.doesNotMatch(app, /Nenhum curso encontrado para/);
     }
   },
   {
