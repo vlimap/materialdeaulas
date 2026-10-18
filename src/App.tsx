@@ -2,7 +2,7 @@ import { ArrowLeft, ArrowRight, BookOpen, Clock3, Github, GitPullRequest, Layers
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { searchCourseCatalog } from './lib/courseSearch';
-import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from './content/catalog';
+import { catalog, findLesson, getCourseLessonNavigation, technologyCourseGroups, technologyCourses } from './content/catalog';
 import { DeckPlayer } from './components/deck/DeckPlayer';
 import vlimapAvatar from './brand/vlimap-avatar.png';
 import { getTechnologyIcon } from './brand/technologyIcons';
@@ -45,8 +45,6 @@ function CourseVisual() {
 
 function CatalogPage() {
   const [courseQuery, setCourseQuery] = useState('');
-  const technologies = technologyCourses;
-
   const searching = courseQuery.trim().length > 0;
   const results = useMemo(
     () => searchCourseCatalog(allCourses, courseQuery, 24),
@@ -54,7 +52,6 @@ function CatalogPage() {
   );
   const courses = results.filter(result => result.kind === 'course');
   const lessons = results.filter(result => result.kind === 'lesson');
-  const groups = Array.from(new Set(technologies.map(technology => technology.description.split(' · ')[1])));
 
   return (
     <div className="home-shell">
@@ -131,10 +128,15 @@ function CatalogPage() {
               )}
             </div>
           ) : (
-            groups.map(group => <section className="technology-group" id={'group-' + group.toLowerCase().replace(/[^a-z]+/g, '-')} key={group}>
-              <h2>{group}</h2>
+            technologyCourseGroups.map(({ category, courses }) => <section
+              className="technology-group"
+              id={'group-' + category.toLocaleLowerCase('pt-BR').normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}
+              key={category}
+            >
+              <h2>{category}</h2>
               <div className="technology-badges">
-                {technologies.filter(technology => technology.description.endsWith(group)).map(technology => (
+                {courses.map(technology => (
                   <Link
                     className="technology-badge"
                     key={technology.slug}
