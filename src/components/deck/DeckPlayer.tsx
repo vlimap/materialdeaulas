@@ -25,6 +25,7 @@ import type { CourseLessonNavigationItem } from '../../content/catalog';
 import type { LessonDefinition, Slide } from '../../types/course';
 import { exportLessonPdf, exportLessonPptx } from '../../lib/exportDeck';
 import { SlideRenderer } from './SlideRenderer';
+import { shouldHandleDeckShortcut } from './keyboardShortcuts';
 
 const STORY_BREAKPOINT = 620;
 const DESKTOP_PLAYLIST_BREAKPOINT = 1180;
@@ -145,13 +146,12 @@ export function DeckPlayer({
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (target?.matches('input, textarea, select, [contenteditable="true"]')) return;
-
-      if (event.key === 'Escape' && playlistOpen) {
+      if (event.key === 'Escape' && playlistOpen && !event.defaultPrevented) {
         setPlaylistOpen(false);
         return;
       }
+
+      if (!shouldHandleDeckShortcut(event)) return;
 
       if (event.key.toLowerCase() === 'l') {
         event.preventDefault();
