@@ -8,6 +8,7 @@ import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
 import { createAlgorithmVisualization } from '../src/components/deck/algorithm-visualization-engine';
+import { shouldHandleDeckShortcut } from '../src/components/deck/keyboardShortcuts';
 
 type TestCase = {
   name: string;
@@ -15,6 +16,36 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+  {
+    name: 'não captura teclas reservadas a controles interativos e atalhos do sistema',
+    run: () => {
+      const base = {
+        defaultPrevented: false,
+        altKey: false,
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        isComposing: false
+      };
+      const keyboard = (target: EventTarget | null, overrides: Partial<typeof base> = {}) =>
+        ({ ...base, target, ...overrides });
+      const focusedControl = (fragment: string) => ({
+        closest: (selector: string) => selector.includes(fragment) ? {} : null
+      }) as unknown as EventTarget;
+      const nonInteractive = { closest: () => null } as unknown as EventTarget;
+
+      assert.equal(shouldHandleDeckShortcut(keyboard(null)), true);
+      assert.equal(shouldHandleDeckShortcut(keyboard(nonInteractive)), true);
+      for (const selector of ['button', 'a[href]', 'input', 'textarea', 'summary',
+        '[role="slider"]', '[role="button"]', '[role="dialog"]', '[contenteditable]']) {
+        assert.equal(shouldHandleDeckShortcut(keyboard(focusedControl(selector))), false, selector);
+      }
+      for (const modifier of ['defaultPrevented', 'altKey', 'ctrlKey', 'metaKey', 'shiftKey', 'isComposing'] as const) {
+        assert.equal(shouldHandleDeckShortcut(keyboard(null, { [modifier]: true })), false, modifier);
+      }
+    }
+  },
+
   {
     name: 'mantém a Aula 01 de HTML com duração de 4 horas',
     run: () => {
