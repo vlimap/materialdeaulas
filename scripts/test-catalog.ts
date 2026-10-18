@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { Script, runInNewContext } from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
-import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
+import { catalog, findLesson, getCourseLessonNavigation, technologyCourseGroups, technologyCourses } from '../src/content/catalog';
 import { searchCourseCatalog } from '../src/lib/courseSearch';
 import { javascriptLessons } from '../src/content/javascript/course';
 import { getPublicSeoPages } from '../src/seo/metadata';
@@ -15,6 +15,37 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+  {
+    name: 'agrupa cursos pela categoria do catálogo sem depender do texto da descrição',
+    run: () => {
+      assert.ok(technologyCourseGroups.length > 0);
+      assert.deepEqual(
+        [...technologyCourseGroups.flatMap(group => group.courses.map(course => course.slug))].sort(),
+        [...technologyCourses.map(course => course.slug)].sort()
+      );
+      assert.equal(
+        technologyCourseGroups.reduce((sum, group) => sum + group.courses.length, 0),
+        technologyCourses.length
+      );
+      assert.equal(new Set(technologyCourseGroups.map(group => group.category)).size, technologyCourseGroups.length);
+      assert.ok(technologyCourseGroups.every(group =>
+        typeof group.category === 'string' && group.category.trim().length > 0 && group.courses.length > 0
+      ));
+
+      for (const slug of ['curso-sdlc', 'curso-logic-programming', 'curso-algorithms']) {
+        const course = technologyCourses.find(item => item.slug === slug);
+        assert.ok(course, slug);
+        assert.equal(course.description.includes(' · '), false, 'Exemplo de descrição sem delimitador');
+        assert.ok(technologyCourseGroups.some(group => group.category === 'Fundamentos de Software' &&
+          group.courses.some(item => item.slug === slug)), slug);
+      }
+
+      const app = readFileSync('src/App.tsx', 'utf8');
+      assert.match(app, /technologyCourseGroups\.map/);
+      assert.doesNotMatch(app, /description\.split\(' · '\)/);
+      assert.doesNotMatch(app, /description\.endsWith\(group\)/);
+    }
+  },
   {
     name: 'mantém a Aula 01 de HTML com duração de 4 horas',
     run: () => {
