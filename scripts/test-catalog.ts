@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
 import { Script, runInNewContext } from 'node:vm';
 import { readFileSync, readdirSync } from 'node:fs';
-import { catalog, findLesson, getCourseLessonNavigation, technologyCourses } from '../src/content/catalog';
+import { catalog, findLesson, getCourseLessonNavigation, technologyCourseGroups, technologyCourses } from '../src/content/catalog';
 import { searchCourseCatalog } from '../src/lib/courseSearch';
 import { javascriptLessons } from '../src/content/javascript/course';
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
 import { createAlgorithmVisualization } from '../src/components/deck/algorithm-visualization-engine';
+import { shouldHandleDeckShortcut } from '../src/components/deck/keyboardShortcuts';
 
 type TestCase = {
   name: string;
@@ -15,6 +16,42 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+  {
+    name: 'agrupa cursos pela categoria do catálogo sem depender do texto da descrição',
+    run: () => {
+      assert.ok(technologyCourseGroups.length > 0);
+      assert.deepEqual(
+        [...technologyCourseGroups.flatMap(group => group.courses.map(course => course.slug))].sort(),
+        [...technologyCourses.map(course => course.slug)].sort()
+      );
+      assert.equal(
+        technologyCourseGroups.reduce((sum, group) => sum + group.courses.length, 0),
+        technologyCourses.length
+      );
+      assert.equal(new Set(technologyCourseGroups.map(group => group.category)).size, technologyCourseGroups.length);
+      assert.ok(technologyCourseGroups.every(group =>
+        typeof group.category === 'string' && group.category.trim().length > 0 && group.courses.length > 0
+      ));
+
+      for (const slug of ['curso-sdlc', 'curso-logic-programming', 'curso-algorithms']) {
+        const course = technologyCourses.find(item => item.slug === slug);
+        assert.ok(course, slug);
+        assert.ok(technologyCourseGroups.some(group => group.category === 'Fundamentos de Software' &&
+          group.courses.some(item => item.slug === slug)), slug);
+      }
+
+      const javascript = technologyCourses.find(item => item.slug === 'curso-javascript');
+      assert.ok(javascript);
+      assert.equal(javascript.description.includes(' · '), false, 'A descrição não contém categoria');
+      assert.ok(technologyCourseGroups.some(group => group.category === 'Linguagens' &&
+        group.courses.includes(javascript)), 'JavaScript deve aparecer em Linguagens');
+
+      const app = readFileSync('src/App.tsx', 'utf8');
+      assert.match(app, /technologyCourseGroups\.map/);
+      assert.doesNotMatch(app, /description\.split\(' · '\)/);
+      assert.doesNotMatch(app, /description\.endsWith\(group\)/);
+    }
+  },
   {
     name: 'mantém a Aula 01 de HTML com duração de 4 horas',
     run: () => {
@@ -100,8 +137,8 @@ const tests: TestCase[] = [
       assert.equal(lessons.length, 12);
       assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
       assert.equal(lessons[0].status, 'published');
-      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 2);
-      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 10);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 12);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 0);
     }
   },
   {
@@ -138,6 +175,55 @@ const tests: TestCase[] = [
           (slide) => slide.kind === 'visual' && slide.visual === 'html-links-network-svg'
         )
       );
+    }
+  },
+  {
+    name: 'valida curso completo HTML5 com doze aulas, slides e laboratórios existentes',
+    run: () => {
+      const html = technologyCourses.find(course => course.slug === 'curso-html5');
+      assert.ok(html);
+      const lessons = html.ucs[0].modules[0].lessons;
+      assert.equal(lessons.length, 12);
+      assert.equal(lessons.reduce((minutes, lesson) => minutes + lesson.durationMinutes, 0), 2880);
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
+      assert.equal(new Set(lessons.map(lesson => lesson.id)).size, 12);
+      assert.equal(new Set(lessons.map(lesson => lesson.slug)).size, 12);
+
+      for (const lesson of lessons) {
+        assert.equal(lesson.status, 'published', lesson.slug);
+        assert.equal(lesson.durationMinutes, 240, lesson.slug);
+        assert.equal(lesson.ucSlug, 'fundamentos-html5', lesson.slug);
+        assert.ok(lesson.objectives.length >= 4, lesson.slug);
+        assert.ok(lesson.slides.length >= 18, lesson.slug);
+        assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length, lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'exercise'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'lab'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'references'), lesson.slug);
+        assert.ok(lesson.lab?.workspacePath, lesson.slug);
+        const labPath = lesson.lab.workspacePath;
+        const document = readFileSync(labPath, 'utf8');
+        assert.match(document, /<!doctype html>/i, labPath);
+        assert.match(document, /<html lang="pt-BR"/i, labPath);
+        assert.ok(
+          findLesson('curso-html5', 'fundamentos-html5', lesson.slug)?.lesson.id === lesson.id,
+          lesson.slug + ': rota não resolvida'
+        );
+        if (lesson.number >= 3) {
+          assert.ok(lesson.slides.filter(slide => slide.kind === 'challenge').length >= 3, lesson.slug);
+        }
+      }
+      for (const path of ['labs/html/aula-12/agenda.html', 'labs/html/aula-12/contato.html']) {
+        assert.match(readFileSync(path, 'utf8'), /<main /);
+      }
+      const pages = getPublicSeoPages();
+      for (const lesson of lessons) {
+        assert.ok(
+          pages.some(page => page.kind === 'lesson' &&
+            page.path === '/curso/curso-html5/uc/fundamentos-html5/aula/' + lesson.slug),
+          lesson.slug + ': rota ausente do SEO'
+        );
+      }
     }
   },
   {
@@ -207,7 +293,7 @@ const tests: TestCase[] = [
       assert.equal(navigation[0].id, 'fullstack-front-html-aula-01');
       assert.equal(navigation[0].published, true);
       assert.equal(navigation[1].published, true);
-      assert.equal(navigation[2].published, false);
+      assert.ok(navigation.every(item => item.published));
       assert.match(
         navigation[0].href,
         /^\/curso\/curso-html5\/uc\/fundamentos-html5\/aula\//
@@ -818,7 +904,36 @@ const tests: TestCase[] = [
         false
       );
     }
-  }
+  },
+  {
+    name: 'não captura teclas reservadas a controles interativos e atalhos do sistema',
+    run: () => {
+      const base = {
+        defaultPrevented: false,
+        altKey: false,
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        isComposing: false
+      };
+      const keyboard = (target: EventTarget | null, overrides: Partial<typeof base> = {}) =>
+        ({ ...base, target, ...overrides });
+      const focusedControl = (fragment: string) => ({
+        closest: (selector: string) => selector.includes(fragment) ? {} : null
+      }) as unknown as EventTarget;
+      const nonInteractive = { closest: () => null } as unknown as EventTarget;
+
+      assert.equal(shouldHandleDeckShortcut(keyboard(null)), true);
+      assert.equal(shouldHandleDeckShortcut(keyboard(nonInteractive)), true);
+      for (const selector of ['button', 'a[href]', 'input', 'textarea', 'summary',
+        '[role="slider"]', '[role="button"]', '[role="dialog"]', '[contenteditable]']) {
+        assert.equal(shouldHandleDeckShortcut(keyboard(focusedControl(selector))), false, selector);
+      }
+      for (const modifier of ['defaultPrevented', 'altKey', 'ctrlKey', 'metaKey', 'shiftKey', 'isComposing'] as const) {
+        assert.equal(shouldHandleDeckShortcut(keyboard(null, { [modifier]: true })), false, modifier);
+      }
+    }
+  },
 ];
 
 let failures = 0;
