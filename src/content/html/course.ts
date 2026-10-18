@@ -1,6 +1,7 @@
 import type { CourseDefinition, LessonDefinition } from '../../types/course';
 import { aula01Html } from '../fullstack/aula-01-html';
 import { aula02Html } from './aula-02-textos-links-imagens';
+import { aula03Html } from './aula-03-html-semantico';
 
 function plannedLesson(
   number: number,
@@ -40,18 +41,7 @@ export const htmlLessons: LessonDefinition[] = [
     }
   },
   aula02Html,
-  plannedLesson(
-    3,
-    'aula-03-html-semantico',
-    'HTML semântico: estrutura e significado',
-    'HTML semântico',
-    [
-      'Organizar páginas com header, nav, main, section, article, aside e footer.',
-      'Escolher elementos pelo significado e não pela aparência.',
-      'Usar figure, figcaption, time e address quando apropriado.',
-      'Reconhecer quando div e span continuam sendo adequados.'
-    ]
-  ),
+  aula03Html,
   plannedLesson(
     4,
     'aula-04-tabelas',

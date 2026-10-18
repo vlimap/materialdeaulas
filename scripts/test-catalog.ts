@@ -53,8 +53,8 @@ const tests: TestCase[] = [
       assert.equal(lessons.length, 12);
       assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
       assert.equal(lessons[0].status, 'published');
-      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 2);
-      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 10);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 3);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 9);
     }
   },
   {
@@ -91,6 +91,15 @@ const tests: TestCase[] = [
           (slide) => slide.kind === 'visual' && slide.visual === 'html-links-network-svg'
         )
       );
+
+      const routedLesson03 = findLesson('curso-html5', 'fundamentos-html5', 'aula-03-html-semantico');
+      assert.equal(routedLesson03?.lesson.id, 'html-aula-03');
+      assert.equal(routedLesson03?.lesson.status, 'published');
+      assert.equal(routedLesson03?.lesson.lab?.workspacePath, 'labs/html/aula-03/index.html');
+      assert.ok(routedLesson03?.lesson.slides.some((slide) => slide.kind === 'lab'));
+      assert.ok(routedLesson03?.lesson.slides.some((slide) => slide.kind === 'references'));
+      const slideIds03 = routedLesson03?.lesson.slides.map((slide) => slide.id) ?? [];
+      assert.equal(new Set(slideIds03).size, slideIds03.length);
     }
   },
   {
@@ -160,7 +169,8 @@ const tests: TestCase[] = [
       assert.equal(navigation[0].id, 'fullstack-front-html-aula-01');
       assert.equal(navigation[0].published, true);
       assert.equal(navigation[1].published, true);
-      assert.equal(navigation[2].published, false);
+      assert.equal(navigation[2].published, true);
+      assert.equal(navigation[3].published, false);
       assert.match(
         navigation[0].href,
         /^\/curso\/curso-html5\/uc\/fundamentos-html5\/aula\//
