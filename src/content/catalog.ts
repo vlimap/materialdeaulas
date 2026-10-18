@@ -383,6 +383,26 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
   };
 });
 
+
+/**
+ * Group courses using the categories supplied by the catalog itself.
+ * Descriptions are editorial text and must not be parsed for taxonomy.
+ *
+ * technologyCourses and technologySeeds have a one-to-one relationship:
+ * every seed produces exactly one course, including the customized courses.
+ */
+export const technologyCourseGroups = technologySeeds.reduce<
+  Array<{ category: string; courses: CourseDefinition[] }>
+>((groups, [, , category], index) => {
+  const group = groups.find(item => item.category === category);
+  if (group) {
+    group.courses.push(technologyCourses[index]);
+  } else {
+    groups.push({ category, courses: [technologyCourses[index]] });
+  }
+  return groups;
+}, []);
+
 export function findLesson(courseSlug: string, ucSlug: string, lessonSlug: string) {
   const course = [...catalog, ...technologyCourses].find((item) => item.slug === courseSlug);
   if (!course) return null;
