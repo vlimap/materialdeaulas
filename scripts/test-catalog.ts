@@ -137,8 +137,8 @@ const tests: TestCase[] = [
       assert.equal(lessons.length, 12);
       assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
       assert.equal(lessons[0].status, 'published');
-      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 2);
-      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 10);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 12);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 0);
     }
   },
   {
@@ -175,6 +175,55 @@ const tests: TestCase[] = [
           (slide) => slide.kind === 'visual' && slide.visual === 'html-links-network-svg'
         )
       );
+    }
+  },
+  {
+    name: 'valida curso completo HTML5 com doze aulas, slides e laboratórios existentes',
+    run: () => {
+      const html = technologyCourses.find(course => course.slug === 'curso-html5');
+      assert.ok(html);
+      const lessons = html.ucs[0].modules[0].lessons;
+      assert.equal(lessons.length, 12);
+      assert.equal(lessons.reduce((minutes, lesson) => minutes + lesson.durationMinutes, 0), 2880);
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
+      assert.equal(new Set(lessons.map(lesson => lesson.id)).size, 12);
+      assert.equal(new Set(lessons.map(lesson => lesson.slug)).size, 12);
+
+      for (const lesson of lessons) {
+        assert.equal(lesson.status, 'published', lesson.slug);
+        assert.equal(lesson.durationMinutes, 240, lesson.slug);
+        assert.equal(lesson.ucSlug, lesson.number === 1 ? 'desenvolvimento-front-end' : 'fundamentos-html5', lesson.slug);
+        assert.ok(lesson.objectives.length >= 4, lesson.slug);
+        assert.ok(lesson.slides.length >= 18, lesson.slug);
+        assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length, lesson.slug);
+        if (lesson.number >= 2) assert.ok(lesson.slides.some(slide => slide.kind === 'exercise'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'lab'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'), lesson.slug);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'references'), lesson.slug);
+        assert.ok(lesson.lab?.workspacePath, lesson.slug);
+        const labPath = lesson.lab.workspacePath;
+        const document = readFileSync(labPath, 'utf8');
+        assert.match(document, /<!doctype html>/i, labPath);
+        assert.match(document, /<html lang="pt-BR"/i, labPath);
+        assert.ok(
+          findLesson('curso-html5', 'fundamentos-html5', lesson.slug)?.lesson.id === lesson.id,
+          lesson.slug + ': rota não resolvida'
+        );
+        if (lesson.number >= 3) {
+          assert.ok(lesson.slides.filter(slide => slide.kind === 'challenge').length >= 3, lesson.slug);
+        }
+      }
+      for (const path of ['labs/html/aula-12/agenda.html', 'labs/html/aula-12/contato.html']) {
+        assert.match(readFileSync(path, 'utf8'), /<main /);
+      }
+      const pages = getPublicSeoPages();
+      for (const lesson of lessons) {
+        assert.ok(
+          pages.some(page => page.kind === 'lesson' &&
+            page.path === '/curso/curso-html5/uc/fundamentos-html5/aula/' + lesson.slug),
+          lesson.slug + ': rota ausente do SEO'
+        );
+      }
     }
   },
   {
@@ -244,7 +293,7 @@ const tests: TestCase[] = [
       assert.equal(navigation[0].id, 'fullstack-front-html-aula-01');
       assert.equal(navigation[0].published, true);
       assert.equal(navigation[1].published, true);
-      assert.equal(navigation[2].published, false);
+      assert.ok(navigation.every(item => item.published));
       assert.match(
         navigation[0].href,
         /^\/curso\/curso-html5\/uc\/fundamentos-html5\/aula\//
