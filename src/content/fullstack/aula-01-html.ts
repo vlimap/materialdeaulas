@@ -1,124 +1,126 @@
 import type { LessonDefinition } from '../../types/course';
 
 const firstDocument = [
-  '<!doctype html>',
+  '<!DOCTYPE html>',
   '<html lang="pt-BR">',
-  '  <head>',
-  '    <meta charset="UTF-8" />',
-  '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+  '<head>',
+  '    <meta charset="UTF-8">',
+  '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
   '    <title>Minha primeira página</title>',
-  '  </head>',
-  '  <body>',
+  '</head>',
+  '<body>',
   '    <h1>Olá, Web!</h1>',
   '    <p>Minha primeira página HTML está funcionando.</p>',
-  '  </body>',
+  '</body>',
   '</html>'
 ].join('\n');
 
-const nestedElements = [
-  '<article>',
-  '  <h2>Meu primeiro projeto</h2>',
-  '  <p>',
-  '    Estou aprendendo <strong>HTML</strong>',
-  '    para estruturar conteúdo na Web.',
-  '  </p>',
-  '</article>'
-].join('\n');
-
-const listExample = [
-  '<h2>O que estou aprendendo</h2>',
-  '<ul>',
-  '  <li>Estrutura de documentos</li>',
-  '  <li>Elementos e atributos</li>',
-  '  <li>HTML semântico</li>',
-  '</ul>'
-].join('\n');
-
-const linkExample = [
+const textSymbolsEmoji = [
+  '<h1>Minha primeira página</h1>',
+  '',
   '<p>',
-  '  Veja meus projetos no',
-  '  <a href="https://github.com/" target="_blank">',
-  '    GitHub',
-  '  </a>.',
+  '  Estou aprendendo HTML &amp; CSS.',
+  '  Hoje descobri que 5 &lt; 10.',
+  '</p>',
+  '',
+  '<p>',
+  '  Símbolos: &copy; &reg; &euro;',
+  '</p>',
+  '',
+  '<p>',
+  '  Emojis: 🚀 💻 🌐',
   '</p>'
 ].join('\n');
 
-const imageExample = [
+const hierarchyExample = [
+  '<h1>Curso de Desenvolvimento Web</h1>',
+  '<p>Visão geral do curso.</p>',
+  '',
+  '<h2>HTML</h2>',
+  '<p>Estrutura e significado.</p>',
+  '',
+  '<h3>Textos</h3>',
+  '<p>Títulos, parágrafos e semântica.</p>',
+  '',
+  '<h2>CSS</h2>',
+  '<p>Apresentação e layout.</p>'
+].join('\n');
+
+const linksExample = [
+  '<h2 id="contato">Contato</h2>',
+  '',
+  '<p>',
+  '  <a href="https://developer.mozilla.org/">',
+  '    Abrir documentação',
+  '  </a>',
+  '</p>',
+  '',
+  '<p>',
+  '  <a href="#contato">',
+  '    Ir para contato',
+  '  </a>',
+  '</p>'
+].join('\n');
+
+const mediaExample = [
   '<img',
-  '  src="perfil.jpg"',
-  '  alt="Retrato de Ana, desenvolvedora iniciante"',
-  '  width="240"',
-  '/>'
+  '  src="assets/internet.svg"',
+  '  alt="Ilustração de computadores conectados pela Internet"',
+  '  width="480"',
+  '>',
+  '',
+  '<audio controls>',
+  '  <source src="audio/episodio.mp3" type="audio/mpeg">',
+  '</audio>',
+  '',
+  '<video controls width="480" poster="capa.jpg">',
+  '  <source src="video/aula.mp4" type="video/mp4">',
+  '</video>'
 ].join('\n');
 
-const semanticPage = [
-  '<body>',
-  '  <header>',
-  '    <h1>Ana Silva</h1>',
-  '    <p>Desenvolvedora em formação</p>',
-  '  </header>',
+const cssWays = [
+  '<!-- 1. Inline: uso pontual -->',
+  '<h1 style="color: black;">Olá</h1>',
   '',
-  '  <nav aria-label="Navegação principal">',
-  '    <a href="#sobre">Sobre</a>',
-  '    <a href="#aprendendo">Aprendendo</a>',
-  '  </nav>',
+  '<!-- 2. Interno: demonstração/página isolada -->',
+  '<style>',
+  '  h1 { color: black; }',
+  '</style>',
   '',
-  '  <main>',
-  '    <section id="sobre">...</section>',
-  '    <section id="aprendendo">...</section>',
-  '  </main>',
-  '',
-  '  <footer>Contato: ana@email.com</footer>',
-  '</body>'
+  '<!-- 3. Externo: padrão recomendado -->',
+  '<link rel="stylesheet" href="styles.css">'
 ].join('\n');
 
-const finalProject = [
-  '<!doctype html>',
+const integratedStarter = [
+  '<!DOCTYPE html>',
   '<html lang="pt-BR">',
-  '  <head>',
-  '    <meta charset="UTF-8" />',
-  '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-  '    <meta name="description" content="Página de apresentação de Ana Silva" />',
-  '    <title>Ana Silva | Apresentação</title>',
-  '  </head>',
-  '  <body>',
-  '    <header>',
-  '      <h1>Ana Silva</h1>',
-  '      <p>Estudante de Desenvolvimento Web</p>',
-  '    </header>',
+  '<head>',
+  '    <meta charset="UTF-8">',
+  '    <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+  '    <title>Minha jornada na Web</title>',
+  '    <link rel="stylesheet" href="styles.css">',
+  '</head>',
+  '<body>',
+  '    <h1>Minha jornada na Web 🚀</h1>',
+  '    <p>Hoje comecei a entender como a Web funciona.</p>',
   '',
-  '    <nav aria-label="Navegação principal">',
-  '      <a href="#sobre">Sobre</a>',
-  '      <a href="#habilidades">Habilidades</a>',
-  '      <a href="#contato">Contato</a>',
-  '    </nav>',
+  '    <h2>O que aprendi</h2>',
+  '    <p>HTML organiza o conteúdo; CSS cuida da apresentação.</p>',
   '',
-  '    <main>',
-  '      <section id="sobre">',
-  '        <h2>Sobre mim</h2>',
-  '        <img src="perfil.jpg" alt="Retrato de Ana Silva" width="240" />',
-  '        <p>Estou iniciando minha jornada no desenvolvimento web.</p>',
-  '      </section>',
+  '    <h2>Um recurso visual</h2>',
+  '    <img',
+  '      src="assets/internet.svg"',
+  '      alt="Cartoon de pacotes atravessando a Internet"',
+  '      width="520"',
+  '    >',
   '',
-  '      <section id="habilidades">',
-  '        <h2>O que estou aprendendo</h2>',
-  '        <ul>',
-  '          <li>HTML semântico</li>',
-  '          <li>Git e GitHub</li>',
-  '          <li>Fundamentos da Web</li>',
-  '        </ul>',
-  '      </section>',
-  '',
-  '      <section id="contato">',
-  '        <h2>Contato</h2>',
-  '        <p><a href="mailto:ana@email.com">ana@email.com</a></p>',
-  '      </section>',
-  '    </main>',
-  '',
-  '    <footer>',
-  '      <p>Primeiro projeto HTML · 2026</p>',
-  '    </footer>',
-  '  </body>',
+  '    <h2 id="links">Links</h2>',
+  '    <p>',
+  '      <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">',
+  '        Consultar documentação',
+  '      </a>',
+  '    </p>',
+  '</body>',
   '</html>'
 ].join('\n');
 
@@ -126,147 +128,197 @@ export const aula01Html: LessonDefinition = {
   id: 'fullstack-front-html-aula-01',
   slug: 'aula-01-html-primeira-pagina',
   number: 1,
-  title: 'HTML: da história da Web à primeira página',
-  shortTitle: 'HTML · Primeira página',
+  title: 'Fundamentos da Web: Internet, HTML e primeiros estilos',
+  shortTitle: 'Fundamentos da Web',
   durationMinutes: 240,
   audience: 'Iniciantes, sem necessidade de experiência prévia com programação',
   ucSlug: 'desenvolvimento-front-end',
   objectives: [
-    'Explicar por que a Web surgiu e qual problema o hipertexto ajudou a resolver.',
-    'Distinguir Internet, Web, navegador, servidor e documento HTML.',
-    'Reconhecer tags, elementos, atributos, conteúdo e aninhamento.',
-    'Montar a estrutura completa de um documento HTML moderno.',
-    'Usar títulos, parágrafos, listas, links e imagens com significado adequado.',
-    'Aplicar elementos semânticos para organizar uma página.',
-    'Produzir uma página de apresentação completa usando apenas HTML.'
+    'Explicar a evolução da Internet, o papel dos protocolos, da infraestrutura e dos pacotes de dados.',
+    'Distinguir domínio de hospedagem.',
+    'Diferenciar front-end, back-end, HTML, CSS e JavaScript.',
+    'Preparar VS Code, Google Chrome e extensões úteis para desenvolvimento web.',
+    'Construir e explicar a estrutura básica de um documento HTML.',
+    'Inserir textos, símbolos especiais e emojis.',
+    'Introduzir hierarquia de títulos e semântica HTML5.',
+    'Criar links externos e âncoras internas.',
+    'Reconhecer opções para imagens, áudio e vídeo na Web.',
+    'Introduzir CSS inline, interno e externo e separar conteúdo de apresentação.'
   ],
+  sources: [
+    {
+      label: 'HTML Living Standard',
+      author: 'WHATWG',
+      note: 'Referência normativa para estrutura, elementos e semântica HTML.'
+    },
+    {
+      label: 'MDN Web Docs',
+      author: 'Mozilla',
+      note: 'Referência didática para fundamentos da Web, HTML e CSS.'
+    }
+  ],
+  visualPlan: [
+    'Cartoons P&B em SVG como linguagem visual prioritária dos conceitos abstratos.',
+    'Fluxos animados dentro dos próprios SVGs para pacotes, conexões e transformação visual.',
+    'Código real apenas quando o aluno precisa ler ou escrever sintaxe.',
+    'Movimentos respeitam prefers-reduced-motion; GSAP fica reservado a interações que exijam timeline programática.'
+  ],
+  lab: {
+    workspacePath: 'labs/html/aula-01/index.html',
+    editorLabel: 'Abrir código da Aula 01 no VS Code Web'
+  },
   slides: [
     {
       id: 'capa',
       kind: 'cover',
-      eyebrow: 'Desenvolvimento Front-End · Fundamentos',
-      title: 'HTML',
-      subtitle: 'História → estrutura → prática → primeira página',
+      eyebrow: 'Desenvolvimento Web · Fundamentos',
+      title: 'Como a Web funciona',
+      subtitle: 'Internet → ambiente → HTML → mídia → primeiros estilos',
       badge: 'Aula 01',
       duration: '4 horas',
-      note: 'Abra perguntando: o que precisa existir antes de uma página ficar bonita?'
+      note: 'Abra perguntando: quando digitamos um endereço no navegador, o que precisa acontecer até a página aparecer?'
     },
     {
       id: 'objetivo-final',
       kind: 'statement',
       eyebrow: 'Objetivo da aula',
-      title: 'Hoje você sai do zero com uma página completa.',
-      lead: 'Entender primeiro. Marcar depois.',
-      detail: 'A aula começa pelo problema que criou a Web e termina com uma página HTML completa.',
-      chips: ['história', 'estrutura', 'semântica', 'prática', 'produção final']
+      title: 'Construir o mapa mental antes de decorar tags.',
+      lead: 'Entender o caminho completo.',
+      detail: 'A aula conecta rede, navegador, servidor, HTML, mídia e CSS antes de aprofundar cada tema.',
+      chips: ['Internet', 'Web', 'HTML', 'mídia', 'CSS']
     },
     {
-      id: 'roteiro-4h',
+      id: 'roteiro-1',
       kind: 'cards',
-      eyebrow: 'Plano de 4 horas',
-      title: 'Progressão da aula',
-      subtitle: '9 blocos · 240 min',
+      eyebrow: 'Primeiras 2 horas',
+      title: 'Da Internet ao primeiro documento',
       items: [
-        { kicker: '30 min', title: 'Contexto', detail: 'Web + hipertexto', tone: 'innovation' },
-        { kicker: '20 min', title: 'Como a Web funciona', detail: 'cliente → servidor', tone: 'blue' },
-        { kicker: '60 min', title: 'Fundamentos HTML', detail: 'tags + atributos + árvore', tone: 'orange' },
-        { kicker: '25 min', title: 'Conteúdo', detail: 'texto + links + mídia', tone: 'green' },
-        { kicker: '15 min', title: 'Intervalo', detail: 'pausa', tone: 'neutral' },
-        { kicker: '25 min', title: 'Semântica', detail: 'estrutura com significado', tone: 'blue' },
-        { kicker: '25 min', title: 'Prática guiada', detail: 'construção passo a passo', tone: 'innovation' },
-        { kicker: '30 min', title: 'Produção final', detail: 'página completa', tone: 'orange' },
-        { kicker: '10 min', title: 'Revisão', detail: 'checkpoint', tone: 'green' }
+        { kicker: '20 min', title: 'Internet', detail: 'evolução + protocolos + pacotes', tone: 'blue' },
+        { kicker: '15 min', title: 'Domínio × hospedagem', detail: 'endereço × armazenamento', tone: 'innovation' },
+        { kicker: '20 min', title: 'Front × back', detail: 'áreas + linguagens', tone: 'orange' },
+        { kicker: '20 min', title: 'Ambiente', detail: 'VS Code + Chrome + extensões', tone: 'green' },
+        { kicker: '35 min', title: 'HTML básico', detail: 'estrutura do documento', tone: 'blue' },
+        { kicker: '20 min', title: 'Texto', detail: 'símbolos + emojis', tone: 'innovation' }
       ]
     },
     {
-      id: 'antes-da-web',
-      kind: 'statement',
-      eyebrow: 'Antes do HTML',
-      title: 'O problema não era “criar sites bonitos”.',
-      lead: 'Conectar informação.',
-      detail: 'Documentos isolados → documentos conectados por links.',
-      chips: ['documentos', 'hipertexto', 'links', 'informação']
-    },
-    {
-      id: 'nascimento-web-visual',
-      kind: 'visual',
-      eyebrow: 'Ideia central',
-      title: 'Documentos isolados começam a conversar',
-      subtitle: 'uma conexão muda a forma de navegar informação',
-      visual: 'web-birth',
-      caption: 'A Web nasce da possibilidade de conectar documentos e seguir relações entre eles.'
+      id: 'roteiro-2',
+      kind: 'cards',
+      eyebrow: 'Segundas 2 horas',
+      title: 'Conteúdo conectado e primeiros estilos',
+      items: [
+        { kicker: '20 min', title: 'Hierarquia', detail: 'títulos + semântica', tone: 'blue' },
+        { kicker: '15 min', title: 'Links', detail: 'externos + âncoras', tone: 'innovation' },
+        { kicker: '20 min', title: 'Multimídia', detail: 'imagem + áudio + vídeo', tone: 'orange' },
+        { kicker: '15 min', title: 'Intervalo', detail: 'pausa', tone: 'neutral' },
+        { kicker: '15 min', title: 'CSS', detail: 'inline + interno + externo', tone: 'green' },
+        { kicker: '25 min', title: 'Integração', detail: 'primeira página completa', tone: 'blue' }
+      ]
     },
     {
       id: 'historia-web',
       kind: 'timeline',
-      eyebrow: 'História da Web',
-      title: '5 marcos. Uma nova forma de navegar informação.',
-      subtitle: '1989 → 1994',
+      eyebrow: 'Evolução da Internet',
+      title: 'A Web é uma camada construída sobre uma rede que já existia',
+      subtitle: 'alguns marcos para formar o modelo mental',
       items: [
-        { year: '1989', title: 'A proposta', detail: 'Proposta de sistema baseado em hipertexto.' },
-        { year: '1990', title: 'A Web ganha forma', detail: 'Servidor + navegador/editor + HTML. Ainda sem framework para instalar.' },
-        { year: '1991', title: 'Expansão', detail: 'A Web começa a se expandir.' },
-        { year: '1993', title: 'Web aberta', detail: 'Tecnologia liberada para ampla adoção.' },
-        { year: '1994', title: 'W3C', detail: 'W3C e padrões abertos.' }
+        { year: '1969', title: 'ARPANET', detail: 'Computadores distantes começam a trocar dados em rede.' },
+        { year: '1983', title: 'TCP/IP', detail: 'A comunicação passa a adotar uma base comum entre redes.' },
+        { year: '1989', title: 'Proposta da Web', detail: 'Hipertexto conecta documentos sobre a infraestrutura da Internet.' },
+        { year: '1991', title: 'Web pública', detail: 'Servidor, navegador e HTML começam a se espalhar.' },
+        { year: 'Hoje', title: 'Internet global', detail: 'Fibra, rádio, cabos submarinos, data centers e dispositivos.' }
       ]
     },
     {
-      id: 'hipertexto',
-      kind: 'statement',
-      eyebrow: 'O H de HTML',
-      title: 'HyperText: texto que aponta para outros recursos.',
-      lead: 'Texto + conexão = navegação.',
-      detail: 'O documento aponta para outro recurso. O usuário escolhe o caminho.',
-      chips: ['HyperText', 'href', 'documentos', 'navegação']
+      id: 'internet-pacotes',
+      kind: 'visual',
+      eyebrow: 'Infraestrutura',
+      title: 'Dados não “teletransportam”: eles atravessam uma rede',
+      subtitle: 'dispositivo → roteadores → servidor',
+      visual: 'html-internet-packets-cartoon',
+      caption: 'A informação é dividida e transportada em pacotes até o destino.'
     },
     {
-      id: 'hipertexto-visual',
-      kind: 'visual',
-      eyebrow: 'Hipertexto em movimento',
-      title: 'Um documento pode levar a muitos outros',
-      subtitle: 'documentos → links → caminhos',
-      visual: 'hypertext-map',
-      caption: 'O usuário segue relações, não a infraestrutura.'
+      id: 'protocolos',
+      kind: 'cards',
+      eyebrow: 'Protocolos',
+      title: 'Cada camada resolve uma parte da comunicação',
+      items: [
+        { title: 'IP', detail: 'endereçamento e roteamento entre redes', tone: 'blue' },
+        { title: 'TCP / QUIC', detail: 'transporte dos dados entre aplicações', tone: 'innovation' },
+        { title: 'DNS', detail: 'traduz nomes de domínio em endereços', tone: 'orange' },
+        { title: 'HTTP / HTTPS', detail: 'regras para transferir recursos da Web', tone: 'green' }
+      ]
     },
     {
-      id: 'internet-web',
+      id: 'dominio-hospedagem',
       kind: 'visual',
-      eyebrow: 'Modelo mental',
-      title: 'Internet e Web não são sinônimos',
-      subtitle: 'Internet = infraestrutura · Web = serviço',
-      visual: 'web-internet',
-      caption: 'A Web usa a rede para localizar e transferir recursos.'
+      eyebrow: 'Onde está o site?',
+      title: 'Domínio é endereço. Hospedagem é onde os arquivos ficam.',
+      subtitle: 'nome fácil de lembrar ≠ servidor',
+      visual: 'html-domain-hosting-cartoon',
+      caption: 'O domínio ajuda a localizar; a hospedagem mantém os recursos disponíveis.'
     },
     {
-      id: 'request-flow',
+      id: 'front-back',
       kind: 'visual',
-      eyebrow: 'Do endereço à tela',
-      title: 'Do endereço digitado à página renderizada',
-      visual: 'request-flow',
-      caption: 'Acompanhe o pedido saindo do navegador e o HTML voltando até virar tela.'
+      eyebrow: 'Áreas de desenvolvimento',
+      title: 'Front-end e back-end trabalham em partes diferentes do sistema',
+      subtitle: 'interface visível × processamento e dados',
+      visual: 'html-frontend-backend-cartoon',
+      caption: 'A fronteira varia por projeto, mas a separação ajuda a entender responsabilidades.'
     },
     {
-      id: 'papel-tecnologias',
+      id: 'linguagens',
+      kind: 'cards',
+      eyebrow: 'Tecnologias fundamentais',
+      title: 'HTML, CSS e JavaScript não são a mesma coisa',
+      items: [
+        { title: 'HTML', detail: 'linguagem de marcação: conteúdo + estrutura', tone: 'blue' },
+        { title: 'CSS', detail: 'linguagem de estilos: apresentação + layout', tone: 'innovation' },
+        { title: 'JavaScript', detail: 'linguagem de programação: comportamento + lógica', tone: 'orange' },
+        { title: 'Não existe “a melhor”', detail: 'cada tecnologia resolve tipos de problema', tone: 'green' }
+      ]
+    },
+    {
+      id: 'ambiente-visual',
       kind: 'visual',
-      eyebrow: 'Responsabilidades',
-      title: 'HTML, CSS e JavaScript resolvem problemas diferentes',
-      subtitle: 'Hoje: HTML',
-      visual: 'html-css-js'
+      eyebrow: 'Preparação',
+      title: 'Seu laboratório de desenvolvimento',
+      subtitle: 'editor + navegador + ferramentas',
+      visual: 'html-dev-environment-cartoon',
+      caption: 'Vamos escrever no VS Code e observar o comportamento no Chrome.'
+    },
+    {
+      id: 'ambiente',
+      kind: 'checklist',
+      eyebrow: 'Preparação do ambiente',
+      title: 'Deixe tudo pronto antes de começar a codificar',
+      items: [
+        'Instalar ou abrir o Visual Studio Code.',
+        'Instalar ou abrir o Google Chrome.',
+        'Criar uma pasta exclusiva para o projeto.',
+        'Abrir a pasta inteira no VS Code.',
+        'Conhecer Explorer, editor, terminal e extensões.',
+        'Opcional: Live Server para recarregar automaticamente.',
+        'Opcional: Prettier para formatação consistente.',
+        'Abrir DevTools no navegador e localizar Elements e Console.'
+      ]
     },
     {
       id: 'o-que-e-html',
       kind: 'statement',
       eyebrow: 'HTML',
       title: 'HTML é uma linguagem de marcação.',
-      lead: 'Estrutura + significado.',
-      detail: 'HTML identifica o papel de cada parte do conteúdo.',
-      chips: ['HyperText', 'Markup', 'Language', 'semântica']
+      lead: 'Conteúdo + estrutura + significado.',
+      detail: 'Ele descreve o papel das partes de um documento; não é uma linguagem de programação.',
+      chips: ['HyperText', 'Markup', 'Language', 'documento']
     },
     {
       id: 'anatomia-elemento',
       kind: 'anatomy',
       eyebrow: 'Anatomia',
-      title: 'Um elemento HTML possui partes identificáveis',
+      title: 'Elementos HTML possuem partes identificáveis',
       code: '<p class="destaque">Minha primeira página</p>',
       labels: [
         { token: '<p', label: 'tag de abertura' },
@@ -276,402 +328,238 @@ export const aula01Html: LessonDefinition = {
       ]
     },
     {
-      id: 'microdesafio-html-valido',
-      kind: 'challenge',
-      eyebrow: '30 segundos',
-      title: 'Qual marcação está correta?',
-      subtitle: 'Responda antes de revelar a explicação.',
-      prompt: 'Qual opção representa um parágrafo HTML corretamente aberto e fechado?',
-      options: [
-        { label: 'Opção A', code: '<p>Olá</p>' },
-        { label: 'Opção B', code: '<p>Olá<p>' },
-        { label: 'Opção C', code: '<p Olá </p>' }
-      ],
-      answerIndex: 0,
-      explanation: 'A tag de abertura <p> e a tag de fechamento </p> envolvem o conteúdo.'
-    },
-    {
-      id: 'conceitos-base',
-      kind: 'cards',
-      eyebrow: 'Vocabulário essencial',
-      title: '6 peças do vocabulário HTML',
-      items: [
-        { title: 'Tag', detail: '<p> ... </p>', tone: 'blue' },
-        { title: 'Elemento', detail: 'tag + conteúdo + fechamento', tone: 'innovation' },
-        { title: 'Atributo', detail: 'dados extras da tag', tone: 'orange' },
-        { title: 'Conteúdo', detail: 'o que está dentro', tone: 'green' },
-        { title: 'Elemento vazio', detail: 'ex.: <img>', tone: 'neutral' },
-        { title: 'Aninhamento', detail: 'pai → filho', tone: 'blue' }
-      ]
-    },
-    {
-      id: 'aninhamento',
-      kind: 'code',
-      eyebrow: 'Hierarquia',
-      title: 'HTML forma uma árvore de elementos',
-      subtitle: 'pai → filho → neto',
-      language: 'html',
-      code: nestedElements,
-      bullets: [
-        '<article> → h2 + p',
-        '<strong> está dentro de <p>',
-        'Indentação = leitura mais clara'
-      ]
-    },
-    {
-      id: 'microdesafio-aninhamento',
-      kind: 'challenge',
-      eyebrow: 'Leitura de árvore',
-      title: 'Quem é o pai de <strong>?',
-      prompt: 'No exemplo anterior, qual elemento contém diretamente <strong>?</strong>?',
-      options: [
-        { label: '<article>' },
-        { label: '<p>' },
-        { label: '<h2>' }
-      ],
-      answerIndex: 1,
-      explanation: '<strong> está diretamente dentro de <p>. O <article> é ancestral, mas não é o pai imediato.'
-    },
-    {
       id: 'arvore-documento',
       kind: 'visual',
-      eyebrow: 'Documento completo',
-      title: 'Todo documento HTML possui uma estrutura',
+      eyebrow: 'Documento',
+      title: 'A estrutura básica tem uma árvore previsível',
       subtitle: 'html → head + body',
       visual: 'document-tree',
-      caption: 'head = metadados · body = conteúdo'
+      caption: 'head descreve o documento; body contém o conteúdo apresentado.'
     },
     {
       id: 'primeiro-documento',
       kind: 'code',
-      eyebrow: 'Primeiro arquivo',
-      title: 'Crie index.html',
-      subtitle: 'A estrutura mínima que vamos reutilizar',
+      eyebrow: 'Estrutura básica',
+      title: 'Crie index.html e entenda cada linha',
+      subtitle: 'esta estrutura será reutilizada durante todo o curso',
       language: 'html',
       code: firstDocument,
       bullets: [
-        '<!doctype html> → HTML moderno',
-        'lang → idioma',
-        'charset → caracteres',
-        'viewport → telas diferentes'
+        '<!DOCTYPE html> → documento HTML moderno',
+        'lang → idioma principal',
+        'charset → codificação de caracteres',
+        'viewport → largura adequada em telas móveis'
       ]
     },
     {
       id: 'laboratorio-primeira-pagina',
       kind: 'lab',
       eyebrow: 'Laboratório ao vivo',
-      title: 'Edite o HTML e veja o resultado imediatamente',
-      subtitle: 'O código inicial também pode ser aberto no VS Code para Web em outra guia.',
+      title: 'Edite o documento e observe o navegador',
+      subtitle: 'altere uma coisa por vez e valide o efeito',
       language: 'html',
       starterCode: firstDocument,
       editorPath: 'labs/html/aula-01/index.html',
       instructions: [
-        'Troque o conteúdo do h1 pelo seu nome.',
-        'Altere o parágrafo para uma apresentação curta.',
-        'Adicione um segundo parágrafo sem apagar a estrutura do documento.',
-        'Observe a prévia a cada mudança antes de seguir.'
+        'Troque o h1 pelo seu nome.',
+        'Altere o title e observe a aba do navegador.',
+        'Adicione um segundo parágrafo.',
+        'Inclua um h2 abaixo do primeiro parágrafo.',
+        'Abra DevTools e localize os elementos que você escreveu.'
       ]
     },
     {
-      id: 'head',
+      id: 'texto-visual',
       kind: 'visual',
-      eyebrow: 'Dentro de <head>',
-      title: '<head>: pequenas linhas, consequências visíveis',
-      subtitle: 'aba · caracteres · celular · resumo',
-      visual: 'head-impact',
-      caption: 'Em vez de decorar metadados, observe o que muda quando cada um existe.'
+      eyebrow: 'Conteúdo',
+      title: 'A Web também precisa representar símbolos e caracteres modernos',
+      subtitle: 'texto · entidades · Unicode · emojis',
+      visual: 'html-text-symbols-emoji-cartoon',
+      caption: 'UTF-8 permite trabalhar com grande variedade de caracteres e emojis.'
     },
     {
-      id: 'texto-com-significado',
-      kind: 'cards',
-      eyebrow: 'Conteúdo textual',
-      title: 'Escolha a tag pelo significado',
-      subtitle: 'semântica > aparência',
-      items: [
-        { title: '<h1> … <h6>', detail: 'hierarquia de títulos', tone: 'blue' },
-        { title: '<p>', detail: 'parágrafo', tone: 'innovation' },
-        { title: '<strong>', detail: 'forte importância', tone: 'orange' },
-        { title: '<em>', detail: 'ênfase', tone: 'green' },
-        { title: '<br>', detail: 'quebra de linha', tone: 'neutral' },
-        { title: '<hr>', detail: 'mudança temática', tone: 'blue' }
+      id: 'textos-simbolos',
+      kind: 'code',
+      eyebrow: 'Texto, símbolos e emojis',
+      title: 'Caracteres reservados podem ser representados com entidades',
+      language: 'html',
+      code: textSymbolsEmoji,
+      bullets: [
+        '&amp; → &',
+        '&lt; → <',
+        '&gt; → >',
+        'UTF-8 permite emojis diretamente no documento'
       ]
     },
     {
-      id: 'listas',
+      id: 'semantica',
+      kind: 'statement',
+      eyebrow: 'HTML5',
+      title: 'Semântica é escolher elementos pelo significado.',
+      lead: 'Design fica para o CSS.',
+      detail: 'HTML explica a estrutura do conteúdo; CSS decide como essa estrutura será apresentada.',
+      chips: ['h1–h6', 'p', 'significado', 'estrutura']
+    },
+    {
+      id: 'hierarquia',
       kind: 'code',
-      eyebrow: 'Coleções',
-      title: 'Listas = itens relacionados',
+      eyebrow: 'Hierarquia de títulos',
+      title: 'Headings funcionam como um sumário do documento',
       language: 'html',
-      code: listExample,
+      code: hierarchyExample,
       bullets: [
-        '<ul> → sem ordem',
-        '<ol> → ordem importa',
-        '<li> → item'
+        'h1 → assunto principal',
+        'h2 → seção',
+        'h3 → subseção',
+        'não escolha heading pelo tamanho visual'
       ]
     },
     {
       id: 'links',
       kind: 'code',
-      eyebrow: 'Hipertexto na prática',
-      title: '<a> conecta recursos',
+      eyebrow: 'Links e âncoras',
+      title: '<a> conecta documentos e pontos da própria página',
       language: 'html',
-      code: linkExample,
+      code: linksExample,
       bullets: [
-        'href → destino',
-        'texto do link → intenção clara',
-        'target="_blank" → nova guia'
+        'href com URL → outro recurso',
+        'href="#id" → ponto do mesmo documento',
+        'texto do link deve explicar o destino'
       ]
     },
     {
-      id: 'imagens',
-      kind: 'code',
-      eyebrow: 'Conteúdo visual',
-      title: '<img>: arquivo + significado',
-      language: 'html',
-      code: imageExample,
-      bullets: [
-        'src → arquivo',
-        'alt → significado',
-        'decorativa → alt=""'
-      ]
-    },
-    {
-      id: 'alt-em-acao',
+      id: 'multimidia-visual',
       kind: 'visual',
-      eyebrow: 'Acessibilidade em ação',
-      title: 'O texto alternativo continua útil quando a imagem não ajuda',
-      subtitle: 'significado > decoração',
-      visual: 'alt-demo',
-      caption: 'Descreva o que a imagem comunica. Se ela for apenas decorativa, alt="" é válido.'
+      eyebrow: 'Multimídia',
+      title: 'Imagem, áudio e vídeo têm custos e estratégias diferentes',
+      subtitle: 'arquivo local × plataforma externa',
+      visual: 'html-multimedia-cartoon',
+      caption: 'Mídia própria dá controle; serviços externos podem reduzir tráfego e complexidade.'
+    },
+    {
+      id: 'multimidia',
+      kind: 'code',
+      eyebrow: 'HTML multimídia',
+      title: 'HTML possui elementos nativos para imagem, áudio e vídeo',
+      language: 'html',
+      code: mediaExample,
+      bullets: [
+        '<img> → imagem e texto alternativo',
+        '<audio controls> → reprodução de áudio',
+        '<video controls> → reprodução de vídeo',
+        'YouTube/Vimeo podem ser incorporados em vez de hospedar vídeo localmente'
+      ]
+    },
+    {
+      id: 'imagem-responsiva-intro',
+      kind: 'cards',
+      eyebrow: 'Imagem responsiva · visão inicial',
+      title: 'A mesma imagem não precisa ser enviada para todas as telas',
+      items: [
+        { title: 'img', detail: 'imagem padrão e texto alternativo', tone: 'blue' },
+        { title: 'srcset', detail: 'oferece diferentes arquivos ao navegador', tone: 'innovation' },
+        { title: 'sizes', detail: 'informa o espaço provável da imagem', tone: 'orange' },
+        { title: 'picture', detail: 'permite direção de arte e formatos', tone: 'green' }
+      ]
+    },
+    {
+      id: 'video-local-ou-plataforma',
+      kind: 'cards',
+      eyebrow: 'Vídeo na Web',
+      title: 'Hospedar o vídeo ou incorporar uma plataforma?',
+      items: [
+        { title: 'Vídeo próprio', detail: 'mais controle sobre arquivo e experiência', tone: 'blue' },
+        { title: 'Custo próprio', detail: 'mais tráfego, armazenamento e processamento', tone: 'orange' },
+        { title: 'YouTube / Vimeo', detail: 'distribuição e player já resolvidos', tone: 'innovation' },
+        { title: 'Trade-off', detail: 'dependência externa, privacidade e interface', tone: 'green' }
+      ]
     },
     {
       id: 'intervalo',
       kind: 'statement',
       eyebrow: '15 minutos',
       title: 'Intervalo',
-      lead: '15 min.',
-      detail: 'Na volta: semântica + construção final.',
-      chips: ['salvar arquivos', 'organizar pasta', 'retomar em 15 min']
+      lead: 'Salve o projeto antes da pausa.',
+      detail: 'Na volta: primeiros passos com CSS e integração da página.',
+      chips: ['salvar', 'organizar', 'retomar em 15 min']
     },
     {
-      id: 'divverso',
-      kind: 'code',
-      eyebrow: 'Antes da semântica',
-      title: 'Bem-vindo ao Divverso',
-      subtitle: 'Funciona. Mas ninguém sabe o papel de cada bloco só olhando a marcação.',
-      language: 'html',
-      code: '<div>\n  <div>\n    <div>\n      <div>\n        <div>conteúdo</div>\n      </div>\n    </div>\n  </div>\n</div>',
-      bullets: [
-        'div não é errado',
-        'o problema é usar div quando existe um elemento com significado melhor',
-        'semântica deixa a estrutura legível para pessoas e ferramentas'
-      ]
-    },
-    {
-      id: 'semantica',
-      kind: 'statement',
-      eyebrow: 'HTML semântico',
-      title: 'Semântica é escolher elementos pelo significado.',
-      lead: 'Sem CSS, ainda precisa fazer sentido.',
-      detail: 'Semântica melhora leitura, acessibilidade, manutenção e interpretação.',
-      chips: ['significado', 'estrutura', 'acessibilidade', 'manutenção']
-    },
-    {
-      id: 'regioes-semanticas',
-      kind: 'cards',
-      eyebrow: 'Regiões da página',
-      title: 'As regiões ganham nomes',
-      items: [
-        { title: '<header>', detail: 'introdução', tone: 'blue' },
-        { title: '<nav>', detail: 'navegação', tone: 'innovation' },
-        { title: '<main>', detail: 'conteúdo principal', tone: 'orange' },
-        { title: '<section>', detail: 'grupo temático', tone: 'green' },
-        { title: '<article>', detail: 'conteúdo independente', tone: 'neutral' },
-        { title: '<footer>', detail: 'encerramento', tone: 'blue' }
-      ]
-    },
-    {
-      id: 'pagina-semantica-visual',
+      id: 'html-css-visual',
       kind: 'visual',
-      eyebrow: 'Quebra-cabeça semântico',
-      title: 'Monte o mapa lógico da página',
-      subtitle: 'pense antes de revelar',
-      visual: 'semantic-puzzle',
-      caption: 'A ordem visual acompanha a ordem lógica do documento.'
+      eyebrow: 'Primeiros passos com CSS',
+      title: 'HTML cuida do conteúdo; CSS cuida da forma',
+      subtitle: 'estrutura antes da apresentação',
+      visual: 'html-css-cartoon',
+      caption: 'Separar responsabilidades facilita manutenção e evolução da página.'
     },
     {
-      id: 'estrutura-semantica',
+      id: 'css-formas',
       kind: 'code',
-      eyebrow: 'Montagem',
-      title: 'A estrutura aparece no próprio código',
+      eyebrow: 'CSS: três formas de aplicar',
+      title: 'Inline, interno e externo existem — mas não têm o mesmo papel',
       language: 'html',
-      code: semanticPage,
+      code: cssWays,
       bullets: [
-        'id → destino interno',
-        '<main> → conteúdo principal',
-        'ordem do código → ordem de leitura'
-      ]
-    },
-    {
-      id: 'microdesafio-semantica',
-      kind: 'challenge',
-      eyebrow: 'Semântica',
-      title: 'Qual elemento representa o conteúdo principal?',
-      prompt: 'Em uma página comum, qual elemento deve envolver o conteúdo principal único do documento?',
-      options: [
-        { label: '<main>' },
-        { label: '<div>' },
-        { label: '<footer>' }
-      ],
-      answerIndex: 0,
-      explanation: '<main> identifica o conteúdo principal. <div> é genérico e <footer> representa encerramento ou informações complementares.'
-    },
-    {
-      id: 'pratica-guiada',
-      kind: 'exercise',
-      eyebrow: 'Prática guiada',
-      title: 'Construa a base da sua página de apresentação',
-      challenge: 'Crie uma página pessoal fictícia usando somente HTML e valide cada etapa no navegador.',
-      timebox: '25 min',
-      steps: [
-        'Crie uma pasta projeto-html e o arquivo index.html.',
-        'Monte doctype, html, head e body.',
-        'Adicione header com nome e uma frase de apresentação.',
-        'Crie nav com links internos para duas seções.',
-        'Adicione uma seção Sobre e outra O que estou aprendendo.',
-        'Inclua pelo menos uma lista, um link externo e uma imagem.'
-      ],
-      success: [
-        'A página abre diretamente no navegador.',
-        'Existe apenas um h1 e os demais títulos seguem hierarquia lógica.',
-        'Todos os links internos levam para a seção correta.',
-        'A imagem possui texto alternativo adequado.'
-      ]
-    },
-    {
-      id: 'checagem-semantica',
-      kind: 'checklist',
-      eyebrow: 'Antes do projeto final',
-      title: 'Revise a estrutura como um desenvolvedor',
-      prompt: 'Se a resposta for “não”, corrija antes de seguir.',
-      items: [
-        'O documento possui lang, charset, viewport e title?',
-        'Existe somente um conteúdo principal representado por main?',
-        'Os títulos formam uma hierarquia coerente?',
-        'Listas realmente representam coleções de itens?',
-        'Links possuem textos que fazem sentido fora do contexto?',
-        'Imagens têm alt coerente com sua finalidade?',
-        'As seções possuem títulos quando necessário?',
-        'A página continua compreensível sem qualquer CSS?'
+        'inline → teste pontual ou caso excepcional',
+        'interno → demonstração ou página isolada',
+        'externo → padrão recomendado para projetos reais'
       ]
     },
     {
       id: 'producao-final',
-      kind: 'missions',
-      eyebrow: 'Produção final · 30 min',
-      title: 'Escolha uma missão e entregue HTML de verdade',
-      subtitle: 'o tema muda; os critérios técnicos são os mesmos',
-      intro: 'Escolha um contexto que ajude você a escrever conteúdo com intenção. Não vale escolher pelo visual: hoje o desafio é estrutura.',
-      options: [
-        {
-          title: 'Portfólio de desenvolvedor',
-          detail: 'Apresente uma pessoa em início de carreira, estudos e formas de contato.'
-        },
-        {
-          title: 'Negócio de bairro',
-          detail: 'Apresente uma cafeteria, oficina, salão ou outro negócio local.'
-        },
-        {
-          title: 'Aluguel de patos',
-          detail: 'Uma empresa fictícia extremamente séria especializada em locação de patos.',
-          twist: 'O negócio é absurdo. O HTML não pode ser.'
-        }
-      ],
-      requirements: [
-        'header, nav, main, sections e footer',
-        'hierarquia coerente de títulos',
-        'lista, imagem com alt e links interno/externo',
-        'contato funcional',
-        'nenhum CSS inline',
-        'explicar a função de cada elemento usado'
-      ]
-    },
-    {
-      id: 'modelo-final',
-      kind: 'code',
-      eyebrow: 'Referência de estrutura',
-      title: 'Um possível ponto de chegada',
-      subtitle: 'Não copie mecanicamente: compare com a sua solução e explique as diferenças.',
+      kind: 'lab',
+      eyebrow: 'Integração · 25 minutos',
+      title: 'Monte sua primeira página completa',
+      subtitle: 'estrutura + texto + link + imagem + CSS externo',
       language: 'html',
-      code: finalProject,
-      bullets: [
-        'O documento possui metadados mínimos.',
-        'O conteúdo está dividido em regiões semânticas.',
-        'Links internos usam IDs para navegar.',
-        'A página já tem significado antes de receber qualquer CSS.'
+      starterCode: integratedStarter,
+      editorPath: 'labs/html/aula-01/index.html',
+      instructions: [
+        'Troque o texto pelo seu próprio conteúdo.',
+        'Mantenha uma hierarquia clara entre h1 e h2.',
+        'Adicione pelo menos um símbolo ou emoji.',
+        'Inclua uma âncora ou link externo.',
+        'Observe o SVG carregado como imagem.',
+        'Abra e feche o link de styles.css para comparar HTML puro e CSS.'
       ]
     },
     {
-      id: 'teste-final',
-      kind: 'checklist',
-      eyebrow: 'Teste no navegador',
-      title: 'Uma entrega simples ainda precisa ser validada',
-      items: [
-        'Recarregue a página e confirme que não há caminhos de arquivo quebrados.',
-        'Clique em todos os links internos e externos.',
-        'Teste a imagem e confira o texto alternativo.',
-        'Redimensione a janela e verifique se o conteúdo continua acessível.',
-        'Leia o HTML de cima para baixo e confirme que a ordem faz sentido.',
-        'Explique em voz alta o papel de head, body, main e section.'
-      ]
-    },
-    {
-      id: 'checkpoint',
+      id: 'checkpoint-final',
       kind: 'checklist',
       eyebrow: 'Fechamento',
-      title: 'Você consegue responder sem olhar?',
-      prompt: 'Esses conceitos serão pressupostos na próxima aula.',
+      title: 'Antes da Aula 02, você precisa reconhecer estas peças',
       items: [
-        'Por que a Web surgiu?',
-        'Qual é a diferença entre Internet e Web?',
-        'O que HTML descreve?',
-        'Qual é a diferença entre tag, elemento e atributo?',
-        'Para que servem head e body?',
-        'Como criar um link?',
-        'Por que alt é importante em imagens?',
-        'O que significa escrever HTML semântico?'
+        'Sei diferenciar Internet e Web.',
+        'Sei explicar domínio e hospedagem.',
+        'Diferencio front-end e back-end.',
+        'Sei por que HTML e CSS não são linguagens de programação.',
+        'Consigo criar a estrutura básica de um documento HTML.',
+        'Consigo inserir texto, símbolos, emojis, links e mídia.',
+        'Entendo a ideia inicial de hierarquia e semântica.',
+        'Sei a diferença entre CSS inline, interno e externo.'
       ]
-    },
-    {
-      id: 'proxima-aula',
-      kind: 'statement',
-      eyebrow: 'Próxima etapa',
-      title: 'A estrutura está pronta. Depois vem a apresentação.',
-      lead: 'CSS entra quando o HTML já faz sentido.',
-      detail: 'Na próxima aula: cores, tipografia, espaçamento, seletores, Box Model e layout responsivo.',
-      chips: ['CSS', 'seletores', 'cores', 'tipografia', 'Box Model']
     },
     {
       id: 'referencias',
       kind: 'references',
-      eyebrow: 'Fontes e continuidade',
-      title: 'Referências técnicas para revisar a aula',
+      eyebrow: 'Referências',
+      title: 'Documentação para continuar estudando',
+      subtitle: 'fontes técnicas antes de tutoriais aleatórios',
       items: [
-        { label: 'CERN — The birth of the Web', url: 'https://home.cern/science/computing/the-birth-of-the-web/' },
-        { label: 'W3C — History', url: 'https://www.w3.org/about/history/' },
-        { label: 'MDN — HTML', url: 'https://developer.mozilla.org/pt-BR/docs/Web/HTML' },
-        { label: 'MDN — Iniciando com HTML', url: 'https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax' },
-        { label: 'WHATWG — HTML Living Standard', url: 'https://html.spec.whatwg.org/' }
+        { label: 'WHATWG — HTML Living Standard', url: 'https://html.spec.whatwg.org/' },
+        { label: 'MDN — Getting started with the Web', url: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started' },
+        { label: 'MDN — HTML', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
+        { label: 'MDN — CSS', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS' }
       ]
     },
     {
       id: 'uso-educacional',
       kind: 'statement',
-      eyebrow: 'Uso educacional',
-      title: 'Professores podem usar este material em suas aulas.',
-      lead: 'Use. Compartilhe. Preserve.',
-      detail: 'Use o material em sua forma original, preservando identidade visual, autoria, créditos e licença. Não redistribua versões modificadas.',
-      chips: ['uso em sala permitido', 'material íntegro', 'créditos preservados', 'licença preservada']
+      eyebrow: 'Material de aula',
+      title: 'Use, adapte e produza de forma original.',
+      lead: 'O objetivo é aprender construindo.',
+      detail: 'Adapte de forma original, preservando autoria, licença dos recursos e identidade visual em contexto educacional.',
+      chips: ['autoria', 'licença', 'identidade visual', 'educação']
     }
   ]
 };

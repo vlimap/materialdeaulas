@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">HTML e CSS</title>
+<desc id="desc">Cartoon preto e branco comparando o esqueleto estrutural de uma página HTML com a mesma página recebendo forma visual através de CSS.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.arrow{animation:go 2.6s ease-in-out infinite}@keyframes go{50%{transform:translateX(12px)}}@media(prefers-reduced-motion:reduce){.arrow{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(90 120)">
+  <rect class="s" width="370" height="390" rx="24"/><path class="s" d="M45 70h280M45 130h200M45 190h280M45 250h230M45 310h280"/>
+  <text class="t" x="185" y="445" text-anchor="middle" font-size="34">HTML</text><text class="t" x="185" y="485" text-anchor="middle" font-size="24">conteúdo + estrutura</text>
+</g>
+<g class="arrow"><path class="s" d="M505 310h170"/><path class="s" d="M640 280l38 30-38 30"/></g>
+<g transform="translate(730 120)">
+  <rect class="s" width="370" height="390" rx="24"/><rect class="s" x="40" y="45" width="290" height="70" rx="16"/><rect class="s" x="40" y="145" width="130" height="170" rx="16"/><rect class="s" x="200" y="145" width="130" height="170" rx="16"/><rect class="s" x="40" y="335" width="290" height="30" rx="12"/>
+  <text class="t" x="185" y="445" text-anchor="middle" font-size="34">CSS</text><text class="t" x="185" y="485" text-anchor="middle" font-size="24">forma + apresentação</text>
+</g>
+</svg>
