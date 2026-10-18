@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Ambiente de desenvolvimento</title>
+<desc id="desc">Cartoon preto e branco com notebook, editor de código, navegador e extensões conectados.</desc>
+<style>.s{fill:#fff;stroke:#111;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.t{font-family:Arial,sans-serif;font-weight:700;fill:#111}.blink{animation:blink 1.2s steps(1) infinite}@keyframes blink{50%{opacity:0}}@media(prefers-reduced-motion:reduce){.blink{animation:none}}</style>
+<rect width="1200" height="675" fill="#fff"/>
+<g transform="translate(150 90)">
+  <rect class="s" width="620" height="390" rx="24"/><rect class="s" x="40" y="45" width="540" height="290" rx="14"/>
+  <path class="s" d="M0 390h620l90 95H-90z"/><path class="s" d="M160 485h300"/>
+  <path class="s" d="M85 95h170M85 145h260M85 195h215M85 245h310"/><rect class="blink" x="410" y="92" width="8" height="36" fill="#111"/>
+  <text class="t" x="310" y="365" text-anchor="middle" font-size="28">VS CODE</text>
+</g>
+<g transform="translate(800 120)">
+  <rect class="s" width="270" height="190" rx="22"/><path class="s" d="M0 50h270"/><circle cx="30" cy="25" r="7" fill="#111"/><circle cx="55" cy="25" r="7" fill="#111"/><circle cx="80" cy="25" r="7" fill="#111"/>
+  <text class="t" x="135" y="125" text-anchor="middle" font-size="32">CHROME</text>
+</g>
+<g transform="translate(815 360)">
+  <rect class="s" width="240" height="120" rx="22"/><path class="s" d="M55 40h130M55 78h130"/><circle class="s" cx="25" cy="40" r="10"/><circle class="s" cx="25" cy="78" r="10"/>
+  <text class="t" x="120" y="155" text-anchor="middle" font-size="24">EXTENSÕES</text>
+</g>
+<text class="t" x="600" y="620" text-anchor="middle" font-size="34">editor + navegador + ferramentas</text>
+</svg>

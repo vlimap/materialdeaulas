@@ -1,19 +1,37 @@
-# Aula 01 — HTML
+# Aula 01 — Fundamentos da Web
 
-Arquivo inicial do laboratório da Aula 01.
+Laboratório integrado da primeira aula.
 
-## Objetivo
+## Objetivos
 
-Editar uma página HTML mínima sem adicionar CSS ou JavaScript.
+- editar a estrutura básica de um documento HTML;
+- observar a diferença entre HTML e CSS;
+- inserir texto, símbolos e emojis;
+- criar um link externo;
+- carregar um SVG local;
+- usar DevTools para inspecionar o documento.
 
-## Atividade
+## Arquivos
 
-1. Troque o conteúdo do `h1` pelo seu nome.
-2. Altere o primeiro parágrafo para uma apresentação curta.
-3. Adicione um segundo parágrafo.
-4. Mantenha a estrutura `doctype → html → head → body`.
-5. Abra o arquivo em um navegador para conferir o resultado.
+```text
+aula-01/
+├── index.html
+├── styles.css
+└── assets/
+    └── internet.svg
+```
 
-## VS Code para Web
+## Experimento principal
 
-O material pode abrir este arquivo diretamente no VS Code para Web. O editor web é adequado para edição de HTML, mas não oferece o mesmo runtime/terminal do VS Code Desktop. A própria aula mantém uma prévia ao vivo para testar mudanças rapidamente.
+Remova temporariamente esta linha do `head`:
+
+```html
+<link rel="stylesheet" href="styles.css">
+```
+
+A estrutura e o conteúdo continuam existindo. O que muda é a apresentação.
+
+```text
+HTML = conteúdo + estrutura
+CSS  = apresentação
+```
