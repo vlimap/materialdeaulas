@@ -35,10 +35,15 @@ const tests: TestCase[] = [
       for (const slug of ['curso-sdlc', 'curso-logic-programming', 'curso-algorithms']) {
         const course = technologyCourses.find(item => item.slug === slug);
         assert.ok(course, slug);
-        assert.equal(course.description.includes(' · '), false, 'Exemplo de descrição sem delimitador');
         assert.ok(technologyCourseGroups.some(group => group.category === 'Fundamentos de Software' &&
           group.courses.some(item => item.slug === slug)), slug);
       }
+
+      const javascript = technologyCourses.find(item => item.slug === 'curso-javascript');
+      assert.ok(javascript);
+      assert.equal(javascript.description.includes(' · '), false, 'A descrição não contém categoria');
+      assert.ok(technologyCourseGroups.some(group => group.category === 'Linguagens' &&
+        group.courses.includes(javascript)), 'JavaScript deve aparecer em Linguagens');
 
       const app = readFileSync('src/App.tsx', 'utf8');
       assert.match(app, /technologyCourseGroups\.map/);
