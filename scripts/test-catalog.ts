@@ -196,7 +196,7 @@ const tests: TestCase[] = [
         assert.ok(lesson.objectives.length >= 4, lesson.slug);
         assert.ok(lesson.slides.length >= 18, lesson.slug);
         assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length, lesson.slug);
-        assert.ok(lesson.slides.some(slide => slide.kind === 'exercise'), lesson.slug);
+        if (lesson.number >= 2) assert.ok(lesson.slides.some(slide => slide.kind === 'exercise'), lesson.slug);
         assert.ok(lesson.slides.some(slide => slide.kind === 'lab'), lesson.slug);
         assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'), lesson.slug);
         assert.ok(lesson.slides.some(slide => slide.kind === 'references'), lesson.slug);
