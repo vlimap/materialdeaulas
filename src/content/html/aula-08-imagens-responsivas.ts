@@ -92,7 +92,7 @@ export const aula08Html = buildHtmlLesson({
     }
   ],
   "labTitle": "Monte a galeria responsiva de projetos da comunidade",
-  "starterCode": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Galeria responsiva</title></head><body>\n<main><h1>Projetos da comunidade</h1>\n<figure><picture>\n  <source media=\"(max-width: 600px)\" srcset=\"imagens/capa-320.svg\">\n  <img src=\"imagens/capa-960.svg\" alt=\"Biblioteca comunitária com estantes de livros\" width=\"960\" height=\"540\">\n</picture><figcaption>Biblioteca: aprendizagem compartilhada.</figcaption></figure>\n<!-- Experimente srcset e sizes no segundo projeto. -->\n</main></body></html>",
+  "starterCode": "<!doctype html>\n<html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Galeria responsiva</title><style>img { max-width: 100%; height: auto; }</style></head><body>\n<main><h1>Projetos da comunidade</h1>\n<figure><picture>\n  <source media=\"(max-width: 600px)\" srcset=\"imagens/capa-320.svg\">\n  <img src=\"imagens/capa-960.svg\" alt=\"Biblioteca comunitária com estantes de livros\" width=\"960\" height=\"540\">\n</picture><figcaption>Biblioteca: aprendizagem compartilhada.</figcaption></figure>\n<!-- Experimente srcset e sizes no segundo projeto. -->\n</main></body></html>",
   "labSteps": [
     "Abra o exemplo no navegador em larguras de 375 e 1024 pixels.",
     "Inclua uma segunda imagem com srcset e sizes.",
