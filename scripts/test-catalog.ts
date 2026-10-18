@@ -192,7 +192,7 @@ const tests: TestCase[] = [
       for (const lesson of lessons) {
         assert.equal(lesson.status, 'published', lesson.slug);
         assert.equal(lesson.durationMinutes, 240, lesson.slug);
-        assert.equal(lesson.ucSlug, 'fundamentos-html5', lesson.slug);
+        assert.equal(lesson.ucSlug, lesson.number === 1 ? 'desenvolvimento-front-end' : 'fundamentos-html5', lesson.slug);
         assert.ok(lesson.objectives.length >= 4, lesson.slug);
         assert.ok(lesson.slides.length >= 18, lesson.slug);
         assert.equal(new Set(lesson.slides.map(slide => slide.id)).size, lesson.slides.length, lesson.slug);
