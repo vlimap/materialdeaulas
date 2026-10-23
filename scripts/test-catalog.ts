@@ -364,7 +364,21 @@ const tests: TestCase[] = [
       assert.equal(lessons.length, 12);
       assert.ok(lessons.every((lesson) => lesson.durationMinutes === 240));
       assert.equal(lessons[0].status, 'published');
-      assert.equal(lessons.slice(1).filter((lesson) => lesson.status === 'planned').length, 11);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'published').length, 12);
+      assert.equal(lessons.filter((lesson) => lesson.status === 'planned').length, 0);
+      assert.deepEqual(lessons.map((lesson) => lesson.number), Array.from({length: 12}, (_, i) => i + 1));
+      assert.ok(getCourseLessonNavigation('curso-sdlc').every((lesson) => lesson.published));
+      for (const lesson of lessons) {
+        assert.equal(findLesson('curso-sdlc', 'fundamentos-sdlc', lesson.slug)?.lesson.id, lesson.id);
+        assert.ok(lesson.slides.length >= 20, lesson.slug);
+        assert.equal(new Set(lesson.slides.map((slide) => slide.id)).size, lesson.slides.length);
+        assert.ok(lesson.slides.some((slide) => slide.kind === 'checklist'));
+        assert.ok(lesson.slides.some((slide) => slide.kind === 'references'));
+        if (lesson.number > 1) {
+          assert.equal(lesson.slides.filter((slide) => slide.kind === 'challenge').length, 4);
+          assert.equal(lesson.slides.filter((slide) => slide.kind === 'exercise').length, 3);
+        }
+      }
       assert.match(lessons[0].title, /SDLC/i);
     }
   },
@@ -901,8 +915,17 @@ const tests: TestCase[] = [
         lessonPages.some((page) =>
           page.path.endsWith('/aula/aula-02-discovery-problema-viabilidade')
         ),
-        false
+        true
       );
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      for (const lesson of sdlc?.ucs[0].modules[0].lessons ?? []) {
+        assert.ok(
+          lessonPages.some((page) =>
+            page.path.endsWith('/curso/curso-sdlc/uc/fundamentos-sdlc/aula/' + lesson.slug)
+          ),
+          lesson.slug
+        );
+      }
     }
   },
   {

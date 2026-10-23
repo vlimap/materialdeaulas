@@ -1,5 +1,6 @@
 import type { CourseDefinition, LessonDefinition, LessonSource } from '../../types/course';
 import { aula01Sdlc } from './aula-01-sdlc';
+import { completedLesson } from './lesson-builder';
 
 const sommerville = (
   chapters: string[],
@@ -14,37 +15,9 @@ const sommerville = (
   note
 });
 
-function plannedLesson(
-  number: number,
-  slug: string,
-  title: string,
-  shortTitle: string,
-  objectives: string[],
-  sources: LessonSource[],
-  visualPlan: string[]
-): LessonDefinition {
-  const padded = String(number).padStart(2, '0');
-
-  return {
-    id: 'sdlc-aula-' + padded,
-    status: 'planned',
-    slug,
-    number,
-    title,
-    shortTitle,
-    durationMinutes: 240,
-    audience: 'Iniciantes em desenvolvimento e engenharia de software',
-    ucSlug: 'fundamentos-sdlc',
-    objectives,
-    sources,
-    visualPlan,
-    slides: []
-  };
-}
-
 export const sdlcLessons: LessonDefinition[] = [
   aula01Sdlc,
-  plannedLesson(
+  completedLesson(
     2,
     'aula-02-discovery-problema-viabilidade',
     'SDLC: problema, stakeholders, viabilidade e risco inicial',
@@ -70,7 +43,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Caso contínuo com decisão go / revise / stop.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     3,
     'aula-03-requisitos-rastreabilidade',
     'SDLC: requisitos, validação e rastreabilidade',
@@ -96,7 +69,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Conflito entre stakeholders resolvido por priorização e negociação.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     4,
     'aula-04-analise-modelagem',
     'SDLC: análise e modelagem de sistemas',
@@ -122,7 +95,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Seleção visual: qual modelo responde qual pergunta?'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     5,
     'aula-05-planejamento-riscos-qualidade',
     'SDLC: planejamento, estimativas, riscos e qualidade',
@@ -148,7 +121,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Revisão/inspeção representada como fluxo autor → pares → correção.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     6,
     'aula-06-design-arquitetura-decisoes',
     'SDLC: arquitetura, visões e decisões de projeto',
@@ -174,7 +147,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'ADR visual: contexto → decisão → consequência.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     7,
     'aula-07-implementacao-integracao',
     'SDLC: projeto, implementação, configuração e integração',
@@ -200,7 +173,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Mudança conectada a versão, build e release.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     8,
     'aula-08-verificacao-validacao-testes',
     'SDLC: testes, verificação, validação e TDD',
@@ -226,7 +199,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Usuário validando objetivo em cenário real.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     9,
     'aula-09-release-deploy',
     'SDLC: build, release, implantação e controle de versões',
@@ -252,7 +225,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Blue-green/canary como atualização visual claramente marcada.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     10,
     'aula-10-operacao-observabilidade-incidentes',
     'SDLC: operação, confiabilidade, observabilidade e incidentes',
@@ -278,7 +251,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Confiabilidade visualizada como propriedade do sistema em uso.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     11,
     'aula-11-manutencao-divida-retirada',
     'SDLC: evolução, manutenção, legado e retirada',
@@ -304,7 +277,7 @@ export const sdlcLessons: LessonDefinition[] = [
       'Retirada visual com migração de usuários e dados.'
     ]
   ),
-  plannedLesson(
+  completedLesson(
     12,
     'aula-12-modelos-projeto-final',
     'SDLC: modelos de processo, melhoria e projeto final',
