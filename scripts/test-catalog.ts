@@ -915,8 +915,17 @@ const tests: TestCase[] = [
         lessonPages.some((page) =>
           page.path.endsWith('/aula/aula-02-discovery-problema-viabilidade')
         ),
-        false
+        true
       );
+      const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
+      for (const lesson of sdlc?.ucs[0].modules[0].lessons ?? []) {
+        assert.ok(
+          lessonPages.some((page) =>
+            page.path.endsWith('/curso/curso-sdlc/uc/fundamentos-sdlc/aula/' + lesson.slug)
+          ),
+          lesson.slug
+        );
+      }
     }
   },
   {
