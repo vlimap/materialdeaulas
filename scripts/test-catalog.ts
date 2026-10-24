@@ -648,6 +648,26 @@ const tests: TestCase[] = [
       assert.match(css, /grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/);
       assert.match(css, /@media \(max-width: 620px\)/);
       assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+      const compareSource = models.slice(
+        models.indexOf('type ComparisonModelId'),
+        models.indexOf('export function SdlcProcessModels')
+      );
+      const globalStyles = readFileSync('src/styles/global.css', 'utf8');
+      for (const id of ['waterfall', 'v-model', 'incremental', 'spiral', 'prototype', 'agile']) {
+        assert.match(compareSource, new RegExp("id: '" + id + "'"), 'Modelo ausente na comparação: ' + id);
+        assert.match(compareSource, new RegExp("case '" + id + "'"), 'Miniatura ausente: ' + id);
+      }
+      assert.match(compareSource, /role="img"/, 'As miniaturas precisam de descrições acessíveis');
+      assert.match(compareSource, /comparisonSpiralPath/, 'A espiral deve ser uma curva verdadeira');
+      assert.doesNotMatch(compareSource, /animation:|rotate\(|setInterval|requestAnimationFrame/,
+        'Comparação não deve girar ou animar continuamente');
+      assert.match(css, /\.pm-comparison \*,[\s\S]*?animation:\s*none !important/);
+      assert.match(css, /\.pm-comparison-grid\s*\{[\s\S]*?grid-template-columns:\s*repeat\(3,/);
+      assert.match(css, /grid-template-rows:\s*repeat\(2,/);
+      assert.match(css, /\.story-mode \.pm-comparison-grid[\s\S]*?grid-template-rows:\s*repeat\(3,/);
+      assert.doesNotMatch(globalStyles, /\.mini-spiral i\s*\{/,
+        'O desenho legado que girava indefinidamente deve desaparecer');
+
     }
   },
   {
