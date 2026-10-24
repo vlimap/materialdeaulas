@@ -1,0 +1,235 @@
+/*
+ * Identidade visual unificada dos simuladores e orientação de aprendizagem.
+ * O projeto utiliza um player escuro: as superfícies dos laboratórios não
+ * devem voltar ao branco azulado que destoa dos slides e reduz a continuidade.
+ */
+
+/* Uma explicação visível antes de questões, exercícios e simulações. */
+.deck-page .slide-header .activity-guidance {
+  margin-top: .75cqw;
+  padding: .55cqw 1cqw;
+  display: grid;
+  gap: .25cqw;
+  border-left: .28cqw solid #f2c53d;
+  border-radius: 0 .45cqw .45cqw 0;
+  background: rgba(30, 39, 51, .82);
+  color: #e7f0fa;
+  max-width: 72cqw;
+}
+.deck-page .slide-header .activity-guidance strong {
+  font: 700 .88cqw/1.3 Arial, sans-serif;
+  color: #f2c53d;
+}
+.deck-page .slide-header .activity-guidance p {
+  margin: 0;
+  color: #d7e3f0;
+  font: .85cqw/1.4 Arial, sans-serif;
+}
+
+/* Tokens compartilhados: mesma paleta do player dos cursos. */
+.deck-page .slide-canvas {
+  --sim-bg: #151a21;
+  --sim-raised: #1e2733;
+  --sim-strong: #11161d;
+  --sim-text: #edf4ff;
+  --sim-muted: #b8c6d6;
+  --sim-border: #34465a;
+  --sim-yellow: #f2c53d;
+}
+
+/* Superfícies externas dos módulos de simulação. */
+.deck-page .slide-canvas .logic-scene,
+.deck-page .slide-canvas .logic-panel,
+.deck-page .slide-canvas .problem-scene,
+.deck-page .slide-canvas .problem-control,
+.deck-page .slide-canvas .truth-lab-controls,
+.deck-page .slide-canvas .truth-lab-display,
+.deck-page .slide-canvas .algo-viz-scene,
+.deck-page .slide-canvas .algo-viz-actions,
+.deck-page .slide-canvas .algorithm-simulation,
+.deck-page .slide-canvas .algorithm-controls,
+.deck-page .slide-canvas .js-console-editor,
+.deck-page .slide-canvas .js-console-output {
+  background: var(--sim-bg);
+  background-image: none;
+  color: var(--sim-text);
+  border-color: var(--sim-border);
+}
+
+/* Títulos, legendas, descrições e rótulos não podem conservar a tinta
+   azul-escura das antigas superfícies brancas. */
+.deck-page .slide-canvas .logic-scene-heading,
+.deck-page .slide-canvas .logic-scene-caption,
+.deck-page .slide-canvas .logic-panel > strong,
+.deck-page .slide-canvas .problem-scene-label,
+.deck-page .slide-canvas .problem-scene-status,
+.deck-page .slide-canvas .problem-control > strong,
+.deck-page .slide-canvas .truth-lab-step,
+.deck-page .slide-canvas .truth-table-heading,
+.deck-page .slide-canvas .truth-choice-label,
+.deck-page .slide-canvas .algo-viz-label,
+.deck-page .slide-canvas .algo-viz-code-heading,
+.deck-page .slide-canvas .algo-viz-heading strong,
+.deck-page .slide-canvas .algorithm-label,
+.deck-page .slide-canvas .algorithm-code-label,
+.deck-page .slide-canvas .algorithm-heading,
+.deck-page .slide-canvas .js-console-topline,
+.deck-page .slide-canvas .js-console-output > strong {
+  color: var(--sim-yellow);
+}
+.deck-page .slide-canvas .logic-panel > p,
+.deck-page .slide-canvas .logic-steps li,
+.deck-page .slide-canvas .logic-empty,
+.deck-page .slide-canvas .problem-control > p,
+.deck-page .slide-canvas .problem-order-note,
+.deck-page .slide-canvas .problem-readonly-label,
+.deck-page .slide-canvas .truth-table-heading span,
+.deck-page .slide-canvas .truth-rule p,
+.deck-page .slide-canvas .truth-output p,
+.deck-page .slide-canvas .truth-output > div span,
+.deck-page .slide-canvas .algo-viz-heading span,
+.deck-page .slide-canvas .algo-viz-conclusion,
+.deck-page .slide-canvas .algo-viz-cell small,
+.deck-page .slide-canvas .algorithm-machine small,
+.deck-page .slide-canvas .algorithm-result span,
+.deck-page .slide-canvas .js-console-topline span,
+.deck-page .slide-canvas .js-console-output p,
+.deck-page .slide-canvas .js-console-output small {
+  color: var(--sim-muted);
+}
+
+/* Cartões, estados e respostas de simulações: sem branco puro. */
+.deck-page .slide-canvas .algo-viz-cell,
+.deck-page .slide-canvas .algo-viz-status,
+.deck-page .slide-canvas .algorithm-machine > div,
+.deck-page .slide-canvas .algorithm-result,
+.deck-page .slide-canvas .truth-table td,
+.deck-page .slide-canvas .truth-output,
+.deck-page .slide-canvas .truth-rule,
+.deck-page .slide-canvas .problem-task,
+.deck-page .slide-canvas .problem-sort li,
+.deck-page .slide-canvas .problem-dataflow > div,
+.deck-page .slide-canvas .problem-selection-status,
+.deck-page .slide-canvas .problem-order-arrow,
+.deck-page .slide-canvas .problem-reader,
+.deck-page .slide-canvas .logic-options button {
+  background: var(--sim-raised);
+  background-image: none;
+  color: var(--sim-text);
+  border-color: var(--sim-border);
+}
+.deck-page .slide-canvas .algo-viz-status strong,
+.deck-page .slide-canvas .algorithm-result strong,
+.deck-page .slide-canvas .truth-output strong,
+.deck-page .slide-canvas .problem-sort-number,
+.deck-page .slide-canvas .problem-order-icon,
+.deck-page .slide-canvas .problem-quantity output,
+.deck-page .slide-canvas .logic-quantity output {
+  color: var(--sim-yellow);
+}
+.deck-page .slide-canvas .truth-table caption,
+.deck-page .slide-canvas .truth-table td,
+.deck-page .slide-canvas .problem-task span,
+.deck-page .slide-canvas .problem-sort-label,
+.deck-page .slide-canvas .problem-order-icon strong,
+.deck-page .slide-canvas .problem-dataflow small,
+.deck-page .slide-canvas .problem-dataflow strong {
+  color: var(--sim-text);
+}
+.deck-page .slide-canvas .truth-lab button,
+.deck-page .slide-canvas .algo-viz-actions select,
+.deck-page .slide-canvas .algorithm-input-row select,
+.deck-page .slide-canvas .algorithm-buttons button.is-secondary,
+.deck-page .slide-canvas .algo-viz-footer button.is-secondary,
+.deck-page .slide-canvas .js-console-buttons button.is-secondary,
+.deck-page .slide-canvas .problem-actions .is-secondary,
+.deck-page .slide-canvas .logic-actions .logic-secondary {
+  background: var(--sim-raised);
+  color: var(--sim-text);
+  border-color: #62768a;
+}
+.deck-page .slide-canvas .truth-lab button.is-selected,
+.deck-page .slide-canvas .logic-options button.is-selected,
+.deck-page .slide-canvas .problem-task.is-chosen {
+  background: #234d7c;
+  color: #fff;
+  border-color: #f2c53d;
+}
+.deck-page .slide-canvas .truth-table tr.is-current td {
+  background: #22476e;
+  color: #fff;
+  border-color: #f2c53d;
+}
+.deck-page .slide-canvas .algo-viz-cell.is-complete,
+.deck-page .slide-canvas .algorithm-machine .algorithm-machine-output.is-complete,
+.deck-page .slide-canvas .problem-dataflow .is-complete {
+  background: #183d31;
+  color: #c9f7dd;
+  border-color: #4fa77b;
+}
+.deck-page .slide-canvas .algo-viz-cell.is-active,
+.deck-page .slide-canvas .algorithm-machine .algorithm-machine-unit.is-running {
+  background: #493d20;
+  color: #ffe6a4;
+  border-color: #f2c53d;
+}
+.deck-page .slide-canvas .algorithm-result span,
+.deck-page .slide-canvas .logic-steps li.is-current {
+  color: #e7f0fa;
+}
+.deck-page .slide-canvas .logic-steps li.is-complete,
+.deck-page .slide-canvas .problem-ok {
+  color: #a7f0c5 !important;
+}
+.deck-page .slide-canvas .truth-rule {
+  border-left-color: #f2c53d;
+}
+.deck-page .slide-canvas .truth-rule strong,
+.deck-page .slide-canvas .truth-table-heading,
+.deck-page .slide-canvas .truth-output strong {
+  color: var(--sim-yellow);
+}
+
+/* Laboratórios de HTML mantêm a prévia real do documento renderizado:
+   o tema escuro se aplica ao editor/chrome, não ao HTML do aluno. */
+.deck-page .slide-canvas .live-lab-editor,
+.deck-page .slide-canvas .live-lab-instructions,
+.deck-page .slide-canvas .live-lab-preview {
+  background-color: var(--sim-bg);
+  border-color: var(--sim-border);
+}
+
+/* Adaptar explicação sem criar rolagem interna no Stories mobile. */
+@media (max-width: 620px) {
+  .story-mode .deck-stage .slide-header .activity-guidance {
+    max-width: 100%;
+    margin-top: 7px;
+    padding: 6px 9px;
+    gap: 2px;
+    border-left-width: 3px;
+    border-radius: 0 6px 6px 0;
+  }
+  .story-mode .deck-stage .slide-header .activity-guidance strong {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  .story-mode .deck-stage .slide-header .activity-guidance p {
+    font-size: 11px;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+}
+@media (max-width: 620px) and (max-height: 660px) {
+  .story-mode .deck-stage .slide-header .activity-guidance {
+    margin-top: 3px;
+    padding: 4px 7px;
+  }
+  .story-mode .deck-stage .slide-header .activity-guidance p {
+    font-size: 10px;
+    line-height: 1.17;
+    -webkit-line-clamp: 2;
+  }
+}
