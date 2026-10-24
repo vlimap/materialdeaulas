@@ -29,21 +29,35 @@ function Brand() {
   );
 }
 
-function Header({ slide, guidance }: { slide: Slide; guidance?: ActivityGuidance | null }) {
+function Header({ slide }: { slide: Slide }) {
   return (
     <header className="slide-header">
       <div>
         {slide.eyebrow && <p className="eyebrow">{slide.eyebrow}</p>}
         <h2>{slide.title}</h2>
         {slide.subtitle && <p className="slide-subtitle">{slide.subtitle}</p>}
-        {guidance && (
-          <div className="activity-guidance" role="note" aria-label="Explicação antes da atividade">
-            <strong>Entenda antes de praticar · {guidance.topic}</strong>
-            <p>{guidance.explanation}</p>
-          </div>
-        )}
       </div>
     </header>
+  );
+}
+
+/**
+ * A orientação integra o fluxo da área de atividade, nunca o cabeçalho fixo.
+ * Ela pode ser recolhida pelo aluno para liberar espaço às simulações.
+ */
+function Guidance({ guidance }: { guidance: ActivityGuidance }) {
+  return (
+    <details
+      className="activity-guidance"
+      open
+      aria-label="Explicação antes da atividade"
+      onClick={stopDeckGesture}
+      onPointerDown={stopDeckGesture}
+      onPointerUp={stopDeckGesture}
+    >
+      <summary>Entenda antes de praticar · {guidance.topic}</summary>
+      <p>{guidance.explanation}</p>
+    </details>
   );
 }
 
@@ -711,11 +725,12 @@ export function SlideRenderer({ slide, guidance }: { slide: Slide; guidance?: Ac
   }
 
   return (
-    <article className={'slide-canvas slide-' + slide.kind}>
+    <article className={'slide-canvas slide-' + slide.kind + (guidance ? ' has-activity-guidance' : '')}>
       <Brand />
-      <Header slide={slide} guidance={guidance} />
+      <Header slide={slide} />
 
       <div className="slide-body">
+        {guidance && <Guidance guidance={guidance} />}
         {slide.kind === 'statement' && (
           <div className="statement-layout">
             <p className="statement-lead">{slide.lead}</p>
