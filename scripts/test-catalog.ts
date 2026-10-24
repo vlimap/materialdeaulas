@@ -86,6 +86,21 @@ const tests: TestCase[] = [
       assert.match(player, /getActivityGuidance\(lesson, slideIndex\)/, 'Orientação deve ser exportada para PDF e PPTX');
       assert.match(renderer, /Explicação antes da atividade/);
       assert.match(renderer, /learning-theme\.css/);
+
+      // Regressão visual da Aula 01 SDLC: o enunciado não pode dividir espaço
+      // com uma explicação inserida no cabeçalho absoluto do slide.
+      assert.match(renderer, /<Header slide=\{slide\} \/>/);
+      assert.match(renderer, /<div className="slide-body">\s*\{guidance && <Guidance guidance=\{guidance\} \/>\}/);
+      assert.doesNotMatch(renderer, /<Header slide=\{slide\} guidance=\{guidance\}/);
+      assert.match(renderer, /className="activity-guidance"/);
+      assert.match(renderer, /<details[\s\S]*?open[\s\S]*?<summary>/);
+
+      // A linha explicativa participa do cálculo de layout, ao invés de
+      // transbordar sobre o enunciado. Nunca esconder sua mensagem com line-clamp.
+      assert.match(styles, /\.slide-canvas\.has-activity-guidance > \.slide-body\s*\{[\s\S]*?grid-template-rows: auto minmax\(0, 1fr\)/);
+      assert.match(styles, /\.story-mode \.deck-stage \.slide-canvas\.has-activity-guidance > \.slide-body/);
+      assert.doesNotMatch(styles, /\.slide-header \.activity-guidance/);
+      assert.doesNotMatch(styles, /-webkit-line-clamp/);
     }
   },
 
