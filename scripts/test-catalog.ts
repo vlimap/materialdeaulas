@@ -4,6 +4,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourseGroups, technologyCourses } from '../src/content/catalog';
 import { searchCourseCatalog } from '../src/lib/courseSearch';
 import { javascriptLessons } from '../src/content/javascript/course';
+import { group01 as oopGroup01 } from '../src/content/oop/group-01';
+import { group02 as oopGroup02 } from '../src/content/oop/group-02';
+import { group03 as oopGroup03 } from '../src/content/oop/group-03';
+import { group04 as oopGroup04 } from '../src/content/oop/group-04';
 import { group01 as dataGroup01 } from '../src/content/data-structures/group-01';
 import { group02 as dataGroup02 } from '../src/content/data-structures/group-02';
 import { group03 as dataGroup03 } from '../src/content/data-structures/group-03';
@@ -20,6 +24,59 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+
+  {
+    name: 'publica curso POO com 12 aulas completas, exemplos reais, SEO e navegação',
+    run: () => {
+      const course = technologyCourses.find(item => item.slug === 'curso-oop');
+      assert.ok(course, 'Curso POO precisa existir no catálogo');
+      assert.equal(course.ucs[0].slug, 'fundamentos-oop');
+      assert.equal(course.ucs[0].modules[0].status, 'active');
+      const lessons = course.ucs[0].modules[0].lessons;
+      const specs = [...oopGroup01, ...oopGroup02, ...oopGroup03, ...oopGroup04];
+      assert.equal(specs.length, 12);
+      assert.equal(lessons.length, 12);
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
+      assert.equal(lessons.reduce((total, lesson) => total + lesson.durationMinutes, 0), 2880);
+      const slideIds = new Set<string>();
+      const seoPaths = getPublicSeoPages().filter(page => page.kind === 'lesson').map(page => page.path);
+      for (const lesson of lessons) {
+        assert.equal(lesson.status, 'published', lesson.slug);
+        assert.equal(lesson.slides.length, 20, lesson.slug);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, 4);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'exercise').length, 3);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'javascript-console').length, 1);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'references'));
+        assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'));
+        assert.ok((lesson.sources?.length ?? 0) > 0);
+        assert.ok(findLesson('curso-oop', 'fundamentos-oop', lesson.slug)?.lesson.id === lesson.id);
+        assert.ok(seoPaths.some(path => path.endsWith(
+          '/curso/curso-oop/uc/fundamentos-oop/aula/' + lesson.slug)), 'SEO faltante: ' + lesson.slug);
+        for (const slide of lesson.slides) {
+          assert.ok(!slideIds.has(slide.id), 'ID duplicado: ' + slide.id);
+          slideIds.add(slide.id);
+        }
+      }
+      assert.equal(slideIds.size, 240);
+      const nav = getCourseLessonNavigation('curso-oop');
+      assert.equal(nav.length, 12);
+      assert.ok(nav.every(item => item.published));
+      for (const [index, spec] of specs.entries()) {
+        const output: string[] = [];
+        runInNewContext(spec.starterCode, {
+          console: { log: (...args: unknown[]) => output.push(args.map(String).join(' ')) }
+        }, { timeout: 1000 });
+        assert.equal(output.join('\n'), spec.expected, 'Saída incorreta: aula ' + spec.number);
+        assert.notEqual(spec.distractors[0], spec.expected, spec.slug);
+        assert.notEqual(spec.distractors[1], spec.expected, spec.slug);
+        const question = lessons[index].slides.find(slide =>
+          slide.id === 'oop-' + String(spec.number).padStart(2, '0') + '-output');
+        assert.ok(question?.kind === 'challenge');
+        assert.equal(question.options[question.answerIndex].label, spec.expected);
+      }
+    }
+  },
+
 
   {
     name: 'publica 12 aulas de Estruturas de Dados com códigos executáveis, avaliação e rotas',
