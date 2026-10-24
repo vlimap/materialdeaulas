@@ -8,6 +8,7 @@ import { TruthTablePlayground } from './TruthTablePlayground';
 import { JavaScriptConsole } from './JavaScriptConsole';
 import type { Slide } from '../../types/course';
 import type { ActivityGuidance } from './activityGuidance';
+import './learning-theme.css';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
 import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
