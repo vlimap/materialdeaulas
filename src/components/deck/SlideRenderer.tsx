@@ -1,5 +1,5 @@
 import { useState, type SyntheticEvent } from 'react';
-import { ExternalLink, RotateCcw } from 'lucide-react';
+import { BookOpen, ChevronDown, ExternalLink, RotateCcw } from 'lucide-react';
 import { LogicPlayground } from './LogicPlayground';
 import { ProblemPlayground } from './ProblemPlayground';
 import { AlgorithmLab } from './AlgorithmLab';
@@ -56,8 +56,23 @@ function Guidance({ guidance }: { guidance: ActivityGuidance }) {
       onPointerDown={stopDeckGesture}
       onPointerUp={stopDeckGesture}
     >
-      <summary>Entenda antes de praticar · {guidance.topic}</summary>
-      <p>{guidance.explanation}</p>
+      <summary>
+        <span className="activity-guidance-icon" aria-hidden="true">
+          <BookOpen size={19} strokeWidth={1.9} />
+        </span>
+        <span className="activity-guidance-heading">
+          <span className="activity-guidance-label">Antes da atividade</span>
+          <strong className="activity-guidance-title">{guidance.topic}</strong>
+        </span>
+        <span className="activity-guidance-toggle" aria-hidden="true">
+          <span className="activity-guidance-toggle-open">Recolher</span>
+          <span className="activity-guidance-toggle-closed">Ver explicação</span>
+          <ChevronDown size={18} strokeWidth={2} />
+        </span>
+      </summary>
+      <div className="activity-guidance-content">
+        <p>{guidance.explanation}</p>
+      </div>
     </details>
   );
 }
