@@ -6,6 +6,7 @@ import { AlgorithmLab } from './AlgorithmLab';
 import { AlgorithmVisualizer } from './AlgorithmVisualizer';
 import { TruthTablePlayground } from './TruthTablePlayground';
 import { JavaScriptConsole } from './JavaScriptConsole';
+import { SdlcProcessModels, type SdlcProcessModel } from './SdlcProcessModels';
 import type { Slide } from '../../types/course';
 import type { ActivityGuidance } from './activityGuidance';
 import './learning-theme.css';
@@ -319,51 +320,8 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
     );
   }
 
-  if (name === 'sdlc-waterfall') {
-    const stages = [
-      ['01', 'Requisitos'],
-      ['02', 'Projeto'],
-      ['03', 'Implementação'],
-      ['04', 'Integração + testes'],
-      ['05', 'Operação + manutenção']
-    ];
-
-    return (
-      <div className="sdlc-waterfall" aria-label="Modelo em cascata redesenhado">
-        <div className="sdlc-waterfall-path" aria-hidden="true"><span /></div>
-        {stages.map(([number, label], index) => (
-          <div
-            key={label}
-            className="sdlc-waterfall-step"
-            style={{ '--sdlc-step': index } as React.CSSProperties}
-          >
-            <span>{number}</span>
-            <strong>{label}</strong>
-          </div>
-        ))}
-        <div className="sdlc-waterfall-feedback">feedback entre estágios ↶</div>
-      </div>
-    );
-  }
-
-  if (name === 'sdlc-incremental') {
-    return (
-      <div className="sdlc-incremental" aria-label="Desenvolvimento incremental com atividades intercaladas">
-        <div className="sdlc-incremental-activities">
-          <div><span>01</span><strong>Especificação</strong></div>
-          <div><span>02</span><strong>Desenvolvimento</strong></div>
-          <div><span>03</span><strong>Validação</strong></div>
-        </div>
-        <div className="sdlc-incremental-exchange" aria-hidden="true">
-          <i /><i /><i />
-        </div>
-        <div className="sdlc-incremental-versions">
-          <div><span>v1</span><strong>versão inicial</strong></div>
-          <div><span>v2</span><strong>versão intermediária</strong></div>
-          <div><span>v3</span><strong>versão útil ampliada</strong></div>
-        </div>
-      </div>
-    );
+  if (['sdlc-waterfall', 'sdlc-incremental', 'sdlc-v-model', 'sdlc-spiral', 'sdlc-prototyping', 'sdlc-agile', 'sdlc-models'].includes(name)) {
+    return <SdlcProcessModels model={name as SdlcProcessModel} />;
   }
 
   if (name === 'sdlc-feedback') {
@@ -407,31 +365,6 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
             {index < artifacts.length - 1 && <b aria-hidden="true">→</b>}
           </div>
         ))}
-      </div>
-    );
-  }
-
-  if (name === 'sdlc-models') {
-    return (
-      <div className="sdlc-models" aria-label="Comparação visual entre modelos de processo">
-        <div className="sdlc-model-card">
-          <span>CASCATA</span>
-          <div className="mini-waterfall" aria-hidden="true"><i/><i/><i/><i/></div>
-          <strong>estágios visíveis</strong>
-          <small>bom quando requisitos são estáveis</small>
-        </div>
-        <div className="sdlc-model-card">
-          <span>INCREMENTAL</span>
-          <div className="mini-incremental" aria-hidden="true"><i/><i/><i/></div>
-          <strong>versões + feedback</strong>
-          <small>valor chega em partes</small>
-        </div>
-        <div className="sdlc-model-card">
-          <span>RISCO / ITERAÇÃO</span>
-          <div className="mini-spiral" aria-hidden="true"><i/></div>
-          <strong>decisões por risco</strong>
-          <small>processo adapta-se ao contexto</small>
-        </div>
       </div>
     );
   }

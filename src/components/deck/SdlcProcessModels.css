@@ -1,0 +1,365 @@
+/* Diagramas autorais de processos de software, sem imagens de livro.
+   Blocos representam relações, não decoração; legíveis no player escuro.
+   Usa unidades do contêiner de slide para acompanhar PDF/PPTX 16:9. */
+
+.process-model {
+  --pm-fg: #f5f7fa;
+  --pm-muted: #b8c6d6;
+  --pm-accent: #f2c53d;
+  --pm-panel: #151d27;
+  --pm-border: #3b4b5f;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.35cqw;
+  color: var(--pm-fg);
+  font-family: Arial, sans-serif;
+}
+.process-model * { box-sizing: border-box; }
+.pm-stage {
+  min-width: 0;
+  min-height: 8.6cqw;
+  padding: 1cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: .48cqw;
+  border: 1px solid var(--pm-border);
+  border-top: 3px solid var(--pm-accent);
+  border-radius: .9cqw;
+  background: linear-gradient(155deg, #1b2837, var(--pm-panel));
+}
+.pm-stage-number {
+  font-size: .76cqw;
+  font-weight: 800;
+  color: var(--pm-accent);
+  letter-spacing: .08em;
+}
+.pm-stage strong {
+  font-size: clamp(12px, 1.08cqw, 19px);
+  line-height: 1.22;
+  overflow-wrap: anywhere;
+}
+.pm-stage small {
+  color: var(--pm-muted);
+  font-size: clamp(10px, .76cqw, 14px);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.pm-note {
+  margin: 0;
+  align-self: center;
+  max-width: 95%;
+  display: flex;
+  gap: .7cqw;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--pm-muted);
+  font: clamp(11px, .93cqw, 16px)/1.35 Arial, sans-serif;
+}
+.pm-note > span { color: var(--pm-accent); font-size: 1.55em; }
+
+/* CASCATA: etapas equidistantes com setas curtas, sem diagonal decorativa. */
+.pm-waterfall-track {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.7cqw;
+  align-items: stretch;
+}
+.pm-waterfall-item { min-width: 0; position: relative; display: flex; }
+.pm-waterfall-item .pm-stage { flex: 1; min-height: 12cqw; }
+.pm-waterfall-arrow {
+  position: absolute;
+  left: calc(100% + .16cqw);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.38cqw;
+  color: var(--pm-accent);
+  font-size: 1.8cqw;
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+}
+.pm-waterfall .pm-note {
+  border: 1px solid #39495c;
+  border-radius: 999px;
+  padding: .75cqw 1.5cqw;
+  background: #182431;
+}
+
+/* INCREMENTAL: cada versão repete as três atividades e acumula funcionalidades. */
+.pm-increment-list { display: grid; gap: .8cqw; }
+.pm-increment {
+  display: grid;
+  grid-template-columns: 16% 40% 1fr;
+  gap: 1cqw;
+  align-items: center;
+  min-height: 7.9cqw;
+  padding: .65cqw 1cqw;
+  border: 1px solid var(--pm-border);
+  border-radius: .9cqw;
+  background: var(--pm-panel);
+}
+.pm-increment-number,
+.pm-increment-result { display: grid; gap: .45cqw; min-width: 0; }
+.pm-increment-number span, .pm-tag {
+  color: var(--pm-accent);
+  font-size: .71cqw;
+  letter-spacing: .06em;
+  font-weight: 800;
+}
+.pm-increment-number strong { font-size: 1.08cqw; }
+.pm-increment-cycle { display: flex; align-items: center; min-width: 0; gap: .25cqw; }
+.pm-increment-cycle > span {
+  min-width: 0;
+  flex: 1;
+  border-radius: .4cqw;
+  background: #243a50;
+  padding: .9cqw .35cqw;
+  text-align: center;
+  font-size: .75cqw;
+  font-weight: 700;
+}
+.pm-increment-cycle b { font-size: 1.4cqw; color: var(--pm-accent); }
+.pm-increment-features { display: flex; gap: .32cqw; flex-wrap: wrap; min-width: 0; }
+.pm-increment-features span {
+  padding: .52cqw .65cqw;
+  border: 1px solid #537659;
+  border-radius: .4cqw;
+  background: #1b3b2e;
+  color: #ccf4da;
+  font-size: .78cqw;
+  font-weight: 700;
+}
+.pm-increment-result small { color: var(--pm-muted); font-size: .78cqw; }
+
+/* MODELO V: linhas pontilhadas ligam atividades de definição aos testes. */
+.pm-v-layout {
+  height: min(32cqw, 94%);
+  min-height: 0;
+  position: relative;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr) .9fr;
+}
+.pm-v-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.pm-v-main-path { fill: none; stroke: #f2c53d; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; opacity: .55; }
+.pm-v-pair-path { fill: none; stroke: #8dacc5; stroke-width: 2; stroke-dasharray: 8 8; opacity: .32; }
+.pm-v-row {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7cqw;
+}
+.pm-v-row-0 { padding-inline: 0; }
+.pm-v-row-1 { padding-inline: 9%; }
+.pm-v-row-2 { padding-inline: 18%; }
+.pm-v-row .pm-stage { width: 21cqw; min-height: 6.9cqw; padding: .67cqw 1cqw; }
+.pm-v-row .pm-stage-number { font-size: .67cqw; }
+.pm-v-row .pm-stage strong { font-size: .96cqw; }
+.pm-v-row .pm-stage small { font-size: .66cqw; }
+.pm-v-pair-label {
+  color: #a5b4c4;
+  font-size: .68cqw;
+  letter-spacing: .02em;
+  text-align: center;
+  white-space: nowrap;
+}
+.pm-v-base { display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; }
+.pm-v-base .pm-stage { width: 21cqw; min-height: 6cqw; align-items: center; text-align: center; }
+.pm-v-code { border-color: #9e8531; background: linear-gradient(160deg,#3c311d,#181d24); }
+
+/* ESPIRAL: traçado real crescente em vez de um anel giratório. */
+.pm-spiral-layout { min-width: 0; min-height: 0; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 2cqw; }
+.pm-spiral-image { display: block; max-width: 100%; max-height: 29cqw; width: 100%; height: auto; }
+.pm-spiral-ring { fill: none; stroke: #506477; stroke-width: 1.3; stroke-dasharray: 5 8; opacity: .5; }
+.pm-spiral-axes { fill: none; stroke: #2e4355; stroke-width: 1.7; }
+.pm-spiral-curve { fill: none; stroke: #f2c53d; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.pm-spiral-origin { fill: #d3e7ff; }
+.pm-spiral-tip { fill: #67d4a3; stroke: #fff; stroke-width: 2; }
+.pm-spiral-svg-caption { fill: #c1ccda; font: 13px Arial, sans-serif; }
+.pm-spiral-stages { display: grid; gap: .6cqw; min-width: 0; }
+.pm-spiral-stage {
+  display: grid;
+  grid-template-columns: 2.4cqw minmax(0, 1fr);
+  gap: .8cqw;
+  min-width: 0;
+  align-items: center;
+  padding: .66cqw .9cqw;
+  background: var(--pm-panel);
+  border: 1px solid var(--pm-border);
+  border-radius: .7cqw;
+}
+.pm-spiral-stage > span { color: var(--pm-accent); font-weight: 800; font-size: .82cqw; }
+.pm-spiral-stage > div { display: grid; gap: .25cqw; }
+.pm-spiral-stage strong { font-size: 1cqw; }
+.pm-spiral-stage small { color: var(--pm-muted); font-size: .76cqw; }
+
+/* PROTOTIPAÇÃO: circuito de construção e feedback explícito. */
+.pm-loop-track { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1.7cqw; }
+.pm-loop-item { position: relative; min-width: 0; display: flex; }
+.pm-loop-item .pm-stage { flex: 1; min-height: 10.3cqw; }
+.pm-loop-arrow {
+  position: absolute;
+  left: calc(100% + .3cqw);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pm-accent);
+  font-size: 1.7cqw;
+}
+.pm-loop-return {
+  align-self: center;
+  width: 84%;
+  display: grid;
+  grid-template-columns: 2cqw 1fr;
+  gap: .2cqw .8cqw;
+  align-items: center;
+  padding: 1.2cqw 1.8cqw;
+  border: 1px dashed #88763d;
+  border-radius: 1cqw;
+  background: #22251f;
+}
+.pm-loop-return > span { grid-row: 1 / 3; color: var(--pm-accent); font-size: 2.2cqw; }
+.pm-loop-return strong { color: var(--pm-accent); font-size: 1.08cqw; }
+.pm-loop-return small { color: var(--pm-muted); font-size: .83cqw; }
+
+/* ÁGIL: backlog alimenta sprint, que gera incremento. */
+.pm-agile-track { display: grid; grid-template-columns: 19% 4% 1fr 4% 19%; gap: .5cqw; align-items: center; }
+.pm-agile-link { color: var(--pm-accent); font-size: 2cqw; text-align: center; }
+.pm-agile-side {
+  display: flex;
+  min-height: 14cqw;
+  flex-direction: column;
+  justify-content: center;
+  gap: .65cqw;
+  padding: 1.25cqw;
+  background: #172230;
+  border: 1px solid var(--pm-border);
+  border-radius: 1cqw;
+}
+.pm-agile-side strong { font-size: 1.55cqw; }
+.pm-agile-side small { color: var(--pm-muted); font-size: .91cqw; line-height: 1.35; }
+.pm-agile-output { border-top: 3px solid #68bf91; }
+.pm-agile-sprint { padding: 1cqw; border: 1px solid #b99d44; border-radius: 1cqw; background: #1b232c; }
+.pm-agile-sprint-heading { display: flex; justify-content: space-between; color: var(--pm-accent); align-items: center; margin: 0 0 .55cqw; }
+.pm-agile-sprint-heading strong { letter-spacing: .1em; font-size: 1cqw; }
+.pm-agile-sprint-heading span { font-size: 1.8cqw; }
+.pm-agile-steps { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .55cqw; }
+.pm-agile-steps > div { display: grid; gap: .26cqw; padding: .75cqw; border-radius: .5cqw; background: #263448; }
+.pm-agile-steps span { color: var(--pm-accent); font-weight: 700; font-size: .65cqw; }
+.pm-agile-steps strong { font-size: .95cqw; }
+.pm-agile-steps small { color: #bdcad9; font-size: .7cqw; }
+
+/* COMPARAÇÃO: visão completa sem escadinha ou círculos decorativos. */
+.pm-comparison-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1cqw; }
+.pm-comparison-card {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  align-content: center;
+  gap: .55cqw;
+  min-height: 12cqw;
+  padding: 1.2cqw;
+  border: 1px solid var(--pm-border);
+  border-radius: .9cqw;
+  background: #17212b;
+}
+.pm-comparison-card span { color: var(--pm-accent); font-size: .78cqw; font-weight: 800; }
+.pm-comparison-card strong { color: var(--pm-fg); font-size: 1.13cqw; }
+.pm-comparison-card small { color: var(--pm-muted); font-size: .83cqw; }
+.pm-comparison-card b { align-self: end; color: #bce8d1; font: 700 .83cqw/1.25 Consolas, monospace; }
+
+/* No celular os slides ocupam uma única tela, sem rolagem interna. */
+@media (max-width: 620px) {
+  .story-mode .process-model { gap: 8px; justify-content: center; }
+  .story-mode .pm-stage { min-height: 0; gap: 3px; padding: 8px 10px; border-radius: 8px; border-top-width: 2px; }
+  .story-mode .pm-stage-number { font-size: 9px; }
+  .story-mode .pm-stage strong { font-size: 12px; line-height: 1.17; }
+  .story-mode .pm-stage small { font-size: 10px; line-height: 1.15; }
+  .story-mode .pm-note { font-size: 10px; line-height: 1.23; max-width: 100%; gap: 6px; }
+  .story-mode .pm-waterfall-track { grid-template-columns: 1fr; gap: 7px; }
+  .story-mode .pm-waterfall-item .pm-stage { min-height: 49px; width: 100%; display: grid; grid-template-columns: 30px minmax(0,1fr); grid-template-rows: auto auto; align-content: center; gap: 2px 6px; }
+  .story-mode .pm-waterfall-item .pm-stage-number { grid-row: 1 / 3; align-self: center; }
+  .story-mode .pm-waterfall-arrow { left: 50%; top: calc(100% + 0px); transform: translateX(-50%); font-size: 13px; width: 15px; line-height: 8px; height: 10px; rotate: 90deg; z-index: 2; }
+  .story-mode .pm-waterfall .pm-note { padding: 6px 9px; border-radius: 8px; }
+
+  .story-mode .pm-increment-list { gap: 6px; }
+  .story-mode .pm-increment { grid-template-columns: 1fr; min-height: 0; gap: 5px; padding: 8px; border-radius: 8px; }
+  .story-mode .pm-increment-number { display: flex; gap: 8px; align-items: baseline; }
+  .story-mode .pm-increment-number span, .story-mode .pm-tag { font-size: 9px; }
+  .story-mode .pm-increment-number strong { font-size: 11px; }
+  .story-mode .pm-increment-cycle { gap: 3px; }
+  .story-mode .pm-increment-cycle > span { padding: 5px 2px; font-size: 10px; border-radius: 5px; }
+  .story-mode .pm-increment-cycle b { font-size: 13px; }
+  .story-mode .pm-increment-features span { padding: 3px 6px; font-size: 10px; border-radius: 4px; }
+  .story-mode .pm-increment-result small { font-size: 9px; }
+
+  .story-mode .pm-v-layout { height: 95%; grid-template-rows: repeat(3, 1fr) .78fr; }
+  .story-mode .pm-v-row { padding-inline: 0; gap: 5px; }
+  .story-mode .pm-v-row-1 { padding-inline: 3%; }
+  .story-mode .pm-v-row-2 { padding-inline: 6%; }
+  .story-mode .pm-v-row .pm-stage { width: 43%; min-height: 51px; padding: 5px 7px; }
+  .story-mode .pm-v-row .pm-stage-number { font-size: 8px; }
+  .story-mode .pm-v-row .pm-stage strong { font-size: 10px; }
+  .story-mode .pm-v-row .pm-stage small { font-size: 9px; }
+  .story-mode .pm-v-pair-label { font-size: 8px; white-space: normal; }
+  .story-mode .pm-v-base .pm-stage { width: 52%; min-height: 46px; }
+  .story-mode .pm-v-path { opacity: .42; }
+
+  .story-mode .pm-spiral-layout { grid-template-columns: 1fr; gap: 4px; justify-items: center; }
+  .story-mode .pm-spiral-image { width: min(66%, 220px); max-height: 180px; }
+  .story-mode .pm-spiral-stages { width: 100%; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px; }
+  .story-mode .pm-spiral-stage { grid-template-columns: 19px 1fr; padding: 6px; border-radius: 6px; gap: 4px; }
+  .story-mode .pm-spiral-stage > span { font-size: 10px; }
+  .story-mode .pm-spiral-stage strong { font-size: 10px; }
+  .story-mode .pm-spiral-stage small { font-size: 9px; line-height: 1.18; }
+
+  .story-mode .pm-loop-track { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; }
+  .story-mode .pm-loop-item .pm-stage { min-height: 80px; }
+  .story-mode .pm-loop-arrow { display: none; }
+  .story-mode .pm-loop-return { width: 100%; grid-template-columns: 24px 1fr; padding: 8px 10px; gap: 2px 8px; }
+  .story-mode .pm-loop-return > span { font-size: 19px; }
+  .story-mode .pm-loop-return strong { font-size: 12px; }
+  .story-mode .pm-loop-return small { font-size: 10px; }
+
+  .story-mode .pm-agile-track { grid-template-columns: 1fr; gap: 5px; }
+  .story-mode .pm-agile-side { min-height: 49px; gap: 3px; padding: 7px 10px; }
+  .story-mode .pm-agile-side strong { font-size: 13px; }
+  .story-mode .pm-agile-side small { font-size: 10px; }
+  .story-mode .pm-agile-link { display: none; }
+  .story-mode .pm-agile-sprint { padding: 8px; }
+  .story-mode .pm-agile-sprint-heading { margin-bottom: 4px; }
+  .story-mode .pm-agile-sprint-heading strong { font-size: 11px; }
+  .story-mode .pm-agile-sprint-heading span { font-size: 17px; }
+  .story-mode .pm-agile-steps { gap: 5px; }
+  .story-mode .pm-agile-steps > div { padding: 6px; }
+  .story-mode .pm-agile-steps span { font-size: 9px; }
+  .story-mode .pm-agile-steps strong { font-size: 11px; }
+  .story-mode .pm-agile-steps small { font-size: 9px; }
+
+  .story-mode .pm-comparison-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 6px; }
+  .story-mode .pm-comparison-card { min-height: 83px; padding: 8px; gap: 3px; border-radius: 7px; }
+  .story-mode .pm-comparison-card span { font-size: 9px; }
+  .story-mode .pm-comparison-card strong { font-size: 11px; }
+  .story-mode .pm-comparison-card small { font-size: 9px; }
+  .story-mode .pm-comparison-card b { font-size: 9px; }
+}
+@media (max-width: 620px) and (max-height: 660px) {
+  .story-mode .process-model { gap: 5px; }
+  .story-mode .pm-waterfall-item .pm-stage { min-height: 42px; padding: 5px 8px; }
+  .story-mode .pm-increment { padding: 5px 7px; gap: 3px; }
+  .story-mode .pm-increment-cycle > span { padding: 4px 2px; }
+  .story-mode .pm-spiral-image { max-height: 128px; }
+  .story-mode .pm-loop-item .pm-stage { min-height: 63px; }
+  .story-mode .pm-comparison-card { min-height: 68px; padding: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .process-model *, .process-model *::before, .process-model *::after { animation: none !important; transition: none !important; }
+}

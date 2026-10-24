@@ -79,6 +79,10 @@ export type Slide =
         | 'sdlc-four-activities'
         | 'sdlc-waterfall'
         | 'sdlc-incremental'
+        | 'sdlc-v-model'
+        | 'sdlc-spiral'
+        | 'sdlc-prototyping'
+        | 'sdlc-agile'
         | 'sdlc-feedback'
         | 'sdlc-artifacts'
         | 'sdlc-models';

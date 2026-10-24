@@ -599,6 +599,58 @@ const tests: TestCase[] = [
     }
   },
   {
+    name: 'SDLC usa seis diagramas autorais distintos, com sequência didática e formatos responsivos',
+    run: () => {
+      const lesson = findLesson(
+        'curso-sdlc', 'fundamentos-sdlc',
+        'aula-01-visao-geral-ciclo-vida-software'
+      )?.lesson;
+      assert.ok(lesson);
+      const expectedModels = [
+        ['cascata-visual', 'sdlc-waterfall'],
+        ['modelo-v-visual', 'sdlc-v-model'],
+        ['incremental-visual', 'sdlc-incremental'],
+        ['espiral-visual', 'sdlc-spiral'],
+        ['prototipacao-visual', 'sdlc-prototyping'],
+        ['agil-visual', 'sdlc-agile'],
+        ['comparacao-modelos', 'sdlc-models']
+      ] as const;
+      const ids = lesson.slides.map(slide => slide.id);
+      for (const [id, model] of expectedModels) {
+        const currentDiagram: (typeof lesson.slides)[number] | undefined =
+          lesson.slides.find(item => item.id === id);
+        assert.ok(currentDiagram && currentDiagram.kind === 'visual', 'Diagrama inexistente: ' + id);
+        assert.equal(currentDiagram.visual, model);
+        assert.ok(currentDiagram.caption && currentDiagram.caption.length > 30);
+      }
+      for (let i = 1; i < expectedModels.length; i++) {
+        assert.ok(
+          ids.indexOf(expectedModels[i - 1][0]) < ids.indexOf(expectedModels[i][0]),
+          'Ordem didática incorreta: ' + expectedModels[i][0]
+        );
+      }
+      const renderer = readFileSync('src/components/deck/SlideRenderer.tsx', 'utf8');
+      const models = readFileSync('src/components/deck/SdlcProcessModels.tsx', 'utf8');
+      const css = readFileSync('src/components/deck/SdlcProcessModels.css', 'utf8');
+      const types = readFileSync('src/types/course.ts', 'utf8');
+      assert.match(renderer, /<SdlcProcessModels model=\{name as SdlcProcessModel\} \/>/);
+      for (const [, model] of expectedModels) {
+        assert.ok(models.includes("'" + model + "'"), 'Componente ausente: ' + model);
+        assert.ok(types.includes("'" + model + "'"), 'Tipo de slide ausente: ' + model);
+      }
+      assert.match(models, /pm-waterfall-track/);
+      assert.match(models, /pm-waterfall-arrow/);
+      assert.doesNotMatch(models, /sdlc-waterfall-path/);
+      assert.match(models, /pm-v-main-path/);
+      assert.match(models, /pm-spiral-curve/);
+      assert.match(models, /pm-loop-return/);
+      assert.match(models, /pm-agile-sprint/);
+      assert.match(css, /grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\)/);
+      assert.match(css, /@media \(max-width: 620px\)/);
+      assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+    }
+  },
+  {
     name: 'mantém Sommerville e plano visual em todas as aulas de SDLC',
     run: () => {
       const sdlc = technologyCourses.find((course) => course.slug === 'curso-sdlc');
