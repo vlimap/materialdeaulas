@@ -617,10 +617,11 @@ const tests: TestCase[] = [
       ] as const;
       const ids = lesson.slides.map(slide => slide.id);
       for (const [id, model] of expectedModels) {
-        const slide = lesson.slides.find(item => item.id === id);
-        assert.ok(slide && slide.kind === 'visual', 'Diagrama inexistente: ' + id);
-        assert.equal(slide.visual, model);
-        assert.ok(slide.caption && slide.caption.length > 30);
+        const currentDiagram: (typeof lesson.slides)[number] | undefined =
+          lesson.slides.find(item => item.id === id);
+        assert.ok(currentDiagram && currentDiagram.kind === 'visual', 'Diagrama inexistente: ' + id);
+        assert.equal(currentDiagram.visual, model);
+        assert.ok(currentDiagram.caption && currentDiagram.caption.length > 30);
       }
       for (let i = 1; i < expectedModels.length; i++) {
         assert.ok(
