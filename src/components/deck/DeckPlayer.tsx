@@ -25,6 +25,7 @@ import type { CourseLessonNavigationItem } from '../../content/catalog';
 import type { LessonDefinition, Slide } from '../../types/course';
 import { exportLessonPdf, exportLessonPptx } from '../../lib/exportDeck';
 import { SlideRenderer } from './SlideRenderer';
+import { getActivityGuidance } from './activityGuidance';
 import { shouldHandleDeckShortcut } from './keyboardShortcuts';
 
 const STORY_BREAKPOINT = 620;
@@ -437,7 +438,7 @@ export function DeckPlayer({
         }}
       >
         <div className="deck-slide-frame" key={current.id}>
-          <SlideRenderer slide={current} />
+          <SlideRenderer slide={current} guidance={getActivityGuidance(lesson, index)} />
         </div>
       </section>
 
