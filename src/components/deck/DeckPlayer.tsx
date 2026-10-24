@@ -615,9 +615,9 @@ export function DeckPlayer({
       </div>
 
       <div className="export-stage" aria-hidden="true">
-        {lesson.slides.map((slide) => (
+        {lesson.slides.map((slide, slideIndex) => (
           <div data-export-slide="true" key={slide.id}>
-            <SlideRenderer slide={slide} />
+            <SlideRenderer slide={slide} guidance={getActivityGuidance(lesson, slideIndex)} />
           </div>
         ))}
       </div>
