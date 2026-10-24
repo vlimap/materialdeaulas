@@ -101,6 +101,36 @@ const tests: TestCase[] = [
       assert.match(styles, /\.story-mode \.deck-stage \.slide-canvas\.has-activity-guidance > \.slide-body/);
       assert.doesNotMatch(styles, /\.slide-header \.activity-guidance/);
       assert.doesNotMatch(styles, /-webkit-line-clamp/);
+
+      // Contrato visual global: qualquer atividade usa o mesmo cartão, seja
+      // questão, simulação, laboratório ou exercício, também nos exports.
+      assert.match(renderer, /className="activity-guidance-icon"/);
+      assert.match(renderer, /<BookOpen size=\{19\}/);
+      assert.match(renderer, /className="activity-guidance-heading"/);
+      assert.match(renderer, /className="activity-guidance-label">Antes da atividade/);
+      assert.match(renderer, /className="activity-guidance-title">\{guidance.topic\}/);
+      assert.match(renderer, /className="activity-guidance-content"/);
+      assert.match(renderer, /className="activity-guidance-toggle"/);
+      assert.match(renderer, /className="activity-guidance-toggle-open">Recolher/);
+      assert.match(renderer, /className="activity-guidance-toggle-closed">Ver explicação/);
+      assert.match(renderer, /<ChevronDown size=\{18\}/);
+      assert.match(renderer, /onClick=\{stopDeckGesture\}/);
+      assert.match(renderer, /onPointerDown=\{stopDeckGesture\}/);
+      assert.match(renderer, /onPointerUp=\{stopDeckGesture\}/);
+
+      // Sem marcador nativo, fonte minúscula ou texto truncado: o assunto,
+      // a explicação e o botão devem permanecer legíveis no tema escuro.
+      assert.match(styles, /\.activity-guidance summary::\-webkit-details-marker\s*\{[\s\S]*?display:\s*none/);
+      assert.match(styles, /\.activity-guidance-heading\s*\{/);
+      assert.match(styles, /\.activity-guidance-title\s*\{/);
+      assert.match(styles, /\.activity-guidance-content p\s*\{/);
+      assert.match(styles, /\.activity-guidance summary:focus-visible\s*\{/);
+      assert.match(styles, /\.activity-guidance:not\(\[open\]\) \.activity-guidance-toggle svg\s*\{/);
+      assert.match(styles, /grid-template-columns:\s*30px minmax\(0, 1fr\) 22px/);
+      assert.match(styles, /max-height:\s*660px/);
+      assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/);
+      assert.doesNotMatch(styles, /\.activity-guidance-content p[\s\S]*?-webkit-line-clamp/);
+
     }
   },
 
