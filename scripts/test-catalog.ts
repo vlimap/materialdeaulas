@@ -4,6 +4,10 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { catalog, findLesson, getCourseLessonNavigation, technologyCourseGroups, technologyCourses } from '../src/content/catalog';
 import { searchCourseCatalog } from '../src/lib/courseSearch';
 import { javascriptLessons } from '../src/content/javascript/course';
+import { group01 as dataGroup01 } from '../src/content/data-structures/group-01';
+import { group02 as dataGroup02 } from '../src/content/data-structures/group-02';
+import { group03 as dataGroup03 } from '../src/content/data-structures/group-03';
+import { group04 as dataGroup04 } from '../src/content/data-structures/group-04';
 import { getPublicSeoPages } from '../src/seo/metadata';
 import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
@@ -16,6 +20,61 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+
+  {
+    name: 'publica 12 aulas de Estruturas de Dados com códigos executáveis, avaliação e rotas',
+    run: () => {
+      const course = technologyCourses.find(course => course.slug === 'curso-data-structures');
+      assert.ok(course);
+      assert.equal(course.ucs[0].slug, 'fundamentos-data-structures');
+      const lessons = course.ucs[0].modules[0].lessons;
+      const specs = [...dataGroup01, ...dataGroup02, ...dataGroup03, ...dataGroup04];
+      assert.equal(specs.length, 12);
+      assert.equal(lessons.length, 12);
+      assert.equal(lessons.reduce((sum, lesson) => sum + lesson.durationMinutes, 0), 2880);
+      assert.deepEqual(lessons.map(lesson => lesson.number), Array.from({ length: 12 }, (_, i) => i + 1));
+      const allIds = new Set<string>();
+      for (const lesson of lessons) {
+        assert.equal(lesson.status, 'published', lesson.slug);
+        assert.equal(findLesson('curso-data-structures', 'fundamentos-data-structures', lesson.slug)?.lesson.id, lesson.id);
+        assert.ok(lesson.slides.length >= 20, lesson.slug);
+        assert.ok(lesson.objectives.length >= 4);
+        assert.ok(lesson.slides.some(slide => slide.kind === 'checklist'));
+        assert.ok(lesson.slides.some(slide => slide.kind === 'references'));
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'challenge').length, 4);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'exercise').length, 3);
+        assert.equal(lesson.slides.filter(slide => slide.kind === 'javascript-console').length, 1);
+        assert.ok((lesson.sources?.length ?? 0) >= 1);
+        for (const slide of lesson.slides) {
+          assert.ok(!allIds.has(slide.id), 'ID de slide duplicado: ' + slide.id);
+          allIds.add(slide.id);
+        }
+        assert.doesNotMatch(JSON.stringify(lesson.slides), /Peça à dupla|O professor deve|solicite aos alunos|divida a turma/i);
+      }
+      assert.equal(allIds.size, lessons.reduce((total, lesson) => total + lesson.slides.length, 0));
+      const navigation = getCourseLessonNavigation('curso-data-structures');
+      assert.equal(navigation.length, 12);
+      assert.ok(navigation.every(item => item.published));
+      const seoPaths = getPublicSeoPages().filter(page => page.kind === 'lesson').map(page => page.path);
+      for (const lesson of lessons) {
+        assert.ok(seoPaths.some(path => path.endsWith('/curso/curso-data-structures/uc/fundamentos-data-structures/aula/' + lesson.slug)), 'SEO: ' + lesson.slug);
+      }
+
+      // Cada console deve realmente produzir a saída exibida na questão de previsão.
+      for (const [index, spec] of specs.entries()) {
+        const lines: string[] = [];
+        runInNewContext(spec.starterCode, {
+          console: { log: (...args: unknown[]) => lines.push(args.map(String).join(' ')) }
+        }, { timeout: 1000 });
+        assert.equal(lines.join('\n'), spec.expected, 'Execução incorreta na aula ' + spec.number);
+        const outputQuestion = lessons[index].slides.find(slide => slide.id ===
+          'ed-' + String(spec.number).padStart(2, '0') + '-output');
+        assert.ok(outputQuestion?.kind === 'challenge');
+        assert.equal(outputQuestion.options[outputQuestion.answerIndex].label, spec.expected);
+      }
+    }
+  },
+
   {
     name: 'agrupa cursos pela categoria do catálogo sem depender do texto da descrição',
     run: () => {
