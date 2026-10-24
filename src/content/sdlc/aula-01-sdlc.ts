@@ -13,7 +13,7 @@ export const aula01Sdlc: LessonDefinition = {
   objectives: [
     'Explicar por que software profissional exige processo e não apenas programação.',
     'Reconhecer especificação, desenvolvimento, validação e evolução como atividades fundamentais.',
-    'Comparar visualmente processo em cascata e desenvolvimento incremental.',
+    'Comparar visualmente cascata, modelo V, incremental, espiral, prototipação e ágil.',
     'Relacionar requisitos, projeto, implementação, testes, operação e manutenção.',
     'Identificar feedback e mudança como partes naturais do ciclo de vida.',
     'Escolher uma organização de processo coerente com o contexto do sistema.'
@@ -31,11 +31,14 @@ export const aula01Sdlc: LessonDefinition = {
   visualPlan: [
     'Software profissional = programa + configuração + documentação.',
     'Ciclo animado das quatro atividades fundamentais.',
-    'Cascata redesenhada com progressão e retorno entre fases.',
-    'Desenvolvimento incremental com especificação, desenvolvimento e validação intercalados.',
+    'Cascata em fluxo horizontal centrado, com cinco etapas iguais e setas curtas.',
+    'Modelo V com pares de verificação/validação e implementação na base.',
+    'Desenvolvimento incremental com versões cumulativas e ciclos curtos completos.',
+    'Espiral com trajetória real crescente e análise de riscos em cada ciclo.',
+    'Prototipação com retorno do usuário e ciclo ágil com backlog, sprint e incremento.',
     'Feedback da operação retornando para especificação e evolução.',
     'Mapa visual de artefatos produzidos ao longo do ciclo.',
-    'Comparação visual entre cascata, incremental e abordagem orientada a risco.'
+    'Comparação visual de seis modelos e abordagens, com ênfase em contexto e trade-offs.'
   ],
   slides: [
     {
@@ -139,7 +142,7 @@ export const aula01Sdlc: LessonDefinition = {
       kind: 'visual',
       eyebrow: 'Modelo de processo',
       title: 'Cascata organiza o trabalho em estágios encadeados',
-      subtitle: 'Requisitos → projeto → implementação → integração/teste → operação/manutenção',
+      subtitle: 'As saídas de uma etapa orientam a seguinte.',
       visual: 'sdlc-waterfall',
       caption: 'Redesenho autoral baseado na Figura 2.1 de Sommerville.'
     },
@@ -154,6 +157,15 @@ export const aula01Sdlc: LessonDefinition = {
         { title: 'Mudança cara', detail: 'Revisar fases anteriores pode gerar retrabalho.', tone: 'orange' },
         { title: 'Requisitos estáveis', detail: 'Funciona melhor quando a mudança esperada é baixa.', tone: 'green' }
       ]
+    },
+    {
+      id: 'modelo-v-visual',
+      kind: 'visual',
+      eyebrow: 'Modelo de processo · Verificação',
+      title: 'Modelo V liga as decisões de projeto aos testes',
+      subtitle: 'Cada nível de definição encontra um nível correspondente de validação.',
+      visual: 'sdlc-v-model',
+      caption: 'Esquema didático autoral do modelo V; associa definição à verificação e à validação.'
     },
     {
       id: 'incremental-visual',
@@ -177,13 +189,40 @@ export const aula01Sdlc: LessonDefinition = {
       ]
     },
     {
+      id: 'espiral-visual',
+      kind: 'visual',
+      eyebrow: 'Modelo orientado a risco',
+      title: 'Espiral cresce a cada ciclo de aprendizagem',
+      subtitle: 'Objetivos → riscos → desenvolvimento → avaliação e planejamento.',
+      visual: 'sdlc-spiral',
+      caption: 'Representação autoral dos princípios do modelo espiral orientado a riscos.'
+    },
+    {
+      id: 'prototipacao-visual',
+      kind: 'visual',
+      eyebrow: 'Exploração de requisitos',
+      title: 'Prototipação transforma dúvidas em feedback',
+      subtitle: 'Criar uma representação simples, testar e refinar antes de consolidar.',
+      visual: 'sdlc-prototyping',
+      caption: 'O feedback sobre o protótipo reduz incerteza; nem todo protótipo vira produto.'
+    },
+    {
+      id: 'agil-visual',
+      kind: 'visual',
+      eyebrow: 'Desenvolvimento iterativo',
+      title: 'Ágil trabalha com ciclos curtos e entregas de valor',
+      subtitle: 'Backlog → sprint → incremento → feedback.',
+      visual: 'sdlc-agile',
+      caption: 'Esquema didático de trabalho iterativo e incremental; não é uma regra única para todas as equipes ágeis.'
+    },
+    {
       id: 'comparacao-modelos',
       kind: 'visual',
       eyebrow: 'Comparação',
-      title: 'Não existe um único processo ideal para todo software',
-      subtitle: 'Contexto, risco, mudança e criticidade alteram a escolha',
+      title: 'O contexto define qual organização de processo ajuda mais',
+      subtitle: 'Compare sequência, testes, entrega, riscos e aprendizado.',
       visual: 'sdlc-models',
-      caption: 'Síntese visual baseada nos modelos discutidos no capítulo 2.'
+      caption: 'Síntese didática autoral; inclui abordagens complementares às figuras de Sommerville.'
     },
     {
       id: 'desafio-modelo',
