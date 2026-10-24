@@ -6,7 +6,7 @@
     "dev": "node scripts/dev-server.cjs",
     "build": "webpack --mode production && npm run seo:generate",
     "preview": "node scripts/dev-server.cjs --preview",
-    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts && ts-node --project tsconfig.test.json scripts/test-pptx.ts && node --test labs/data-structures/projeto-final/chamados.test.mjs",
+    "test": "ts-node --project tsconfig.test.json scripts/test-catalog.ts && ts-node --project tsconfig.test.json scripts/test-pptx.ts && node --test labs/data-structures/projeto-final/chamados.test.mjs && node --test labs/oop/projeto-final/reservas.test.mjs",
     "seo:generate": "ts-node --project tsconfig.test.json scripts/generate-seo.ts",
     "test:server": "node scripts/test-server.cjs"
   },

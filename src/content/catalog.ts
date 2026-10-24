@@ -4,6 +4,7 @@ import { sdlcCourse } from './sdlc/course';
 import { logicCourse } from './logic-programming/course';
 import { algorithmsCourse } from './algorithms/course';
 import { dataStructuresCourse } from './data-structures/course';
+import { oopCourse } from './oop/course';
 import { javascriptCourse } from './javascript/course';
 
 export const catalog: CourseDefinition[] = [
@@ -364,6 +365,7 @@ export const technologyCourses: CourseDefinition[] = technologySeeds.map(([slug,
   if (slug === 'logic-programming') return logicCourse;
   if (slug === 'algorithms') return algorithmsCourse;
   if (slug === 'data-structures') return dataStructuresCourse;
+  if (slug === 'oop') return oopCourse;
   if (slug === 'javascript') return javascriptCourse;
 
   return {
