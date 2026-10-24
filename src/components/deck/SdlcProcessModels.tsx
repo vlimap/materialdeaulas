@@ -209,26 +209,148 @@ function AgileModelVisual() {
   );
 }
 
-const comparisons = [
-  ['Cascata', 'Etapas ordenadas', 'Requisitos mais estáveis', '01 → 02 → 03'],
-  ['Modelo V', 'Testes associados', 'Ênfase em verificação', 'Definir ↔ Testar'],
-  ['Incremental', 'Entrega por versões', 'Feedback antecipado', 'v1 → v2 → v3'],
-  ['Espiral', 'Ciclos por risco', 'Incerteza e criticidade', 'Risco → Decisão'],
-  ['Prototipação', 'Aprender com usuários', 'Ideias ainda incertas', 'Fazer ↔ Testar'],
-  ['Ágil / iterativo', 'Ciclos curtos', 'Mudança frequente', 'Sprint ↻ Entrega']
+type ComparisonModelId =
+  | 'waterfall' | 'v-model' | 'incremental' | 'spiral' | 'prototype' | 'agile';
+
+const comparisons: Array<{
+  id: ComparisonModelId; title: string; core: string; bestFor: string; caution: string;
+}> = [
+  {
+    id: 'waterfall', title: 'Cascata', core: 'Etapas em sequência',
+    bestFor: 'Requisitos relativamente estáveis',
+    caution: 'Mudanças tardias podem exigir retrabalho'
+  },
+  {
+    id: 'v-model', title: 'Modelo V', core: 'Projeto ligado a testes',
+    bestFor: 'Verificação e rastreabilidade',
+    caution: 'Exige planejamento dos testes'
+  },
+  {
+    id: 'incremental', title: 'Incremental', core: 'Produto cresce por entregas',
+    bestFor: 'Valor e feedback desde cedo',
+    caution: 'Arquitetura precisa evoluir'
+  },
+  {
+    id: 'spiral', title: 'Espiral', core: 'Ciclos orientados por risco',
+    bestFor: 'Projetos incertos ou críticos',
+    caution: 'Análise de risco tem custo'
+  },
+  {
+    id: 'prototype', title: 'Prototipação', core: 'Hipóteses testadas com usuários',
+    bestFor: 'Requisitos ainda pouco claros',
+    caution: 'Protótipo não é produto pronto'
+  },
+  {
+    id: 'agile', title: 'Ágil / iterativo', core: 'Ciclos curtos de aprendizagem',
+    bestFor: 'Prioridades que mudam',
+    caution: 'Exige colaboração constante'
+  }
 ];
+
+const comparisonSpiralPath = Array.from({ length: 115 }, (_, index) => {
+  const t = index / 114;
+  const angle = -Math.PI / 2 + 5 * Math.PI * t;
+  const radius = 2 + 42 * t;
+  const x = 110 + radius * Math.cos(angle);
+  const y = 49 + radius * Math.sin(angle);
+  return (index === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
+}).join(' ');
+
+function ComparisonMiniature({ model }: { model: ComparisonModelId }) {
+  switch (model) {
+    case 'waterfall':
+      return (
+        <div className="pm-mini pm-mini-waterfall"
+          role="img" aria-label="Requisitos seguem para projeto, desenvolvimento e testes">
+          {['Req.', 'Proj.', 'Dev.', 'Teste'].map((label, index) => (
+            <div className="pm-mini-sequence-item" key={label}>
+              <span>{label}</span>
+              {index < 3 && <b aria-hidden="true">→</b>}
+            </div>
+          ))}
+        </div>
+      );
+    case 'v-model':
+      return (
+        <svg className="pm-mini pm-mini-v" viewBox="0 0 220 98" role="img"
+          aria-label="Ramo de definição e ramo de testes se encontram na implementação">
+          <path d="M28 17 L110 83 L192 17" className="pm-mini-v-main" />
+          <path d="M43 29 L177 29 M73 53 L147 53" className="pm-mini-v-pairs" />
+          <circle cx="28" cy="17" r="5" /><circle cx="192" cy="17" r="5" />
+          <circle cx="110" cy="83" r="5" />
+          <text x="12" y="10">Definir</text><text x="166" y="10">Testar</text>
+          <text x="110" y="96" textAnchor="middle">Código</text>
+        </svg>
+      );
+    case 'incremental':
+      return (
+        <div className="pm-mini pm-mini-incremental" role="img"
+          aria-label="Versão 1 possui uma função, versão 2 tem duas e versão 3 tem três">
+          {[1, 2, 3].map(count => (
+            <div className="pm-mini-release" key={count}>
+              <div className="pm-mini-features">
+                {Array.from({ length: count }, (_, i) => <i key={i} />)}
+              </div>
+              <span>v{count}</span>
+            </div>
+          ))}
+        </div>
+      );
+    case 'spiral':
+      return (
+        <svg className="pm-mini pm-mini-spiral" viewBox="0 0 220 98" role="img"
+          aria-label="Curva espiral contínua cresce do centro para fora, representando ciclos sucessivos de análise de riscos">
+          <circle cx="110" cy="49" r="28" className="pm-mini-spiral-guide" />
+          <circle cx="110" cy="49" r="44" className="pm-mini-spiral-guide" />
+          <path d={comparisonSpiralPath} className="pm-mini-spiral-path" />
+          <circle cx="110" cy="49" r="3" className="pm-mini-spiral-origin" />
+          <text x="166" y="88">Risco ↗</text>
+        </svg>
+      );
+    case 'prototype':
+      return (
+        <div className="pm-mini pm-mini-loop" role="img"
+          aria-label="Ideia segue para protótipo e teste; feedback retorna à ideia">
+          <div className="pm-mini-loop-track">
+            <span>Ideia</span><b aria-hidden="true">→</b>
+            <span>Protótipo</span><b aria-hidden="true">→</b><span>Teste</span>
+          </div>
+          <div className="pm-mini-loop-feedback"><b aria-hidden="true">↶</b> Ajustar a partir do feedback</div>
+        </div>
+      );
+    case 'agile':
+      return (
+        <div className="pm-mini pm-mini-loop pm-mini-agile" role="img"
+          aria-label="Backlog alimenta sprint, que entrega incremento; a revisão orienta o próximo ciclo">
+          <div className="pm-mini-loop-track">
+            <span>Backlog</span><b aria-hidden="true">→</b>
+            <span>Sprint</span><b aria-hidden="true">→</b><span>Entrega</span>
+          </div>
+          <div className="pm-mini-loop-feedback"><b aria-hidden="true">↶</b> Revisar e melhorar</div>
+        </div>
+      );
+  }
+}
 
 function ModelsComparisonVisual() {
   return (
-    <div className="process-model pm-comparison" aria-label="Comparação dos seis modelos de processo quanto à estrutura, características e contextos">
+    <div className="process-model pm-comparison"
+      aria-label="Comparação de seis modelos de processo, com diagramas estáticos, aplicações e cuidados">
       <div className="pm-comparison-grid">
         {comparisons.map((item, index) => (
-          <div className="pm-comparison-card" key={item[0]}>
-            <span>0{index + 1} · {item[0]}</span>
-            <strong>{item[1]}</strong>
-            <small>{item[2]}</small>
-            <b>{item[3]}</b>
-          </div>
+          <section className={'pm-comparison-card pm-comparison-' + item.id} key={item.id}
+            aria-label={item.title}>
+            <div className="pm-comparison-heading">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{item.title}</strong>
+            </div>
+            <ComparisonMiniature model={item.id} />
+            <p className="pm-comparison-core">{item.core}</p>
+            <div className="pm-comparison-foot">
+              <p><b>Indicado:</b> {item.bestFor}</p>
+              <p><b>Atenção:</b> {item.caution}</p>
+            </div>
+          </section>
         ))}
       </div>
     </div>
