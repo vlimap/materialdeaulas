@@ -4,15 +4,16 @@
  * devem voltar ao branco azulado que destoa dos slides e reduz a continuidade.
  */
 
-/* 
- * A orientação não integra o cabeçalho absoluto. 
- * Reserva uma linha real no layout do slide, evitando sobreposição de texto.
+/*
+ * Guia didático global — aparece antes de toda interação do curso.
+ * Reservar espaço no fluxo evita que a explicação se sobreponha à pergunta.
+ * O layout compacto funciona no player, em tela cheia e na exportação.
  */
 .deck-page .slide-canvas.has-activity-guidance > .slide-body {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   align-content: stretch;
-  gap: .9cqw;
+  gap: .78cqw;
 }
 .deck-page .slide-canvas.has-activity-guidance > .slide-body > :not(.activity-guidance) {
   min-width: 0;
@@ -21,35 +22,130 @@
 }
 .deck-page .slide-canvas > .slide-body > .activity-guidance {
   box-sizing: border-box;
-  width: min(72cqw, 100%);
+  width: min(80cqw, 100%);
   min-width: 0;
   margin: 0 auto;
-  padding: .55cqw .95cqw;
-  border: 1px solid #34465a;
-  border-left: .28cqw solid #f2c53d;
-  border-radius: .5cqw;
-  background: rgba(30, 39, 51, .92);
-  color: #e7f0fa;
+  padding: 0;
+  position: relative;
+  isolation: isolate;
+  border: 1px solid #3a5269;
+  border-radius: .82cqw;
+  color: #f0f5fc;
+  background: linear-gradient(112deg, #1b2b3b 0%, #18232f 62%, #151e29 100%);
+  box-shadow: 0 .35cqw 1.3cqw rgba(0, 0, 0, .22);
+  overflow: hidden;
+}
+.deck-page .slide-canvas > .slide-body > .activity-guidance::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: .28cqw;
+  background: linear-gradient(180deg, #ffe17a, #f2c53d 58%, #96732a);
+  pointer-events: none;
 }
 .deck-page .slide-canvas .activity-guidance summary {
-  display: list-item;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 2.5cqw minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .9cqw;
+  padding: .68cqw 1.2cqw .68cqw 1.15cqw;
+  list-style: none;
   cursor: pointer;
-  color: #f2c53d;
-  font: 700 .85cqw/1.32 Arial, sans-serif;
-  overflow-wrap: anywhere;
+  color: inherit;
+}
+.deck-page .slide-canvas .activity-guidance summary::-webkit-details-marker {
+  display: none;
+}
+.deck-page .slide-canvas .activity-guidance summary::marker {
+  content: '';
 }
 .deck-page .slide-canvas .activity-guidance summary:focus-visible {
   outline: 2px solid #f2c53d;
-  outline-offset: 3px;
+  outline-offset: -3px;
+  border-radius: .7cqw;
 }
-.deck-page .slide-canvas .activity-guidance p {
-  margin: .35cqw 0 0;
-  color: #d7e3f0;
-  font: .82cqw/1.36 Arial, sans-serif;
+.deck-page .slide-canvas .activity-guidance-icon {
+  display: grid;
+  place-items: center;
+  width: 2.5cqw;
+  height: 2.5cqw;
+  border: 1px solid rgba(242, 197, 61, .3);
+  border-radius: .65cqw;
+  background: rgba(242, 197, 61, .09);
+  color: #f2c53d;
+}
+.deck-page .slide-canvas .activity-guidance-icon svg {
+  display: block;
+  width: 1.28cqw;
+  height: 1.28cqw;
+}
+.deck-page .slide-canvas .activity-guidance-heading {
+  display: grid;
+  min-width: 0;
+  gap: .15cqw;
+}
+.deck-page .slide-canvas .activity-guidance-label {
+  color: #f2c53d;
+  font: 800 .69cqw/1.2 Arial, sans-serif;
+  letter-spacing: .095em;
+  text-transform: uppercase;
+}
+.deck-page .slide-canvas .activity-guidance-title {
+  min-width: 0;
+  color: #f6f8fc;
+  font: 700 1.07cqw/1.23 Arial, sans-serif;
   overflow-wrap: anywhere;
 }
+.deck-page .slide-canvas .activity-guidance-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .52cqw;
+  min-width: 0;
+  padding: .43cqw .65cqw;
+  color: #d9e4f1;
+  border: 1px solid #475b70;
+  border-radius: .48cqw;
+  font: 700 .72cqw/1.25 Arial, sans-serif;
+  white-space: nowrap;
+  background: rgba(255,255,255,.035);
+}
+.deck-page .slide-canvas .activity-guidance-toggle svg {
+  display: block;
+  width: 1.05cqw;
+  height: 1.05cqw;
+  transition: transform 180ms ease;
+  color: #f2c53d;
+}
+.deck-page .slide-canvas .activity-guidance-toggle-closed { display: none; }
+.deck-page .slide-canvas .activity-guidance:not([open]) .activity-guidance-toggle-open { display: none; }
+.deck-page .slide-canvas .activity-guidance:not([open]) .activity-guidance-toggle-closed { display: inline; }
+.deck-page .slide-canvas .activity-guidance:not([open]) .activity-guidance-toggle svg {
+  transform: rotate(-90deg);
+}
+.deck-page .slide-canvas .activity-guidance-content {
+  margin: 0 1.2cqw .8cqw 4.55cqw;
+  padding: .55cqw 0 0;
+  border-top: 1px solid rgba(127, 153, 180, .2);
+  min-width: 0;
+}
+.deck-page .slide-canvas .activity-guidance-content p {
+  margin: 0;
+  color: #d0deee;
+  font: .91cqw/1.42 Arial, sans-serif;
+  overflow-wrap: anywhere;
+}
+.deck-page .slide-canvas .activity-guidance summary:hover .activity-guidance-toggle {
+  border-color: #af9447;
+  background: rgba(242,197,61,.06);
+}
 
-/* Visível inicialmente, recolhível pelo aluno caso o exemplo ocupe mais espaço. */
+/* O próprio <details> mantém a explicação disponível sem encolher o enunciado:
+   ao recolher, o restante da atividade ocupa a linha liberada. */
+@media (prefers-reduced-motion: reduce) {
+  .deck-page .slide-canvas .activity-guidance-toggle svg { transition: none; }
+}
 
 /* Tokens compartilhados: mesma paleta do player dos cursos. */
 .deck-page .slide-canvas {
@@ -224,7 +320,7 @@
   border-color: var(--sim-border);
 }
 
-/* Layout responsivo sem rolagem dentro da apresentação Stories. */
+/* Guia compacto no Stories: hierarquia clara, sem cortes de texto ou scroll interno. */
 @media (max-width: 620px) {
   .story-mode .deck-stage .slide-canvas.has-activity-guidance > .slide-body {
     display: grid;
@@ -235,18 +331,56 @@
   }
   .story-mode .deck-stage .slide-canvas > .slide-body > .activity-guidance {
     width: 100%;
-    padding: 7px 9px;
-    border-left-width: 3px;
-    border-radius: 7px;
+    border-radius: 10px;
+  }
+  .story-mode .deck-stage .slide-canvas > .slide-body > .activity-guidance::before {
+    width: 3px;
   }
   .story-mode .deck-stage .slide-canvas .activity-guidance summary {
-    font-size: 11px;
+    grid-template-columns: 30px minmax(0, 1fr) 22px;
+    gap: 8px;
+    padding: 8px 10px 7px 11px;
+    border-radius: 10px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-heading { gap: 2px; }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-label {
+    font-size: 9px;
+    letter-spacing: .05em;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-title {
+    font-size: 12px;
     line-height: 1.2;
   }
-  .story-mode .deck-stage .slide-canvas .activity-guidance p {
-    margin-top: 4px;
+  .story-mode .deck-stage .slide-canvas .activity-guidance-toggle {
+    padding: 0;
+    min-height: 24px;
+    border: 0;
+    background: transparent;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-toggle-open,
+  .story-mode .deck-stage .slide-canvas .activity-guidance-toggle-closed {
+    display: none;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-toggle svg {
+    width: 17px;
+    height: 17px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-content {
+    margin: 0 10px 9px 49px;
+    padding-top: 6px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-content p {
     font-size: 11px;
-    line-height: 1.28;
+    line-height: 1.34;
   }
   .story-mode .deck-stage .slide-canvas.has-activity-guidance > .slide-body > :not(.activity-guidance) {
     min-height: 0;
@@ -255,18 +389,25 @@
   }
 }
 @media (max-width: 620px) and (max-height: 660px) {
-  .story-mode .deck-stage .slide-canvas.has-activity-guidance > .slide-body {
-    gap: 4px;
-  }
-  .story-mode .deck-stage .slide-canvas > .slide-body > .activity-guidance {
-    padding: 4px 7px;
-  }
+  .story-mode .deck-stage .slide-canvas.has-activity-guidance > .slide-body { gap: 4px; }
   .story-mode .deck-stage .slide-canvas .activity-guidance summary {
-    font-size: 10px;
-    line-height: 1.17;
+    grid-template-columns: 26px minmax(0, 1fr) 17px;
+    gap: 6px;
+    padding: 6px 8px 5px 9px;
   }
-  .story-mode .deck-stage .slide-canvas .activity-guidance p {
+  .story-mode .deck-stage .slide-canvas .activity-guidance-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-label { font-size: 8px; }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-title { font-size: 11px; }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-content {
+    margin: 0 8px 6px 42px;
+    padding-top: 4px;
+  }
+  .story-mode .deck-stage .slide-canvas .activity-guidance-content p {
     font-size: 10px;
-    line-height: 1.2;
+    line-height: 1.23;
   }
 }
