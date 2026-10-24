@@ -49,6 +49,23 @@ Exemplo:
 
 Isso permite manter a referência acadêmica sem publicar páginas do livro dentro do repositório.
 
+## Diagramas de modelos de processo na Aula 01
+
+O player utiliza componentes React autorais em `src/components/deck/SdlcProcessModels.tsx`, com estilos em `SdlcProcessModels.css`. As imagens da edição impressa **não foram copiadas**.
+
+| Modelo | Construção visual | Ideia que o estudante deve perceber |
+| --- | --- | --- |
+| Cascata | Cinco cartões alinhados com setas curtas | As fases se sucedem, podendo exigir retorno |
+| Modelo V | Duas pernas com pares de definição e teste | Testes respondem a diferentes níveis de decisão |
+| Incremental | Três entregas que acumulam funcionalidades | O produto cresce e recebe feedback a cada versão |
+| Espiral | Curva efetivamente espiralada e quatro atividades | Riscos e aprendizagem guiam novos ciclos |
+| Prototipação | Quatro passos com retorno visual | Hipóteses devem ser testadas com usuários |
+| Ágil/iterativo | Backlog, sprint e incremento | Ciclos curtos convertem feedback em trabalho futuro |
+
+Há ainda uma comparação final de seis abordagens. A escolha depende do tipo de produto, risco, mudanças e exigências de validação. **Cascata e desenvolvimento incremental** têm referência direta às figuras conceituais de Sommerville. Os demais exemplos são explicações didáticas complementares e não devem ser rotulados como cópias das mesmas figuras.
+
+As representações também possuem layout mobile sem rolagem interna, texto acessível, contraste no tema escuro e respeito à preferência de redução de movimento.
+
 ## Mapa das 12 aulas
 
 | Aula | Eixo | Sommerville | Direção visual |
