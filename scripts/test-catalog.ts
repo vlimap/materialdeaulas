@@ -17,6 +17,7 @@ import { buildAlgorithmTrace } from '../src/components/deck/algorithm-traces';
 import { evaluateTruth, explainTruth, getTruthRows } from '../src/components/deck/truth-table';
 import { createAlgorithmVisualization } from '../src/components/deck/algorithm-visualization-engine';
 import { shouldHandleDeckShortcut } from '../src/components/deck/keyboardShortcuts';
+import { getActivityGuidance, needsActivityGuidance } from '../src/components/deck/activityGuidance';
 
 type TestCase = {
   name: string;
@@ -24,6 +25,69 @@ type TestCase = {
 };
 
 const tests: TestCase[] = [
+
+  {
+    name: 'toda atividade publicada recebe explicação didática antes da interação',
+    run: () => {
+      const allCourses = [...catalog, ...technologyCourses];
+      let publishedLessons = 0;
+      let activities = 0;
+      for (const course of allCourses) for (const uc of course.ucs) {
+        for (const module of uc.modules) for (const lesson of module.lessons) {
+          if (lesson.status === 'planned' || !lesson.slides.length) continue;
+          publishedLessons++;
+          lesson.slides.forEach((slide, index) => {
+            const guidance = getActivityGuidance(lesson, index);
+            if (needsActivityGuidance(slide)) {
+              activities++;
+              assert.ok(guidance, 'Sem explicação: ' + lesson.id + ':' + slide.id);
+              assert.ok(guidance.topic.trim().length > 2, 'Assunto ausente: ' + slide.id);
+              assert.ok(guidance.explanation.trim().length > 16, 'Explicação curta: ' + slide.id);
+            } else {
+              assert.equal(guidance, null, 'Guia desnecessário: ' + slide.id);
+            }
+          });
+        }
+      }
+      assert.ok(publishedLessons >= 90, 'É necessário verificar todos os cursos publicados');
+      assert.ok(activities >= 300, 'É necessário verificar todos os quizzes, exercícios e laboratórios');
+
+      // Regressão da captura da tela enviada: a primeira questão do curso
+      // POO deve receber a explicação sobre estado e comportamento.
+      const oop = technologyCourses.find(course => course.slug === 'curso-oop');
+      const lesson = oop?.ucs[0].modules[0].lessons[0];
+      assert.ok(lesson);
+      const quizIndex = lesson.slides.findIndex(slide => slide.kind === 'challenge');
+      assert.ok(quizIndex > 0);
+      const intro = getActivityGuidance(lesson, quizIndex);
+      assert.ok(intro);
+      assert.match(intro.explanation, /estado|comportamento|operações/i);
+    }
+  },
+  {
+    name: 'simuladores compartilham paleta escura do player e adaptação mobile',
+    run: () => {
+      const styles = readFileSync('src/components/deck/learning-theme.css', 'utf8');
+      for (const selector of [
+        '.logic-scene', '.logic-panel', '.problem-scene', '.problem-control',
+        '.truth-lab-controls', '.truth-lab-display', '.algo-viz-scene',
+        '.algo-viz-actions', '.algorithm-simulation', '.algorithm-controls',
+        '.js-console-editor', '.js-console-output'
+      ]) {
+        assert.ok(styles.includes(selector), 'Tema ausente: ' + selector);
+      }
+      assert.match(styles, /--sim-bg: #151a21/);
+      assert.match(styles, /max-width: 620px/);
+      assert.match(styles, /\.activity-guidance/);
+
+      const player = readFileSync('src/components/deck/DeckPlayer.tsx', 'utf8');
+      const renderer = readFileSync('src/components/deck/SlideRenderer.tsx', 'utf8');
+      assert.match(player, /getActivityGuidance\(lesson, index\)/);
+      assert.match(renderer, /Explicação antes da atividade/);
+      assert.match(renderer, /learning-theme\.css/);
+    }
+  },
+
 
   {
     name: 'publica curso POO com 12 aulas completas, exemplos reais, SEO e navegação',
