@@ -7,6 +7,7 @@ import { AlgorithmVisualizer } from './AlgorithmVisualizer';
 import { TruthTablePlayground } from './TruthTablePlayground';
 import { JavaScriptConsole } from './JavaScriptConsole';
 import type { Slide } from '../../types/course';
+import type { ActivityGuidance } from './activityGuidance';
 import vlimapAvatar from '../../brand/vlimap-avatar.png';
 import htmlContentHierarchyVisual from '../../assets/lessons/html/aula-02/content-hierarchy.svg';
 import htmlLinksNetworkVisual from '../../assets/lessons/html/aula-02/links-network.svg';
@@ -27,13 +28,19 @@ function Brand() {
   );
 }
 
-function Header({ slide }: { slide: Slide }) {
+function Header({ slide, guidance }: { slide: Slide; guidance?: ActivityGuidance | null }) {
   return (
     <header className="slide-header">
       <div>
         {slide.eyebrow && <p className="eyebrow">{slide.eyebrow}</p>}
         <h2>{slide.title}</h2>
         {slide.subtitle && <p className="slide-subtitle">{slide.subtitle}</p>}
+        {guidance && (
+          <div className="activity-guidance" role="note" aria-label="Explicação antes da atividade">
+            <strong>Entenda antes de praticar · {guidance.topic}</strong>
+            <p>{guidance.explanation}</p>
+          </div>
+        )}
       </div>
     </header>
   );
@@ -685,7 +692,7 @@ function Visual({ name }: { name: Extract<Slide, { kind: 'visual' }>['visual'] }
   );
 }
 
-export function SlideRenderer({ slide }: { slide: Slide }) {
+export function SlideRenderer({ slide, guidance }: { slide: Slide; guidance?: ActivityGuidance | null }) {
   if (slide.kind === 'cover') {
     return (
       <article className="slide-canvas cover-slide">
@@ -705,7 +712,7 @@ export function SlideRenderer({ slide }: { slide: Slide }) {
   return (
     <article className={'slide-canvas slide-' + slide.kind}>
       <Brand />
-      <Header slide={slide} />
+      <Header slide={slide} guidance={guidance} />
 
       <div className="slide-body">
         {slide.kind === 'statement' && (
