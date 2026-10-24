@@ -83,6 +83,7 @@ const tests: TestCase[] = [
       const player = readFileSync('src/components/deck/DeckPlayer.tsx', 'utf8');
       const renderer = readFileSync('src/components/deck/SlideRenderer.tsx', 'utf8');
       assert.match(player, /getActivityGuidance\(lesson, index\)/);
+      assert.match(player, /getActivityGuidance\(lesson, slideIndex\)/, 'Orientação deve ser exportada para PDF e PPTX');
       assert.match(renderer, /Explicação antes da atividade/);
       assert.match(renderer, /learning-theme\.css/);
     }
